@@ -35,10 +35,16 @@ export async function POST(req: Request) {
       }),
     });
 
+    // Handle 204 No Content response (successful update, no body)
+    if (brevoResponse.status === 204) {
+      return NextResponse.json({ ok: true, message: 'Successfully added to waitlist' });
+    }
+
+    // Parse JSON for other responses
     const data = await brevoResponse.json();
 
-    // Brevo returns 201 for new contact, 204 for existing contact updated
-    if (brevoResponse.ok || brevoResponse.status === 204) {
+    // Brevo returns 201 for new contact
+    if (brevoResponse.ok) {
       return NextResponse.json({ ok: true, message: 'Successfully added to waitlist' });
     }
 
