@@ -9,7 +9,7 @@ export default function PrivacyPage() {
       <Container>
         <div className="prose-nuvvoo mx-auto max-w-3xl py-16">
           <h1 className="text-3xl font-semibold text-slate-900">Privacy Policy</h1>
-          <p className="mt-3 text-sm text-slate-500">Last updated: March 2, 2026</p>
+          <p className="mt-3 text-sm text-slate-500">&ldquo;Last updated&rdquo;: March 2, 2026</p>
 
           <div className="mt-8 space-y-8">
             <p>
@@ -93,7 +93,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-xl font-semibold text-slate-900">7. Changes to This Policy</h2>
               <p>
-                We may update this Privacy Policy from time to time. The "Last updated" date will reflect the latest revision.
+                We may update this Privacy Policy from time to time. The "&ldquo;Last updated&rdquo;" date will reflect the latest revision.
               </p>
             </section>
           </div>
