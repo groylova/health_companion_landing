@@ -30,12 +30,16 @@ export default function HomePage() {
               </p>
 
               <div className="mt-6 flex flex-col items-center gap-3">
-                <div className="flex justify-center gap-3">
-                  <Button variant="ghost" asChild href="/#waitlist">
-                    <AppleIcon className="mr-2" /> iOS — coming soon
+                <div className="flex justify-center gap-2 md:gap-3">
+                  <Button variant="ghost" asChild href="/#waitlist" className="text-xs md:text-sm">
+                    <span className="flex items-center">
+                      <AppleIcon className="mr-1 md:mr-2 h-4 w-4" /> iOS - coming soon
+                    </span>
                   </Button>
-                  <Button variant="ghost" asChild href="/#waitlist">
-                    <AndroidIcon className="mr-2" /> Android — coming soon
+                  <Button variant="ghost" asChild href="/#waitlist" className="text-xs md:text-sm">
+                    <span className="flex items-center">
+                      <AndroidIcon className="mr-1 md:mr-2 h-4 w-4" /> Android - coming soon
+                    </span>
                   </Button>
                 </div>
                 <Button variant="primary" asChild href="/#waitlist">

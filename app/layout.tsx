@@ -6,7 +6,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Nuvvoo — Track by chatting, not logging',
+    default: 'Nuvvoo — Your AI Health Companion',
     template: '%s · Nuvvoo',
   },
   description:
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     images: ['/images/og.png'],
   },
   icons: {
-    icon: '/images/favicon.png',
+    icon: '/illustrations/logo.png',
   },
 };
 

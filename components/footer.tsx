@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container } from '@/components/container';
 
 export function Footer() {
@@ -7,7 +8,18 @@ export function Footer() {
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="text-sm text-slate-600">
-            <div className="font-medium text-slate-900">Nuvvoo</div>
+            <div className="flex items-center gap-2">
+              <div className="relative h-6 w-6 overflow-hidden rounded-lg">
+                <Image
+                  src="/illustrations/logo.png"
+                  alt="Nuvvoo logo"
+                  width={24}
+                  height={24}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <div className="font-medium text-slate-900">Nuvvoo</div>
+            </div>
             <div className="mt-1">A calm AI companion for food, habits, and energy.</div>
           </div>
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container } from '@/components/container';
 
 export function Nav() {
@@ -7,23 +8,29 @@ export function Nav() {
       <Container>
         <div className="flex h-14 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-nuvvooGreen-100 text-nuvvooGreen-800">
-              <span className="text-lg">🫧</span>
-            </span>
+            <div className="relative h-8 w-8 overflow-hidden rounded-xl">
+              <Image
+                src="/illustrations/logo.png"
+                alt="Nuvvoo logo"
+                width={32}
+                height={32}
+                className="h-full w-full object-contain"
+              />
+            </div>
             <span className="font-semibold tracking-tight">Nuvvoo</span>
           </Link>
 
-          <nav className="flex items-center gap-6">
-            <a href="/#founder" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+          <nav className="flex items-center gap-3 md:gap-6">
+            <a href="/#founder" className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
               Founder
             </a>
-            <a href="/#how" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+            <a href="/#how" className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
               How it works
             </a>
-            <a href="/#product" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+            <a href="/#product" className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
               Product
             </a>
-            <a href="/#waitlist" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+            <a href="/#waitlist" className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
               Early access
             </a>
           </nav>
