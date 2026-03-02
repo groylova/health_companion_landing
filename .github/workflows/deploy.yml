@@ -1,0 +1,67 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://nuvvoo.pryvus.com
+
+      - name: Create deployment package
+        run: |
+          mkdir -p deploy_package
+          cp -r .next deploy_package/
+          cp -r public deploy_package/
+          cp package.json package-lock.json deploy_package/
+          cp next.config.mjs deploy_package/
+          echo "node_modules/" > deploy_package/.deployignore
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        run: |
+          # Upload files
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            deploy_package/.next \
+            deploy_package/public \
+            deploy_package/package.json \
+            deploy_package/package-lock.json \
+            deploy_package/next.config.mjs \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/nuvvoo-zfxrz/nuvvoo.pryvus.com/
+
+          # Install production dependencies and restart
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/nuvvoo-zfxrz/nuvvoo.pryvus.com && \
+             npm ci --production && \
+             pm2 reload nuvvoo || pm2 start npm --name nuvvoo -- start"
+
+      - name: Cleanup
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
