@@ -32,7 +32,7 @@ export function WaitlistForm() {
         return;
       }
       setStatus('success');
-      setMessage('You're on the list. See you soon ✨');
+      setMessage("You're on the list. See you soon ✨");
       setEmail('');
 
       // Track successful waitlist signup
