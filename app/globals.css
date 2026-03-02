@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: theme(colors.nuvvooBg);
+  color: theme(colors.nuvvooInk);
+}
+
+/* Slightly nicer default text rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.prose-nuvvoo p {
+  @apply text-slate-600 leading-relaxed;
+}
+
+.prose-nuvvoo strong {
+  @apply text-slate-900;
+}

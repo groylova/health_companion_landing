@@ -1,0 +1,65 @@
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+
+export function WaitlistForm() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState<string>('');
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus('loading');
+    setMessage('');
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, source: 'landing' }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        setStatus('error');
+        setMessage(data?.error || 'Something went wrong.');
+        return;
+      }
+      setStatus('success');
+      setMessage('You’re on the list. See you soon ✨');
+      setEmail('');
+    } catch {
+      setStatus('error');
+      setMessage('Network error. Please try again.');
+    }
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-center">
+      {status === 'success' ? (
+        <div className="text-base text-nuvvooGreen-800 font-medium">
+          {message}
+        </div>
+      ) : (
+        <>
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            className="w-full flex-1 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 shadow-sm outline-none focus:border-nuvvooGreen-300 focus:ring-2 focus:ring-nuvvooGreen-200"
+          />
+          <Button variant="primary" disabled={status === 'loading'}>
+            {status === 'loading' ? 'Joining…' : 'Join'}
+          </Button>
+          {status === 'error' && message ? (
+            <div className="w-full text-sm text-rose-600 sm:w-auto">
+              {message}
+            </div>
+          ) : null}
+        </>
+      )}
+    </form>
+  );
+}
