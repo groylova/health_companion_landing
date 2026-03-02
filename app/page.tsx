@@ -3,6 +3,7 @@ import { Container } from '@/components/container';
 import { Nav } from '@/components/nav';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
+import { TrackedButton } from '@/components/tracked-button';
 import { WaitlistForm } from '@/components/waitlist-form';
 import { SectionHeading } from '@/components/section-heading';
 import { AppleIcon, AndroidIcon } from '@/components/icons';
@@ -23,7 +24,7 @@ export default function HomePage() {
               </div>
 
               <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-                Track by chatting, not logging.
+                Track by chatting, not logging
               </h1>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
                 Nuvvoo is a gentle AI companion that helps you stay on track with food, habits, and energy, without pressure or perfection.
@@ -31,20 +32,37 @@ export default function HomePage() {
 
               <div className="mt-6 flex flex-col items-center gap-3">
                 <div className="flex justify-center gap-2 md:gap-3">
-                  <Button variant="ghost" asChild href="/#waitlist" className="text-xs md:text-sm">
+                  <TrackedButton
+                    variant="ghost"
+                    href="/#waitlist"
+                    className="text-xs md:text-sm"
+                    eventName="click_ios_button"
+                    eventParams={{ button_location: 'hero', platform: 'ios' }}
+                  >
                     <span className="flex items-center">
                       <AppleIcon className="mr-1 md:mr-2 h-4 w-4" /> iOS - coming soon
                     </span>
-                  </Button>
-                  <Button variant="ghost" asChild href="/#waitlist" className="text-xs md:text-sm">
+                  </TrackedButton>
+                  <TrackedButton
+                    variant="ghost"
+                    href="/#waitlist"
+                    className="text-xs md:text-sm"
+                    eventName="click_android_button"
+                    eventParams={{ button_location: 'hero', platform: 'android' }}
+                  >
                     <span className="flex items-center">
                       <AndroidIcon className="mr-1 md:mr-2 h-4 w-4" /> Android - coming soon
                     </span>
-                  </Button>
+                  </TrackedButton>
                 </div>
-                <Button variant="primary" asChild href="/#waitlist">
+                <TrackedButton
+                  variant="primary"
+                  href="/#waitlist"
+                  eventName="click_early_access"
+                  eventParams={{ button_location: 'hero' }}
+                >
                   Join early access
-                </Button>
+                </TrackedButton>
               </div>
 
               <p className="mt-3 text-center text-sm text-slate-500">Launching soon on iOS and Android.</p>

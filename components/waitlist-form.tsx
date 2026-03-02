@@ -3,6 +3,12 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
 export function WaitlistForm() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -26,8 +32,16 @@ export function WaitlistForm() {
         return;
       }
       setStatus('success');
-      setMessage('You’re on the list. See you soon ✨');
+      setMessage('You're on the list. See you soon ✨');
       setEmail('');
+
+      // Track successful waitlist signup
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'waitlist_signup',
+          source: 'landing',
+        });
+      }
     } catch {
       setStatus('error');
       setMessage('Network error. Please try again.');
