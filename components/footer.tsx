@@ -8,7 +8,7 @@ export function Footer() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="text-sm text-slate-600">
             <div className="font-medium text-slate-900">Nuvvoo</div>
-            <div className="mt-1">A calm, chat-first food journal.</div>
+            <div className="mt-1">A calm AI companion for food, habits, and energy.</div>
           </div>
 
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
