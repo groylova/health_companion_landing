@@ -18,7 +18,7 @@ export function Button({
   ...rest
 }: Props) {
   const base =
-    'inline-flex items-center justify-center rounded-full px-8 py-3.5 text-base font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nuvvooGreen-300 disabled:opacity-50 disabled:pointer-events-none';
+    'inline-flex items-center justify-center rounded-full px-4 py-2 md:px-8 md:py-3.5 text-base font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nuvvooGreen-300 disabled:opacity-50 disabled:pointer-events-none';
 
   const styles: Record<Variant, string> = {
     primary:
