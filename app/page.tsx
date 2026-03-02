@@ -39,7 +39,7 @@ export default function HomePage() {
                     eventName="click_ios_button"
                     eventParams={{ button_location: 'hero', platform: 'ios' }}
                   >
-                    <span className="flex items-center">
+                    <span className="flex items-center justify-center">
                       <AppleIcon className="mr-1 md:mr-2 h-4 w-4" /> iOS - coming soon
                     </span>
                   </TrackedButton>
@@ -50,7 +50,7 @@ export default function HomePage() {
                     eventName="click_android_button"
                     eventParams={{ button_location: 'hero', platform: 'android' }}
                   >
-                    <span className="flex items-center">
+                    <span className="flex items-center justify-center">
                       <AndroidIcon className="mr-1 md:mr-2 h-4 w-4" /> Android - coming soon
                     </span>
                   </TrackedButton>

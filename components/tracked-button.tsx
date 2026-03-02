@@ -36,7 +36,7 @@ export function TrackedButton({
   };
 
   return (
-    <Link href={href} onClick={handleClick}>
+    <Link href={href} onClick={handleClick} className="inline-block">
       <Button variant={variant} className={className}>
         {children}
       </Button>
