@@ -21,7 +21,7 @@ export function Footer() {
             <Link className="text-slate-600 hover:text-slate-900" href="/legal/ai-disclosure">
               AI disclosure
             </Link>
-            <a className="text-slate-600 hover:text-slate-900" href="mailto:hello@yourdomain.com">
+            <a className="text-slate-600 hover:text-slate-900" href="mailto:support.nuvvoo@pryvus.com">
               Contact
             </a>
           </div>
