@@ -45,8 +45,9 @@ jobs:
 
       - name: Deploy to server
         run: |
-          # Upload files
+          # Upload files (exclude .env files to preserve server secrets)
           rsync -avz --delete \
+            --exclude='.env*' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
             deploy_package/.next \
             deploy_package/public \
