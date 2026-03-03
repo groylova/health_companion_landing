@@ -32,3 +32,48 @@ body {
 .prose-nuvvoo strong {
   @apply text-slate-900;
 }
+
+/* Enhanced prose-nuvvoo styles for SEO content pages */
+.prose-nuvvoo a {
+  @apply text-nuvvooGreen-700 underline hover:text-nuvvooGreen-800 transition-colors;
+}
+
+.prose-nuvvoo h2 {
+  @apply text-2xl font-semibold tracking-tight text-slate-900 mt-8 mb-4;
+}
+
+.prose-nuvvoo h3 {
+  @apply text-lg font-semibold text-slate-900 mt-6 mb-3;
+}
+
+.prose-nuvvoo ul {
+  @apply list-disc pl-6 space-y-2;
+}
+
+.prose-nuvvoo ol {
+  @apply list-decimal pl-6 space-y-2;
+}
+
+.prose-nuvvoo li {
+  @apply text-slate-600;
+}
+
+.prose-nuvvoo table {
+  @apply w-full border-collapse mt-6 mb-6;
+}
+
+.prose-nuvvoo th {
+  @apply bg-nuvvooGreen-50 border border-slate-200 p-3 text-left font-semibold text-slate-900 text-sm;
+}
+
+.prose-nuvvoo td {
+  @apply border border-slate-200 p-3 text-slate-600 text-sm;
+}
+
+.prose-nuvvoo thead {
+  @apply bg-nuvvooGreen-50;
+}
+
+.prose-nuvvoo tbody tr:hover {
+  @apply bg-slate-50;
+}
