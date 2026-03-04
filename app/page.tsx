@@ -65,6 +65,9 @@ export default function HomePage() {
       <section className="py-12 md:py-16">
         <Container>
           <div className="mx-auto max-w-lg">
+            <p className="mb-6 mt-4 text-center text-base font-medium text-slate-600 md:text-lg">
+              One button. That&rsquo;s it. Tap once, speak naturally. Nuvvoo logs it and guides&nbsp;you.
+            </p>
             <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/80 p-5 shadow-soft md:p-6">
               <div className="space-y-4">
                 <div className="flex justify-end">
@@ -77,8 +80,22 @@ export default function HomePage() {
                     <Image src="/illustrations/logo.png" alt="Nuvvoo" width={28} height={28} className="h-full w-full object-contain" />
                   </div>
                   <div className="max-w-[80%] rounded-2xl rounded-bl-md bg-slate-100 px-4 py-3 text-sm text-slate-700">
-                    <p>Logged. You're still within your calorie range.</p>
+                    <p>Logged. You&rsquo;re still within your calorie range.</p>
                     <p className="mt-2">Want a dinner suggestion to balance your day?</p>
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <div className="max-w-[80%] rounded-2xl rounded-br-md bg-nuvvooGreen-100 px-4 py-3 text-sm text-slate-800">
+                    Yes! Also log my boxing workout. And btw &mdash; I&rsquo;m in a great mood today.
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 h-7 w-7 shrink-0 overflow-hidden rounded-full">
+                    <Image src="/illustrations/logo.png" alt="Nuvvoo" width={28} height={28} className="h-full w-full object-contain" />
+                  </div>
+                  <div className="max-w-[80%] rounded-2xl rounded-bl-md bg-slate-100 px-4 py-3 text-sm text-slate-700">
+                    <p>Boxing logged. Mood: great. I&rsquo;m so proud of you!</p>
+                    <p className="mt-2">Here&rsquo;s what you could have for dinner&hellip;</p>
                   </div>
                 </div>
               </div>
@@ -101,7 +118,7 @@ export default function HomePage() {
                   Hi! I&rsquo;m Irene. <strong className="font-semibold text-slate-900">A couple of years ago</strong> I started taking medication for migraines. It helped with the pain, but the side effects hit hard: low mood, weight gain, and a feeling of losing control over my routine.
                 </p>
                 <span className="mt-4 inline-block text-sm font-medium text-nuvvooGreen-700 group-open:hidden">
-                  Read more &rarr;
+                  Read more &darr;
                 </span>
               </summary>
 
@@ -185,18 +202,31 @@ export default function HomePage() {
         <Container>
           <div className="mx-auto max-w-3xl">
             <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/70 p-8 shadow-soft md:p-10">
-              <SectionHeading
-                eyebrow="Evening rescue"
-                title="Even if the day went wrong, you can still win the evening."
-              />
-              <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-600">
-                <p>Most apps punish imperfect days. Nuvvoo helps you recover.</p>
-                <p>
-                  If your day went off track, the AI suggests a dinner that balances your calories and macros.
-                </p>
-                <p className="font-medium text-slate-900">
-                  Small recovery beats perfect plans.
-                </p>
+              <div className="grid items-center gap-8 md:grid-cols-[1fr,auto]">
+                <div>
+                  <SectionHeading
+                    eyebrow="Evening rescue"
+                    title="Even if the day went wrong, you can still win the evening."
+                  />
+                  <div className="mt-8 space-y-4 text-base leading-relaxed text-slate-600">
+                    <p>Most apps punish imperfect days. Nuvvoo helps you recover.</p>
+                    <p>
+                      If your day went off track, the AI suggests a dinner that balances your calories and macros.
+                    </p>
+                    <p className="font-medium text-slate-900">
+                      Small recovery beats perfect plans.
+                    </p>
+                  </div>
+                </div>
+                <div className="mx-auto w-64 overflow-hidden rounded-[1.5rem] md:w-72">
+                  <Image
+                    src="/illustrations/evening-rescue.png"
+                    alt="Nuvvoo suggesting a balanced dinner after an off-track day"
+                    width={900}
+                    height={430}
+                    className="h-auto w-full"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -261,7 +291,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="How it works"
               title="A calm routine, in four steps"
-              subtitle="Talk to Nuvvoo in a calm chat. No databases, no grams, no guilt."
+              subtitle="No searching. No weighing. No guilt. Just talk."
               center
             />
           </div>
@@ -270,28 +300,28 @@ export default function HomePage() {
             <FeatureCard
               step="1"
               title="Tell Nuvvoo what you had"
-              desc="Just talk. What you ate. How you feel. Your mood."
+              desc="Just talk. What you ate. Workouts. Supplements. Your mood."
               imageSrc="/illustrations/scene-05-salad.png"
               imageAlt="Nuvvoo cheering a healthy meal"
             />
             <FeatureCard
               step="2"
               title="AI logs it automatically"
-              desc="Calories and macros calculated. No searching, no weighing."
+              desc="Calories and macros calculated. All your health notes saved."
               imageSrc="/illustrations/scene-03-doing-great.png"
               imageAlt="Nuvvoo celebrating your progress"
             />
             <FeatureCard
               step="3"
               title="Get gentle suggestions"
-              desc="Suggestions, balance, and support — not judgment."
+              desc="Dinner ideas, daily balance, and support — not judgment."
               imageSrc="/illustrations/scene-04-dinner-choices.png"
               imageAlt="Nuvvoo suggesting dinner ideas"
             />
             <FeatureCard
               step="4"
               title="Stay consistent, not perfect"
-              desc="Missed a day? No problem. Nuvvoo welcomes you back."
+              desc="While you rest, Nuvvoo finds patterns and helps you feel calmer every day."
               imageSrc="/illustrations/scene-07-goodnight.png"
               imageAlt="Nuvvoo says good night"
               highlight
@@ -305,7 +335,7 @@ export default function HomePage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-lg font-medium text-slate-900">
-              Join <span className="text-nuvvooGreen-700">20+</span> early users
+              Join early access
             </p>
 
             <div className="mt-8 grid gap-5 md:grid-cols-3">
