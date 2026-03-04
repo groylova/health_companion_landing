@@ -38,7 +38,8 @@ export default function HomePage() {
                   Join early access
                 </TrackedButton>
                 <p className="text-sm text-slate-500">
-                  Missed a day? Nuvvoo helps you come back. Imperfect days included.
+                  Track food, habits and symptoms by chatting with Nuvvoo.
+                  Missed a day? Just come back.
                 </p>
               </div>
             </div>

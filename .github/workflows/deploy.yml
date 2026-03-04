@@ -25,7 +25,7 @@ jobs:
       - name: Build Next.js app
         run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: https://nuvvoo.pryvus.com
+          NEXT_PUBLIC_SITE_URL: https://nuvvoo.app
 
       - name: Create deployment package
         run: |
@@ -54,7 +54,7 @@ jobs:
             deploy_package/package.json \
             deploy_package/package-lock.json \
             deploy_package/next.config.mjs \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/nuvvoo-zfxrz/nuvvoo.pryvus.com/
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/nuvvoo-zfxrz/nuvvoo.app/
 
           # Install production dependencies and restart
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
