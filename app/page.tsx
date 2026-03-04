@@ -38,7 +38,7 @@ export default function HomePage() {
                   Join early access
                 </TrackedButton>
                 <p className="text-sm text-slate-500">
-                  Track food, habits, and symptoms by simply chatting with&nbsp;AI.
+                  Missed a day? Nuvvoo helps you come back. Imperfect days included.
                 </p>
               </div>
             </div>
@@ -87,6 +87,43 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* ─── FOUNDER STORY (rollout) ─── */}
+      <section id="founder" className="py-10 md:py-14">
+        <Container>
+          <div className="mx-auto max-w-[680px]">
+            <details className="group">
+              <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                <SectionHeading
+                  eyebrow="Founder story"
+                  title="Why I'm building Nuvvoo"
+                />
+                <p className="mt-4 text-base leading-[1.75] text-slate-600 md:text-lg">
+                  Hi! I&rsquo;m Irene. <strong className="font-semibold text-slate-900">A couple of years ago</strong> I started taking medication for migraines. It helped with the pain, but the side effects hit hard: low mood, weight gain, and a feeling of losing control over my routine.
+                </p>
+                <span className="mt-4 inline-block text-sm font-medium text-nuvvooGreen-700 group-open:hidden">
+                  Read more &rarr;
+                </span>
+              </summary>
+
+              <div className="mt-6 space-y-6">
+                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
+                  I tried many calorie apps. Not because they were bad — but because I couldn&rsquo;t stay <strong className="font-semibold text-slate-900">consistent</strong>. Searching foods, logging portions... I&rsquo;d abandon it within days. It felt exhausting.
+                </p>
+                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
+                  One day I told an AI what I&rsquo;d eaten and asked what I could have for dinner to stay within my calories. It didn&rsquo;t judge. It gently guided me.
+                </p>
+                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
+                  I repeated that conversation the next day. And the next. Within a month, tracking stopped feeling stressful. It became a calm <strong className="font-semibold text-slate-900">daily rhythm</strong>.
+                </p>
+                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
+                  That&rsquo;s when I decided to build Nuvvoo — a companion that listens first, tracks second, and helps you stay <strong className="font-semibold text-slate-900">balanced</strong> without pressure.
+                </p>
+              </div>
+            </details>
+          </div>
+        </Container>
+      </section>
+
       {/* ─── THE RESTART LOOP ─── */}
       <section className="py-16 md:py-24">
         <Container>
@@ -115,6 +152,9 @@ export default function HomePage() {
                   <p className="text-base font-medium text-nuvvooGreen-700 md:text-lg">
                     Nuvvoo is built to break it.
                   </p>
+                  <p className="text-base font-medium text-slate-800 md:text-lg">
+                    No punishment. Just a return.
+                  </p>
                 </div>
               </div>
 
@@ -136,6 +176,47 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ─── EVENING RESCUE ─── */}
+      <section className="py-16 md:py-20">
+        <Container>
+          <div className="mx-auto max-w-3xl">
+            <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/70 p-8 shadow-soft md:p-10">
+              <SectionHeading
+                eyebrow="Evening rescue"
+                title="Even if the day went wrong, you can still win the evening."
+              />
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-600">
+                <p>Most apps punish imperfect days. Nuvvoo helps you recover.</p>
+                <p>
+                  If your day went off track, the AI suggests a dinner that balances your calories and macros.
+                </p>
+                <p className="font-medium text-slate-900">
+                  Small recovery beats perfect plans.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ─── APP SCREENSHOTS ─── */}
+      <section id="product" className="py-12 md:py-16">
+        <Container>
+          <SectionHeading
+            eyebrow="Product"
+            title="No logging. No guilt. Just a calm chat."
+            subtitle="Track food and habits by chatting with AI — not logging everything."
+            center
+          />
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            <Shot src="/screens/screen-journal.png" alt="Journal screen" />
+            <Shot src="/screens/screen-today-ring.png" alt="Today screen with ring" />
+            <Shot src="/screens/screen-stats.png" alt="Statistics screen" />
           </div>
         </Container>
       </section>
@@ -165,7 +246,7 @@ export default function HomePage() {
                 <div className="mt-4 space-y-3 text-base text-slate-800">
                   <p>Miss a day.</p>
                   <p>Come back tomorrow.</p>
-                  <p className="font-semibold">Consistency beats perfection.</p>
+                  <p className="font-semibold">No restart required.</p>
                 </div>
               </div>
             </div>
@@ -180,7 +261,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="How it works"
               title="A calm routine, in four steps"
-              subtitle="Talk to Nuvvoo like a friend. No databases, no grams, no guilt."
+              subtitle="Talk to Nuvvoo in a calm chat. No databases, no grams, no guilt."
               center
             />
           </div>
@@ -213,30 +294,8 @@ export default function HomePage() {
               desc="Missed a day? No problem. Nuvvoo welcomes you back."
               imageSrc="/illustrations/scene-07-goodnight.png"
               imageAlt="Nuvvoo says good night"
+              highlight
             />
-          </div>
-        </Container>
-      </section>
-
-      {/* ─── EVENING RESCUE ─── */}
-      <section className="py-16 md:py-20">
-        <Container>
-          <div className="mx-auto max-w-3xl">
-            <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/70 p-8 shadow-soft md:p-10">
-              <SectionHeading
-                eyebrow="Evening rescue"
-                title="Even if the day went wrong, you can still win the evening."
-              />
-              <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-600">
-                <p>Most apps punish imperfect days. Nuvvoo helps you recover.</p>
-                <p>
-                  If your day went off track, the AI suggests a dinner that balances your calories and macros.
-                </p>
-                <p className="font-medium text-slate-900">
-                  Small recovery beats perfect plans.
-                </p>
-              </div>
-            </div>
           </div>
         </Container>
       </section>
@@ -250,58 +309,10 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 grid gap-5 md:grid-cols-3">
-              <QuoteCard name="Maria" quote="I track perfectly for 10 days and then disappear." />
-              <QuoteCard name="Anastasia" quote="I hate logging food but I want to stay consistent." />
-              <QuoteCard name="Alexandra" quote="I just want something that doesn't punish me." />
+              <QuoteCard name="Maria, photographer" quote="I track perfectly for 10 days and then disappear." />
+              <QuoteCard name="Anastasia, stylist" quote="I hate logging food but I want to stay consistent." />
+              <QuoteCard name="Alexandra, busy mom" quote="I just want something that doesn't punish me." />
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ─── FOUNDER STORY ─── */}
-      <section id="founder" className="py-16 md:py-20">
-        <Container>
-          <div className="mx-auto max-w-[680px]">
-            <SectionHeading
-              eyebrow="Founder story"
-              title="Why I'm building Nuvvoo"
-            />
-
-            <div className="mt-8 space-y-6">
-              <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                Hi! I'm Irene. <strong className="font-semibold text-slate-900">A couple of years ago</strong> I started taking medication for migraines. It helped with the pain, but the side effects hit hard: low mood, weight gain, and a feeling of losing control over my routine.
-              </p>
-              <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                I tried many calorie apps. Not because they were bad — but because I couldn't stay <strong className="font-semibold text-slate-900">consistent</strong>. Searching foods, logging portions... I'd abandon it within days. It felt exhausting.
-              </p>
-              <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                One day I told an AI what I'd eaten and asked what I could have for dinner to stay within my calories. It didn't judge. It gently guided me.
-              </p>
-              <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                I repeated that conversation the next day. And the next. Within a month, tracking stopped feeling stressful. It became a calm <strong className="font-semibold text-slate-900">daily rhythm</strong>.
-              </p>
-              <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                That's when I decided to build Nuvvoo — a companion that listens first, tracks second, and helps you stay <strong className="font-semibold text-slate-900">balanced</strong> without pressure.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ─── APP SCREENSHOTS ─── */}
-      <section id="product" className="py-12 md:py-16">
-        <Container>
-          <SectionHeading
-            eyebrow="Product"
-            title="No logging. No guilt. Just a calm chat."
-            subtitle="Track food and habits by chatting with AI — not logging everything."
-            center
-          />
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <Shot src="/screens/screen-journal.png" alt="Journal screen" />
-            <Shot src="/screens/screen-today-ring.png" alt="Today screen with ring" />
-            <Shot src="/screens/screen-stats.png" alt="Statistics screen" />
           </div>
         </Container>
       </section>
@@ -407,9 +418,10 @@ function FeatureCard(props: {
   desc: string;
   imageSrc: string;
   imageAlt: string;
+  highlight?: boolean;
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white/70 p-5 shadow-soft">
+    <div className={'group relative overflow-hidden rounded-[1.5rem] p-5 shadow-soft ' + (props.highlight ? 'border-2 border-nuvvooGreen-300 bg-nuvvooGreen-50/30' : 'border border-slate-200 bg-white/70')}>
       <div className="flex items-center gap-2 text-sm text-slate-500">
         <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-nuvvooGreen-100 text-nuvvooGreen-800">
           {props.step}

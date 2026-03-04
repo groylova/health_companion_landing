@@ -45,18 +45,18 @@ export function Nav() {
               Founder
             </a>
             <a
-              href="/#how"
-              onClick={() => trackNavClick('how_it_works')}
-              className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
-            >
-              How it works
-            </a>
-            <a
               href="/#product"
               onClick={() => trackNavClick('product')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
               Product
+            </a>
+            <a
+              href="/#how"
+              onClick={() => trackNavClick('how_it_works')}
+              className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
+            >
+              How it works
             </a>
             <a
               href="/#waitlist"
