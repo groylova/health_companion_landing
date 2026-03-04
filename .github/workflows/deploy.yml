@@ -59,7 +59,7 @@ jobs:
           # Install production dependencies and restart
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "cd /home/nuvvoo-zfxrz/nuvvoo.pryvus.com && \
+            "cd /home/nuvvoo-zfxrz/nuvvoo.app && \
              npm ci --production && \
              pm2 reload nuvvoo || pm2 start npm --name nuvvoo -- start"
 
