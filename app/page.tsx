@@ -339,9 +339,9 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 grid gap-5 md:grid-cols-3">
-              <QuoteCard name="Maria, photographer" quote="I track perfectly for 10 days and then disappear." />
-              <QuoteCard name="Anastasia, stylist" quote="I hate logging food but I want to stay consistent." />
-              <QuoteCard name="Alexandra, busy mom" quote="I just want something that doesn't punish me." />
+              <QuoteCard name="Mary, photographer" quote="I track perfectly for 10 days and then disappear." />
+              <QuoteCard name="Stacy, stylist" quote="I hate logging food but I want to stay consistent." />
+              <QuoteCard name="Sarah, busy mom" quote="I just want something that doesn't punish me." />
             </div>
           </div>
         </Container>
