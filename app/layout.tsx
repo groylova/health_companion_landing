@@ -29,9 +29,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nuvvoo — Track food by talking, not logging',
+    title: 'Nuvvoo — Track food by chatting, not logging',
     description:
-      'A gentle AI companion that helps you stay on track with food, habits, and energy — without pressure or spreadsheets.',
+      'A gentle AI companion that helps you stay on track with food, habits, and energy — without pressure. You need only one button.',
     images: ['/images/og.png'],
   },
   icons: {
