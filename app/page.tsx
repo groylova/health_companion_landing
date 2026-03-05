@@ -25,7 +25,7 @@ export default function HomePage() {
                 Stop restarting your health every&nbsp;Monday
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
-                A chat-first health companion for people who know what to do but struggle to stay consistent.
+                A gentle AI-chat companion that helps you stay on track with food, habits, and energy — without pressure.
               </p>
 
               <div className="mt-8 flex flex-col items-start gap-3">
@@ -35,7 +35,7 @@ export default function HomePage() {
                   eventName="click_early_access"
                   eventParams={{ button_location: 'hero' }}
                 >
-                  Join early access
+                  Get priority access
                 </TrackedButton>
                 <p className="text-sm text-slate-500">
                   Track food, habits and symptoms by chatting with Nuvvoo.
@@ -143,7 +143,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── THE RESTART LOOP ─── */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 md:py-16">
         <Container>
           <SectionHeading
             eyebrow="The real problem"
@@ -155,11 +155,9 @@ export default function HomePage() {
             <div className="grid items-start gap-12 md:grid-cols-2">
               <div>
                 <div className="space-y-3.5">
-                  <FamiliarBullet>You know a lot about nutrition</FamiliarBullet>
                   <FamiliarBullet>You track perfectly for two weeks</FamiliarBullet>
                   <FamiliarBullet>Then you miss one day</FamiliarBullet>
                   <FamiliarBullet>And suddenly it feels like you failed</FamiliarBullet>
-                  <FamiliarBullet>So you stop logging</FamiliarBullet>
                   <FamiliarBullet>And start again next Monday</FamiliarBullet>
                 </div>
 
@@ -336,7 +334,7 @@ export default function HomePage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-lg font-medium text-slate-900">
-              Join early access
+              Get priority access
             </p>
 
             <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -363,7 +361,7 @@ export default function HomePage() {
                 <p className="mt-3 text-slate-600">
                   Be the first to try Nuvvoo. Leave your email and we'll send you the launch&nbsp;link.
                 </p>
-                <p className="mt-2 text-sm text-slate-500">No spam. Just launch updates.</p>
+                <p className="mt-2 text-sm text-slate-500">Just the launch link + a bonus for first users.</p>
               </div>
 
               <div>

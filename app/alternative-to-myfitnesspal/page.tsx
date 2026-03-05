@@ -187,7 +187,7 @@ export default function AlternativeToMyFitnessPal() {
             <SeoCta
               title="Try a different approach to tracking"
               description="Join Nuvvoo's early access and experience calorie tracking through conversation instead of databases."
-              buttonText="Join early access"
+              buttonText="Get priority access"
             />
 
             <ContentSection title="Making the Switch">

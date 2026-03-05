@@ -100,7 +100,7 @@ export default function ChatCalorieTracker() {
             <SeoCta
               title="Ready to try chat-based tracking?"
               description="Join Nuvvoo's early access and start tracking by conversation, not database search."
-              buttonText="Join early access"
+              buttonText="Get priority access"
             />
 
             <ContentSection title="Who Benefits from Conversational Tracking">

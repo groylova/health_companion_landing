@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     template: '%s · Nuvvoo',
   },
   description:
-    'A gentle AI companion that helps you stay on track with food, habits, and energy — without pressure or spreadsheets.',
+    'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure.',
   openGraph: {
     title: 'Nuvvoo — Track by chatting, not logging',
     description:
-      'A gentle AI companion that helps you stay on track with food, habits, and energy — without pressure or spreadsheets.',
+      'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure.',
     type: 'website',
     url: siteUrl,
     images: [
@@ -31,11 +31,12 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Nuvvoo — Track food by chatting, not logging',
     description:
-      'A gentle AI companion that helps you stay on track with food, habits, and energy — without pressure. You need only one button.',
+      'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure. You need only one button.',
     images: ['/images/og.png'],
   },
   icons: {
-    icon: '/illustrations/logo.png',
+    icon: '/favicon.png',
+    apple: '/apple-icon.png',
   },
 };
 

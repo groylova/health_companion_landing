@@ -8,8 +8,8 @@ type SeoCtaProps = {
 
 export function SeoCta({
   title = 'Ready to track without stress?',
-  description = 'Join early access and start tracking by chatting, not logging.',
-  buttonText = 'Join early access',
+  description = 'Get priority access and start tracking by chatting, not logging.',
+  buttonText = 'Get priority access',
 }: SeoCtaProps) {
   return (
     <div className="my-12 overflow-hidden rounded-2xl border border-slate-200 bg-white/70 p-8 shadow-soft">

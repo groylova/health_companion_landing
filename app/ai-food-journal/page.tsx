@@ -91,7 +91,7 @@ export default function AiFoodJournal() {
             <SeoCta
               title="Ready to start your AI food journal?"
               description="Join Nuvvoo's early access and begin tracking food, mood, and energy with a journal that remembers."
-              buttonText="Join early access"
+              buttonText="Get priority access"
             />
 
             <ContentSection title="Track Mood & Energy, Not Just Food">

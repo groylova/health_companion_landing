@@ -103,7 +103,7 @@ export default function CalorieTrackingWithoutStress() {
             <SeoCta
               title="Track calories without the stress"
               description="Join Nuvvoo's early access and experience calorie tracking that's calm, flexible, and judgment-free."
-              buttonText="Join early access"
+              buttonText="Get priority access"
             />
 
             <ContentSection title="How Nuvvoo Enables Calm Tracking">
