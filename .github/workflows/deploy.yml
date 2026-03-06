@@ -60,8 +60,8 @@ jobs:
           ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
             "cd /home/nuvvoo-zfxrz/nuvvoo.app && \
-             npm ci --production && \
-             pm2 reload nuvvoo || pm2 start npm --name nuvvoo -- start"
+             npm install --omit=dev --prefer-offline && \
+             pm2 reload nuvvooapp || pm2 start npm --name nuvvooapp -- start"
 
       - name: Cleanup
         if: always()
