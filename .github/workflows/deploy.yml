@@ -63,7 +63,7 @@ jobs:
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
             "cd /home/nuvvoo-zfxrz/nuvvoo.app && \
              npm install --omit=dev --prefer-offline && \
-             pm2 reload nuvvooapp || pm2 start npm --name nuvvooapp -- start"
+             pm2 reload nuvvoo || pm2 start npm --name nuvvoo -i 2 -- start"
 
       - name: Cleanup
         if: always()
