@@ -2,10 +2,13 @@ import { Container } from '@/components/container';
 import { Nav } from '@/components/nav';
 import { Footer } from '@/components/footer';
 
-export default function TermsPage() {
+export default async function TermsPage({ searchParams }: { searchParams: Promise<{ mode?: string }> }) {
+  const { mode } = await searchParams;
+  const isApp = mode === 'app';
+
   return (
     <main>
-      <Nav />
+      {!isApp && <Nav />}
       <Container>
         <div className="prose-nuvvoo mx-auto max-w-3xl py-16">
           <h1 className="text-3xl font-semibold text-slate-900">Terms of Service</h1>
@@ -127,7 +130,7 @@ export default function TermsPage() {
           </div>
         </div>
       </Container>
-      <Footer />
+      {!isApp && <Footer />}
     </main>
   );
 }
