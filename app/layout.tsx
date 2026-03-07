@@ -2,18 +2,18 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Nuvvoo — Your AI Health Companion',
+    default: 'Nuvvoo Your AI Health Companion',
     template: '%s · Nuvvoo',
   },
   description:
     'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure.',
   openGraph: {
-    title: 'Nuvvoo — Track by chatting, not logging',
+    title: 'Nuvvoo Track by chatting, not logging',
     description:
       'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure.',
     type: 'website',
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
         url: '/images/og.png',
         width: 1200,
         height: 630,
-        alt: 'Nuvvoo — Track by chatting, not logging',
+        alt: 'Nuvvoo Track by chatting, not logging',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nuvvoo — Track food by chatting, not logging',
+    title: 'Nuvvoo Track food by chatting, not logging',
     description:
       'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure. You need only one button.',
     images: ['/images/og.png'],
