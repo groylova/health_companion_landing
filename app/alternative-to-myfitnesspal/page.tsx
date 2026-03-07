@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer';
 import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -47,6 +48,12 @@ export default function AlternativeToMyFitnessPal() {
             </p>
           </header>
 
+          <div className="mx-auto mt-10 max-w-3xl">
+            <div className="overflow-hidden rounded-[2rem]">
+              <Image src="/illustrations/scene-04-dinner-choices.png" alt="Nuvvoo suggesting healthy dinner alternatives" width={1200} height={800} className="h-auto w-full" />
+            </div>
+          </div>
+
           <div className="mx-auto mt-12 max-w-3xl space-y-12">
             <ContentSection title="Why People Seek MyFitnessPal Alternatives">
               <p>
@@ -67,7 +74,7 @@ export default function AlternativeToMyFitnessPal() {
                 These aren't dealbreakers for everyone. Many people successfully use MyFitnessPal long-term. But for those who value <strong>speed and simplicity</strong> over database precision, alternatives focused on reducing friction make tracking more sustainable.
               </p>
               <p>
-                Research shows that 70-80% of people who start using calorie tracking apps quit within the first month. The main reason? The tracking method itself becomes a barrier. When logging feels like work, consistency suffers.
+                Industry data suggests that most health and fitness apps see significant user drop-off in the first 30 days. The main reason? The tracking method itself becomes a barrier. When logging feels like work, consistency suffers.
               </p>
             </ContentSection>
 

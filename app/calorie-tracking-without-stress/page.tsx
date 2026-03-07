@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer';
 import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -47,6 +48,12 @@ export default function CalorieTrackingWithoutStress() {
             </p>
           </header>
 
+          <div className="mx-auto mt-10 max-w-3xl">
+            <div className="overflow-hidden rounded-[2rem]">
+              <Image src="/illustrations/scene-07-goodnight.png" alt="Nuvvoo offering a calm end-of-day check-in" width={1200} height={800} className="h-auto w-full" />
+            </div>
+          </div>
+
           <div className="mx-auto mt-12 max-w-3xl space-y-12">
             <ContentSection title="Why Calorie Apps Create Anxiety">
               <p>
@@ -64,7 +71,7 @@ export default function CalorieTrackingWithoutStress() {
                 <li><strong>Obsessive checking:</strong> Constantly opening the app to see if you're "on track," turning meals into math problems</li>
               </ul>
               <p>
-                Research shows that rigid calorie tracking can increase anxiety around food, especially for people prone to perfectionism. When tracking becomes stressful, it stops being helpful—even if the original intention was health.
+                Studies in eating behavior suggest that rigid calorie tracking can increase anxiety around food, especially for people prone to perfectionism. When tracking becomes stressful, it stops being helpful—even if the original intention was health.
               </p>
               <p>
                 The problem isn't tracking itself. It's <em>how</em> most apps approach tracking: with rigid rules, judgment, and a focus on restriction rather than awareness.
@@ -140,7 +147,7 @@ export default function CalorieTrackingWithoutStress() {
 
             <ContentSection title="Reducing Mental Load While Staying Consistent">
               <p>
-                Stress-free tracking isn't just about tone—it's about reducing the <strong>cognitive load</strong> of tracking itself.
+                Stress-free tracking isn't just about tone—it's about reducing the <strong>mental effort</strong> of tracking itself.
               </p>
               <p>
                 Traditional calorie tracking requires constant decision-making:
@@ -169,7 +176,7 @@ export default function CalorieTrackingWithoutStress() {
                 When tracking becomes this simple, it's easier to stay consistent. And <strong>consistency is more important than accuracy</strong> for long-term health habits.
               </p>
               <p>
-                Research on habit formation shows that making behaviors easy increases adherence by 40-60%. Nuvvoo applies this principle to calorie tracking: remove friction, increase consistency, reduce stress.
+                Habit research consistently points to one principle: the easier something is to do, the more likely you'll keep doing it. Nuvvoo applies this to calorie tracking: remove the busywork, and consistency follows naturally.
               </p>
               <p>
                 The result? Tracking that actually helps you build sustainable habits instead of burning you out.

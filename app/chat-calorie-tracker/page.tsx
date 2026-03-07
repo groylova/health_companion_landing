@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer';
 import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -47,16 +48,22 @@ export default function ChatCalorieTracker() {
             </p>
           </header>
 
+          <div className="mx-auto mt-10 max-w-3xl">
+            <div className="overflow-hidden rounded-[2rem]">
+              <Image src="/illustrations/scene-05-salad.png" alt="Nuvvoo AI chat tracking a healthy meal" width={1200} height={800} className="h-auto w-full" />
+            </div>
+          </div>
+
           <div className="mx-auto mt-12 max-w-3xl space-y-12">
             <ContentSection title="Why Traditional Food Logging Fails">
               <p>
                 Most calorie tracking apps follow the same pattern: open the app, search a massive database, pick the closest match, enter portion size, repeat for every ingredient. For a simple breakfast, you might spend 3-5 minutes just logging.
               </p>
               <p>
-                This creates friction. And friction kills consistency.
+                This creates friction. And when tracking feels like a chore, most people stop doing it.
               </p>
               <p>
-                Research shows that <strong>80% of people who start calorie tracking quit within the first month</strong>. The problem isn't motivation—it's the method. Traditional food logging requires:
+                According to app retention studies, <strong>the majority of people who start calorie tracking abandon it within weeks</strong>. The problem isn't motivation—it's the method. Traditional food logging requires:
               </p>
               <ul>
                 <li><strong>Time you don't have:</strong> Searching databases, weighing food, calculating portions</li>
@@ -142,7 +149,7 @@ export default function ChatCalorieTracker() {
                 <strong>This matters for habit formation.</strong> The easier a behavior is to do, the more likely you'll do it consistently. And consistency beats perfection in health tracking.
               </p>
               <p>
-                Studies on habit formation show that reducing friction increases adherence by 40-60%. That's why apps like <Link href="/alternative-to-myfitnesspal">alternatives to MyFitnessPal</Link> focus on simplifying the tracking experience.
+                Behavioral research consistently shows that the simpler a habit is to perform, the more likely people stick with it. That's why apps like <Link href="/alternative-to-myfitnesspal">alternatives to MyFitnessPal</Link> focus on simplifying the tracking experience.
               </p>
               <p>
                 Chat-based tracking also removes the pressure of "doing it right." There's no wrong way to describe your meal. You're not searching for the perfect database entry—you're just talking. This reduces anxiety and makes tracking feel less like a chore.

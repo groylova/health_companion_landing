@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer';
 import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -47,6 +48,12 @@ export default function AiFoodJournal() {
             </p>
           </header>
 
+          <div className="mx-auto mt-10 max-w-3xl">
+            <div className="overflow-hidden rounded-[2rem]">
+              <Image src="/illustrations/scene-03-doing-great.png" alt="Nuvvoo celebrating your food journal progress" width={1200} height={800} className="h-auto w-full" />
+            </div>
+          </div>
+
           <div className="mx-auto mt-12 max-w-3xl space-y-12">
             <ContentSection title="Food Journaling vs. Calorie Tracking">
               <p>
@@ -59,7 +66,7 @@ export default function AiFoodJournal() {
                 Food journaling takes a different approach. It asks: <em>What did I eat today? How did I feel? What patterns do I notice?</em> The goal isn't perfection—it's <strong>awareness</strong>.
               </p>
               <p>
-                Research shows that awareness-based approaches lead to more sustainable behavior change than restrictive counting. When you understand your patterns—like noticing you crave sweets when stressed—you can make informed choices without rigid rules.
+                Emerging evidence in nutrition psychology suggests that awareness-based approaches lead to more sustainable behavior change than restrictive counting. When you understand your patterns—like noticing you crave sweets when stressed—you can make informed choices without rigid rules.
               </p>
               <p>
                 <strong>Nuvvoo combines both approaches:</strong> You get the structure of calorie tracking (if you want it) with the flexibility and self-awareness of journaling. Instead of feeling like you're logging data, it feels like you're <Link href="/chat-calorie-tracker">chatting with a supportive companion</Link>.
@@ -124,7 +131,7 @@ export default function AiFoodJournal() {
 
             <ContentSection title="Why People Quit Food Journals (And How AI Helps)">
               <p>
-                Traditional food journaling—whether paper-based or app-based—has a consistency problem. <strong>Most people quit within 2-3 weeks.</strong>
+                Traditional food journaling—whether paper-based or app-based—has a consistency problem. <strong>The initial enthusiasm rarely lasts beyond a few weeks.</strong>
               </p>
               <p>
                 <strong>Common reasons people stop journaling:</strong>
