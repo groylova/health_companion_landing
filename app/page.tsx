@@ -284,6 +284,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── HOW IT WORKS (illustrated cards — warm, not clinical) ─── */}
+      <div id="how-it-works" />
       <section id="how" className="py-16 md:py-20">
         <Container>
           <div className="text-center">
@@ -347,6 +348,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── WAITLIST ─── */}
+      <div id="early-access" />
       <section id="waitlist" className="mt-16 md:mt-24">
         <Container>
           <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white/70 p-8 shadow-soft md:p-10">
