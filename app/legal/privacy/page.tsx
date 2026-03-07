@@ -2,9 +2,8 @@ import { Container } from '@/components/container';
 import { Nav } from '@/components/nav';
 import { Footer } from '@/components/footer';
 
-export default async function PrivacyPage({ searchParams }: { searchParams: Promise<{ mode?: string }> }) {
-  const { mode } = await searchParams;
-  const isApp = mode === 'app';
+export default function PrivacyPage({ searchParams }: { searchParams: { mode?: string } }) {
+  const isApp = searchParams.mode === 'app';
 
   return (
     <main>
