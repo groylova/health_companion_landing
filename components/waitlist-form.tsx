@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 declare global {
   interface Window {
     dataLayer: any[];
+    gtag: (...args: any[]) => void;
   }
 }
 
@@ -40,6 +41,15 @@ export function WaitlistForm() {
         window.dataLayer.push({
           event: 'waitlist_signup',
           source: 'landing',
+        });
+      }
+
+      // Google Ads conversion
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-17996002178/02JLCMKExIMcEILnlIVD',
+          value: 1.0,
+          currency: 'USD',
         });
       }
     } catch {
