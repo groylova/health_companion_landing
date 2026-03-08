@@ -62,6 +62,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KMGPK4KM');`}
         </Script>
+        <Script id="scroll-depth-tracking" strategy="afterInteractive">
+          {`(function(){
+var thresholds=[25,50,75,90],fired={};
+function getScrollPercent(){
+  var h=document.documentElement,b=document.body;
+  var st=h.scrollTop||b.scrollTop;
+  var sh=(h.scrollHeight||b.scrollHeight)-h.clientHeight;
+  return sh>0?Math.round((st/sh)*100):0;
+}
+function check(){
+  var p=getScrollPercent();
+  for(var i=0;i<thresholds.length;i++){
+    var t=thresholds[i];
+    if(p>=t&&!fired[t]){
+      fired[t]=true;
+      if(typeof gtag==='function'){
+        gtag('event','scroll_depth',{percent_scrolled:t,page_path:location.pathname});
+      }
+    }
+  }
+}
+var ticking=false;
+window.addEventListener('scroll',function(){
+  if(!ticking){ticking=true;requestAnimationFrame(function(){check();ticking=false;});}
+});
+})();`}
+        </Script>
       </head>
       <body>
         <noscript>

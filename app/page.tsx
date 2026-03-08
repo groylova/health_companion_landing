@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer';
 import { TrackedButton } from '@/components/tracked-button';
 import { WaitlistForm } from '@/components/waitlist-form';
 import { SectionHeading } from '@/components/section-heading';
+import { AppleIcon, AndroidIcon } from '@/components/icons';
 
 export default function HomePage() {
   return (
@@ -22,24 +23,37 @@ export default function HomePage() {
               </div>
 
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
-                Stop restarting your health every&nbsp;Monday
+                Track food by chatting, not&nbsp;logging
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
-                A gentle AI-chat companion that helps you stay on track with food, habits, and energy — without pressure.
+                Like ChatGPT, but for your health. It learns your patterns over time — no logging, no&nbsp;pressure.
               </p>
 
-              <div className="mt-8 flex flex-col items-start gap-3">
-                <TrackedButton
-                  variant="primary"
-                  href="/#waitlist"
-                  eventName="click_early_access"
-                  eventParams={{ button_location: 'hero' }}
-                >
-                  Get priority access
-                </TrackedButton>
+              <div className="mt-8 flex flex-col items-start gap-4">
+                <div className="flex gap-3">
+                  <TrackedButton
+                    href="#product"
+                    variant="primary"
+                    eventName="click_platform"
+                    eventParams={{ platform: 'ios', button_location: 'hero' }}
+                    className="!bg-slate-900 !shadow-none hover:!bg-slate-800 gap-2 min-w-[140px]"
+                  >
+                    <AppleIcon size={18} />
+                    iOS
+                  </TrackedButton>
+                  <TrackedButton
+                    href="#product"
+                    variant="outline"
+                    eventName="click_platform"
+                    eventParams={{ platform: 'android', button_location: 'hero' }}
+                    className="gap-2 min-w-[140px]"
+                  >
+                    <AndroidIcon size={18} />
+                    Android
+                  </TrackedButton>
+                </div>
                 <p className="text-sm text-slate-500">
-                  Track food, habits and symptoms by chatting with Nuvvoo.
-                  Missed a day? Just come back.
+                  Just describe your day. Nuvvoo tracks food, habits, and energy — and gets smarter about you every week. As simple as ChatGPT.
                 </p>
               </div>
             </div>
