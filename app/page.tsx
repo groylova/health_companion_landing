@@ -26,7 +26,7 @@ export default function HomePage() {
                 Track food by chatting, not&nbsp;logging
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
-                Like ChatGPT, but for your health. It learns your patterns over time — no logging, no&nbsp;pressure.
+                Just describe your day. Nuvvoo tracks food, habits, and energy — and gets smarter about you every week. As simple as&nbsp;ChatGPT.
               </p>
 
               <div className="mt-8 flex flex-col items-start gap-4">
@@ -53,7 +53,7 @@ export default function HomePage() {
                   </TrackedButton>
                 </div>
                 <p className="text-sm text-slate-500">
-                  Just describe your day. Nuvvoo tracks food, habits, and energy — and gets smarter about you every week. As simple as ChatGPT.
+                  Missed a day? Just come back.
                 </p>
               </div>
             </div>
