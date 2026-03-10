@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 declare global {
   interface Window {
     dataLayer: any[];
+    gtag?: (...args: any[]) => void;
   }
 }
 
@@ -27,11 +28,13 @@ export function TrackedButton({
   children,
 }: TrackedButtonProps) {
   const handleClick = () => {
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({
-        event: eventName,
-        ...eventParams,
-      });
+    if (typeof window !== 'undefined') {
+      if (window.gtag) {
+        window.gtag('event', eventName, eventParams);
+      }
+      if (window.dataLayer) {
+        window.dataLayer.push({ event: eventName, ...eventParams });
+      }
     }
   };
 

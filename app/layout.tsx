@@ -72,15 +72,17 @@ function getScrollPercent(){
   var sh=(h.scrollHeight||b.scrollHeight)-h.clientHeight;
   return sh>0?Math.round((st/sh)*100):0;
 }
+function send(name,params){
+  if(typeof gtag==='function'){gtag('event',name,params);}
+  else{(window.dataLayer=window.dataLayer||[]).push(Object.assign({event:name},params));}
+}
 function check(){
   var p=getScrollPercent();
   for(var i=0;i<thresholds.length;i++){
     var t=thresholds[i];
     if(p>=t&&!fired[t]){
       fired[t]=true;
-      if(typeof gtag==='function'){
-        gtag('event','scroll_depth',{percent_scrolled:t,page_path:location.pathname});
-      }
+      send('scroll_depth',{percent_scrolled:t,page_path:location.pathname});
     }
   }
 }
