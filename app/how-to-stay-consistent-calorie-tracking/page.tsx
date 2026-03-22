@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     title: 'How to Actually Stay Consistent With Calorie Tracking (Without Burning Out)',
     description: 'The problem isn\'t motivation — it\'s friction. Here\'s what habit science says about making food tracking stick, and why most apps are designed wrong.',
     url: `${siteUrl}/how-to-stay-consistent-calorie-tracking`,
-    images: [{ url: '/illustrations/scene-consistency.png', width: 1200, height: 800 }],
+    images: [{ url: '/illustrations/scene-consistency.webp', width: 1200, height: 800 }],
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Why You Keep Quitting Calorie Tracking (And How to Actually Stick With It)',
     description: 'It\'s not about discipline. It\'s about friction. Here\'s the habit science behind food tracking consistency.',
-    images: ['/illustrations/scene-consistency.png'],
+    images: ['/illustrations/scene-consistency.webp'],
   },
 };
 
@@ -63,7 +63,7 @@ export default function HowToStayConsistentCalorieTracking() {
 
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
-              <Image src="/illustrations/scene-consistency.png" alt="Person relaxed on couch tracking food habits on phone with Nuvvoo — building a consistent calorie tracking habit" width={1200} height={800} className="h-auto w-full" />
+              <Image src="/illustrations/scene-consistency.webp" alt="Person relaxed on couch tracking food habits on phone with Nuvvoo — building a consistent calorie tracking habit" width={1200} height={800} className="h-auto w-full" />
             </div>
           </div>
 

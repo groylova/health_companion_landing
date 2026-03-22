@@ -52,7 +52,7 @@ export default function CalorieTrackingWithoutStress() {
 
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
-              <Image src="/illustrations/scene-07-goodnight.png" alt="Nuvvoo offering a calm end-of-day check-in" width={1200} height={800} className="h-auto w-full" />
+              <Image src="/illustrations/scene-07-goodnight.webp" alt="Nuvvoo offering a calm end-of-day check-in" width={1200} height={800} className="h-auto w-full" />
             </div>
           </div>
 

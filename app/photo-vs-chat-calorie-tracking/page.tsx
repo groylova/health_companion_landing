@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     title: 'Photo vs Chat: Two Approaches to AI Calorie Tracking',
     description: 'Snap a photo or describe your meal — two very different approaches to AI food tracking. Here\'s what the research says about accuracy, and which one actually fits how most people eat.',
     url: `${siteUrl}/photo-vs-chat-calorie-tracking`,
-    images: [{ url: '/illustrations/scene-photo-vs-chat.png', width: 1200, height: 800 }],
+    images: [{ url: '/illustrations/scene-photo-vs-chat.webp', width: 1200, height: 800 }],
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Photo vs Chat: Which AI Calorie Tracker Is More Accurate?',
     description: 'Research shows 30–40% error rates on complex dishes for photo tracking. Here\'s what the alternative looks like.',
-    images: ['/illustrations/scene-photo-vs-chat.png'],
+    images: ['/illustrations/scene-photo-vs-chat.webp'],
   },
 };
 
@@ -63,7 +63,7 @@ export default function PhotoVsChatCalorieTracking() {
 
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
-              <Image src="/illustrations/scene-photo-vs-chat.png" alt="Describing a restaurant meal to Nuvvoo instead of taking a photo — conversational AI calorie tracking at dinner" width={1200} height={800} className="h-auto w-full" />
+              <Image src="/illustrations/scene-photo-vs-chat.webp" alt="Describing a restaurant meal to Nuvvoo instead of taking a photo — conversational AI calorie tracking at dinner" width={1200} height={800} className="h-auto w-full" />
             </div>
           </div>
 

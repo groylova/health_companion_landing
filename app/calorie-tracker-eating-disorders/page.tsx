@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     title: 'Calorie Tracking With an Eating Disorder: Why Conversation Works Better Than Counting',
     description: 'Research shows traditional calorie trackers can worsen disordered eating. A conversational approach — describing your day instead of logging numbers — changes everything.',
     url: `${siteUrl}/calorie-tracker-eating-disorders`,
-    images: [{ url: '/illustrations/scene-eating-disorders.png', width: 1200, height: 800 }],
+    images: [{ url: '/illustrations/scene-eating-disorders.webp', width: 1200, height: 800 }],
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Calorie Tracking With an Eating Disorder: Why Chat Works Better',
     description: '73% of traditional calorie tracker users with an eating disorder say the app made it worse. There\'s a better way.',
-    images: ['/illustrations/scene-eating-disorders.png'],
+    images: ['/illustrations/scene-eating-disorders.webp'],
   },
 };
 
@@ -63,7 +63,7 @@ export default function CalorieTrackerEatingDisorders() {
 
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
-              <Image src="/illustrations/scene-eating-disorders.png" alt="A calm conversation about food instead of anxious calorie counting — Nuvvoo gently asking how are you feeling" width={1200} height={800} className="h-auto w-full" />
+              <Image src="/illustrations/scene-eating-disorders.webp" alt="A calm conversation about food instead of anxious calorie counting — Nuvvoo gently asking how are you feeling" width={1200} height={800} className="h-auto w-full" />
             </div>
           </div>
 

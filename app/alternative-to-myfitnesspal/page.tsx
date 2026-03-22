@@ -52,7 +52,7 @@ export default function AlternativeToMyFitnessPal() {
 
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
-              <Image src="/illustrations/scene-04-dinner-choices.png" alt="Nuvvoo suggesting healthy dinner alternatives" width={1200} height={800} className="h-auto w-full" />
+              <Image src="/illustrations/scene-04-dinner-choices.webp" alt="Nuvvoo suggesting healthy dinner alternatives" width={1200} height={800} className="h-auto w-full" />
             </div>
           </div>
 

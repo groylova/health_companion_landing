@@ -52,7 +52,7 @@ export default function ChatCalorieTracker() {
 
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
-              <Image src="/illustrations/scene-05-salad.png" alt="Nuvvoo AI chat tracking a healthy meal" width={1200} height={800} className="h-auto w-full" />
+              <Image src="/illustrations/scene-05-salad.webp" alt="Nuvvoo AI chat tracking a healthy meal" width={1200} height={800} className="h-auto w-full" />
             </div>
           </div>
 

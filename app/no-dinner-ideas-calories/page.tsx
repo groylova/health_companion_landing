@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     title: 'No Dinner Ideas? How to Find Meals That Actually Fit Your Calories',
     description: '15 easy, filling dinners that fit a moderate calorie goal — plus a simpler way to think about dinner when your brain is blank and you\'re already hungry.',
     url: `${siteUrl}/no-dinner-ideas-calories`,
-    images: [{ url: '/illustrations/scene-dinner-ideas.png', width: 1200, height: 800 }],
+    images: [{ url: '/illustrations/scene-dinner-ideas.webp', width: 1200, height: 800 }],
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'No Dinner Ideas That Fit Your Calories? Start Here.',
     description: '15 easy meals + a simpler way to think about dinner when you\'re tired and your brain is blank.',
-    images: ['/illustrations/scene-dinner-ideas.png'],
+    images: ['/illustrations/scene-dinner-ideas.webp'],
   },
 };
 
@@ -63,7 +63,7 @@ export default function NoDinnerIdeasCalories() {
 
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
-              <Image src="/illustrations/scene-dinner-ideas.png" alt="Standing at the fridge with no dinner ideas — Nuvvoo offering to help find a meal that fits your calorie goal" width={1200} height={800} className="h-auto w-full" />
+              <Image src="/illustrations/scene-dinner-ideas.webp" alt="Standing at the fridge with no dinner ideas — Nuvvoo offering to help find a meal that fits your calorie goal" width={1200} height={800} className="h-auto w-full" />
             </div>
           </div>
 

@@ -52,7 +52,7 @@ export default function AiFoodJournal() {
 
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
-              <Image src="/illustrations/scene-03-doing-great.png" alt="Nuvvoo celebrating your food journal progress" width={1200} height={800} className="h-auto w-full" />
+              <Image src="/illustrations/scene-03-doing-great.webp" alt="Nuvvoo celebrating your food journal progress" width={1200} height={800} className="h-auto w-full" />
             </div>
           </div>
 

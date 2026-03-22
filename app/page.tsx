@@ -63,11 +63,12 @@ export default function HomePage() {
               <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-nuvvooGreen-100 via-white to-nuvvooGreen-50 blur-2xl" />
               <div className="overflow-hidden rounded-[2rem] bg-white/60 p-3 shadow-soft">
                 <Image
-                  src="/illustrations/scene-01-handshake.png"
+                  src="/illustrations/scene-01-handshake.webp"
                   alt="Irene meeting Nuvvoo the blob"
                   width={1200}
-                  height={900}
+                  height={800}
                   priority
+                  fetchPriority="high"
                   className="h-auto w-full rounded-[1.6rem]"
                 />
               </div>
@@ -92,7 +93,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-7 w-7 shrink-0 overflow-hidden rounded-full">
-                    <Image src="/illustrations/logo.png" alt="Nuvvoo" width={28} height={28} className="h-full w-full object-contain" />
+                    <Image src="/illustrations/logo.webp" alt="Nuvvoo" width={28} height={28} className="h-full w-full object-contain" />
                   </div>
                   <div className="max-w-[80%] rounded-2xl rounded-bl-md bg-slate-100 px-4 py-3 text-sm text-slate-700">
                     <p>Logged. You&rsquo;re still within your calorie range.</p>
@@ -106,7 +107,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="mt-1 h-7 w-7 shrink-0 overflow-hidden rounded-full">
-                    <Image src="/illustrations/logo.png" alt="Nuvvoo" width={28} height={28} className="h-full w-full object-contain" />
+                    <Image src="/illustrations/logo.webp" alt="Nuvvoo" width={28} height={28} className="h-full w-full object-contain" />
                   </div>
                   <div className="max-w-[80%] rounded-2xl rounded-bl-md bg-slate-100 px-4 py-3 text-sm text-slate-700">
                     <p>Boxing logged. Mood: great. I&rsquo;m so proud of you!</p>
@@ -193,15 +194,15 @@ export default function HomePage() {
                 <div className="relative flex flex-col items-center gap-0">
                   <div className="absolute left-1/2 top-6 bottom-12 -z-10 w-px -translate-x-1/2 bg-gradient-to-b from-slate-200 via-slate-200 to-nuvvooGreen-200" />
 
-                  <LoopStep text="Track perfectly" icon="/illustrations/loop-track.png" />
+                  <LoopStep text="Track perfectly" icon="/illustrations/loop-track.webp" />
                   <LoopArrow />
-                  <LoopStep text="Miss one day" icon="/illustrations/loop-miss.png" />
+                  <LoopStep text="Miss one day" icon="/illustrations/loop-miss.webp" />
                   <LoopArrow />
-                  <LoopStep text="Feel guilty" icon="/illustrations/loop-guilty.png" />
+                  <LoopStep text="Feel guilty" icon="/illustrations/loop-guilty.webp" />
                   <LoopArrow />
-                  <LoopStep text="Stop logging" icon="/illustrations/loop-stop.png" />
+                  <LoopStep text="Stop logging" icon="/illustrations/loop-stop.webp" />
                   <LoopArrow />
-                  <LoopStep text="Restart Monday" icon="/illustrations/loop-restart.png" highlight />
+                  <LoopStep text="Restart Monday" icon="/illustrations/loop-restart.webp" highlight />
                   <LoopReturn />
                 </div>
               </div>
@@ -233,7 +234,7 @@ export default function HomePage() {
                 </div>
                 <div className="mx-auto w-64 overflow-hidden rounded-[1.5rem] md:w-72">
                   <Image
-                    src="/illustrations/evening-rescue.png"
+                    src="/illustrations/evening-rescue.webp"
                     alt="Nuvvoo suggesting a balanced dinner after an off-track day"
                     width={900}
                     height={430}
@@ -315,28 +316,28 @@ export default function HomePage() {
               step="1"
               title="Tell Nuvvoo what you had"
               desc="Just talk. What you ate. Workouts. Supplements. Your mood."
-              imageSrc="/illustrations/scene-05-salad.png"
+              imageSrc="/illustrations/scene-05-salad.webp"
               imageAlt="Nuvvoo cheering a healthy meal"
             />
             <FeatureCard
               step="2"
               title="AI logs it automatically"
               desc="Calories and macros calculated. All your health notes saved."
-              imageSrc="/illustrations/scene-03-doing-great.png"
+              imageSrc="/illustrations/scene-03-doing-great.webp"
               imageAlt="Nuvvoo celebrating your progress"
             />
             <FeatureCard
               step="3"
               title="Get gentle suggestions"
               desc="Dinner ideas, daily balance, and support — not judgment."
-              imageSrc="/illustrations/scene-04-dinner-choices.png"
+              imageSrc="/illustrations/scene-04-dinner-choices.webp"
               imageAlt="Nuvvoo suggesting dinner ideas"
             />
             <FeatureCard
               step="4"
               title="Stay consistent, not perfect"
               desc="While you rest, Nuvvoo finds patterns and helps you feel calmer every day."
-              imageSrc="/illustrations/scene-07-goodnight.png"
+              imageSrc="/illustrations/scene-07-goodnight.webp"
               imageAlt="Nuvvoo says good night"
               highlight
             />
