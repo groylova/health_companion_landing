@@ -7,15 +7,15 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Nuvvoo Your AI Health Companion',
+    default: 'Nuvvoo – AI Calorie Tracker via Chat | Track Food Without Logging',
     template: '%s · Nuvvoo',
   },
   description:
-    'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure.',
+    'Track calories by chatting with AI — no databases, no barcode scanning. Nuvvoo learns your habits and helps you stay on track with food, energy, and wellness. Try free.',
   openGraph: {
-    title: 'Nuvvoo Track by chatting, not logging',
+    title: 'Nuvvoo: Just describe your day. AI tracks the rest.',
     description:
-      'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure.',
+      'The calorie tracker that works like ChatGPT. Describe your meals in plain text — Nuvvoo handles the numbers.',
     type: 'website',
     url: siteUrl,
     images: [
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
         url: '/images/og.png',
         width: 1200,
         height: 630,
-        alt: 'Nuvvoo Track by chatting, not logging',
+        alt: 'Nuvvoo: Just describe your day. AI tracks the rest.',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nuvvoo Track food by chatting, not logging',
+    title: 'Nuvvoo: Just describe your day. AI tracks the rest.',
     description:
-      'A gentle AI companion that helps you stay on track with food, habits, and energy without pressure. You need only one button.',
+      'The calorie tracker that works like ChatGPT. Describe your meals in plain text — Nuvvoo handles the numbers.',
     images: ['/images/og.png'],
   },
   icons: {

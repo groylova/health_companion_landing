@@ -7,6 +7,8 @@ import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AppleIcon, AndroidIcon } from '@/components/icons';
+import { TrackedButton } from '@/components/tracked-button';
 
 export const metadata: Metadata = {
   title: 'Calorie Tracking Without Stress or Anxiety | Nuvvoo',
@@ -103,7 +105,7 @@ export default function CalorieTrackingWithoutStress() {
                 Stress-free tracking embraces this. It's not about hitting exact numbers every day—it's about understanding your eating patterns over time. Some days you'll track perfectly. Other days you'll estimate. Both are valuable.
               </p>
               <p>
-                Apps like <Link href="/alternative-to-myfitnesspal">alternatives to MyFitnessPal</Link> are designed to reduce this perfectionism by making tracking feel more flexible and forgiving.
+                Apps like <Link href="/alternative-to-myfitnesspal">alternatives to MyFitnessPal</Link> are designed to reduce this perfectionism by making tracking feel more flexible and forgiving. If perfectionism has crossed into disordered eating territory, read about <Link href="/calorie-tracker-eating-disorders">why conversation-based tracking is safer for people with eating disorders</Link>.
               </p>
             </ContentSection>
 
@@ -179,9 +181,35 @@ export default function CalorieTrackingWithoutStress() {
                 Habit research consistently points to one principle: the easier something is to do, the more likely you'll keep doing it. Nuvvoo applies this to calorie tracking: remove the busywork, and consistency follows naturally.
               </p>
               <p>
-                The result? Tracking that actually helps you build sustainable habits instead of burning you out.
+                The result? Tracking that actually helps you build sustainable habits instead of burning you out. Even on those evenings when you have <Link href="/no-dinner-ideas-calories">no idea what to eat for dinner</Link>, a quick chat is all it takes.
               </p>
             </ContentSection>
+
+            <div className="my-12 flex flex-col items-center gap-4 text-center">
+              <p className="text-lg font-medium text-slate-900">Available soon on</p>
+              <div className="flex gap-3">
+                <TrackedButton
+                  href="/#waitlist"
+                  variant="primary"
+                  eventName="click_platform"
+                  eventParams={{ platform: 'ios', button_location: 'seo_stress_free' }}
+                  className="!bg-slate-900 !shadow-none hover:!bg-slate-800 gap-2 min-w-[140px]"
+                >
+                  <AppleIcon size={18} />
+                  iOS
+                </TrackedButton>
+                <TrackedButton
+                  href="/#waitlist"
+                  variant="outline"
+                  eventName="click_platform"
+                  eventParams={{ platform: 'android', button_location: 'seo_stress_free' }}
+                  className="gap-2 min-w-[140px]"
+                >
+                  <AndroidIcon size={18} />
+                  Android
+                </TrackedButton>
+              </div>
+            </div>
 
             <FaqSection faqs={faqs} />
           </div>

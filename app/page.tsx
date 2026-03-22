@@ -26,7 +26,7 @@ export default function HomePage() {
                 Track food by chatting, not&nbsp;logging
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
-                Just describe your day. Nuvvoo tracks food, habits, and energy — and gets smarter about you every week. As simple as&nbsp;ChatGPT.
+                Just describe your day. Nuvvoo is the AI calorie tracker that learns your habits every week. As simple as&nbsp;ChatGPT.
               </p>
 
               <div className="mt-8 flex flex-col items-start gap-4">

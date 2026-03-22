@@ -7,6 +7,8 @@ import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AppleIcon, AndroidIcon } from '@/components/icons';
+import { TrackedButton } from '@/components/tracked-button';
 
 export const metadata: Metadata = {
   title: 'AI Food Journal: Smart Food Diary That Remembers | Nuvvoo',
@@ -125,7 +127,7 @@ export default function AiFoodJournal() {
                 <strong>Why this matters for behavior change:</strong> Understanding the <em>why</em> behind your eating habits makes it easier to adjust them. If you realize you're stress-eating because work is overwhelming, you can address the root cause rather than just trying to "eat less."
               </p>
               <p>
-                This approach aligns with intuitive eating and mindful eating practices, which focus on awareness and self-compassion rather than restriction. It's what makes Nuvvoo feel less like <Link href="/calorie-tracking-without-stress">a stressful calorie counter</Link> and more like a wellness tool.
+                This approach aligns with intuitive eating and mindful eating practices, which focus on awareness and self-compassion rather than restriction. It's what makes Nuvvoo feel less like <Link href="/calorie-tracking-without-stress">a stressful calorie counter</Link> and more like a wellness tool — especially for people who need a <Link href="/calorie-tracker-eating-disorders">safer alternative to traditional calorie tracking</Link>.
               </p>
             </ContentSection>
 
@@ -162,9 +164,35 @@ export default function AiFoodJournal() {
                 <li>Adapting to your journaling style (some people journal daily, others weekly—both work)</li>
               </ul>
               <p>
-                This adaptive, supportive approach is what helps people stick with food journaling long-term. It's not about rigid tracking—it's about building sustainable awareness.
+                This adaptive, supportive approach is what helps people stick with food journaling long-term. It's not about rigid tracking—it's about building sustainable awareness. Learn more about <Link href="/how-to-stay-consistent-calorie-tracking">how to actually stay consistent with food tracking</Link>.
               </p>
             </ContentSection>
+
+            <div className="my-12 flex flex-col items-center gap-4 text-center">
+              <p className="text-lg font-medium text-slate-900">Available soon on</p>
+              <div className="flex gap-3">
+                <TrackedButton
+                  href="/#waitlist"
+                  variant="primary"
+                  eventName="click_platform"
+                  eventParams={{ platform: 'ios', button_location: 'seo_food_journal' }}
+                  className="!bg-slate-900 !shadow-none hover:!bg-slate-800 gap-2 min-w-[140px]"
+                >
+                  <AppleIcon size={18} />
+                  iOS
+                </TrackedButton>
+                <TrackedButton
+                  href="/#waitlist"
+                  variant="outline"
+                  eventName="click_platform"
+                  eventParams={{ platform: 'android', button_location: 'seo_food_journal' }}
+                  className="gap-2 min-w-[140px]"
+                >
+                  <AndroidIcon size={18} />
+                  Android
+                </TrackedButton>
+              </div>
+            </div>
 
             <FaqSection faqs={faqs} />
           </div>

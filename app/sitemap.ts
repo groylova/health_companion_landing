@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.pryvus.com';
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
   return [
     {
       url: `${base}/`,
@@ -34,6 +34,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7
+    },
+    {
+      url: `${base}/calorie-tracker-eating-disorders`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8
+    },
+    {
+      url: `${base}/no-dinner-ideas-calories`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8
+    },
+    {
+      url: `${base}/how-to-stay-consistent-calorie-tracking`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8
+    },
+    {
+      url: `${base}/photo-vs-chat-calorie-tracking`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8
     },
 
     // Legal Pages

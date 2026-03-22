@@ -7,6 +7,8 @@ import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AppleIcon, AndroidIcon } from '@/components/icons';
+import { TrackedButton } from '@/components/tracked-button';
 
 export const metadata: Metadata = {
   title: 'MyFitnessPal Alternative: Track by Chatting, Not Logging | Nuvvoo',
@@ -185,6 +187,7 @@ export default function AlternativeToMyFitnessPal() {
                 <li>You want awareness without obsessing over exact numbers</li>
                 <li>You value speed and simplicity over database precision</li>
                 <li>You prefer conversational interfaces to form-based logging</li>
+                <li>You have a history of <Link href="/calorie-tracker-eating-disorders">disordered eating triggered by calorie apps</Link></li>
               </ul>
               <p>
                 Both tools have their place. The best tracker is the one you'll actually use consistently.
@@ -227,9 +230,35 @@ export default function AlternativeToMyFitnessPal() {
                 The goal isn't to find the "perfect" tracker—it's to find the one that helps you <strong>stay consistent without burning out</strong>.
               </p>
               <p>
-                If you're curious about Nuvvoo's approach, you can also explore how it functions as an <Link href="/ai-food-journal">AI food journal</Link> that combines tracking with holistic health awareness.
+                If you're curious about Nuvvoo's approach, you can also explore how it functions as an <Link href="/ai-food-journal">AI food journal</Link> that combines tracking with holistic health awareness. Or see how it helps when you're <Link href="/no-dinner-ideas-calories">stuck with no dinner ideas and a calorie goal to hit</Link>.
               </p>
             </ContentSection>
+
+            <div className="my-12 flex flex-col items-center gap-4 text-center">
+              <p className="text-lg font-medium text-slate-900">Available soon on</p>
+              <div className="flex gap-3">
+                <TrackedButton
+                  href="/#waitlist"
+                  variant="primary"
+                  eventName="click_platform"
+                  eventParams={{ platform: 'ios', button_location: 'seo_mfp_alternative' }}
+                  className="!bg-slate-900 !shadow-none hover:!bg-slate-800 gap-2 min-w-[140px]"
+                >
+                  <AppleIcon size={18} />
+                  iOS
+                </TrackedButton>
+                <TrackedButton
+                  href="/#waitlist"
+                  variant="outline"
+                  eventName="click_platform"
+                  eventParams={{ platform: 'android', button_location: 'seo_mfp_alternative' }}
+                  className="gap-2 min-w-[140px]"
+                >
+                  <AndroidIcon size={18} />
+                  Android
+                </TrackedButton>
+              </div>
+            </div>
 
             <FaqSection faqs={faqs} />
           </div>

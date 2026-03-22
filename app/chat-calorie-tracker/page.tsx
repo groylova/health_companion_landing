@@ -7,6 +7,8 @@ import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
 import Image from 'next/image';
 import Link from 'next/link';
+import { AppleIcon, AndroidIcon } from '@/components/icons';
+import { TrackedButton } from '@/components/tracked-button';
 
 export const metadata: Metadata = {
   title: 'Chat Calorie Tracker: Track Food by Talking, Not Logging | Nuvvoo',
@@ -87,7 +89,7 @@ export default function ChatCalorieTracker() {
                 Nuvvoo's AI understands natural language. It recognizes foods, estimates portions based on context, and calculates calories automatically. If it needs clarification—like whether your eggs included butter or how large your toast slices were—it asks.
               </p>
               <p>
-                The entire interaction takes about 30 seconds. Compare that to 3 minutes of database searching, and you've just reduced tracking friction by 80%.
+                The entire interaction takes about 30 seconds. Compare that to 3 minutes of database searching, and you've just reduced tracking friction by 80%. Curious how this compares to photo-based AI tracking? See our <Link href="/photo-vs-chat-calorie-tracking">photo vs chat comparison</Link>.
               </p>
               <p>
                 <strong>Here's what happens behind the scenes:</strong>
@@ -125,7 +127,7 @@ export default function ChatCalorieTracker() {
                 <li><strong>Prefer talking to typing:</strong> You find it faster to describe meals than to search menus</li>
               </ul>
               <p>
-                Conversational tracking also helps people who experience <Link href="/calorie-tracking-without-stress">tracking-related stress</Link>. When logging feels more like a conversation than data entry, it reduces the mental burden and makes tracking sustainable.
+                Conversational tracking also helps people who experience <Link href="/calorie-tracking-without-stress">tracking-related stress</Link> or have a complicated relationship with food. If traditional calorie apps have triggered anxiety or disordered patterns, read about why <Link href="/calorie-tracker-eating-disorders">conversation works better than counting for people with eating disorders</Link>.
               </p>
               <p>
                 <strong>When database tracking might be better:</strong>
@@ -152,9 +154,35 @@ export default function ChatCalorieTracker() {
                 Behavioral research consistently shows that the simpler a habit is to perform, the more likely people stick with it. That's why apps like <Link href="/alternative-to-myfitnesspal">alternatives to MyFitnessPal</Link> focus on simplifying the tracking experience.
               </p>
               <p>
-                Chat-based tracking also removes the pressure of "doing it right." There's no wrong way to describe your meal. You're not searching for the perfect database entry—you're just talking. This reduces anxiety and makes tracking feel less like a chore.
+                Chat-based tracking also removes the pressure of "doing it right." There's no wrong way to describe your meal. You're not searching for the perfect database entry—you're just talking. This reduces anxiety and makes tracking feel less like a chore. Even when you're <Link href="/no-dinner-ideas-calories">stuck with no dinner ideas</Link>, you can describe what you have and get help.
               </p>
             </ContentSection>
+
+            <div className="my-12 flex flex-col items-center gap-4 text-center">
+              <p className="text-lg font-medium text-slate-900">Available soon on</p>
+              <div className="flex gap-3">
+                <TrackedButton
+                  href="/#waitlist"
+                  variant="primary"
+                  eventName="click_platform"
+                  eventParams={{ platform: 'ios', button_location: 'seo_chat_tracker' }}
+                  className="!bg-slate-900 !shadow-none hover:!bg-slate-800 gap-2 min-w-[140px]"
+                >
+                  <AppleIcon size={18} />
+                  iOS
+                </TrackedButton>
+                <TrackedButton
+                  href="/#waitlist"
+                  variant="outline"
+                  eventName="click_platform"
+                  eventParams={{ platform: 'android', button_location: 'seo_chat_tracker' }}
+                  className="gap-2 min-w-[140px]"
+                >
+                  <AndroidIcon size={18} />
+                  Android
+                </TrackedButton>
+              </div>
+            </div>
 
             <FaqSection faqs={faqs} />
           </div>

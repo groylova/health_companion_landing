@@ -12,19 +12,38 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-6 md:flex-row md:gap-12">
-            {/* Resources Section */}
+            {/* Resources — Column 1 (newer, high-impact articles first) */}
             <div className="flex flex-col gap-2">
               <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Resources
               </div>
+              <Link className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-tracker-eating-disorders">
+                Eating Disorder Safety
+              </Link>
+              <Link className="text-sm text-slate-600 hover:text-slate-900" href="/no-dinner-ideas-calories">
+                Dinner Ideas &amp; Calories
+              </Link>
+              <Link className="text-sm text-slate-600 hover:text-slate-900" href="/how-to-stay-consistent-calorie-tracking">
+                Stay Consistent Tracking
+              </Link>
+              <Link className="text-sm text-slate-600 hover:text-slate-900" href="/photo-vs-chat-calorie-tracking">
+                Photo vs Chat Tracking
+              </Link>
+            </div>
+
+            {/* Resources — Column 2 */}
+            <div className="flex flex-col gap-2">
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                Learn More
+              </div>
+              <Link className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-tracking-without-stress">
+                Stress-Free Tracking
+              </Link>
               <Link className="text-sm text-slate-600 hover:text-slate-900" href="/chat-calorie-tracker">
                 Chat Calorie Tracker
               </Link>
               <Link className="text-sm text-slate-600 hover:text-slate-900" href="/ai-food-journal">
                 AI Food Journal
-              </Link>
-              <Link className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-tracking-without-stress">
-                Stress-Free Tracking
               </Link>
               <Link className="text-sm text-slate-600 hover:text-slate-900" href="/alternative-to-myfitnesspal">
                 MyFitnessPal Alternative
