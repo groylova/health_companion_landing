@@ -46,7 +46,7 @@ export default function ChatCalorieTracker() {
               Chat Calorie Tracker: Track Food by Talking, Not Logging
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              Track your food by chatting, not searching databases. Nuvvoo's AI-powered calorie tracker understands natural language, so you can describe meals in your own words—no manual logging required.
+              Track your food by chatting, not searching databases. Nuvvoo's AI-powered calorie tracker understands natural language, so you can describe meals in your own words. No manual logging required.
             </p>
           </header>
 
@@ -65,7 +65,7 @@ export default function ChatCalorieTracker() {
                 This creates friction. And when tracking feels like a chore, most people stop doing it.
               </p>
               <p>
-                According to app retention studies, <strong>the majority of people who start calorie tracking abandon it within weeks</strong>. The problem isn't motivation—it's the method. Traditional food logging requires:
+                According to <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5332530/" target="_blank" rel="noopener noreferrer" className="text-nuvvooGreen-700 underline hover:text-nuvvooGreen-900">app retention research</a>, <strong>the majority of people who start calorie tracking abandon it within weeks</strong>. The problem isn't motivation—it's the method. Traditional food logging requires:
               </p>
               <ul>
                 <li><strong>Time you don't have:</strong> Searching databases, weighing food, calculating portions</li>
@@ -139,7 +139,7 @@ export default function ChatCalorieTracker() {
 
             <ContentSection title="Why Talking Reduces Friction">
               <p>
-                The shift from database search to conversation isn't just about speed—it's about <strong>cognitive load</strong>.
+                The shift from database search to conversation isn't just about speed. It's about <strong>cognitive load</strong>.
               </p>
               <p>
                 When you search a food database, you're forced to translate your real meal into the app's language. "Grilled chicken breast" becomes a decision: Which entry? How many ounces? Raw or cooked weight? Every decision adds friction.
@@ -159,7 +159,6 @@ export default function ChatCalorieTracker() {
             </ContentSection>
 
             <div className="my-12 flex flex-col items-center gap-4 text-center">
-              <p className="text-lg font-medium text-slate-900">Available soon on</p>
               <div className="flex gap-3">
                 <TrackedButton
                   href="/#waitlist"

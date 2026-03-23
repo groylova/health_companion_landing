@@ -18,7 +18,6 @@ export default function HomePage() {
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-nuvvooGreen-200 bg-nuvvooGreen-50/60 px-4 py-1.5 text-sm font-medium text-nuvvooGreen-800">
-                <span className="h-2 w-2 rounded-full bg-nuvvooGreen-500" />
                 Early access is open
               </div>
 

@@ -76,7 +76,7 @@ export default function AlternativeToMyFitnessPal() {
                 These aren't dealbreakers for everyone. Many people successfully use MyFitnessPal long-term. But for those who value <strong>speed and simplicity</strong> over database precision, alternatives focused on reducing friction make tracking more sustainable.
               </p>
               <p>
-                Industry data suggests that most health and fitness apps see significant user drop-off in the first 30 days. The main reason? The tracking method itself becomes a barrier. When logging feels like work, consistency suffers.
+                <a href="https://www.businessofapps.com/data/health-fitness-app-benchmarks/" target="_blank" rel="noopener noreferrer" className="text-nuvvooGreen-700 underline hover:text-nuvvooGreen-900">Industry data</a> suggests that most health and fitness apps see significant user drop-off in the first 30 days. The main reason? The tracking method itself becomes a barrier. When logging feels like work, consistency suffers.
               </p>
             </ContentSection>
 
@@ -202,7 +202,7 @@ export default function AlternativeToMyFitnessPal() {
 
             <ContentSection title="Making the Switch">
               <p>
-                If you're considering switching from MyFitnessPal to Nuvvoo—or trying both to see what works—here's what to expect:
+                If you're considering switching from MyFitnessPal to Nuvvoo, or trying both to see what works, here's what to expect:
               </p>
               <p>
                 <strong>What you'll gain:</strong>
@@ -227,7 +227,7 @@ export default function AlternativeToMyFitnessPal() {
                 You don't have to commit to one approach forever. Some people use MyFitnessPal during focused training periods and switch to Nuvvoo for everyday maintenance. Others use Nuvvoo as their primary tracker and only open MyFitnessPal when they need detailed macro breakdowns.
               </p>
               <p>
-                The goal isn't to find the "perfect" tracker—it's to find the one that helps you <strong>stay consistent without burning out</strong>.
+                The goal isn't to find the "perfect" tracker. It's to find the one that helps you <strong>stay consistent without burning out</strong>.
               </p>
               <p>
                 If you're curious about Nuvvoo's approach, you can also explore how it functions as an <Link href="/ai-food-journal">AI food journal</Link> that combines tracking with holistic health awareness. Or see how it helps when you're <Link href="/no-dinner-ideas-calories">stuck with no dinner ideas and a calorie goal to hit</Link>.
@@ -235,7 +235,6 @@ export default function AlternativeToMyFitnessPal() {
             </ContentSection>
 
             <div className="my-12 flex flex-col items-center gap-4 text-center">
-              <p className="text-lg font-medium text-slate-900">Available soon on</p>
               <div className="flex gap-3">
                 <TrackedButton
                   href="/#waitlist"

@@ -24,7 +24,7 @@ export default function CalorieTrackingWithoutStress() {
   const faqs = [
     {
       question: 'Can I use this if I struggle with consistency?',
-      answer: 'Yes. Nuvvoo is specifically designed for people who struggle with tracking consistently. The chat-based interface removes friction, and the AI\'s supportive tone makes it easier to pick back up after missed days. There\'s no judgment for imperfect tracking—the goal is progress, not perfection.',
+      answer: 'Yes. Nuvvoo is specifically designed for people who struggle with tracking consistently. The chat-based interface removes friction, and the AI\'s supportive tone makes it easier to pick back up after missed days. There\'s no judgment for imperfect tracking. The goal is progress, not perfection.',
     },
     {
       question: 'Is it suitable for complete beginners?',
@@ -65,7 +65,7 @@ export default function CalorieTrackingWithoutStress() {
                 <strong>Common sources of tracking-related anxiety:</strong>
               </p>
               <ul>
-                <li><strong>Red numbers and warnings:</strong> Apps that scold you for eating "too much" create a fear-based relationship with food</li>
+                <li><strong>Bright red warnings:</strong> Apps that scold you for eating "too much" create a fear-based relationship with food</li>
                 <li><strong>All-or-nothing thinking:</strong> Miss one meal or go over your goal, and the whole day feels ruined</li>
                 <li><strong>Perfectionism pressure:</strong> Feeling like every entry must be exact, down to the gram, or it doesn't count</li>
                 <li><strong>Food as moral judgment:</strong> Labeling foods as "good" or "bad," "allowed" or "forbidden"</li>
@@ -73,7 +73,7 @@ export default function CalorieTrackingWithoutStress() {
                 <li><strong>Obsessive checking:</strong> Constantly opening the app to see if you're "on track," turning meals into math problems</li>
               </ul>
               <p>
-                Studies in eating behavior suggest that rigid calorie tracking can increase anxiety around food, especially for people prone to perfectionism. When tracking becomes stressful, it stops being helpful—even if the original intention was health.
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8485346/" target="_blank" rel="noopener noreferrer" className="text-nuvvooGreen-700 underline hover:text-nuvvooGreen-900">Studies in eating behavior</a> suggest that rigid calorie tracking can increase anxiety around food, especially for people prone to perfectionism. When tracking becomes stressful, it stops being helpful, even if the original intention was health.
               </p>
               <p>
                 The problem isn't tracking itself. It's <em>how</em> most apps approach tracking: with rigid rules, judgment, and a focus on restriction rather than awareness.
@@ -82,7 +82,7 @@ export default function CalorieTrackingWithoutStress() {
 
             <ContentSection title="The Problem with Perfectionism in Tracking">
               <p>
-                Perfectionism is one of the biggest reasons people quit calorie tracking—or worse, develop unhealthy relationships with food.
+                Perfectionism is one of the biggest reasons people quit calorie tracking, or worse, develop unhealthy relationships with food.
               </p>
               <p>
                 <strong>What perfectionism looks like in tracking:</strong>
@@ -102,7 +102,7 @@ export default function CalorieTrackingWithoutStress() {
                 The truth is, <strong>imperfect tracking is still useful tracking</strong>. Knowing you ate roughly 1800-2000 calories is more helpful than having no data at all. Estimating portions is better than skipping meals because you can't weigh them.
               </p>
               <p>
-                Stress-free tracking embraces this. It's not about hitting exact numbers every day—it's about understanding your eating patterns over time. Some days you'll track perfectly. Other days you'll estimate. Both are valuable.
+                Stress-free tracking embraces this. It's not about hitting exact numbers every day. It's about understanding your eating patterns over time. Some days you'll track perfectly. Other days you'll estimate. Both are valuable.
               </p>
               <p>
                 Apps like <Link href="/alternative-to-myfitnesspal">alternatives to MyFitnessPal</Link> are designed to reduce this perfectionism by making tracking feel more flexible and forgiving. If perfectionism has crossed into disordered eating territory, read about <Link href="/calorie-tracker-eating-disorders">why conversation-based tracking is safer for people with eating disorders</Link>.
@@ -124,10 +124,10 @@ export default function CalorieTrackingWithoutStress() {
               </p>
               <ul>
                 <li><strong>Conversational interface:</strong> <Link href="/chat-calorie-tracker">Chat-based tracking</Link> feels natural, not clinical. You describe meals in your own words, removing the pressure of finding "perfect" database entries</li>
-                <li><strong>No judgment language:</strong> Nuvvoo never scolds, warns, or uses red numbers. It simply provides information without moral judgment</li>
+                <li><strong>Supportive tone:</strong> Nuvvoo never scolds or uses shame language. If you go over your goal, the response is &ldquo;It&rsquo;s okay. Tomorrow is a new day&rdquo; rather than a warning</li>
+                <li><strong>Soft visual feedback:</strong> Instead of bright red alerts, Nuvvoo uses a gentle coral tone when you exceed your target. No panic, just awareness</li>
                 <li><strong>Flexible accuracy:</strong> Estimates are encouraged. The AI helps you track even when you don't know exact portions</li>
-                <li><strong>Pattern focus:</strong> Instead of obsessing over daily numbers, Nuvvoo helps you see weekly patterns and trends</li>
-                <li><strong>Supportive tone:</strong> The AI responds with empathy and encouragement, not criticism</li>
+                <li><strong>Pattern focus:</strong> The stats screen is labeled &ldquo;Your progress, not your grades.&rdquo; Nuvvoo helps you see weekly patterns and trends, not judge individual meals</li>
                 <li><strong>Skip-friendly:</strong> Missed a day? No problem. Nuvvoo gently welcomes you back without guilt</li>
               </ul>
               <p>
@@ -140,16 +140,16 @@ export default function CalorieTrackingWithoutStress() {
                 <em>Traditional app:</em> "You are 340 calories over your goal. Reduce portion sizes."
               </p>
               <p>
-                <em>Nuvvoo:</em> "Noticed you had a bigger dinner tonight. How are you feeling?"
+                <em>Nuvvoo:</em> "It&rsquo;s okay. Tomorrow is a new day."
               </p>
               <p>
-                This shift in tone makes a huge difference in how tracking feels emotionally. One creates anxiety, the other creates awareness.
+                This shift in tone makes a huge difference in how tracking feels emotionally. One creates anxiety, the other creates space to try again.
               </p>
             </ContentSection>
 
             <ContentSection title="Reducing Mental Load While Staying Consistent">
               <p>
-                Stress-free tracking isn't just about tone—it's about reducing the <strong>mental effort</strong> of tracking itself.
+                Stress-free tracking isn't just about tone. It's about reducing the <strong>mental effort</strong> of tracking itself.
               </p>
               <p>
                 Traditional calorie tracking requires constant decision-making:
@@ -172,7 +172,7 @@ export default function CalorieTrackingWithoutStress() {
                 <li><strong>Handling estimation:</strong> The AI makes reasonable assumptions based on context, so you don't have to calculate everything</li>
                 <li><strong>Remembering your meals:</strong> Over time, Nuvvoo learns your common meals, making logging even faster</li>
                 <li><strong>Accepting rough data:</strong> "I had pasta for dinner" is enough. You don't need precise measurements</li>
-                <li><strong>Flexible timing:</strong> Track meals retroactively or in real-time—whatever works for your schedule</li>
+                <li><strong>Flexible timing:</strong> Track meals retroactively or in real-time, whatever works for your schedule</li>
               </ul>
               <p>
                 When tracking becomes this simple, it's easier to stay consistent. And <strong>consistency is more important than accuracy</strong> for long-term health habits.
@@ -186,7 +186,6 @@ export default function CalorieTrackingWithoutStress() {
             </ContentSection>
 
             <div className="my-12 flex flex-col items-center gap-4 text-center">
-              <p className="text-lg font-medium text-slate-900">Available soon on</p>
               <div className="flex gap-3">
                 <TrackedButton
                   href="/#waitlist"

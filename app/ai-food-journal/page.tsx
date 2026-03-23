@@ -24,7 +24,7 @@ export default function AiFoodJournal() {
   const faqs = [
     {
       question: 'Is this for weight loss or general wellness?',
-      answer: 'Nuvvoo is designed for general wellness and building awareness around food, mood, and energy. While many people use food journals as part of weight management, Nuvvoo focuses on sustainable habits rather than restrictive dieting. It helps you understand patterns—like how certain foods affect your energy—rather than just counting calories.',
+      answer: 'Nuvvoo is designed for general wellness and building awareness around food, mood, and energy. While many people use food journals as part of weight management, Nuvvoo focuses on sustainable habits rather than restrictive dieting. It tracks calories and macros in the background, but the emphasis is on understanding patterns, like how certain foods affect your energy, rather than obsessing over numbers.',
     },
     {
       question: 'Does it count macros and micronutrients?',
@@ -68,7 +68,7 @@ export default function AiFoodJournal() {
                 Food journaling takes a different approach. It asks: <em>What did I eat today? How did I feel? What patterns do I notice?</em> The goal isn't perfection—it's <strong>awareness</strong>.
               </p>
               <p>
-                Emerging evidence in nutrition psychology suggests that awareness-based approaches lead to more sustainable behavior change than restrictive counting. When you understand your patterns—like noticing you crave sweets when stressed—you can make informed choices without rigid rules.
+                <a href="https://www.cambridge.org/core/journals/nutrition-research-reviews/article/mindful-eating-and-common-diet-programs-lower-body-weight-similarly-systematic-review-and-metaanalysis/0B1A848D72AE1BF8535B42509E04EA03" target="_blank" rel="noopener noreferrer" className="text-nuvvooGreen-700 underline hover:text-nuvvooGreen-900">Emerging evidence in nutrition psychology</a> suggests that awareness-based approaches lead to more sustainable behavior change than restrictive counting. When you understand your patterns—like noticing you crave sweets when stressed—you can make informed choices without rigid rules.
               </p>
               <p>
                 <strong>Nuvvoo combines both approaches:</strong> You get the structure of calorie tracking (if you want it) with the flexibility and self-awareness of journaling. Instead of feeling like you're logging data, it feels like you're <Link href="/chat-calorie-tracker">chatting with a supportive companion</Link>.
@@ -127,7 +127,7 @@ export default function AiFoodJournal() {
                 <strong>Why this matters for behavior change:</strong> Understanding the <em>why</em> behind your eating habits makes it easier to adjust them. If you realize you're stress-eating because work is overwhelming, you can address the root cause rather than just trying to "eat less."
               </p>
               <p>
-                This approach aligns with intuitive eating and mindful eating practices, which focus on awareness and self-compassion rather than restriction. It's what makes Nuvvoo feel less like <Link href="/calorie-tracking-without-stress">a stressful calorie counter</Link> and more like a wellness tool — especially for people who need a <Link href="/calorie-tracker-eating-disorders">safer alternative to traditional calorie tracking</Link>.
+                This approach aligns with intuitive eating and mindful eating practices, which focus on awareness and self-compassion rather than restriction. It's what makes Nuvvoo feel less like <Link href="/calorie-tracking-without-stress">a stressful calorie counter</Link> and more like a wellness tool, especially for people who need a <Link href="/calorie-tracker-eating-disorders">safer alternative to traditional calorie tracking</Link>.
               </p>
             </ContentSection>
 
@@ -164,12 +164,11 @@ export default function AiFoodJournal() {
                 <li>Adapting to your journaling style (some people journal daily, others weekly—both work)</li>
               </ul>
               <p>
-                This adaptive, supportive approach is what helps people stick with food journaling long-term. It's not about rigid tracking—it's about building sustainable awareness. Learn more about <Link href="/how-to-stay-consistent-calorie-tracking">how to actually stay consistent with food tracking</Link>.
+                This adaptive, supportive approach is what helps people stick with food journaling long-term. It's not about rigid tracking. It's about building sustainable awareness. Learn more about <Link href="/how-to-stay-consistent-calorie-tracking">how to actually stay consistent with food tracking</Link>.
               </p>
             </ContentSection>
 
             <div className="my-12 flex flex-col items-center gap-4 text-center">
-              <p className="text-lg font-medium text-slate-900">Available soon on</p>
               <div className="flex gap-3">
                 <TrackedButton
                   href="/#waitlist"
