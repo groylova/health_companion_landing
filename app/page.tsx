@@ -22,10 +22,10 @@ export default function HomePage() {
               </div>
 
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
-                Track food by chatting, not&nbsp;logging
+                Track food and more by chatting, not&nbsp;logging
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
-                Just describe your day. Nuvvoo is the AI calorie tracker that learns your habits every week. As simple as&nbsp;ChatGPT.
+                Food, water, sleep, workouts, supplements, mood&nbsp;&mdash; Nuvvoo is the AI health companion that learns your habits every week. As simple as&nbsp;ChatGPT.
               </p>
 
               <div className="mt-8 flex flex-col items-start gap-4">
