@@ -31,13 +31,14 @@ export default function AiDisclosurePage({ searchParams }: { searchParams: { mod
                 <li>The text of your chat messages (food descriptions, questions)</li>
                 <li>Your dietary preferences (allergies, avoided foods) to personalize responses</li>
                 <li>Your recent meal history for that day (for context, e.g. to infer meal type)</li>
+                <li>Your first name (if provided) to personalize responses</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-slate-900">What Is NOT Sent</h2>
               <ul>
-                <li>Your name, email, or account ID</li>
+                <li>Your email or account ID</li>
                 <li>Payment or subscription information</li>
                 <li>Device identifiers</li>
               </ul>
