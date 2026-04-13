@@ -11,7 +11,7 @@ import { AppleIcon, AndroidIcon } from '@/components/icons';
 import { TrackedButton } from '@/components/tracked-button';
 
 export const metadata: Metadata = {
-  title: 'AI Food Journal: Smart Food Diary That Remembers | Nuvvoo',
+  title: 'AI Food Journal: Smart Food Diary That Remembers',
   description: 'A gentle AI food journal that learns your patterns, tracks mood & energy, and helps you stay consistent without the pressure of manual logging.',
   openGraph: {
     title: 'AI Food Journal: Smart Food Diary That Remembers',

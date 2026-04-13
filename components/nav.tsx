@@ -1,8 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { Container } from '@/components/container';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 declare global {
   interface Window {
@@ -11,6 +13,10 @@ declare global {
 }
 
 export function Nav() {
+  const t = useTranslations('nav');
+  const locale = useLocale();
+  const prefix = locale === 'en' ? '' : `/${locale}`;
+
   const trackNavClick = (section: string) => {
     if (typeof window !== 'undefined' && window.dataLayer) {
       window.dataLayer.push({
@@ -38,33 +44,34 @@ export function Nav() {
 
           <nav className="flex items-center gap-3 md:gap-6">
             <a
-              href="/#founder"
+              href={`${prefix}/#founder`}
               onClick={() => trackNavClick('founder')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
-              Founder
+              {t('founder')}
             </a>
             <a
-              href="/#product"
+              href={`${prefix}/#product`}
               onClick={() => trackNavClick('product')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
-              Product
+              {t('product')}
             </a>
             <a
-              href="/#how"
+              href={`${prefix}/#how`}
               onClick={() => trackNavClick('how_it_works')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
-              How it works
+              {t('howItWorks')}
             </a>
             <a
-              href="/#waitlist"
+              href={`${prefix}/#waitlist`}
               onClick={() => trackNavClick('early_access')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
-              Early access
+              {t('earlyAccess')}
             </a>
+            <LanguageSwitcher />
           </nav>
         </div>
       </Container>

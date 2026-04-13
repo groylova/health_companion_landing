@@ -1,13 +1,24 @@
 import type { MetadataRoute } from 'next';
+import { routing } from '@/i18n/routing';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
+
+  // Build locale alternates for the main page
+  const mainPageLanguages: Record<string, string> = { 'x-default': `${base}/` };
+  for (const locale of routing.locales) {
+    mainPageLanguages[locale] = locale === 'en' ? `${base}/` : `${base}/${locale}`;
+  }
+
   return [
     {
       url: `${base}/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 1
+      priority: 1,
+      alternates: {
+        languages: mainPageLanguages,
+      },
     },
 
     // SEO Content Pages

@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "title": "Nuvvoo – Compteur de calories par IA via chat | Suivez vos repas sans tout noter",
+    "description": "Suivez vos calories en discutant avec une IA — sans base de données, sans scanner de code-barres. Nuvvoo apprend vos habitudes et vous aide à garder le cap sur l'alimentation, l'énergie et le bien-être. Essai gratuit.",
+    "ogTitle": "Nuvvoo : Décrivez votre journée. L'IA s'occupe du reste.",
+    "ogDescription": "Le compteur de calories qui fonctionne comme ChatGPT. Décrivez vos repas en langage naturel — Nuvvoo gère les chiffres."
+  },
+  "nav": {
+    "founder": "Fondatrice",
+    "product": "Produit",
+    "howItWorks": "Comment ça marche",
+    "earlyAccess": "Télécharger"
+  },
+  "hero": {
+    "badge": "L'accès anticipé est ouvert",
+    "title": "Compter les calories, aussi simple qu'envoyer un message",
+    "subtitle": "Parlez à Nuvvoo de votre journée, votre sommeil, vos entraînements et votre humeur \u2014 semaine après semaine, il vous comprendra mieux.",
+    "subtitleLine2": "Un suivi unique des calories \u2014 par chat.",
+    "ios": "iOS",
+    "android": "Android",
+    "heroImageAlt": "Irina rencontrant Nuvvoo"
+  },
+  "founder": {
+    "eyebrow": "L'histoire de la fondatrice",
+    "name": "Irina Groylova",
+    "role": "Fondatrice de Nuvvoo",
+    "title": "Pourquoi je crée Nuvvoo",
+    "intro": "<strong>Il y a quelques années</strong>, j'ai commencé à prendre des médicaments contre les migraines. La douleur est partie, mais les effets secondaires ont frappé fort : moral au plus bas, prise de poids, l'impression que tout m'échappait.",
+    "readMore": "Lire la suite \u2193",
+    "p1": "J'ai cherché un moyen de perdre du poids et essayé plein d'applis de comptage de calories. Et je les abandonnais à chaque fois. Pas parce qu'elles étaient mauvaises, mais parce que je n'avais pas l'énergie de le faire <strong>régulièrement</strong>. C'était très dur de chercher les aliments, de taper les grammes\u2026 surtout en pleine dépression.",
+    "p2": "Mais un jour, j'ai simplement écrit à une IA dans un chat, je lui ai raconté ce que j'avais mangé dans la journée et je lui ai demandé \u2014 ce que je pouvais prendre au dîner pour rester dans mes calories. C'était si naturel. Le chat ne s'est pas contenté de me donner des recommandations, il a aussi ajouté des mots de soutien. Un shoot rapide de dopamine qui me manquait tellement.",
+    "p3": "Le lendemain, j'ai récrit. Et le jour d'après. En un mois, ça n'était plus stressant. Parler au chat de ce que je mangeais est devenu un <strong>rituel quotidien</strong> apaisant.",
+    "p4": "C'est là que m'est venue l'idée de Nuvvoo \u2014 un compagnon qui écoute d'abord, compte ensuite, et aide à rester <strong>en équilibre</strong> tous ceux qui, comme moi, luttent contre la procrastination. J'espère que vous aussi trouverez votre façon de rester en équilibre \u2014 sans pression et avec plaisir."
+  },
+  "product": {
+    "eyebrow": "Produit",
+    "title": "Un seul chat au lieu de dix applis.",
+    "subtitle": "Parlez à Nuvvoo de vos repas, votre sommeil, votre entraînement \u2014 il compte et se souvient.",
+    "journalAlt": "Écran du journal",
+    "todayAlt": "Écran du jour avec anneau",
+    "statsAlt": "Écran des statistiques"
+  },
+  "philosophy": {
+    "eyebrow": "Notre philosophie",
+    "title": "La santé sans la perfection",
+    "othersLabel": "Autres applis",
+    "othersBeDisciplined": "Soyez discipliné.",
+    "othersLogEverything": "Notez tout.",
+    "othersNeverMiss": "Ne ratez jamais un jour.",
+    "othersSearch": "Cherchez l'aliment dans une base de données.",
+    "othersSetup": "Remplissez un questionnaire de 15 écrans.",
+    "othersGrams": "Entrez le poids au gramme près.",
+    "othersThreeApps": "Une appli pour la nourriture, une pour l'eau, une pour le sommeil.",
+    "othersConfigure": "Configurez objectifs, macros et limites à la main.",
+    "nuvvooLabel": "Nuvvoo",
+    "nuvvooMissDay": "Raté\u00a0? OK.",
+    "nuvvooComeBack": "Revenez demain.",
+    "nuvvooNoRestart": "Pas besoin de recommencer.",
+    "nuvvooJustWrite": "Écrivez «\u00a0poulet-riz\u00a0». C'est fait.",
+    "nuvvooOpen": "Commencez à écrire tout de suite.",
+    "nuvvooPizza": "«\u00a0Pizza au café\u00a0» \u2014 ça suffit.",
+    "nuvvooOneChat": "Repas, eau, sommeil, sport \u2014 un seul chat.",
+    "nuvvooLearns": "En une semaine, Nuvvoo connaît vos habitudes."
+  },
+  "howItWorks": {
+    "eyebrow": "Comment ça marche",
+    "title": "Un rituel transparent en quatre étapes",
+    "step": "Étape",
+    "step1Title": "Parlez à Nuvvoo de votre journée",
+    "step1Desc": "Décrivez avec vos mots ce que vous avez mangé, vos entraînements, votre humeur, etc.",
+    "step1ImageAlt": "Nuvvoo encourageant un repas sain",
+    "step2Title": "L'IA note pour vous",
+    "step2Desc": "Calories et macros calculées. Tout est enregistré.",
+    "step2ImageAlt": "Nuvvoo célébrant vos progrès",
+    "step3Title": "Des suggestions douces",
+    "step3Desc": "Des idées de dîner, l'équilibre du jour et du soutien.",
+    "step3ImageAlt": "Nuvvoo suggérant des idées de dîner",
+    "step4Title": "Régularité, pas perfection",
+    "step4Desc": "Pendant que vous vous reposez, Nuvvoo détecte des tendances et vous aide à vous sentir plus serein.",
+    "step4ImageAlt": "Nuvvoo dit bonne nuit"
+  },
+  "socialProof": {
+    "heading": "Essayez parmi les premiers",
+    "quote1": "Ça fait 10 jours que je suis là-dessus, aucune envie d'arrêter.",
+    "name1": "Marie, photographe",
+    "quote2": "Je déteste noter ce que je mange, mais je veux faire attention. Avec Nuvvoo, on n'a pas l'impression de tout noter en permanence. C'est juste une conversation.",
+    "name2": "Stacy, styliste",
+    "quote3": "Je veux juste un truc qui ne m'énerve pas. Nuvvoo est un compagnon doux et bienveillant.",
+    "name3": "Sarah, maman de deux"
+  },
+  "waitlistCta": {
+    "title": "La régularité sans la perfection.",
+    "subtitle": "Soyez parmi les premiers à essayer Nuvvoo. Laissez votre e-mail et nous vous enverrons le lien de\u00a0lancement.",
+    "note": "Juste le lien de lancement + un bonus pour les premiers utilisateurs."
+  },
+  "waitlist": {
+    "placeholder": "vous@exemple.com",
+    "join": "Rejoindre",
+    "joining": "Inscription\u2026",
+    "success": "Vous êtes sur la liste. À très bientôt \u2728",
+    "networkError": "Erreur réseau. Veuillez réessayer.",
+    "genericError": "Une erreur est survenue."
+  },
+  "footer": {
+    "tagline": "Un compagnon IA apaisant pour l'alimentation, les habitudes et l'énergie.",
+    "resources": "Ressources",
+    "learnMore": "En savoir plus",
+    "legal": "Mentions légales",
+    "eatingDisorderSafety": "Troubles alimentaires et sécurité",
+    "dinnerIdeas": "Idées de dîner et calories",
+    "stayConsistent": "Rester régulier dans le suivi",
+    "photoVsChat": "Photo vs suivi par chat",
+    "stressFree": "Suivi sans stress",
+    "chatTracker": "Compteur de calories par chat",
+    "aiFoodJournal": "Journal alimentaire IA",
+    "mfpAlternative": "Alternative à MyFitnessPal",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "aiDisclosure": "Divulgation IA",
+    "contact": "Contact",
+    "copyright": "\u00a9 2026 Pryvus Inc."
+  },
+  "seoCta": {
+    "title": "Prêt à suivre vos repas sans stress ?",
+    "description": "Obtenez un accès prioritaire et commencez à suivre vos repas en discutant, pas en notant.",
+    "button": "Obtenir un accès prioritaire"
+  },
+  "languageSwitcher": {
+    "label": "Langue",
+    "en": "English",
+    "de": "Deutsch",
+    "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+    "es": "Espa\u00f1ol",
+    "fr": "Fran\u00e7ais"
+  }
+}

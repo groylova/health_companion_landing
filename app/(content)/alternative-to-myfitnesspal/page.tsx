@@ -11,7 +11,7 @@ import { AppleIcon, AndroidIcon } from '@/components/icons';
 import { TrackedButton } from '@/components/tracked-button';
 
 export const metadata: Metadata = {
-  title: 'MyFitnessPal Alternative: Track by Chatting, Not Logging | Nuvvoo',
+  title: 'MyFitnessPal Alternative: Track by Chatting, Not Logging',
   description: 'Looking for a MyFitnessPal alternative? Nuvvoo helps you track food consistently with chat-based logging—no database searches or manual entry.',
   openGraph: {
     title: 'MyFitnessPal Alternative: Track by Chatting, Not Logging',

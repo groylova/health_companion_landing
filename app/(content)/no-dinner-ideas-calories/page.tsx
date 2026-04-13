@@ -13,7 +13,7 @@ import { TrackedButton } from '@/components/tracked-button';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
 export const metadata: Metadata = {
-  title: 'No Idea What to Eat for Dinner? Meals That Actually Fit Your Calories | Nuvvoo',
+  title: 'No Idea What to Eat for Dinner? Meals That Actually Fit Your Calories',
   description: 'Staring at the fridge with no dinner ideas and a calorie goal to hit? Here\'s how to think about it, plus 15 simple meals that actually work.',
   alternates: { canonical: `${siteUrl}/no-dinner-ideas-calories` },
   openGraph: {

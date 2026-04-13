@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "title": "Nuvvoo – AI Calorie Tracker via Chat | Track Food Without Logging",
+    "description": "Track calories by chatting with AI — no databases, no barcode scanning. Nuvvoo learns your habits and helps you stay on track with food, energy, and wellness. Try free.",
+    "ogTitle": "Nuvvoo: Just describe your day. AI tracks the rest.",
+    "ogDescription": "The calorie tracker that works like ChatGPT. Describe your meals in plain text — Nuvvoo handles the numbers."
+  },
+  "nav": {
+    "founder": "Founder",
+    "product": "Product",
+    "howItWorks": "How it works",
+    "earlyAccess": "Download"
+  },
+  "hero": {
+    "badge": "Early access is open",
+    "title": "Counting calories is as easy as texting",
+    "subtitle": "Tell Nuvvoo about your day, sleep, workouts and mood \u2014 week by week it will understand you better.",
+    "subtitleLine2": "A unique way to track calories \u2014 through chat.",
+    "ios": "iOS",
+    "android": "Android",
+    "heroImageAlt": "Irina meeting Nuvvoo"
+  },
+  "founder": {
+    "eyebrow": "Founder story",
+    "name": "Irina Groylova",
+    "role": "Founder of Nuvvoo",
+    "title": "Why I\u2019m building Nuvvoo",
+    "intro": "<strong>A couple of years ago</strong> I started taking migraine medication. The pain went away, but the side effects hit hard: my mood crashed, my weight went up, and it felt like everything was slipping out of control.",
+    "readMore": "Read more \u2193",
+    "p1": "I started looking for a way to lose weight and tried a ton of calorie-tracking apps. And kept quitting every time. Not because the apps were bad, but because I didn\u2019t have the energy to do it <strong>consistently</strong>. It was really hard to search for foods, enter grams\u2026 especially while depressed.",
+    "p2": "But one day I simply wrote in a chat with AI, told it what I\u2019d eaten that day, and asked \u2014 what could I have for dinner to stay within my calories. It felt so natural. The chat didn\u2019t just give recommendations, it added supportive words too. A quick dopamine hit I\u2019d been missing.",
+    "p3": "The next day I wrote again. And the next. Within a month it stopped feeling like stress. Talking with the chat about my food became a calm <strong>daily ritual</strong>.",
+    "p4": "That\u2019s when I came up with the idea for Nuvvoo \u2014 a companion that listens first, counts second, and helps everyone who struggles with procrastination like I do stay in <strong>balance</strong>. I hope you\u2019ll find your own way to stay balanced \u2014 without pressure, with joy."
+  },
+  "product": {
+    "eyebrow": "Product",
+    "title": "One chat instead of ten apps.",
+    "subtitle": "Tell Nuvvoo about your food, sleep, workout \u2014 it\u2019ll count and remember.",
+    "journalAlt": "Journal screen",
+    "todayAlt": "Today screen with ring",
+    "statsAlt": "Statistics screen"
+  },
+  "philosophy": {
+    "eyebrow": "Our philosophy",
+    "title": "Health without perfection",
+    "othersLabel": "Other apps",
+    "othersBeDisciplined": "Be disciplined.",
+    "othersLogEverything": "Log everything.",
+    "othersNeverMiss": "Never miss a day.",
+    "othersSearch": "Search the food in a database.",
+    "othersSetup": "Fill out a 15-screen questionnaire.",
+    "othersGrams": "Enter the weight to the gram.",
+    "othersThreeApps": "One app for food, another for water, a third for sleep.",
+    "othersConfigure": "Set goals, macros and limits manually.",
+    "nuvvooLabel": "Nuvvoo",
+    "nuvvooMissDay": "Missed? OK.",
+    "nuvvooComeBack": "Come back tomorrow.",
+    "nuvvooNoRestart": "No need to restart.",
+    "nuvvooJustWrite": "Type \"chicken with rice\". Done.",
+    "nuvvooOpen": "Start typing right away.",
+    "nuvvooPizza": "\"Pizza at a cafe\" \u2014 that\u2019s enough.",
+    "nuvvooOneChat": "Food, water, sleep, workouts \u2014 one chat.",
+    "nuvvooLearns": "In a week, Nuvvoo knows your habits."
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "A transparent ritual in four steps",
+    "step": "Step",
+    "step1Title": "Tell Nuvvoo about your day",
+    "step1Desc": "Describe in your own words what you ate, how you worked out, your mood, and so on.",
+    "step1ImageAlt": "Nuvvoo cheering a healthy meal",
+    "step2Title": "AI logs it for you",
+    "step2Desc": "Calories and macros calculated. Everything saved.",
+    "step2ImageAlt": "Nuvvoo celebrating your progress",
+    "step3Title": "Gentle hints",
+    "step3Desc": "Dinner ideas, daily balance, and support.",
+    "step3ImageAlt": "Nuvvoo suggesting dinner ideas",
+    "step4Title": "Consistency, not perfection",
+    "step4Desc": "While you rest, Nuvvoo finds patterns and helps you feel calmer.",
+    "step4ImageAlt": "Nuvvoo says good night"
+  },
+  "socialProof": {
+    "heading": "Be the first to try it",
+    "quote1": "I\u2019ve been tracking for 10 days, no urge to quit.",
+    "name1": "Mary, photographer",
+    "quote2": "I hate logging food, but I want to watch what I eat. With Nuvvoo it doesn\u2019t feel like constant logging. It\u2019s just a conversation.",
+    "name2": "Stacy, stylist",
+    "quote3": "I just want something that won\u2019t annoy me. Nuvvoo is a sweet, supportive companion.",
+    "name3": "Sarah, mom of two"
+  },
+  "waitlistCta": {
+    "title": "Consistency without perfection.",
+    "subtitle": "Be the first to try Nuvvoo. Leave your email and we\u2019ll send you the launch\u00a0link.",
+    "note": "Just the launch link + a bonus for first users."
+  },
+  "waitlist": {
+    "placeholder": "you@example.com",
+    "join": "Join",
+    "joining": "Joining\u2026",
+    "success": "You\u2019re on the list. See you soon \u2728",
+    "networkError": "Network error. Please try again.",
+    "genericError": "Something went wrong."
+  },
+  "footer": {
+    "tagline": "A calm AI companion for food, habits, and energy.",
+    "resources": "Resources",
+    "learnMore": "Learn More",
+    "legal": "Legal",
+    "eatingDisorderSafety": "Eating Disorder Safety",
+    "dinnerIdeas": "Dinner Ideas & Calories",
+    "stayConsistent": "Stay Consistent Tracking",
+    "photoVsChat": "Photo vs Chat Tracking",
+    "stressFree": "Stress-Free Tracking",
+    "chatTracker": "Chat Calorie Tracker",
+    "aiFoodJournal": "AI Food Journal",
+    "mfpAlternative": "MyFitnessPal Alternative",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "aiDisclosure": "AI Disclosure",
+    "contact": "Contact",
+    "copyright": "\u00a9 2026 Pryvus Inc."
+  },
+  "seoCta": {
+    "title": "Ready to track without stress?",
+    "description": "Get priority access and start tracking by chatting, not logging.",
+    "button": "Get priority access"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "de": "Deutsch",
+    "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+    "es": "Espa\u00f1ol",
+    "fr": "Fran\u00e7ais"
+  }
+}

@@ -13,7 +13,7 @@ import { TrackedButton } from '@/components/tracked-button';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
 export const metadata: Metadata = {
-  title: 'Calorie Tracking With an Eating Disorder: Why Chat Works Better | Nuvvoo',
+  title: 'Calorie Tracking With an Eating Disorder: Why Chat Works Better',
   description: '73% of traditional calorie tracker users with an eating disorder say the app made it worse. Here\'s why a conversational approach is safer and what to look for instead.',
   alternates: { canonical: `${siteUrl}/calorie-tracker-eating-disorders` },
   openGraph: {

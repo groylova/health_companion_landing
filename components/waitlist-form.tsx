@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
 declare global {
@@ -11,6 +12,7 @@ declare global {
 }
 
 export function WaitlistForm() {
+  const t = useTranslations('waitlist');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState<string>('');
@@ -29,11 +31,11 @@ export function WaitlistForm() {
       const data = await res.json();
       if (!res.ok || !data.ok) {
         setStatus('error');
-        setMessage(data?.error || 'Something went wrong.');
+        setMessage(data?.error || t('genericError'));
         return;
       }
       setStatus('success');
-      setMessage("You're on the list. See you soon ✨");
+      setMessage(t('success'));
       setEmail('');
 
       // Track successful waitlist signup
@@ -54,7 +56,7 @@ export function WaitlistForm() {
       }
     } catch {
       setStatus('error');
-      setMessage('Network error. Please try again.');
+      setMessage(t('networkError'));
     }
   }
 
@@ -71,11 +73,11 @@ export function WaitlistForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
+            placeholder={t('placeholder')}
             className="w-full flex-1 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 shadow-sm outline-none focus:border-nuvvooGreen-300 focus:ring-2 focus:ring-nuvvooGreen-200"
           />
           <Button variant="primary" disabled={status === 'loading'}>
-            {status === 'loading' ? 'Joining…' : 'Join'}
+            {status === 'loading' ? t('joining') : t('join')}
           </Button>
           {status === 'error' && message ? (
             <div className="w-full text-sm text-rose-600 sm:w-auto">

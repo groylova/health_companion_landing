@@ -11,7 +11,7 @@ import { AppleIcon, AndroidIcon } from '@/components/icons';
 import { TrackedButton } from '@/components/tracked-button';
 
 export const metadata: Metadata = {
-  title: 'Calorie Tracking Without Stress or Anxiety | Nuvvoo',
+  title: 'Calorie Tracking Without Stress or Anxiety',
   description: 'Track calories without anxiety. Nuvvoo offers stress-free, mindful calorie tracking that helps you stay consistent without perfectionism or pressure.',
   openGraph: {
     title: 'Calorie Tracking Without Stress or Anxiety',

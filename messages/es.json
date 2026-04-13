@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "title": "Nuvvoo: contar calorías es tan fácil como escribir un mensaje",
+    "description": "Solo tienes que decir lo que has comido y Nuvvoo contará las calorías, recordará tus hábitos y te ayudará a no saltarte la dieta. Pruébalo gratis.",
+    "ogTitle": "Nuvvoo: cuéntanos cómo ha ido tu día. La IA se encargará del resto.",
+    "ogDescription": "Un contador de calorías que funciona como ChatGPT. Cuéntanos lo que has comido y Nuvvoo se encargará de los números."
+  },
+  "nav": {
+    "founder": "Fundadora",
+    "product": "Producto",
+    "howItWorks": "Cómo funciona",
+    "earlyAccess": "Descargar"
+  },
+  "hero": {
+    "badge": "Acceso anticipado disponible",
+    "title": "Contar calorías es tan fácil como escribir un mensaje",
+    "subtitle": "Cuéntale cómo ha ido tu día, tu sueño, tus entrenamientos y tu estado de ánimo, y Nuvvoo te entenderá mejor cada semana.",
+    "subtitleLine2": "Seguimiento único de calorías en formato de chat",
+    "ios": "iOS",
+    "android": "Android",
+    "heroImageAlt": "Irina conoce a Nuvvoo"
+  },
+  "founder": {
+    "eyebrow": "Historia de la fundadora",
+    "name": "Irina Groylova",
+    "role": "Fundadora de Nuvvoo",
+    "title": "Por qué estoy creando Nuvvoo",
+    "intro": "<strong>Hace un par de años</strong> empecé a tomar pastillas para la migraña. El dolor desapareció, pero los efectos secundarios fueron muy fuertes: el ánimo por los suelos, el peso se disparó, tenía la sensación de que todo se estaba descontrolando.",
+    "readMore": "Leer más \u2193",
+    "p1": "Empecé a buscar una forma de adelgazar y probé un montón de aplicaciones para contar calorías. Y lo dejaba constantemente. No porque las aplicaciones fueran malas, sino porque no tenía recursos para hacerlo <strong>de forma constante</strong>. Era muy difícil buscar alimentos, introducir los gramos\u2026 sobre todo estando deprimida.",
+    "p2": "Pero un día simplemente escribí en el chat con la IA, le conté lo que había comido durante el día y le pregunté: ¿qué puedo cenar para no pasarme de calorías? Fue tan natural. El chat no solo me dio recomendaciones, sino que también me acompañó con palabras de apoyo. Esa dosis rápida de dopamina que tanto echaba de menos.",
+    "p3": "Al día siguiente volví a escribir. Y al siguiente. Al cabo de un mes, ya no me resultaba estresante. Hablar con el chat sobre mi alimentación se convirtió en un <strong>ritual diario</strong> tranquilo.",
+    "p4": "Entonces se me ocurrió la idea de Nuvvoo: un compañero que primero escucha, luego calcula y ayuda a mantener el <strong>equilibrio</strong> a todos aquellos que, como yo, luchan contra la procrastinación. Espero que tú también encuentres tu manera de mantener el equilibrio sin presión y con placer."
+  },
+  "product": {
+    "eyebrow": "Producto",
+    "title": "Un chat en lugar de diez aplicaciones.",
+    "subtitle": "Cuéntale sobre la comida, el sueño, el entrenamiento: Nuvvoo lo calculará y lo recordará.",
+    "journalAlt": "Pantalla del diario",
+    "todayAlt": "Pantalla «Hoy»",
+    "statsAlt": "Estadísticas"
+  },
+  "philosophy": {
+    "eyebrow": "Filosofía",
+    "title": "Salud sin perfeccionismo",
+    "othersLabel": "Otras aplicaciones",
+    "othersBeDisciplined": "Sé disciplinado.",
+    "othersLogEverything": "Anota todo.",
+    "othersNeverMiss": "No te saltes ni un día.",
+    "othersSearch": "Busca un producto en la base de datos.",
+    "othersSetup": "Rellena el cuestionario de 15 pantallas.",
+    "othersGrams": "Introduce el peso al gramo.",
+    "othersThreeApps": "Una aplicación para la comida, otra para el agua y una tercera para el sueño.",
+    "othersConfigure": "Configura manualmente tus objetivos, macronutrientes y límites.",
+    "nuvvooLabel": "Nuvvoo",
+    "nuvvooMissDay": "¿Te has saltado un día? No pasa nada.",
+    "nuvvooComeBack": "Vuelve mañana.",
+    "nuvvooNoRestart": "No hace falta volver a empezar.",
+    "nuvvooJustWrite": "Escribe «trigo sarraceno con pollo». Listo.",
+    "nuvvooOpen": "Empieza a escribir directamente.",
+    "nuvvooPizza": "«Pizza en la cafetería»: con eso basta.",
+    "nuvvooOneChat": "Comida, agua, sueño, entrenamiento: un solo chat.",
+    "nuvvooLearns": "En una semana, Nuvvoo conoce tus hábitos."
+  },
+  "howItWorks": {
+    "eyebrow": "Cómo funciona",
+    "title": "Un ritual transparente en cuatro pasos",
+    "step": "Paso",
+    "step1Title": "Cuéntale a Nuvvoo cómo ha sido tu día",
+    "step1Desc": "Describe con tus propias palabras lo que has comido, cómo has entrenado, tu estado de ánimo, etc.",
+    "step1ImageAlt": "Nuvvoo se alegra de una comida saludable",
+    "step2Title": "La IA lo registra todo",
+    "step2Desc": "Las calorías y los macronutrientes están calculados. Todo guardado.",
+    "step2ImageAlt": "Nuvvoo celebra el progreso",
+    "step3Title": "Sugerencias sutiles",
+    "step3Desc": "Ideas para la cena, balance del día y apoyo.",
+    "step3ImageAlt": "Nuvvoo sugiere ideas para la cena",
+    "step4Title": "Regularidad, no perfección",
+    "step4Desc": "Mientras descansas, Nuvvoo detecta patrones y te ayuda a sentirte más tranquilo.",
+    "step4ImageAlt": "Nuvvoo te desea buenas noches"
+  },
+  "socialProof": {
+    "heading": "Pruébalo tú primero",
+    "quote1": "Llevo 10 días registrando lo que como y no tengo ganas de dejarlo.",
+    "name1": "Masha, fotógrafa",
+    "quote2": "Odio llevar un control de lo que como, pero quiero cuidar mi alimentación. Con Nuvvoo no tengo la sensación de estar constantemente registrando datos. Es simplemente una conversación.",
+    "name2": "Nastya, estilista",
+    "quote3": "Solo quiero algo que no me moleste. Nuvvoo es un compañero simpático y comprensivo.",
+    "name3": "Sasha, madre de dos"
+  },
+  "waitlistCta": {
+    "title": "Da pequeños pasos cada día, sin perfeccionismo.",
+    "subtitle": "Sé uno de los primeros en probar Nuvvoo. Deja tu correo electrónico y te enviaremos un enlace para el\u00a0lanzamiento.",
+    "note": "Enlace + bonificación para los primeros."
+  },
+  "waitlist": {
+    "placeholder": "tu@ejemplo.com",
+    "join": "Inscríbete",
+    "joining": "Un momento\u2026",
+    "success": "¡Ya estás en la lista! Nos vemos pronto \u2728",
+    "networkError": "Error de red. Inténtalo de nuevo.",
+    "genericError": "Algo ha salido mal."
+  },
+  "footer": {
+    "tagline": "Compañero de IA para la alimentación, los hábitos y la energía.",
+    "resources": "Recursos",
+    "learnMore": "Más información",
+    "legal": "Documentos",
+    "eatingDisorderSafety": "Trastornos alimentarios y seguridad",
+    "dinnerIdeas": "Ideas para la cena y calorías",
+    "stayConsistent": "Cómo no abandonar el seguimiento",
+    "photoVsChat": "Foto vs. Chat",
+    "stressFree": "Seguimiento sin estrés",
+    "chatTracker": "Calorías por chat",
+    "aiFoodJournal": "Diario de alimentación con IA",
+    "mfpAlternative": "Alternativa a MyFitnessPal",
+    "privacy": "Privacidad",
+    "terms": "Condiciones",
+    "aiDisclosure": "Acerca del uso de la IA",
+    "contact": "Contacto",
+    "copyright": "\u00a9 2026 Pryvus Inc."
+  },
+  "seoCta": {
+    "title": "¿Listo para empezar a contar calorías sin estrés?",
+    "description": "Sé el primero en probarlo: escribe en el chat.",
+    "button": "Descargar"
+  },
+  "languageSwitcher": {
+    "label": "Idioma",
+    "en": "English",
+    "de": "Deutsch",
+    "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+    "es": "Espa\u00f1ol",
+    "fr": "Fran\u00e7ais"
+  }
+}

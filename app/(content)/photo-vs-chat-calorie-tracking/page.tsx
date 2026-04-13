@@ -13,7 +13,7 @@ import { TrackedButton } from '@/components/tracked-button';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
 export const metadata: Metadata = {
-  title: 'Photo vs Chat: Two Approaches to AI Calorie Tracking (And Why It Matters) | Nuvvoo',
+  title: 'Photo vs Chat: Two Approaches to AI Calorie Tracking (And Why It Matters)',
   description: 'Photo-based AI calorie trackers are fast, but research shows 30-40% error rates on complex meals. Here\'s how conversational tracking compares.',
   alternates: { canonical: `${siteUrl}/photo-vs-chat-calorie-tracking` },
   openGraph: {

@@ -11,7 +11,7 @@ import { AppleIcon, AndroidIcon } from '@/components/icons';
 import { TrackedButton } from '@/components/tracked-button';
 
 export const metadata: Metadata = {
-  title: 'Chat Calorie Tracker: Track Food by Talking, Not Logging | Nuvvoo',
+  title: 'Chat Calorie Tracker: Track Food by Talking, Not Logging',
   description: 'Track calories by chatting, not searching databases. Nuvvoo\'s AI calorie tracker lets you talk about food naturally—no manual logging required.',
   openGraph: {
     title: 'Chat Calorie Tracker: Track Food by Talking, Not Logging',
