@@ -27,15 +27,15 @@
     "title": "Por qué estoy creando Nuvvoo",
     "intro": "<strong>Hace un par de años</strong> empecé a tomar pastillas para la migraña. El dolor desapareció, pero los efectos secundarios fueron muy fuertes: el ánimo por los suelos, el peso se disparó, tenía la sensación de que todo se estaba descontrolando.",
     "readMore": "Leer más \u2193",
-    "p1": "Empecé a buscar una forma de adelgazar y probé un montón de aplicaciones para contar calorías. Y lo dejaba constantemente. No porque las aplicaciones fueran malas, sino porque no tenía recursos para hacerlo <strong>de forma constante</strong>. Era muy difícil buscar alimentos, introducir los gramos\u2026 sobre todo estando deprimida.",
-    "p2": "Pero un día simplemente escribí en el chat con la IA, le conté lo que había comido durante el día y le pregunté: ¿qué puedo cenar para no pasarme de calorías? Fue tan natural. El chat no solo me dio recomendaciones, sino que también me acompañó con palabras de apoyo. Esa dosis rápida de dopamina que tanto echaba de menos.",
+    "p1": "Empecé a buscar una forma de adelgazar y probé un montón de aplicaciones para contar calorías. Y lo dejaba constantemente. No porque las aplicaciones fueran malas, sino porque no tenía la energía para hacerlo <strong>de forma constante</strong>. Era muy difícil buscar alimentos, introducir los gramos\u2026 sobre todo estando deprimida.",
+    "p2": "Pero un día simplemente escribí en el chat con la IA, le conté lo que había comido durante el día y le pregunté: ¿qué puedo cenar para no pasarme de calorías? Fue tan natural. El chat no solo me dio recomendaciones, sino que también me acompañó con palabras de apoyo. Un subidón rápido de dopamina que tanto me hacía falta.",
     "p3": "Al día siguiente volví a escribir. Y al siguiente. Al cabo de un mes, ya no me resultaba estresante. Hablar con el chat sobre mi alimentación se convirtió en un <strong>ritual diario</strong> tranquilo.",
-    "p4": "Entonces se me ocurrió la idea de Nuvvoo: un compañero que primero escucha, luego calcula y ayuda a mantener el <strong>equilibrio</strong> a todos aquellos que, como yo, luchan contra la procrastinación. Espero que tú también encuentres tu manera de mantener el equilibrio sin presión y con placer."
+    "p4": "Entonces se me ocurrió la idea de Nuvvoo: un compañero que primero escucha, luego calcula y ayuda a mantener el <strong>equilibrio</strong> a todos aquellos que, como yo, luchan contra la procrastinación. Espero que tú también encuentres tu manera de mantener el equilibrio sin presión y con gusto."
   },
   "product": {
     "eyebrow": "Producto",
     "title": "Un chat en lugar de diez aplicaciones.",
-    "subtitle": "Cuéntale sobre la comida, el sueño, el entrenamiento: Nuvvoo lo calculará y lo recordará.",
+    "subtitle": "Cuéntale sobre tu comida, tu sueño y tu entrenamiento: Nuvvoo lo calcula y lo recuerda.",
     "journalAlt": "Pantalla del diario",
     "todayAlt": "Pantalla «Hoy»",
     "statsAlt": "Estadísticas"
@@ -57,7 +57,7 @@
     "nuvvooComeBack": "Vuelve mañana.",
     "nuvvooNoRestart": "No hace falta volver a empezar.",
     "nuvvooJustWrite": "Escribe «trigo sarraceno con pollo». Listo.",
-    "nuvvooOpen": "Empieza a escribir directamente.",
+    "nuvvooOpen": "Empieza a escribir ya.",
     "nuvvooPizza": "«Pizza en la cafetería»: con eso basta.",
     "nuvvooOneChat": "Comida, agua, sueño, entrenamiento: un solo chat.",
     "nuvvooLearns": "En una semana, Nuvvoo conoce tus hábitos."
@@ -90,8 +90,8 @@
   },
   "waitlistCta": {
     "title": "Da pequeños pasos cada día, sin perfeccionismo.",
-    "subtitle": "Sé uno de los primeros en probar Nuvvoo. Deja tu correo electrónico y te enviaremos un enlace para el\u00a0lanzamiento.",
-    "note": "Enlace + bonificación para los primeros."
+    "subtitle": "Sé uno de los primeros en probar Nuvvoo. Déjanos tu correo y te mandaremos un enlace para el\u00a0lanzamiento.",
+    "note": "Enlace + regalo para los primeros."
   },
   "waitlist": {
     "placeholder": "tu@ejemplo.com",
@@ -102,7 +102,7 @@
     "genericError": "Algo ha salido mal."
   },
   "footer": {
-    "tagline": "Compañero de IA para la alimentación, los hábitos y la energía.",
+    "tagline": "Tu compañero de IA para la comida, los hábitos y la energía.",
     "resources": "Recursos",
     "learnMore": "Más información",
     "legal": "Documentos",

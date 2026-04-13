@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "title": "Nuvvoo – KI-Kalorientracker per Chat | Essen tracken ohne Aufwand",
-    "description": "Kalorien tracken per Chat mit KI — keine Datenbanken, kein Barcode-Scannen. Nuvvoo lernt deine Gewohnheiten und hilft dir, Essen, Energie und Wohlbefinden im Griff zu behalten. Jetzt kostenlos testen.",
-    "ogTitle": "Nuvvoo: Beschreib einfach deinen Tag. Die KI trackt den Rest.",
-    "ogDescription": "Der Kalorientracker, der wie ChatGPT funktioniert. Beschreib deine Mahlzeiten in normalen Worten — Nuvvoo kümmert sich um die Zahlen."
+    "title": "Nuvvoo: Kalorien zählen ist so einfach wie eine Nachricht schreiben",
+    "description": "Erzähl einfach, was du gegessen hast, und Nuvvoo zählt die Kalorien, merkt sich deine Gewohnheiten und hilft dir, nicht vom Kurs abzukommen. Probier es kostenlos aus.",
+    "ogTitle": "Nuvvoo: Erzähl von deinem Tag. Die KI kümmert sich um den Rest.",
+    "ogDescription": "Ein Kalorien-Tracker, der wie ChatGPT funktioniert. Sag einfach, was du gegessen hast – Nuvvoo kümmert sich um die Zahlen."
   },
   "nav": {
     "founder": "Gründerin",
@@ -14,8 +14,8 @@
   "hero": {
     "badge": "Early Access ist geöffnet",
     "title": "Kalorien zählen ist so einfach wie eine Nachricht schreiben",
-    "subtitle": "Erzähl Nuvvoo von deinem Tag, Schlaf, Workouts und deiner Stimmung \u2014 Woche für Woche wird es dich besser verstehen.",
-    "subtitleLine2": "Einzigartiges Kalorien-Tracking \u2014 per Chat.",
+    "subtitle": "Erzähl von deinem Tag, deinem Schlaf, deinem Training und deiner Stimmung, und Nuvvoo wird dich mit jeder Woche besser verstehen.",
+    "subtitleLine2": "Einzigartiges Kalorien-Tracking per Chat.",
     "ios": "iOS",
     "android": "Android",
     "heroImageAlt": "Irina lernt Nuvvoo kennen"
@@ -25,20 +25,20 @@
     "name": "Irina Groylova",
     "role": "Gründerin von Nuvvoo",
     "title": "Warum ich Nuvvoo baue",
-    "intro": "<strong>Vor ein paar Jahren</strong> habe ich angefangen, Migräne-Medikamente zu nehmen. Die Schmerzen verschwanden, aber die Nebenwirkungen trafen mich heftig: schlechte Stimmung, Gewichtszunahme, das Gefühl, dass mir alles entgleitet.",
+    "intro": "<strong>Vor ein paar Jahren</strong> fing ich an, Tabletten gegen Migräne zu nehmen. Die Schmerzen waren weg, aber die Nebenwirkungen waren heftig: Null Stimmung, das Gewicht schoss in die Höhe, ich hatte das Gefühl, dass alles außer Kontrolle gerät.",
     "readMore": "Weiterlesen \u2193",
-    "p1": "Ich habe angefangen, nach einem Weg zum Abnehmen zu suchen, und jede Menge Kalorien-Apps ausprobiert. Und sie ständig wieder aufgegeben. Nicht weil die Apps schlecht waren, sondern weil mir einfach die Kraft fehlte, das <strong>konsequent</strong> zu machen. Es war so mühsam, Lebensmittel zu suchen, Gramm einzutragen\u2026 vor allem mit Depression.",
-    "p2": "Doch eines Tages hab ich einfach in den Chat mit einer KI geschrieben, erzählt, was ich an dem Tag gegessen hatte, und gefragt \u2014 was ich zum Abendessen haben könnte, um in meinen Kalorien zu bleiben. Es fühlte sich so natürlich an. Der Chat hat nicht nur Empfehlungen gegeben, sondern auch unterstützende Worte hinzugefügt. Ein schneller Dopamin-Kick, der mir so gefehlt hatte.",
-    "p3": "Am nächsten Tag hab ich wieder geschrieben. Und am Tag danach. Nach einem Monat fühlte sich das nicht mehr nach Stress an. Das Gespräch mit dem Chat über mein Essen wurde zu einem ruhigen <strong>täglichen Ritual</strong>.",
-    "p4": "Damals kam mir die Idee für Nuvvoo \u2014 einen Begleiter, der erst zuhört, dann rechnet und allen hilft, die wie ich mit Prokrastination kämpfen, <strong>im Gleichgewicht</strong> zu bleiben. Ich hoffe, auch du findest deinen Weg, im Gleichgewicht zu bleiben \u2014 ohne Druck und mit Freude."
+    "p1": "Ich fing an, nach einem Weg zum Abnehmen zu suchen, und probierte jede Menge Kalorien-Apps aus. Und gab es immer wieder auf. Nicht, weil die Apps schlecht waren, sondern weil mir die Energie fehlte, das <strong>ständig</strong> zu machen. Es war sehr schwer, nach Lebensmitteln zu suchen, Gramm einzugeben\u2026 besonders, wenn man depressiv ist.",
+    "p2": "Aber eines Tages schrieb ich einfach in den Chat mit der KI, erzählte, was ich den Tag über gegessen hatte, und fragte, was ich zum Abendessen essen könnte, um mein Kalorienlimit einzuhalten. Das fühlte sich so natürlich an. Der Chat gab mir nicht nur Empfehlungen, sondern begleitete sie auch mit aufmunternden Worten. Ein schneller Dopamin-Kick, den ich so sehr vermisst hatte.",
+    "p3": "Am nächsten Tag schrieb ich wieder. Und am nächsten. Nach einem Monat fühlte es sich nicht mehr wie Stress an. Das Gespräch mit dem Chat über meine Ernährung wurde zu einem ruhigen <strong>täglichen Ritual</strong>.",
+    "p4": "Da kam mir die Idee zu Nuvvoo: einem Begleiter, der erst zuhört, dann rechnet und allen hilft, die wie ich mit Prokrastination zu kämpfen haben, im <strong>Gleichgewicht</strong> zu bleiben. Ich hoffe, auch du findest deinen Weg, ohne Druck und mit Freude im Gleichgewicht zu bleiben."
   },
   "product": {
     "eyebrow": "Produkt",
     "title": "Ein Chat statt zehn Apps.",
-    "subtitle": "Erzähl Nuvvoo von Essen, Schlaf, Workout \u2014 es rechnet und merkt sich alles.",
-    "journalAlt": "Journal-Bildschirm",
-    "todayAlt": "Heute-Bildschirm mit Ring",
-    "statsAlt": "Statistik-Bildschirm"
+    "subtitle": "Erzähl von Essen, Schlaf, Training, und Nuvvoo rechnet es aus und merkt es sich.",
+    "journalAlt": "Tagebuch-Bildschirm",
+    "todayAlt": "Bildschirm \u00abHeute\u00bb",
+    "statsAlt": "Statistik"
   },
   "philosophy": {
     "eyebrow": "Unsere Philosophie",
@@ -56,74 +56,74 @@
     "nuvvooMissDay": "Verpasst? Ok.",
     "nuvvooComeBack": "Komm morgen wieder.",
     "nuvvooNoRestart": "Kein Neustart nötig.",
-    "nuvvooJustWrite": "Schreib \"Hähnchen mit Reis\". Fertig.",
-    "nuvvooOpen": "Leg sofort los mit Schreiben.",
-    "nuvvooPizza": "\"Pizza im Café\" \u2014 das reicht.",
-    "nuvvooOneChat": "Essen, Wasser, Schlaf, Workouts \u2014 ein Chat.",
-    "nuvvooLearns": "Nach einer Woche kennt Nuvvoo deine Gewohnheiten."
+    "nuvvooJustWrite": "Schreib \u00abBuchweizen mit Hähnchen\u00bb. Fertig.",
+    "nuvvooOpen": "Fang gleich an zu schreiben.",
+    "nuvvooPizza": "\u00abPizza im Café\u00bb. Das reicht.",
+    "nuvvooOneChat": "Essen, Wasser, Schlaf, Training in einem Chat.",
+    "nuvvooLearns": "In einer Woche kennt Nuvvoo deine Gewohnheiten."
   },
   "howItWorks": {
     "eyebrow": "So funktioniert's",
     "title": "Ein transparentes Ritual in vier Schritten",
     "step": "Schritt",
     "step1Title": "Erzähl Nuvvoo von deinem Tag",
-    "step1Desc": "Beschreib in eigenen Worten, was du gegessen hast, wie du trainiert hast, deine Stimmung und so weiter.",
-    "step1ImageAlt": "Nuvvoo feiert eine gesunde Mahlzeit",
+    "step1Desc": "Beschreib in deinen eigenen Worten, was du gegessen hast, wie du trainiert hast, deine Stimmung und so weiter.",
+    "step1ImageAlt": "Nuvvoo freut sich über ein gesundes Mittagessen",
     "step2Title": "Die KI trägt es für dich ein",
     "step2Desc": "Kalorien und Makros berechnet. Alles gespeichert.",
     "step2ImageAlt": "Nuvvoo feiert deinen Fortschritt",
     "step3Title": "Sanfte Hinweise",
-    "step3Desc": "Abendessen-Ideen, Tagesbalance und Unterstützung.",
-    "step3ImageAlt": "Nuvvoo schlägt Abendessen-Ideen vor",
-    "step4Title": "Konsequenz, nicht Perfektion",
-    "step4Desc": "Während du dich ausruhst, findet Nuvvoo Muster und hilft dir, gelassener zu werden.",
-    "step4ImageAlt": "Nuvvoo sagt gute Nacht"
+    "step3Desc": "Ideen fürs Abendessen, Tagesbalance und Unterstützung.",
+    "step3ImageAlt": "Nuvvoo gibt Tipps fürs Abendessen",
+    "step4Title": "Regelmäßigkeit statt Perfektion",
+    "step4Desc": "Während du dich ausruhst, erkennt Nuvvoo Muster und hilft dir, dich gelassener zu fühlen.",
+    "step4ImageAlt": "Nuvvoo wünscht dir eine gute Nacht"
   },
   "socialProof": {
     "heading": "Probier es als Erste:r aus",
-    "quote1": "Ich tracke seit 10 Tagen und hab keine Lust aufzuhören.",
-    "name1": "Marie, Fotografin",
+    "quote1": "Ich tracke seit 10 Tagen und will gar nicht mehr aufhören.",
+    "name1": "Mascha, Fotografin",
     "quote2": "Ich hasse es, Essen einzutragen, aber ich will auf meine Ernährung achten. Mit Nuvvoo fühlt es sich nicht wie ständiges Loggen an. Es ist einfach ein Gespräch.",
-    "name2": "Stacy, Stylistin",
+    "name2": "Nastja, Stylistin",
     "quote3": "Ich will einfach etwas, das mich nicht nervt. Nuvvoo ist ein süßer, unterstützender Begleiter.",
-    "name3": "Sarah, Mama von zwei Kindern"
+    "name3": "Sascha, Mama von zwei"
   },
   "waitlistCta": {
-    "title": "Dranbleiben ohne Perfektionismus.",
-    "subtitle": "Sei unter den Ersten, die Nuvvoo ausprobieren. Hinterlasse deine E-Mail und wir schicken dir den Launch-Link.",
-    "note": "Nur der Launch-Link + ein Bonus für die ersten Nutzer."
+    "title": "Mach jeden Tag kleine Schritte, ohne Perfektionismus.",
+    "subtitle": "Probier Nuvvoo als einer der Ersten aus. Hinterlass deine E-Mail, und wir schicken dir einen Link zum\u00a0Start.",
+    "note": "Link + Bonus für die Ersten."
   },
   "waitlist": {
     "placeholder": "du@beispiel.de",
     "join": "Anmelden",
-    "joining": "Wird angemeldet\u2026",
+    "joining": "Einen Moment\u2026",
     "success": "Du bist auf der Liste. Bis bald \u2728",
-    "networkError": "Netzwerkfehler. Bitte versuch es nochmal.",
-    "genericError": "Etwas ist schiefgelaufen."
+    "networkError": "Netzwerkfehler. Versuch es noch einmal.",
+    "genericError": "Da ist etwas schiefgelaufen."
   },
   "footer": {
-    "tagline": "Ein ruhiger KI-Begleiter für Essen, Gewohnheiten und Energie.",
+    "tagline": "KI-Begleiter für Essen, Gewohnheiten und Energie.",
     "resources": "Ressourcen",
-    "learnMore": "Mehr erfahren",
-    "legal": "Rechtliches",
+    "learnMore": "Mehr",
+    "legal": "Dokumente",
     "eatingDisorderSafety": "Essstörungen & Sicherheit",
     "dinnerIdeas": "Abendessen-Ideen & Kalorien",
-    "stayConsistent": "Konstant beim Tracken bleiben",
+    "stayConsistent": "So gibst du das Tracking nicht auf",
     "photoVsChat": "Foto- vs. Chat-Tracking",
     "stressFree": "Stressfreies Tracking",
-    "chatTracker": "Chat-Kalorientracker",
+    "chatTracker": "Kalorien per Chat",
     "aiFoodJournal": "KI-Ernährungstagebuch",
     "mfpAlternative": "MyFitnessPal-Alternative",
     "privacy": "Datenschutz",
     "terms": "AGB",
-    "aiDisclosure": "KI-Hinweis",
+    "aiDisclosure": "Über den Einsatz von KI",
     "contact": "Kontakt",
     "copyright": "\u00a9 2026 Pryvus Inc."
   },
   "seoCta": {
-    "title": "Bereit, ohne Stress zu tracken?",
-    "description": "Sichere dir frühen Zugang und tracke per Chat statt per Eingabe.",
-    "button": "Frühen Zugang sichern"
+    "title": "Bist du bereit, stressfrei Kalorien zu zählen?",
+    "description": "Probier es als Erste:r aus, schreib uns im Chat.",
+    "button": "Herunterladen"
   },
   "languageSwitcher": {
     "label": "Sprache",

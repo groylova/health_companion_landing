@@ -1,9 +1,9 @@
 {
   "metadata": {
     "title": "Nuvvoo – AI Calorie Tracker via Chat | Track Food Without Logging",
-    "description": "Track calories by chatting with AI — no databases, no barcode scanning. Nuvvoo learns your habits and helps you stay on track with food, energy, and wellness. Try free.",
+    "description": "Track calories by chatting with AI, no databases, no barcode scanning. Nuvvoo learns your habits and helps you stay on track with food, energy, and wellness. Try free.",
     "ogTitle": "Nuvvoo: Just describe your day. AI tracks the rest.",
-    "ogDescription": "The calorie tracker that works like ChatGPT. Describe your meals in plain text — Nuvvoo handles the numbers."
+    "ogDescription": "The calorie tracker that works like ChatGPT. Describe your meals in plain text, and Nuvvoo handles the numbers."
   },
   "nav": {
     "founder": "Founder",
@@ -13,9 +13,9 @@
   },
   "hero": {
     "badge": "Early access is open",
-    "title": "Counting calories is as easy as texting",
-    "subtitle": "Tell Nuvvoo about your day, sleep, workouts and mood \u2014 week by week it will understand you better.",
-    "subtitleLine2": "A unique way to track calories \u2014 through chat.",
+    "title": "Track food and more by chatting, not logging",
+    "subtitle": "Tell Nuvvoo about your day, sleep, workouts and mood, and week by week it will understand you better.",
+    "subtitleLine2": "A unique way to track calories through chat.",
     "ios": "iOS",
     "android": "Android",
     "heroImageAlt": "Irina meeting Nuvvoo"
@@ -28,14 +28,14 @@
     "intro": "<strong>A couple of years ago</strong> I started taking migraine medication. The pain went away, but the side effects hit hard: my mood crashed, my weight went up, and it felt like everything was slipping out of control.",
     "readMore": "Read more \u2193",
     "p1": "I started looking for a way to lose weight and tried a ton of calorie-tracking apps. And kept quitting every time. Not because the apps were bad, but because I didn\u2019t have the energy to do it <strong>consistently</strong>. It was really hard to search for foods, enter grams\u2026 especially while depressed.",
-    "p2": "But one day I simply wrote in a chat with AI, told it what I\u2019d eaten that day, and asked \u2014 what could I have for dinner to stay within my calories. It felt so natural. The chat didn\u2019t just give recommendations, it added supportive words too. A quick dopamine hit I\u2019d been missing.",
+    "p2": "But one day I simply wrote in a chat with AI, told it what I\u2019d eaten that day, and asked what I could have for dinner to stay within my calories. It felt so natural. The chat didn\u2019t just give recommendations, it added supportive words too. A quick dopamine hit I\u2019d been missing.",
     "p3": "The next day I wrote again. And the next. Within a month it stopped feeling like stress. Talking with the chat about my food became a calm <strong>daily ritual</strong>.",
-    "p4": "That\u2019s when I came up with the idea for Nuvvoo \u2014 a companion that listens first, counts second, and helps everyone who struggles with procrastination like I do stay in <strong>balance</strong>. I hope you\u2019ll find your own way to stay balanced \u2014 without pressure, with joy."
+    "p4": "That\u2019s when I came up with the idea for Nuvvoo: a companion that listens first, counts second, and helps everyone who struggles with procrastination like I do stay in <strong>balance</strong>. I hope you\u2019ll find your own way to stay balanced, without pressure, with joy."
   },
   "product": {
     "eyebrow": "Product",
     "title": "One chat instead of ten apps.",
-    "subtitle": "Tell Nuvvoo about your food, sleep, workout \u2014 it\u2019ll count and remember.",
+    "subtitle": "Tell Nuvvoo about your food, sleep, workout, and it\u2019ll count and remember.",
     "journalAlt": "Journal screen",
     "todayAlt": "Today screen with ring",
     "statsAlt": "Statistics screen"
@@ -58,8 +58,8 @@
     "nuvvooNoRestart": "No need to restart.",
     "nuvvooJustWrite": "Type \"chicken with rice\". Done.",
     "nuvvooOpen": "Start typing right away.",
-    "nuvvooPizza": "\"Pizza at a cafe\" \u2014 that\u2019s enough.",
-    "nuvvooOneChat": "Food, water, sleep, workouts \u2014 one chat.",
+    "nuvvooPizza": "\"Pizza at a cafe.\" That\u2019s enough.",
+    "nuvvooOneChat": "Food, water, sleep, workouts in one chat.",
     "nuvvooLearns": "In a week, Nuvvoo knows your habits."
   },
   "howItWorks": {
