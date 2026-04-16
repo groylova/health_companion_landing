@@ -10,8 +10,8 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const t = useTranslations('languageSwitcher');
 
-  // Only show on translatable pages (currently just the homepage)
-  if (pathname !== '/') return null;
+  // Legal pages are English-only; no locale switching there.
+  if (pathname.startsWith('/legal')) return null;
 
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
     router.replace(pathname, { locale: e.target.value });
