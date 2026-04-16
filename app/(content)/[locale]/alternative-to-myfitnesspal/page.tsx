@@ -16,7 +16,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 // Locales with a real translation of this article. Others fall back to EN content
 // and keep the parent layout's noindex until translated.
-const TRANSLATED_LOCALES = new Set(['en', 'es', 'fr']);
+const TRANSLATED_LOCALES = new Set(['en', 'es', 'fr', 'de']);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -46,8 +46,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ogDescription:
       "Une alternative à MyFitnessPal qui utilise l'IA conversationnelle pour rendre le suivi des calories plus rapide et plus simple.",
   };
+  const de = {
+    title: 'MyFitnessPal-Alternative: Erfassen durch Chatten statt Eintragen',
+    description:
+      'Suchst du nach einer einfacheren Möglichkeit, deine Ernährung zu erfassen? Nuvvoo ist eine MyFitnessPal-Alternative, die mit KI-Konversationen dabei hilft, Mahlzeiten schnell zu erfassen – ohne Datenbankrecherchen, ohne manuelle Eingabe.',
+    ogDescription:
+      'Eine MyFitnessPal-Alternative, die mit KI-Konversationen das Kalorien-Tracking schneller und einfacher macht.',
+  };
 
-  const copy = locale === 'es' ? es : locale === 'fr' ? fr : en;
+  const copy =
+    locale === 'es' ? es : locale === 'fr' ? fr : locale === 'de' ? de : en;
   const isTranslated = TRANSLATED_LOCALES.has(locale);
 
   const base: Metadata = {
@@ -73,26 +81,33 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
 
   const isSpanish = locale === 'es';
   const isFrench = locale === 'fr';
+  const isGerman = locale === 'de';
 
   const h1 = isSpanish
     ? 'Alternativa a MyFitnessPal: lleva un registro chateando, sin anotar nada'
     : isFrench
       ? "Une alternative à MyFitnessPal : suis ton alimentation par chat, sans saisie manuelle"
-      : 'MyFitnessPal Alternative: Track by Chatting, Not Logging';
+      : isGerman
+        ? 'MyFitnessPal-Alternative: Erfassen durch Chatten statt Eintragen'
+        : 'MyFitnessPal Alternative: Track by Chatting, Not Logging';
 
   const subtitle = isSpanish
     ? '¿Buscas una forma más fácil de llevar un registro de lo que comes? Nuvvoo es una alternativa a MyFitnessPal que usa la conversación con IA para ayudarte a registrar tus comidas rápidamente, sin búsquedas en bases de datos ni entradas manuales.'
     : isFrench
       ? "Tu cherches un moyen plus simple de suivre ton alimentation ? Nuvvoo est une alternative à MyFitnessPal qui utilise l'IA conversationnelle pour t'aider à enregistrer tes repas rapidement — pas besoin de chercher dans une base de données ni de saisir quoi que ce soit manuellement."
-      : 'Looking for an easier way to track food? Nuvvoo is a MyFitnessPal alternative that uses AI conversation to help you log meals quickly—no database searches, no manual entry.';
+      : isGerman
+        ? 'Suchst du nach einer einfacheren Möglichkeit, deine Ernährung zu erfassen? Nuvvoo ist eine MyFitnessPal-Alternative, die mit KI-Konversationen dabei hilft, Mahlzeiten schnell zu erfassen – ohne Datenbankrecherchen, ohne manuelle Eingabe.'
+        : 'Looking for an easier way to track food? Nuvvoo is a MyFitnessPal alternative that uses AI conversation to help you log meals quickly—no database searches, no manual entry.';
 
   const imageAlt = isSpanish
     ? 'Nuvvoo sugiriendo alternativas saludables para la cena'
     : isFrench
       ? 'Nuvvoo suggère des alternatives saines pour le dîner'
-      : 'Nuvvoo suggesting healthy dinner alternatives';
+      : isGerman
+        ? 'Nuvvoo schlägt gesunde Alternativen zum Abendessen vor'
+        : 'Nuvvoo suggesting healthy dinner alternatives';
 
-  const faqs = isSpanish ? faqsEs : isFrench ? faqsFr : faqsEn;
+  const faqs = isSpanish ? faqsEs : isFrench ? faqsFr : isGerman ? faqsDe : faqsEn;
 
   return (
     <main>
@@ -121,7 +136,15 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
           </div>
 
           <div className="mx-auto mt-12 max-w-3xl space-y-12">
-            {isSpanish ? <SpanishBody /> : isFrench ? <FrenchBody /> : <EnglishBody />}
+            {isSpanish ? (
+              <SpanishBody />
+            ) : isFrench ? (
+              <FrenchBody />
+            ) : isGerman ? (
+              <GermanBody />
+            ) : (
+              <EnglishBody />
+            )}
 
             <div className="my-12 flex flex-col items-center gap-4 text-center">
               <div className="flex gap-3">
@@ -763,5 +786,208 @@ const faqsFr = [
     question: 'Nuvvoo est-il gratuit ?',
     answer:
       "Nuvvoo est actuellement en accès anticipé. Les détails sur les tarifs seront annoncés à l'approche du lancement. Notre objectif est de proposer une offre gratuite qui rende le suivi accessible, avec des fonctionnalités premium pour les utilisateurs qui souhaitent des analyses avancées et une personnalisation.",
+  },
+];
+
+/* ─── GERMAN BODY ─── */
+
+function GermanBody() {
+  return (
+    <>
+      <ContentSection title="Warum suchen Menschen nach Alternativen zu MyFitnessPal?">
+        <p>
+          MyFitnessPal ist eine der beliebtesten Apps zur Kalorienerfassung mit Millionen von Nutzern und einer umfassenden Lebensmitteldatenbank. Warum suchen Menschen also nach Alternativen?
+        </p>
+        <p>
+          <strong>Häufige Frustrationen mit MyFitnessPal:</strong>
+        </p>
+        <ul>
+          <li><strong>Überwältigende Datenbank:</strong> Die Suche nach einem einzelnen Lebensmittel unter Hunderten von Einträgen kann Minuten dauern</li>
+          <li><strong>Zeitaufwändige Erfassung:</strong> Die manuelle Eingabe jeder Zutat, besonders bei selbstgekochten Mahlzeiten, ist mühsam</li>
+          <li><strong>Uneinheitliche Datenqualität:</strong> Von Nutzern eingereichte Einträge enthalten oft Fehler oder veraltete Informationen</li>
+          <li><strong>Komplexe Benutzeroberfläche:</strong> Die App hat viele Funktionen, aber die Navigation kann sich unübersichtlich anfühlen</li>
+          <li><strong>Ermüdung durch das Erfassen:</strong> Der manuelle Prozess sorgt für Reibungsverluste, was zu einer unregelmäßigen Nutzung führt</li>
+          <li><strong>Werbung und Upsells:</strong> Die kostenlose Version enthält häufige Werbeanzeigen und Aufforderungen zum Upgrade</li>
+        </ul>
+        <p>
+          Das sind nicht für jeden ein Ausschlusskriterium. Viele Menschen nutzen MyFitnessPal langfristig erfolgreich. Aber für diejenigen, die <strong>Schnelligkeit und Einfachheit</strong> über die Präzision der Datenbank stellen, machen Alternativen, die darauf abzielen, Reibungsverluste zu reduzieren, das Tracking nachhaltiger.
+        </p>
+        <p>
+          <a href="https://www.businessofapps.com/data/health-fitness-app-benchmarks/" target="_blank" rel="noopener noreferrer" className="text-nuvvooGreen-700 underline hover:text-nuvvooGreen-900">Branchendaten</a> deuten darauf hin, dass die meisten Gesundheits- und Fitness-Apps in den ersten 30 Tagen einen erheblichen Nutzerrückgang verzeichnen. Der Hauptgrund? Die Tracking-Methode selbst wird zur Hürde. Wenn das Protokollieren sich wie Arbeit anfühlt, leidet die Kontinuität.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Verschiedene Ansätze zum Food-Tracking">
+        <p>
+          Nicht alle Kalorien-Tracker sind gleich aufgebaut. Das Tool, das du wählst, sollte zu deiner Tracking-Philosophie und deinem Lebensstil passen.
+        </p>
+        <p>
+          <strong>Der Ansatz von MyFitnessPal: Präzision durch Datenbanken</strong>
+        </p>
+        <p>
+          MyFitnessPal gibt dir die Kontrolle. Du durchsuchst eine riesige Datenbank, wählst den genauen Eintrag aus, der zu deinem Essen passt, und gibst die Portionsgrößen an. Das funktioniert gut, wenn du:
+        </p>
+        <ul>
+          <li>aus sportlichen oder medizinischen Gründen eine präzise Makro-Erfassung benötigst</li>
+          <li>die Kontrolle über jeden Datenpunkt bevorzugst</li>
+          <li>viele verpackte Lebensmittel mit Barcodes isst</li>
+          <li>Zeit hast, Datenbanken zu durchsuchen und Portionen abzuwiegen</li>
+        </ul>
+        <p>
+          <strong>Der Ansatz von Nuvvoo: Bewusstsein durch Konversation</strong>
+        </p>
+        <p>
+          Nuvvoo stellt Einfachheit und Beständigkeit über Präzision. Anstatt Datenbanken zu durchsuchen, <Link href="/chat-calorie-tracker">chattest du darüber, was du gegessen hast</Link>. Die KI übernimmt die Schätzung und Berechnung. Das funktioniert gut, wenn du:
+        </p>
+        <ul>
+          <li>konsequent tracken möchtest, ohne mehr als 5 Minuten pro Mahlzeit aufzuwenden</li>
+          <li>Bewusstseinsbildung wichtiger findest als das Erreichen exakter Zahlen</li>
+          <li>lieber über Mahlzeiten sprichst, als Daten einzugeben</li>
+          <li>mit Tracking-Müdigkeit zu kämpfen hast und einen leichteren Ansatz suchst</li>
+        </ul>
+        <p>
+          Keiner der Ansätze ist &bdquo;besser&ldquo; &ndash; sie dienen unterschiedlichen Bedürfnissen. Präzisions-Tracker brauchen Tools wie MyFitnessPal. Nutzer, denen Beständigkeit wichtig ist, bevorzugen oft eine <Link href="/calorie-tracking-without-stress">einfachere, stressfreie Erfassung</Link>.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Vergleich: Datenbank vs. Gespräch">
+        <p>
+          So sehen die beiden Ansätze in der Praxis im Vergleich aus:
+        </p>
+        <div className="prose-nuvvoo">
+          <table>
+            <thead>
+              <tr>
+                <th>Funktion</th>
+                <th>MyFitnessPal</th>
+                <th>Nuvvoo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Eingabemethode</td>
+                <td>Datenbanksuche + manuelle Eingabe</td>
+                <td>Chat in natürlicher Sprache</td>
+              </tr>
+              <tr>
+                <td>Lernkurve</td>
+                <td>Mittel (Datenbanknavigation lernen)</td>
+                <td>Minimal (einfach Mahlzeiten beschreiben)</td>
+              </tr>
+              <tr>
+                <td>Zeitaufwand pro Eintrag</td>
+                <td>2&ndash;5 Minuten (je nach Komplexität der Mahlzeit)</td>
+                <td>30&ndash;60 Sekunden (über Konversation)</td>
+              </tr>
+              <tr>
+                <td>Schwerpunkt</td>
+                <td>Präzise Erfassung &amp; detaillierte Makros</td>
+                <td>Bewusstsein &amp; Beständigkeit</td>
+              </tr>
+              <tr>
+                <td>Lebensmitteldatenbank</td>
+                <td>Über 14 Millionen Lebensmittel, Barcode-Scan</td>
+                <td>KI-gestützte Erkennung (keine Datenbank-Suche)</td>
+              </tr>
+              <tr>
+                <td>Ideal für</td>
+                <td>Sportler, Bodybuilder, präzise Erfasser</td>
+                <td>Vielbeschäftigte, unregelmäßige Erfasser, Anfänger</td>
+              </tr>
+              <tr>
+                <td>Tonfall</td>
+                <td>Datenorientiert, neutral</td>
+                <td>Konversationell, unterstützend</td>
+              </tr>
+              <tr>
+                <td>Flexibilität</td>
+                <td>Hohe Kontrolle, erfordert Details</td>
+                <td>Hohe Flexibilität, akzeptiert Schätzungen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>Wann MyFitnessPal besser sein könnte:</strong>
+        </p>
+        <ul>
+          <li>Du trainierst für Leistungssport oder Bodybuilding</li>
+          <li>Du brauchst präzise Makro-Ziele (z.&nbsp;B. 150&nbsp;g Protein täglich)</li>
+          <li>Du isst viele verpackte Lebensmittel mit Barcodes</li>
+          <li>Du möchtest detaillierte Nährwertangaben sehen</li>
+        </ul>
+        <p>
+          <strong>Wann Nuvvoo besser sein könnte:</strong>
+        </p>
+        <ul>
+          <li>Du hast MyFitnessPal ausprobiert, aber wegen Tracking-Müdigkeit aufgehört</li>
+          <li>Du möchtest ein Bewusstsein entwickeln, ohne dich auf exakte Zahlen zu versteifen</li>
+          <li>Du legst mehr Wert auf Schnelligkeit und Einfachheit als auf die Präzision der Datenbank</li>
+          <li>Du bevorzugst dialogorientierte Oberflächen gegenüber der Protokollierung über Formulare</li>
+          <li>Du hast in der Vergangenheit <Link href="/calorie-tracker-eating-disorders">Essstörungen erlebt, die durch Kalorien-Apps ausgelöst wurden</Link></li>
+        </ul>
+        <p>
+          Beide Tools haben ihre Berechtigung. Der beste Tracker ist der, den du tatsächlich konsequent nutzt.
+        </p>
+      </ContentSection>
+
+      <SeoCta
+        title="Probier mal einen anderen Ansatz zum Tracken aus"
+        description="Melde dich für den Early Access von Nuvvoo an und erlebe Kalorien-Tracking durch Konversation statt über Datenbanken."
+        buttonText="Prioritätszugang sichern"
+      />
+
+      <ContentSection title="Der Wechsel">
+        <p>
+          Wenn du darüber nachdenkst, von MyFitnessPal zu Nuvvoo zu wechseln oder beides auszuprobieren, um zu sehen, was besser passt, kannst du Folgendes erwarten:
+        </p>
+        <p>
+          <strong>Was du gewinnst:</strong>
+        </p>
+        <ul>
+          <li><strong>Schnelleres Protokollieren:</strong> Chat-basierte Einträge dauern 30&ndash;60 Sekunden statt 3&ndash;5 Minuten für die Datensuche</li>
+          <li><strong>Weniger Aufwand:</strong> Kein Suchen, Wiegen oder Rechnen &ndash; beschreibe einfach, was du gegessen hast</li>
+          <li><strong>Weniger Stress:</strong> Schätzungen werden gefördert, wodurch der Perfektionismusdruck wegfällt</li>
+          <li><strong>Bessere Kontinuität:</strong> Einfacheres Tracking führt oft zu einer konsequenteren Nutzung</li>
+          <li><strong>Unterstützung durch Konversation:</strong> Die KI reagiert wie ein Begleiter, nicht wie ein Datenformular</li>
+        </ul>
+        <p>
+          <strong>Was du einbüßt:</strong>
+        </p>
+        <ul>
+          <li><strong>Präzision der Datenbank:</strong> Keine Suche nach exakten Markeneinträgen</li>
+          <li><strong>Barcode-Scannen:</strong> Nuvvoo nutzt (noch) keine Barcodes</li>
+          <li><strong>Detaillierte Kontrolle:</strong> Weniger Möglichkeiten, jede Zutat genau anzupassen</li>
+          <li><strong>Community-Funktionen:</strong> MyFitnessPal bietet Foren und Social Tracking; Nuvvoo konzentriert sich auf das persönliche Tagebuch</li>
+        </ul>
+        <p>
+          Du musst dich nicht für immer auf einen Ansatz festlegen. Manche nutzen MyFitnessPal während intensiver Trainingsphasen und wechseln für die tägliche Erhaltung zu Nuvvoo. Andere nutzen Nuvvoo als ihren primären Tracker und öffnen MyFitnessPal nur, wenn sie detaillierte Makro-Aufschlüsselungen benötigen.
+        </p>
+        <p>
+          Das Ziel ist nicht, den &bdquo;perfekten&ldquo; Tracker zu finden. Es geht darum, denjenigen zu finden, der dir hilft, <strong>konsequent zu bleiben, ohne auszubrennen</strong>.
+        </p>
+        <p>
+          Wenn du neugierig auf den Ansatz von Nuvvoo bist, kannst du auch erkunden, wie es als <Link href="/ai-food-journal">KI-Ernährungstagebuch</Link> funktioniert, das Tracking mit ganzheitlichem Gesundheitsbewusstsein verbindet. Oder schau dir an, wie es hilft, wenn du <Link href="/no-dinner-ideas-calories">keine Ideen für das Abendessen hast und ein Kalorienziel erreichen musst</Link>.
+        </p>
+      </ContentSection>
+    </>
+  );
+}
+
+const faqsDe = [
+  {
+    question: 'Ersetzt Nuvvoo MyFitnessPal vollständig?',
+    answer:
+      'Das hängt von deinen Bedürfnissen ab. Wenn du detaillierte Makro-Erfassung, Barcode-Scannen und eine riesige Lebensmitteldatenbank willst, bleibt MyFitnessPal eine gute Wahl. Wenn du eine einfachere, schnellere Erfassung durch Konversation mit weniger Reibungsverlusten willst, bietet Nuvvoo einen anderen Ansatz. Manche Leute nutzen beides – MyFitnessPal für Tage mit präziser Erfassung, Nuvvoo für die tägliche Beständigkeit.',
+  },
+  {
+    question: 'Kann ich von einem anderen Kalorien-Tracker wechseln?',
+    answer:
+      'Ja. Du kannst jederzeit mit Nuvvoo anfangen, ohne deine Erfassungsgewohnheiten zu verlieren. Es gibt keinen Datenimport aus anderen Apps, aber da Nuvvoo sich darauf konzentriert, durch Gespräche neue Muster aufzubauen, brauchst du deine alten Daten nicht. Fang einfach an, über deine Mahlzeiten zu chatten, und die KI wird deine Gewohnheiten schnell lernen.',
+  },
+  {
+    question: 'Ist Nuvvoo kostenlos?',
+    answer:
+      'Nuvvoo befindet sich derzeit in der Early-Access-Phase. Preisdetails werden kurz vor dem Start bekannt gegeben. Unser Ziel ist es, eine kostenlose Stufe anzubieten, die das Tracking zugänglich macht, mit Premium-Funktionen für Nutzer, die erweiterte Einblicke und Personalisierung wünschen.',
   },
 ];
