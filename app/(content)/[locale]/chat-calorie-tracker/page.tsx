@@ -12,12 +12,16 @@ import { routing } from '@/i18n/routing';
 import { AppleIcon, AndroidIcon } from '@/components/icons';
 import { TrackedButton } from '@/components/tracked-button';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
+
 export const metadata: Metadata = {
   title: 'Chat Calorie Tracker: Track Food by Talking, Not Logging',
   description: 'Track calories by chatting, not searching databases. Nuvvoo\'s AI calorie tracker lets you talk about food naturally—no manual logging required.',
+  alternates: { canonical: `${siteUrl}/chat-calorie-tracker` },
   openGraph: {
     title: 'Chat Calorie Tracker: Track Food by Talking, Not Logging',
     description: 'Track calories by chatting, not searching databases. AI-powered calorie tracking through natural conversation.',
+    url: `${siteUrl}/chat-calorie-tracker`,
     type: 'article',
   },
 };

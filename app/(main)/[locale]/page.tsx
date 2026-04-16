@@ -23,9 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'metadata' });
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
-  const alternates: Record<string, string> = { 'x-default': siteUrl };
+  const canonical = locale === 'en' ? `${siteUrl}/` : `${siteUrl}/${locale}`;
+  const alternates: Record<string, string> = { 'x-default': `${siteUrl}/` };
   for (const loc of routing.locales) {
-    alternates[loc] = loc === 'en' ? siteUrl : `${siteUrl}/${loc}`;
+    alternates[loc] = loc === 'en' ? `${siteUrl}/` : `${siteUrl}/${loc}`;
   }
 
   return {
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t('ogTitle'),
       description: t('ogDescription'),
       type: 'website',
-      url: locale === 'en' ? siteUrl : `${siteUrl}/${locale}`,
+      url: canonical,
       images: [
         {
           url: '/images/og.png',
@@ -55,6 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: ['/images/og.png'],
     },
     alternates: {
+      canonical,
       languages: alternates,
     },
   };

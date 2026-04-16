@@ -12,12 +12,16 @@ import { routing } from '@/i18n/routing';
 import { AppleIcon, AndroidIcon } from '@/components/icons';
 import { TrackedButton } from '@/components/tracked-button';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
+
 export const metadata: Metadata = {
   title: 'Calorie Tracking Without Stress or Anxiety',
   description: 'Track calories without anxiety. Nuvvoo offers stress-free, mindful calorie tracking that helps you stay consistent without perfectionism or pressure.',
+  alternates: { canonical: `${siteUrl}/calorie-tracking-without-stress` },
   openGraph: {
     title: 'Calorie Tracking Without Stress or Anxiety',
     description: 'A calorie tracker that reduces anxiety and supports consistency without perfectionism.',
+    url: `${siteUrl}/calorie-tracking-without-stress`,
     type: 'article',
   },
 };

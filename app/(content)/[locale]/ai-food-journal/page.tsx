@@ -12,12 +12,16 @@ import { routing } from '@/i18n/routing';
 import { AppleIcon, AndroidIcon } from '@/components/icons';
 import { TrackedButton } from '@/components/tracked-button';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
+
 export const metadata: Metadata = {
   title: 'AI Food Journal: Smart Food Diary That Remembers',
   description: 'A gentle AI food journal that learns your patterns, tracks mood & energy, and helps you stay consistent without the pressure of manual logging.',
+  alternates: { canonical: `${siteUrl}/ai-food-journal` },
   openGraph: {
     title: 'AI Food Journal: Smart Food Diary That Remembers',
     description: 'AI-powered food journal that learns your eating patterns and tracks holistic health—mood, energy, and food.',
+    url: `${siteUrl}/ai-food-journal`,
     type: 'article',
   },
 };

@@ -73,6 +73,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             : en;
   const isTranslated = TRANSLATED_LOCALES.has(locale);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
+  const slug = 'alternative-to-myfitnesspal';
+  const canonical =
+    locale === routing.defaultLocale
+      ? `${siteUrl}/${slug}`
+      : `${siteUrl}/${locale}/${slug}`;
+
+  const languages: Record<string, string> = {
+    'x-default': `${siteUrl}/${slug}`,
+  };
+  for (const loc of routing.locales) {
+    languages[loc] =
+      loc === routing.defaultLocale
+        ? `${siteUrl}/${slug}`
+        : `${siteUrl}/${loc}/${slug}`;
+  }
+
   const base: Metadata = {
     title: copy.title,
     description: copy.description,
@@ -80,6 +97,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: copy.title,
       description: copy.ogDescription,
       type: 'article',
+      url: canonical,
+    },
+    alternates: {
+      canonical,
+      languages,
     },
   };
 
