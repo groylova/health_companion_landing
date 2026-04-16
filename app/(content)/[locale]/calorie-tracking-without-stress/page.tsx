@@ -6,7 +6,9 @@ import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
 import { SeoCta } from '@/components/seo/seo-cta';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { setRequestLocale } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
 import { AppleIcon, AndroidIcon } from '@/components/icons';
 import { TrackedButton } from '@/components/tracked-button';
 
@@ -20,7 +22,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CalorieTrackingWithoutStress() {
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function CalorieTrackingWithoutStress({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const faqs = [
     {
       question: 'Can I use this if I struggle with consistency?',
