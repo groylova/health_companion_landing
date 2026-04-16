@@ -1,12 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 
-// Slugs of SEO articles that are fully translated across all locales. Sitemap
-// will emit hreflang alternates for these. Others stay as single EN entries.
+// Slugs of SEO articles that are fully translated across all locales. Each
+// locale gets its own sitemap entry with full hreflang alternates.
 const FULLY_TRANSLATED_SEO_SLUGS = ['alternative-to-myfitnesspal'];
 
-// Slugs of SEO articles that exist only in English. Sitemap will list a single
-// entry per slug without hreflang alternates.
+// Slugs of SEO articles that exist only in English. A single entry per slug.
 const ENGLISH_ONLY_SEO_SLUGS = [
   'chat-calorie-tracker',
   'ai-food-journal',
@@ -17,59 +16,66 @@ const ENGLISH_ONLY_SEO_SLUGS = [
   'photo-vs-chat-calorie-tracking',
 ];
 
-function localizedPath(base: string, locale: string, path = ''): string {
-  // Default locale (EN) is served without a prefix; other locales get /<locale>.
-  // Root EN keeps its trailing slash (matches the site's canonical URL).
+function localizedUrl(base: string, locale: string, path = ''): string {
   if (locale === routing.defaultLocale) {
     return path === '' ? `${base}/` : `${base}${path}`;
   }
   return `${base}/${locale}${path}`;
 }
 
+function buildLanguageAlternates(
+  base: string,
+  path: string,
+): Record<string, string> {
+  const languages: Record<string, string> = {
+    'x-default': localizedUrl(base, routing.defaultLocale, path),
+  };
+  for (const loc of routing.locales) {
+    languages[loc] = localizedUrl(base, loc, path);
+  }
+  return languages;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
   const now = new Date();
 
-  // Home page — all locales
-  const homeLanguages: Record<string, string> = { 'x-default': `${base}/` };
-  for (const loc of routing.locales) {
-    homeLanguages[loc] = localizedPath(base, loc);
-  }
+  const entries: MetadataRoute.Sitemap = [];
 
-  const entries: MetadataRoute.Sitemap = [
-    {
-      url: `${base}/`,
+  // Home — one entry per locale with full hreflang alternates on each
+  const homeAlternates = buildLanguageAlternates(base, '');
+  for (const loc of routing.locales) {
+    entries.push({
+      url: localizedUrl(base, loc, ''),
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 1,
-      alternates: { languages: homeLanguages },
-    },
-  ];
-
-  // Fully translated SEO articles: hreflang alternates for each locale
-  for (const slug of FULLY_TRANSLATED_SEO_SLUGS) {
-    const languages: Record<string, string> = {
-      'x-default': `${base}/${slug}`,
-    };
-    for (const loc of routing.locales) {
-      languages[loc] = localizedPath(base, loc, `/${slug}`);
-    }
-    entries.push({
-      url: `${base}/${slug}`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-      alternates: { languages },
+      alternates: { languages: homeAlternates },
     });
   }
 
-  // English-only SEO articles
+  // Fully translated SEO articles — one entry per locale
+  for (const slug of FULLY_TRANSLATED_SEO_SLUGS) {
+    const path = `/${slug}`;
+    const alternates = buildLanguageAlternates(base, path);
+    for (const loc of routing.locales) {
+      entries.push({
+        url: localizedUrl(base, loc, path),
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.8,
+        alternates: { languages: alternates },
+      });
+    }
+  }
+
+  // English-only SEO articles — single entry each
   for (const slug of ENGLISH_ONLY_SEO_SLUGS) {
     entries.push({
       url: `${base}/${slug}`,
       lastModified: now,
       changeFrequency: 'monthly',
-      priority: slug === 'alternative-to-myfitnesspal' ? 0.7 : 0.8,
+      priority: 0.8,
     });
   }
 
