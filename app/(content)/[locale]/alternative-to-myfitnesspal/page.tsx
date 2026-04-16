@@ -16,7 +16,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 // Locales with a real translation of this article. Others fall back to EN content
 // and keep the parent layout's noindex until translated.
-const TRANSLATED_LOCALES = new Set(['en', 'es', 'fr', 'de']);
+const TRANSLATED_LOCALES = new Set(['en', 'es', 'fr', 'de', 'ru']);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -53,9 +53,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ogDescription:
       'Eine MyFitnessPal-Alternative, die mit KI-Konversationen das Kalorien-Tracking schneller und einfacher macht.',
   };
+  const ru = {
+    title: 'Альтернатива MyFitnessPal: отслеживай питание через чат, а не через ввод данных',
+    description:
+      'Ищешь более простой способ отслеживать питание? Nuvvoo — это альтернатива MyFitnessPal, которая использует AI для общения, чтобы помочь тебе быстро регистрировать приёмы пищи: без поиска в базе данных и ручного ввода.',
+    ogDescription:
+      'Альтернатива MyFitnessPal, которая использует AI-разговор, чтобы сделать подсчёт калорий быстрее и проще.',
+  };
 
   const copy =
-    locale === 'es' ? es : locale === 'fr' ? fr : locale === 'de' ? de : en;
+    locale === 'es'
+      ? es
+      : locale === 'fr'
+        ? fr
+        : locale === 'de'
+          ? de
+          : locale === 'ru'
+            ? ru
+            : en;
   const isTranslated = TRANSLATED_LOCALES.has(locale);
 
   const base: Metadata = {
@@ -82,6 +97,7 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
   const isSpanish = locale === 'es';
   const isFrench = locale === 'fr';
   const isGerman = locale === 'de';
+  const isRussian = locale === 'ru';
 
   const h1 = isSpanish
     ? 'Alternativa a MyFitnessPal: lleva un registro chateando, sin anotar nada'
@@ -89,7 +105,9 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
       ? "Une alternative à MyFitnessPal : suis ton alimentation par chat, sans saisie manuelle"
       : isGerman
         ? 'MyFitnessPal-Alternative: Erfassen durch Chatten statt Eintragen'
-        : 'MyFitnessPal Alternative: Track by Chatting, Not Logging';
+        : isRussian
+          ? 'Альтернатива MyFitnessPal: отслеживай питание через чат, а не через ввод данных'
+          : 'MyFitnessPal Alternative: Track by Chatting, Not Logging';
 
   const subtitle = isSpanish
     ? '¿Buscas una forma más fácil de llevar un registro de lo que comes? Nuvvoo es una alternativa a MyFitnessPal que usa la conversación con IA para ayudarte a registrar tus comidas rápidamente, sin búsquedas en bases de datos ni entradas manuales.'
@@ -97,7 +115,9 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
       ? "Tu cherches un moyen plus simple de suivre ton alimentation ? Nuvvoo est une alternative à MyFitnessPal qui utilise l'IA conversationnelle pour t'aider à enregistrer tes repas rapidement — pas besoin de chercher dans une base de données ni de saisir quoi que ce soit manuellement."
       : isGerman
         ? 'Suchst du nach einer einfacheren Möglichkeit, deine Ernährung zu erfassen? Nuvvoo ist eine MyFitnessPal-Alternative, die mit KI-Konversationen dabei hilft, Mahlzeiten schnell zu erfassen – ohne Datenbankrecherchen, ohne manuelle Eingabe.'
-        : 'Looking for an easier way to track food? Nuvvoo is a MyFitnessPal alternative that uses AI conversation to help you log meals quickly—no database searches, no manual entry.';
+        : isRussian
+          ? 'Ищешь более простой способ отслеживать питание? Nuvvoo — это альтернатива MyFitnessPal, которая использует AI для общения, чтобы помочь тебе быстро регистрировать приёмы пищи: без поиска в базе данных и ручного ввода.'
+          : 'Looking for an easier way to track food? Nuvvoo is a MyFitnessPal alternative that uses AI conversation to help you log meals quickly—no database searches, no manual entry.';
 
   const imageAlt = isSpanish
     ? 'Nuvvoo sugiriendo alternativas saludables para la cena'
@@ -105,9 +125,19 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
       ? 'Nuvvoo suggère des alternatives saines pour le dîner'
       : isGerman
         ? 'Nuvvoo schlägt gesunde Alternativen zum Abendessen vor'
-        : 'Nuvvoo suggesting healthy dinner alternatives';
+        : isRussian
+          ? 'Nuvvoo предлагает здоровые варианты на ужин'
+          : 'Nuvvoo suggesting healthy dinner alternatives';
 
-  const faqs = isSpanish ? faqsEs : isFrench ? faqsFr : isGerman ? faqsDe : faqsEn;
+  const faqs = isSpanish
+    ? faqsEs
+    : isFrench
+      ? faqsFr
+      : isGerman
+        ? faqsDe
+        : isRussian
+          ? faqsRu
+          : faqsEn;
 
   return (
     <main>
@@ -142,6 +172,8 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
               <FrenchBody />
             ) : isGerman ? (
               <GermanBody />
+            ) : isRussian ? (
+              <RussianBody />
             ) : (
               <EnglishBody />
             )}
@@ -989,5 +1021,208 @@ const faqsDe = [
     question: 'Ist Nuvvoo kostenlos?',
     answer:
       'Nuvvoo befindet sich derzeit in der Early-Access-Phase. Preisdetails werden kurz vor dem Start bekannt gegeben. Unser Ziel ist es, eine kostenlose Stufe anzubieten, die das Tracking zugänglich macht, mit Premium-Funktionen für Nutzer, die erweiterte Einblicke und Personalisierung wünschen.',
+  },
+];
+
+/* ─── RUSSIAN BODY ─── */
+
+function RussianBody() {
+  return (
+    <>
+      <ContentSection title="Почему люди ищут альтернативы MyFitnessPal">
+        <p>
+          MyFitnessPal — одно из самых популярных приложений для подсчёта калорий, с миллионами пользователей и обширной базой данных продуктов. Так почему же люди ищут альтернативы?
+        </p>
+        <p>
+          <strong>Распространённые проблемы с MyFitnessPal:</strong>
+        </p>
+        <ul>
+          <li><strong>Огромная база данных:</strong> поиск одного продукта среди сотен записей может занять несколько минут</li>
+          <li><strong>Затратный процесс ввода:</strong> вручную вводить каждый ингредиент, особенно для домашних блюд, очень утомительно</li>
+          <li><strong>Нестабильное качество данных:</strong> записи, добавленные пользователями, часто содержат ошибки или устаревшую информацию</li>
+          <li><strong>Сложность интерфейса:</strong> в приложении много функций, но навигация по ним может казаться запутанной</li>
+          <li><strong>Усталость от учёта:</strong> ручной процесс создаёт трудности, что приводит к нерегулярному использованию</li>
+          <li><strong>Реклама и предложения о переходе на платную версию:</strong> бесплатная версия включает частую рекламу и предложения об обновлении</li>
+        </ul>
+        <p>
+          Это не для всех является причиной отказа от приложения. Многие люди успешно используют MyFitnessPal в течение длительного времени. Но для тех, кто ценит <strong>скорость и простоту</strong> больше, чем точность базы данных, альтернативы, ориентированные на уменьшение неудобств, делают отслеживание более устойчивым.
+        </p>
+        <p>
+          <a href="https://www.businessofapps.com/data/health-fitness-app-benchmarks/" target="_blank" rel="noopener noreferrer" className="text-nuvvooGreen-700 underline hover:text-nuvvooGreen-900">Отраслевые данные</a> показывают, что большинство приложений для здоровья и фитнеса теряют значительную часть пользователей в первые 30 дней. Главная причина? Сам метод отслеживания становится препятствием. Когда ввод данных кажется работой, страдает постоянство.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Разные подходы к отслеживанию питания">
+        <p>
+          Не все калькуляторы калорий одинаковы. Инструмент, который ты выберешь, должен соответствовать твоей философии отслеживания и образу жизни.
+        </p>
+        <p>
+          <strong>Подход MyFitnessPal: точность благодаря базам данных</strong>
+        </p>
+        <p>
+          MyFitnessPal даёт тебе контроль. Ты ищешь в огромной базе данных, выбираешь точную запись, соответствующую твоей еде, и указываешь размер порций. Это хорошо работает, если ты:
+        </p>
+        <ul>
+          <li>нуждаешься в точном отслеживании макроэлементов по спортивным или медицинским причинам</li>
+          <li>предпочитаешь контролировать каждую деталь</li>
+          <li>ешь много упакованных продуктов со штрих-кодами</li>
+          <li>имеешь время искать в базах данных и взвешивать порции</li>
+        </ul>
+        <p>
+          <strong>Подход Nuvvoo: осознание через разговор</strong>
+        </p>
+        <p>
+          Nuvvoo ставит простоту и постоянство выше точности. Вместо поиска в базах данных ты <Link href="/chat-calorie-tracker">рассказываешь о том, что съел</Link>. AI занимается оценкой и расчётами. Это хорошо работает, если ты:
+        </p>
+        <ul>
+          <li>хочешь вести учёт регулярно, не тратя более 5 минут на каждый приём пищи</li>
+          <li>ценишь осознанность больше, чем точные цифры</li>
+          <li>предпочитаешь говорить о еде, а не вводить данные</li>
+          <li>испытываешь усталость от учёта и хочешь более лёгкий подход</li>
+        </ul>
+        <p>
+          Ни один из подходов не «лучше» — они удовлетворяют разные потребности. Для тех, кто ценит точность, нужны такие инструменты, как MyFitnessPal. Пользователи, ориентированные на постоянство, часто предпочитают более <Link href="/calorie-tracking-without-stress">простой трекинг без стресса</Link>.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Сравнение: база данных против разговора">
+        <p>
+          Вот как эти два подхода сравниваются на практике:
+        </p>
+        <div className="prose-nuvvoo">
+          <table>
+            <thead>
+              <tr>
+                <th>Функция</th>
+                <th>MyFitnessPal</th>
+                <th>Nuvvoo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Способ ввода</td>
+                <td>Поиск в базе данных + ручной ввод</td>
+                <td>Чат на естественном языке</td>
+              </tr>
+              <tr>
+                <td>Кривая освоения</td>
+                <td>Умеренная (нужно научиться пользоваться базой данных)</td>
+                <td>Минимальная (просто описываешь еду)</td>
+              </tr>
+              <tr>
+                <td>Время на одну запись</td>
+                <td>2–5 минут (в зависимости от сложности блюда)</td>
+                <td>30–60 секунд (через чат)</td>
+              </tr>
+              <tr>
+                <td>Фокус</td>
+                <td>Точное отслеживание и подробные макроэлементы</td>
+                <td>Осознанность и постоянство</td>
+              </tr>
+              <tr>
+                <td>База данных продуктов</td>
+                <td>Более 14 миллионов продуктов, сканирование штрих-кодов</td>
+                <td>Распознавание на основе AI (без поиска в базе данных)</td>
+              </tr>
+              <tr>
+                <td>Идеально подходит для</td>
+                <td>Спортсменов, бодибилдеров, тех, кто любит точное отслеживание</td>
+                <td>Занятых людей, тех, кто не всегда ведёт учёт, новичков</td>
+              </tr>
+              <tr>
+                <td>Тон</td>
+                <td>Ориентированный на данные, нейтральный</td>
+                <td>Разговорный, поддерживающий</td>
+              </tr>
+              <tr>
+                <td>Гибкость</td>
+                <td>Высокий уровень контроля, требует деталей</td>
+                <td>Высокая гибкость, допускает приблизительные оценки</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>Когда MyFitnessPal может быть лучше:</strong>
+        </p>
+        <ul>
+          <li>ты тренируешься для участия в соревнованиях или занимаешься бодибилдингом</li>
+          <li>тебе нужны точные целевые показатели макроэлементов (например, 150&nbsp;г белка в день)</li>
+          <li>ты ешь много упакованных продуктов со штрих-кодами</li>
+          <li>ты предпочитаешь видеть подробные данные о питании</li>
+        </ul>
+        <p>
+          <strong>Когда Nuvvoo может быть лучше:</strong>
+        </p>
+        <ul>
+          <li>ты пробовал MyFitnessPal, но бросил из-за усталости от отслеживания</li>
+          <li>ты хочешь быть в курсе, но не хочешь зацикливаться на точных цифрах</li>
+          <li>ты ценишь скорость и простоту больше, чем точность базы данных</li>
+          <li>ты предпочитаешь диалоговые интерфейсы ведению записей через формы</li>
+          <li>у тебя в анамнезе есть <Link href="/calorie-tracker-eating-disorders">расстройства пищевого поведения, вызванные приложениями для подсчёта калорий</Link></li>
+        </ul>
+        <p>
+          У обоих инструментов есть своё место. Лучший трекер — это тот, которым ты действительно будешь пользоваться регулярно.
+        </p>
+      </ContentSection>
+
+      <SeoCta
+        title="Попробуй другой подход к отслеживанию"
+        description="Присоединяйся к раннему доступу Nuvvoo и попробуй отслеживать калории через диалог, а не через базы данных."
+        buttonText="Получить ранний доступ"
+      />
+
+      <ContentSection title="Переход">
+        <p>
+          Если ты думаешь перейти с MyFitnessPal на Nuvvoo или попробовать оба, чтобы понять, что подходит, вот чего стоит ожидать:
+        </p>
+        <p>
+          <strong>Что ты получишь:</strong>
+        </p>
+        <ul>
+          <li><strong>Более быструю регистрацию:</strong> ввод данных через чат занимает 30–60 секунд против 3–5 минут поиска в базе данных</li>
+          <li><strong>Меньше хлопот:</strong> не нужно искать, взвешивать или считать — просто опиши, что ты съел</li>
+          <li><strong>Меньше стресса:</strong> приветствуются приблизительные оценки, что снимает давление перфекционизма</li>
+          <li><strong>Больше последовательности:</strong> более простой учёт часто приводит к более регулярному использованию</li>
+          <li><strong>Поддержку в формате диалога:</strong> AI отвечает как собеседник, а не как форма для данных</li>
+        </ul>
+        <p>
+          <strong>Чем тебе придётся пожертвовать:</strong>
+        </p>
+        <ul>
+          <li><strong>Точность базы данных:</strong> нет поиска точных записей по брендам</li>
+          <li><strong>Сканирование штрих-кодов:</strong> Nuvvoo (пока) не использует штрих-коды</li>
+          <li><strong>Детальная настройка:</strong> меньше возможностей для точной настройки каждого ингредиента</li>
+          <li><strong>Функции сообщества:</strong> в MyFitnessPal есть форумы и возможность отслеживать результаты в социальных сетях; Nuvvoo фокусируется на ведении личного дневника</li>
+        </ul>
+        <p>
+          Тебе не обязательно привязываться к одному подходу навсегда. Некоторые люди используют MyFitnessPal во время интенсивных тренировок и переключаются на Nuvvoo для повседневного поддержания формы. Другие используют Nuvvoo в качестве основного трекера и открывают MyFitnessPal только тогда, когда им нужна подробная разбивка макроэлементов.
+        </p>
+        <p>
+          Цель не в том, чтобы найти «идеальный» трекер. Цель — найти тот, который поможет тебе <strong>оставаться последовательным, не выгорая</strong>.
+        </p>
+        <p>
+          Если тебе интересен подход Nuvvoo, ты также можешь узнать, как он работает в качестве <Link href="/ai-food-journal">AI-дневника питания</Link>, сочетающего отслеживание с комплексным подходом к здоровью. Или посмотри, как он помогает, когда ты <Link href="/no-dinner-ideas-calories">застрял без идей на ужин, а калорийную цель нужно выполнить</Link>.
+        </p>
+      </ContentSection>
+    </>
+  );
+}
+
+const faqsRu = [
+  {
+    question: 'Полностью ли Nuvvoo заменяет MyFitnessPal?',
+    answer:
+      'Это зависит от твоих потребностей. Если тебе нужен подробный учёт макроэлементов, сканирование штрих-кодов и обширная база данных продуктов, MyFitnessPal по-прежнему остаётся отличным выбором. Если же ты хочешь более простое и быстрое отслеживание через диалог с меньшими усилиями, Nuvvoo предлагает другой подход. Некоторые люди используют и то, и другое — MyFitnessPal для дней точного учёта, Nuvvoo для повседневной последовательности.',
+  },
+  {
+    question: 'Могу ли я перейти с другого трекера калорий?',
+    answer:
+      'Да. Ты можешь начать пользоваться Nuvvoo в любой момент, не теряя привычки вести учёт. Импорт данных из других приложений не предусмотрен, но поскольку Nuvvoo фокусируется на формировании новых привычек через общение, тебе не нужны старые данные. Просто начни рассказывать о своих приёмах пищи, и AI быстро изучит твои привычки.',
+  },
+  {
+    question: 'Nuvvoo бесплатный?',
+    answer:
+      'Nuvvoo сейчас находится в раннем доступе. Подробности о ценах будут объявлены ближе к запуску. Наша цель — предложить бесплатный тариф, который сделает отслеживание доступным, а также премиум-функции для пользователей, желающих получить расширенную аналитику и персонализацию.',
   },
 ];
