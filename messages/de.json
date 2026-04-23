@@ -16,9 +16,10 @@
     "title": "Kalorien zählen ist so einfach wie eine Nachricht schreiben",
     "subtitle": "Erzähl von deinem Tag, deinem Schlaf, deinem Training und deiner Stimmung, und Nuvvoo wird dich mit jeder Woche besser verstehen.",
     "subtitleLine2": "Einzigartiges Kalorien-Tracking per Chat.",
-    "ios": "iOS",
-    "android": "Android",
-    "heroImageAlt": "Irina lernt Nuvvoo kennen"
+    "heroImageChatAlt": "Nuvvoo-Chat-Screen: Mahlzeiten in einer Nachricht erfassen",
+    "heroImagePlanAlt": "Nuvvoo-Essensplan im Dark Mode",
+    "trustFree": "Kostenloser Download · Optionale Pro-Funktionen",
+    "trustTeam": "Gemacht von einem 2-Personen-Team, das sich wirklich kümmert"
   },
   "founder": {
     "eyebrow": "Die Geschichte der Gründerin",
@@ -90,8 +91,7 @@
   },
   "waitlistCta": {
     "title": "Mach jeden Tag kleine Schritte, ohne Perfektionismus.",
-    "subtitle": "Probier Nuvvoo als einer der Ersten aus. Hinterlass deine E-Mail, und wir schicken dir einen Link zum\u00a0Start.",
-    "note": "Link + Bonus für die Ersten."
+    "subtitle": "Nuvvoo ist jetzt im App Store. Tracke einfach per Chat."
   },
   "waitlist": {
     "placeholder": "du@beispiel.de",

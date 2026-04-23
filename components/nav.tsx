@@ -28,21 +28,26 @@ export function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-nuvvooBg/75 backdrop-blur">
       <Container>
-        <div className="flex h-14 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative h-8 w-8 overflow-hidden rounded-xl">
-              <Image
-                src="/illustrations/logo.png"
-                alt="Nuvvoo logo"
-                width={32}
-                height={32}
-                className="h-full w-full object-contain"
-              />
+        <div className="flex flex-col gap-2 py-2 md:h-14 md:flex-row md:items-center md:justify-between md:gap-0 md:py-0">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="relative h-8 w-8 overflow-hidden rounded-xl">
+                <Image
+                  src="/illustrations/logo.png"
+                  alt="Nuvvoo logo"
+                  width={32}
+                  height={32}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <span className="font-semibold tracking-tight">Nuvvoo</span>
+            </Link>
+            <div className="md:hidden">
+              <LanguageSwitcher />
             </div>
-            <span className="font-semibold tracking-tight">Nuvvoo</span>
-          </Link>
+          </div>
 
-          <nav className="flex items-center gap-3 md:gap-6">
+          <nav className="flex items-center justify-between gap-3 md:justify-end md:gap-6">
             <a
               href={`${prefix}/#founder`}
               onClick={() => trackNavClick('founder')}
@@ -71,7 +76,9 @@ export function Nav() {
             >
               {t('earlyAccess')}
             </a>
-            <LanguageSwitcher />
+            <div className="hidden md:block">
+              <LanguageSwitcher />
+            </div>
           </nav>
         </div>
       </Container>

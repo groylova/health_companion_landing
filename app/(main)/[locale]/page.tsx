@@ -4,10 +4,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Container } from '@/components/container';
 import { Nav } from '@/components/nav';
 import { Footer } from '@/components/footer';
-import { TrackedButton } from '@/components/tracked-button';
-import { WaitlistForm } from '@/components/waitlist-form';
 import { SectionHeading } from '@/components/section-heading';
-import { AppleIcon, AndroidIcon } from '@/components/icons';
+import { AppStoreBadge } from '@/components/app-store-badge';
 import { routing } from '@/i18n/routing';
 
 type Props = {
@@ -88,45 +86,42 @@ export default async function HomePage({ params }: Props) {
               </p>
 
               <div className="mt-8 flex flex-col items-start gap-4">
-                <div className="flex gap-3">
-                  <TrackedButton
-                    href="#product"
-                    variant="primary"
-                    eventName="click_platform"
-                    eventParams={{ platform: 'ios', button_location: 'hero' }}
-                    className="!bg-slate-900 !shadow-none hover:!bg-slate-800 gap-2 min-w-[140px]"
-                  >
-                    <AppleIcon size={18} />
-                    {t('hero.ios')}
-                  </TrackedButton>
-                  <TrackedButton
-                    href="#product"
-                    variant="outline"
-                    eventName="click_platform"
-                    eventParams={{ platform: 'android', button_location: 'hero' }}
-                    className="gap-2 min-w-[140px]"
-                  >
-                    <AndroidIcon size={18} />
-                    {t('hero.android')}
-                  </TrackedButton>
+                <AppStoreBadge buttonLocation="hero" />
+                <div className="flex flex-col gap-1.5 text-sm text-slate-500">
+                  <span>💚 {t('hero.trustFree')}</span>
+                  <span>⭐ {t('hero.trustTeam')}</span>
                 </div>
               </div>
             </div>
 
-            {/* Handshake illustration — the first impression is warmth */}
-            <div className="relative">
+            {/* Paired phone screens — light chat in front, dark plan behind */}
+            <div className="relative mx-auto w-full max-w-[480px]">
               <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-nuvvooGreen-100 via-white to-nuvvooGreen-50 blur-2xl" />
-              <div className="overflow-hidden rounded-[2rem] bg-white/60 p-3 shadow-soft">
+
+              {/* Clip the back phone to parent bounds so it never pushes layout.
+                  On mobile extend overlay into Container's right padding so the phone
+                  can bleed to the viewport edge. */}
+              <div className="pointer-events-none absolute inset-y-0 left-0 -right-5 overflow-hidden md:right-0">
                 <Image
-                  src="/illustrations/scene-01-handshake.webp"
-                  alt={t('hero.heroImageAlt')}
-                  width={1200}
-                  height={800}
+                  src="/screens/hero-plan-dark.png"
+                  alt={t('hero.heroImagePlanAlt')}
+                  width={1206}
+                  height={2622}
                   priority
-                  fetchPriority="high"
-                  className="h-auto w-full rounded-[1.6rem]"
+                  fetchPriority="low"
+                  className="absolute -right-[18%] top-[14%] w-[48%] rotate-6 rounded-[2rem] border-[3px] border-slate-800 md:right-[8%] md:top-[6%] md:w-[54%]"
                 />
               </div>
+
+              <Image
+                src="/screens/hero-chat-light.png"
+                alt={t('hero.heroImageChatAlt')}
+                width={1206}
+                height={2622}
+                priority
+                fetchPriority="high"
+                className="relative left-0 top-[4%] w-[60%] rounded-[2rem] border-[3px] border-slate-800 shadow-[0_35px_60px_-15px_rgba(15,23,42,0.4)] md:left-[6%]"
+              />
             </div>
           </div>
         </Container>
@@ -337,11 +332,14 @@ export default async function HomePage({ params }: Props) {
                 <p className="mt-3 text-slate-600">
                   {t('waitlistCta.subtitle')}
                 </p>
-                <p className="mt-2 text-sm text-slate-500">{t('waitlistCta.note')}</p>
               </div>
 
-              <div>
-                <WaitlistForm />
+              <div className="flex flex-col items-start gap-4 md:items-end">
+                <AppStoreBadge buttonLocation="final_cta" />
+                <div className="flex flex-col gap-1.5 text-sm text-slate-500 md:items-end">
+                  <span>💚 {t('hero.trustFree')}</span>
+                  <span>⭐ {t('hero.trustTeam')}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -392,8 +390,12 @@ function QuoteCard({ name, quote }: { name: string; quote: string }) {
 
 function Shot({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="overflow-hidden rounded-[1.8rem] border border-slate-200 bg-white/70 p-3 shadow-soft">
-      <Image src={src} alt={alt} width={900} height={1200} className="h-auto w-full rounded-[1.4rem]" />
-    </div>
+    <Image
+      src={src}
+      alt={alt}
+      width={1206}
+      height={2622}
+      className="mx-auto h-auto w-full max-w-[240px] rounded-[2rem] border-[3px] border-slate-800 shadow-[0_25px_50px_-12px_rgba(15,23,42,0.35)]"
+    />
   );
 }

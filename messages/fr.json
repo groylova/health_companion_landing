@@ -16,9 +16,10 @@
     "title": "Compter les calories, c'est aussi simple que d'écrire un message",
     "subtitle": "Parle à Nuvvoo de ta journée, ton sommeil, tes entraînements et ton humeur, et semaine après semaine il te comprendra mieux.",
     "subtitleLine2": "Un suivi unique des calories sous forme de chat.",
-    "ios": "iOS",
-    "android": "Android",
-    "heroImageAlt": "Irina découvre Nuvvoo"
+    "heroImageChatAlt": "Écran de chat Nuvvoo : enregistre tes repas en un seul message",
+    "heroImagePlanAlt": "Plan de repas Nuvvoo en mode sombre",
+    "trustFree": "Téléchargement gratuit · Fonctions Pro en option",
+    "trustTeam": "Créé par une équipe de 2 personnes qui s'investit vraiment"
   },
   "founder": {
     "eyebrow": "L'histoire de la fondatrice",
@@ -90,8 +91,7 @@
   },
   "waitlistCta": {
     "title": "Fais de petits pas chaque jour, sans chercher la perfection.",
-    "subtitle": "Sois parmi les premiers à essayer Nuvvoo. Laisse-nous ton e-mail et on t'enverra le lien de\u00a0lancement.",
-    "note": "Lien + bonus pour les premiers."
+    "subtitle": "Nuvvoo est maintenant sur l'App Store. Suis ton alimentation en chattant."
   },
   "waitlist": {
     "placeholder": "toi@exemple.com",

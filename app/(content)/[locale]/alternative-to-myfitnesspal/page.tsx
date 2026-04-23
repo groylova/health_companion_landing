@@ -9,8 +9,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { AppleIcon, AndroidIcon } from '@/components/icons';
-import { TrackedButton } from '@/components/tracked-button';
+import { AppStoreBadge } from '@/components/app-store-badge';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -26,11 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const en = {
-    title: 'MyFitnessPal Alternative: Track by Chatting, Not Logging',
+    title: 'Best MyFitnessPal Alternative 2026 — Just Text What You Ate | Nuvvoo',
     description:
-      'Looking for a MyFitnessPal alternative? Nuvvoo helps you track food consistently with chat-based logging—no database searches or manual entry.',
+      'Tired of searching databases and weighing portions? Nuvvoo tracks calories through chat — describe your meal, get calories in seconds. Works in 5 languages.',
     ogDescription:
-      'A MyFitnessPal alternative that uses AI conversation to make calorie tracking faster and easier.',
+      'Tired of searching databases and weighing portions? Nuvvoo tracks calories through chat — describe your meal, get calories in seconds. Works in 5 languages.',
   };
   const es = {
     title: 'Alternativa a MyFitnessPal: lleva un registro chateando, sin anotar nada',
@@ -129,7 +128,7 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
         ? 'MyFitnessPal-Alternative: Erfassen durch Chatten statt Eintragen'
         : isRussian
           ? 'Альтернатива MyFitnessPal: отслеживай питание через чат, а не через ввод данных'
-          : 'MyFitnessPal Alternative: Track by Chatting, Not Logging';
+          : 'Best MyFitnessPal Alternative 2026: Just Text What You Ate';
 
   const subtitle = isSpanish
     ? '¿Buscas una forma más fácil de llevar un registro de lo que comes? Nuvvoo es una alternativa a MyFitnessPal que usa la conversación con IA para ayudarte a registrar tus comidas rápidamente, sin búsquedas en bases de datos ni entradas manuales.'
@@ -139,7 +138,7 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
         ? 'Suchst du nach einer einfacheren Möglichkeit, deine Ernährung zu erfassen? Nuvvoo ist eine MyFitnessPal-Alternative, die mit KI-Konversationen dabei hilft, Mahlzeiten schnell zu erfassen – ohne Datenbankrecherchen, ohne manuelle Eingabe.'
         : isRussian
           ? 'Ищешь более простой способ отслеживать питание? Nuvvoo — это альтернатива MyFitnessPal, которая использует AI для общения, чтобы помочь тебе быстро регистрировать приёмы пищи: без поиска в базе данных и ручного ввода.'
-          : 'Looking for an easier way to track food? Nuvvoo is a MyFitnessPal alternative that uses AI conversation to help you log meals quickly—no database searches, no manual entry.';
+          : "Tired of spending 5 minutes logging every meal? Nuvvoo is a MyFitnessPal alternative built around one idea: just describe what you ate, like you'd text a friend. The AI handles the rest — calories, macros, tracking. In 5 languages.";
 
   const imageAlt = isSpanish
     ? 'Nuvvoo sugiriendo alternativas saludables para la cena'
@@ -201,28 +200,7 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
             )}
 
             <div className="my-12 flex flex-col items-center gap-4 text-center">
-              <div className="flex gap-3">
-                <TrackedButton
-                  href="/#waitlist"
-                  variant="primary"
-                  eventName="click_platform"
-                  eventParams={{ platform: 'ios', button_location: 'seo_mfp_alternative' }}
-                  className="!bg-slate-900 !shadow-none hover:!bg-slate-800 gap-2 min-w-[140px]"
-                >
-                  <AppleIcon size={18} />
-                  iOS
-                </TrackedButton>
-                <TrackedButton
-                  href="/#waitlist"
-                  variant="outline"
-                  eventName="click_platform"
-                  eventParams={{ platform: 'android', button_location: 'seo_mfp_alternative' }}
-                  className="gap-2 min-w-[140px]"
-                >
-                  <AndroidIcon size={18} />
-                  Android
-                </TrackedButton>
-              </div>
+              <AppStoreBadge buttonLocation="seo_mfp_alternative" />
             </div>
 
             <FaqSection faqs={faqs} />
@@ -379,7 +357,6 @@ function EnglishBody() {
       <SeoCta
         title="Try a different approach to tracking"
         description="Join Nuvvoo's early access and experience calorie tracking through conversation instead of databases."
-        buttonText="Get priority access"
       />
 
       <ContentSection title="Making the Switch">
@@ -582,7 +559,6 @@ function SpanishBody() {
       <SeoCta
         title="Prueba un enfoque diferente para el registro"
         description="Únete al acceso anticipado de Nuvvoo y experimenta el registro de calorías a través de la conversación, no de bases de datos."
-        buttonText="Obtén acceso prioritario"
       />
 
       <ContentSection title="Hacer el cambio">
@@ -785,7 +761,6 @@ function FrenchBody() {
       <SeoCta
         title="Essaie une approche différente du suivi"
         description="Rejoins l'accès anticipé de Nuvvoo et découvre le suivi des calories par la conversation plutôt que par des bases de données."
-        buttonText="Obtenir un accès prioritaire"
       />
 
       <ContentSection title="Faire le changement">
@@ -988,7 +963,6 @@ function GermanBody() {
       <SeoCta
         title="Probier mal einen anderen Ansatz zum Tracken aus"
         description="Melde dich für den Early Access von Nuvvoo an und erlebe Kalorien-Tracking durch Konversation statt über Datenbanken."
-        buttonText="Prioritätszugang sichern"
       />
 
       <ContentSection title="Der Wechsel">
@@ -1191,7 +1165,6 @@ function RussianBody() {
       <SeoCta
         title="Попробуй другой подход к отслеживанию"
         description="Присоединяйся к раннему доступу Nuvvoo и попробуй отслеживать калории через диалог, а не через базы данных."
-        buttonText="Получить ранний доступ"
       />
 
       <ContentSection title="Переход">

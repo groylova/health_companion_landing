@@ -9,8 +9,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { AppleIcon, AndroidIcon } from '@/components/icons';
-import { TrackedButton } from '@/components/tracked-button';
+import { AppStoreBadge } from '@/components/app-store-badge';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
@@ -147,7 +146,6 @@ export default async function NoDinnerIdeasCalories({
             <SeoCta
               title="Not sure what fits your day?"
               description="Describe what you have in the fridge. Nuvvoo suggests what to make and estimates the calories for you."
-              buttonText="Get priority access"
             />
 
             <ContentSection title='The "I Have Nothing in the Fridge" Problem'>
@@ -192,28 +190,7 @@ export default async function NoDinnerIdeasCalories({
             </ContentSection>
 
             <div className="my-12 flex flex-col items-center gap-4 text-center">
-              <div className="flex gap-3">
-                <TrackedButton
-                  href="/#waitlist"
-                  variant="primary"
-                  eventName="click_platform"
-                  eventParams={{ platform: 'ios', button_location: 'seo_dinner_ideas' }}
-                  className="!bg-slate-900 !shadow-none hover:!bg-slate-800 gap-2 min-w-[140px]"
-                >
-                  <AppleIcon size={18} />
-                  iOS
-                </TrackedButton>
-                <TrackedButton
-                  href="/#waitlist"
-                  variant="outline"
-                  eventName="click_platform"
-                  eventParams={{ platform: 'android', button_location: 'seo_dinner_ideas' }}
-                  className="gap-2 min-w-[140px]"
-                >
-                  <AndroidIcon size={18} />
-                  Android
-                </TrackedButton>
-              </div>
+              <AppStoreBadge buttonLocation="seo_dinner_ideas" />
             </div>
 
             <FaqSection faqs={faqs} />

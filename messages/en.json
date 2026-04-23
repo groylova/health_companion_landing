@@ -16,9 +16,10 @@
     "title": "Track food and more by chatting, not logging",
     "subtitle": "Tell Nuvvoo about your day, sleep, workouts and mood, and week by week it will understand you better.",
     "subtitleLine2": "A unique way to track calories through chat.",
-    "ios": "iOS",
-    "android": "Android",
-    "heroImageAlt": "Irina meeting Nuvvoo"
+    "heroImageChatAlt": "Nuvvoo chat screen logging meals in one message",
+    "heroImagePlanAlt": "Nuvvoo meal plan in dark mode",
+    "trustFree": "Free to download · Optional Pro features",
+    "trustTeam": "Made by a 2-person team who actually cares"
   },
   "founder": {
     "eyebrow": "Founder story",
@@ -90,8 +91,7 @@
   },
   "waitlistCta": {
     "title": "Consistency without perfection.",
-    "subtitle": "Be the first to try Nuvvoo. Leave your email and we\u2019ll send you the launch\u00a0link.",
-    "note": "Just the launch link + a bonus for first users."
+    "subtitle": "Nuvvoo is now on the App Store. Start tracking by chatting."
   },
   "waitlist": {
     "placeholder": "you@example.com",
