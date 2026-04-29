@@ -25,11 +25,17 @@ const COUNTRY_BY_LOCALE: Record<string, string> = {
   ru: 'ru',
 };
 
-// Map site locale → badge SVG. Localized SVGs are added once the Apple Marketing
-// Kit is downloaded; until then a locale falls back to the en-us badge (Apple
-// doesn't publish localized badge assets at any open CDN).
+// Map site locale → badge SVG. SVGs are the official Apple Marketing Resources
+// kit, "Download on the App Store" black lockup, one per language. Apple
+// translates the modifier ("Laden im App Store" / "Descargar en App Store" /
+// "Télécharger dans l'App Store" / "Загрузите в App Store") while keeping
+// the App Store wordmark in English, per Apple's identity guidelines.
 const BADGE_BY_LOCALE: Record<string, string> = {
   en: '/badges/app-store-en.svg',
+  de: '/badges/app-store-de.svg',
+  es: '/badges/app-store-es.svg',
+  fr: '/badges/app-store-fr.svg',
+  ru: '/badges/app-store-ru.svg',
 };
 
 const FALLBACK_BADGE = '/badges/app-store-en.svg';
