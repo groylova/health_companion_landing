@@ -1,10 +1,16 @@
 'use client';
 
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+  }
+}
+
 const APP_STORE_URL =
   'https://apps.apple.com/us/app/nuvvoo-ai-food-journal/id6761027583';
 
-const BADGE_SRC =
-  'https://toolbox.marketingtools.apple.com/api/assets/featured-content/apps/badges/badge-2/en-us.svg';
+const BADGE_SRC = '/badges/app-store.svg';
 
 type Props = { buttonLocation: string };
 

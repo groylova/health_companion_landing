@@ -3,26 +3,25 @@ import Script from 'next/script';
 export function Analytics() {
   return (
     <>
-      {/* Google tag (gtag.js) */}
+      {/* Init dataLayer + stub gtag early so any click that fires before the
+          heavy scripts arrive still gets queued instead of dropped. */}
+      <Script id="analytics-init" strategy="afterInteractive">
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;gtag('js',new Date());gtag('config','G-R1S0Z20GHD');gtag('config','AW-17996002178');`}
+      </Script>
+
+      {/* Heavy scripts — defer until window load to keep LCP/TBT clean. */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=AW-17996002178"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="google-ads-gtag" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-R1S0Z20GHD');
-gtag('config', 'AW-17996002178');`}
-      </Script>
-      <Script id="google-tag-manager" strategy="afterInteractive">
+      <Script id="google-tag-manager" strategy="lazyOnload">
         {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KMGPK4KM');`}
       </Script>
-      <Script id="scroll-depth-tracking" strategy="afterInteractive">
+      <Script id="scroll-depth-tracking" strategy="lazyOnload">
         {`(function(){
 var thresholds=[25,50,75,90],fired={};
 function getScrollPercent(){

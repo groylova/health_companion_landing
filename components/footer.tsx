@@ -1,11 +1,9 @@
-'use client';
-
 import NextLink from 'next/link';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Container } from '@/components/container';
 
-export function Footer() {
-  const t = useTranslations('footer');
+export async function Footer() {
+  const t = await getTranslations('footer');
 
   return (
     <footer className="mt-20 border-t border-slate-200/70 py-10">

@@ -103,23 +103,24 @@ export default async function HomePage({ params }: Props) {
                   can bleed to the viewport edge. */}
               <div className="pointer-events-none absolute inset-y-0 left-0 -right-5 overflow-hidden md:right-0">
                 <Image
-                  src="/screens/hero-plan-dark.png"
+                  src="/screens/hero-plan-dark.webp"
                   alt={t('hero.heroImagePlanAlt')}
-                  width={1206}
-                  height={2622}
-                  priority
-                  fetchPriority="low"
+                  width={720}
+                  height={1565}
+                  loading="lazy"
+                  sizes="(min-width: 768px) 260px, 50vw"
                   className="absolute -right-[18%] top-[14%] w-[48%] rotate-6 rounded-[2rem] border-[3px] border-slate-800 md:right-[8%] md:top-[6%] md:w-[54%]"
                 />
               </div>
 
               <Image
-                src="/screens/hero-chat-light.png"
+                src="/screens/hero-chat-light.webp"
                 alt={t('hero.heroImageChatAlt')}
-                width={1206}
-                height={2622}
+                width={720}
+                height={1565}
                 priority
                 fetchPriority="high"
+                sizes="(min-width: 768px) 290px, 60vw"
                 className="relative left-0 top-[4%] w-[60%] rounded-[2rem] border-[3px] border-slate-800 shadow-[0_35px_60px_-15px_rgba(15,23,42,0.4)] md:left-[6%]"
               />
             </div>
@@ -199,9 +200,9 @@ export default async function HomePage({ params }: Props) {
           />
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <Shot src="/screens/screen-journal.png" alt={t('product.journalAlt')} />
-            <Shot src="/screens/screen-today-ring.png" alt={t('product.todayAlt')} />
-            <Shot src="/screens/screen-stats.png" alt={t('product.statsAlt')} />
+            <Shot src="/screens/screen-journal.webp" alt={t('product.journalAlt')} />
+            <Shot src="/screens/screen-today-ring.webp" alt={t('product.todayAlt')} />
+            <Shot src="/screens/screen-stats.webp" alt={t('product.statsAlt')} />
           </div>
         </Container>
       </section>
@@ -393,8 +394,10 @@ function Shot({ src, alt }: { src: string; alt: string }) {
     <Image
       src={src}
       alt={alt}
-      width={1206}
-      height={2622}
+      width={720}
+      height={1565}
+      loading="lazy"
+      sizes="(min-width: 768px) 240px, 80vw"
       className="mx-auto h-auto w-full max-w-[240px] rounded-[2rem] border-[3px] border-slate-800 shadow-[0_25px_50px_-12px_rgba(15,23,42,0.35)]"
     />
   );
