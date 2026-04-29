@@ -19,6 +19,16 @@ const nextConfig = {
         destination: '/calorie-tracking-without-stress',
         permanent: true,
       },
+      // English-only SEO articles: redirect any locale-prefixed URL back to
+      // the canonical English version so Google doesn't index five copies of
+      // the same content. /alternative-to-myfitnesspal is not in this list
+      // because it has full translations across all locales.
+      {
+        source:
+          '/:locale(de|ru|es|fr)/:slug(chat-calorie-tracker|ai-food-journal|calorie-tracking-without-stress|calorie-tracker-eating-disorders|no-dinner-ideas-calories|how-to-stay-consistent-calorie-tracking|photo-vs-chat-calorie-tracking)',
+        destination: '/:slug',
+        permanent: true,
+      },
     ];
   },
   // Keep default (SSR/SSG) for best SEO + API routes.
