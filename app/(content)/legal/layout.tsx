@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Analytics } from '@/components/analytics';
+import { SourceTracker } from '@/components/source-tracker';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
@@ -30,6 +31,7 @@ export default async function LegalLayout({
         <Analytics />
       </head>
       <body>
+        <SourceTracker />
         <NextIntlClientProvider locale="en" messages={messages}>
           {children}
         </NextIntlClientProvider>

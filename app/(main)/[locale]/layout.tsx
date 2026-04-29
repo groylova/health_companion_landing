@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Analytics } from '@/components/analytics';
+import { SourceTracker } from '@/components/source-tracker';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
@@ -41,6 +42,7 @@ export default async function MainLayout({ children, params }: Props) {
         <Analytics />
       </head>
       <body>
+        <SourceTracker />
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>

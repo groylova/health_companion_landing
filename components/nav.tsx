@@ -1,30 +1,14 @@
-'use client';
-
 import Image from 'next/image';
-import { useLocale, useTranslations } from 'next-intl';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { Container } from '@/components/container';
 import { LanguageSwitcher } from '@/components/language-switcher';
 
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
-}
-
-export function Nav() {
-  const t = useTranslations('nav');
-  const locale = useLocale();
+export async function Nav() {
+  const t = await getTranslations('nav');
+  const locale = await getLocale();
   const prefix = locale === 'en' ? '' : `/${locale}`;
 
-  const trackNavClick = (section: string) => {
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({
-        event: 'click_nav_link',
-        nav_section: section,
-      });
-    }
-  };
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-nuvvooBg/75 backdrop-blur">
       <Container>
@@ -50,28 +34,24 @@ export function Nav() {
           <nav className="flex items-center justify-between gap-3 md:justify-end md:gap-6">
             <a
               href={`${prefix}/#founder`}
-              onClick={() => trackNavClick('founder')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
               {t('founder')}
             </a>
             <a
               href={`${prefix}/#product`}
-              onClick={() => trackNavClick('product')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
               {t('product')}
             </a>
             <a
               href={`${prefix}/#how`}
-              onClick={() => trackNavClick('how_it_works')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
               {t('howItWorks')}
             </a>
             <a
               href={`${prefix}/#waitlist`}
-              onClick={() => trackNavClick('early_access')}
               className="text-xs md:text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
             >
               {t('earlyAccess')}
