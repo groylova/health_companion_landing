@@ -86,7 +86,7 @@ export default async function HomePage({ params }: Props) {
                 {t('hero.subtitle')}
               </p>
 
-              <div className="mt-8 flex flex-col items-start gap-4">
+              <div className="mt-8 flex flex-col items-center gap-4">
                 <div className="flex flex-col items-center gap-3">
                   <PrimaryCta buttonLocation="hero_primary" label={t('hero.ctaPrimary')} />
                   <AppStoreBadge buttonLocation="hero_badge" size="sm" />
