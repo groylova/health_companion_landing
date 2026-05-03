@@ -14,12 +14,12 @@
   "hero": {
     "badge": "Early access is open",
     "title": "Track food and more by chatting, not logging",
-    "subtitle": "Tell Nuvvoo about your day, sleep, workouts and mood, and week by week it will understand you better.",
-    "subtitleLine2": "A unique way to track calories through chat.",
+    "subtitle": "Calorie tracking that feels like texting a friend.",
     "heroImageChatAlt": "Nuvvoo chat screen logging meals in one message",
     "heroImagePlanAlt": "Nuvvoo meal plan in dark mode",
-    "trustFree": "Free to download · Optional Pro features",
-    "trustTeam": "Made by a 2-person team who actually cares"
+    "trustFree": "Free Plan",
+    "trustPrivacy": "Privacy-first",
+    "ctaPrimary": "Get Nuvvoo Free"
   },
   "founder": {
     "eyebrow": "Founder story",

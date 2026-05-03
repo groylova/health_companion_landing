@@ -6,6 +6,7 @@ import { Nav } from '@/components/nav';
 import { Footer } from '@/components/footer';
 import { SectionHeading } from '@/components/section-heading';
 import { AppStoreBadge } from '@/components/app-store-badge';
+import { PrimaryCta } from '@/components/primary-cta';
 import { routing } from '@/i18n/routing';
 
 type Props = {
@@ -71,31 +72,37 @@ export default async function HomePage({ params }: Props) {
       <Nav />
 
       {/* ─── HERO ─── */}
-      <section className="pt-16 md:pt-24">
+      <section className="pt-24 md:pt-24">
         <Container>
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
-              <h1 className="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]">
+              <h1
+                style={{ fontFamily: "'Thicccboi', sans-serif" }}
+                className="text-4xl font-extrabold tracking-tight text-[#1F2A24] md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]"
+              >
                 {t('hero.title')}
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
                 {t('hero.subtitle')}
               </p>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
-                {t('hero.subtitleLine2')}
-              </p>
 
               <div className="mt-8 flex flex-col items-start gap-4">
-                <AppStoreBadge buttonLocation="hero" />
-                <div className="flex flex-col gap-1.5 text-sm text-slate-500">
-                  <span>💚 {t('hero.trustFree')}</span>
-                  <span>⭐ {t('hero.trustTeam')}</span>
+                <div className="flex flex-col items-center gap-3">
+                  <PrimaryCta buttonLocation="hero_primary" label={t('hero.ctaPrimary')} />
+                  <AppStoreBadge buttonLocation="hero_badge" size="sm" />
+                  <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
+                    <span>💚 {t('hero.trustFree')}</span>
+                    <span>🔒 {t('hero.trustPrivacy')}</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Paired phone screens — light chat in front, dark plan behind */}
-            <div className="relative mx-auto w-full max-w-[480px]">
+            {/* Paired phone screens — light chat in front, dark plan behind.
+                Hidden on mobile: the Product section right below carries the
+                same screens role, so showing two phones in hero on small
+                viewports just adds scroll between H1 and the App Store CTA. */}
+            <div className="relative mx-auto hidden w-full max-w-[480px] md:block">
               <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-nuvvooGreen-100 via-white to-nuvvooGreen-50 blur-2xl" />
 
               {/* Clip the back phone to parent bounds so it never pushes layout.
@@ -118,8 +125,7 @@ export default async function HomePage({ params }: Props) {
                 alt={t('hero.heroImageChatAlt')}
                 width={720}
                 height={1565}
-                priority
-                fetchPriority="high"
+                loading="lazy"
                 sizes="(min-width: 768px) 290px, 60vw"
                 className="relative left-0 top-[4%] w-[60%] rounded-[2rem] border-[3px] border-slate-800 shadow-[0_35px_60px_-15px_rgba(15,23,42,0.4)] md:left-[6%]"
               />
@@ -129,68 +135,8 @@ export default async function HomePage({ params }: Props) {
       </section>
 
 
-      {/* ─── FOUNDER STORY (rollout) ─── */}
-      <section id="founder" className="pt-20 pb-10 md:pt-28 md:pb-14">
-        <Container>
-          <div className="mx-auto max-w-[680px]">
-            <details className="group">
-              <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                <SectionHeading
-                  eyebrow={t('founder.eyebrow')}
-                  title={t('founder.title')}
-                />
-                <p className="mt-4 text-base leading-[1.75] text-slate-600 md:text-lg">
-                  {t.rich('founder.intro', {
-                    strong: (chunks) => <strong className="font-semibold text-slate-900">{chunks}</strong>,
-                  })}
-                </p>
-                <span className="mt-4 inline-block text-sm font-medium text-nuvvooGreen-700 group-open:hidden">
-                  {t('founder.readMore')}
-                </span>
-              </summary>
-
-              <div className="mt-6 space-y-6">
-                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                  {t.rich('founder.p1', {
-                    strong: (chunks) => <strong className="font-semibold text-slate-900">{chunks}</strong>,
-                  })}
-                </p>
-                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                  {t('founder.p2')}
-                </p>
-                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                  {t.rich('founder.p3', {
-                    strong: (chunks) => <strong className="font-semibold text-slate-900">{chunks}</strong>,
-                  })}
-                </p>
-                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
-                  {t.rich('founder.p4', {
-                    strong: (chunks) => <strong className="font-semibold text-slate-900">{chunks}</strong>,
-                  })}
-                </p>
-              </div>
-            </details>
-
-            <div className="mt-6 flex items-center gap-3">
-              <Image
-                src="/images/founder.jpg"
-                alt={t('founder.name')}
-                width={48}
-                height={48}
-                className="h-12 w-12 rounded-full object-cover ring-2 ring-white shadow-md"
-              />
-              <div>
-                <p className="text-sm font-bold text-slate-900">{t('founder.name')}</p>
-                <p className="text-xs text-slate-500">{t('founder.role')}</p>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-
       {/* ─── APP SCREENSHOTS ─── */}
-      <section id="product" className="py-12 md:py-16">
+      <section id="product" className="pt-24 pb-12 md:pt-28 md:pb-16">
         <Container>
           <SectionHeading
             eyebrow={t('product.eyebrow')}
@@ -300,6 +246,65 @@ export default async function HomePage({ params }: Props) {
         </Container>
       </section>
 
+      {/* ─── FOUNDER STORY (rollout) ─── */}
+      <section id="founder" className="pt-20 pb-10 md:pt-28 md:pb-14">
+        <Container>
+          <div className="mx-auto max-w-[680px]">
+            <details className="group">
+              <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                <SectionHeading
+                  eyebrow={t('founder.eyebrow')}
+                  title={t('founder.title')}
+                />
+                <p className="mt-4 text-base leading-[1.75] text-slate-600 md:text-lg">
+                  {t.rich('founder.intro', {
+                    strong: (chunks) => <strong className="font-semibold text-slate-900">{chunks}</strong>,
+                  })}
+                </p>
+                <span className="mt-4 inline-block text-sm font-medium text-nuvvooGreen-700 group-open:hidden">
+                  {t('founder.readMore')}
+                </span>
+              </summary>
+
+              <div className="mt-6 space-y-6">
+                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
+                  {t.rich('founder.p1', {
+                    strong: (chunks) => <strong className="font-semibold text-slate-900">{chunks}</strong>,
+                  })}
+                </p>
+                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
+                  {t('founder.p2')}
+                </p>
+                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
+                  {t.rich('founder.p3', {
+                    strong: (chunks) => <strong className="font-semibold text-slate-900">{chunks}</strong>,
+                  })}
+                </p>
+                <p className="text-base leading-[1.75] text-slate-600 md:text-lg">
+                  {t.rich('founder.p4', {
+                    strong: (chunks) => <strong className="font-semibold text-slate-900">{chunks}</strong>,
+                  })}
+                </p>
+              </div>
+            </details>
+
+            <div className="mt-6 flex items-center gap-3">
+              <Image
+                src="/images/founder.jpg"
+                alt={t('founder.name')}
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full object-cover ring-2 ring-white shadow-md"
+              />
+              <div>
+                <p className="text-sm font-bold text-slate-900">{t('founder.name')}</p>
+                <p className="text-xs text-slate-500">{t('founder.role')}</p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* ─── SOCIAL PROOF ─── */}
       <section className="py-12 md:py-16">
         <Container>
@@ -336,10 +341,9 @@ export default async function HomePage({ params }: Props) {
               </div>
 
               <div className="flex flex-col items-start gap-4 md:items-end">
-                <AppStoreBadge buttonLocation="final_cta" />
-                <div className="flex flex-col gap-1.5 text-sm text-slate-500 md:items-end">
-                  <span>💚 {t('hero.trustFree')}</span>
-                  <span>⭐ {t('hero.trustTeam')}</span>
+                <div className="flex flex-col items-center gap-3">
+                  <AppStoreBadge buttonLocation="final_cta" />
+                  <span className="text-sm text-slate-500">💚 {t('hero.trustFree')}</span>
                 </div>
               </div>
             </div>
