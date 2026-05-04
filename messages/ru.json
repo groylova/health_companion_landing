@@ -125,6 +125,13 @@
     "description": "Попробуй первым - напиши в чат.",
     "button": "Скачать"
   },
+  "cookieBanner": {
+    "label": "Согласие на cookie",
+    "body": "Мы используем cookies Google Analytics, чтобы понимать, как вы пользуетесь сайтом. С вашего согласия эти данные помогают улучшать сервис.",
+    "learnMore": "Подробнее",
+    "accept": "Принять",
+    "reject": "Отклонить"
+  },
   "languageSwitcher": {
     "label": "Язык",
     "en": "English",

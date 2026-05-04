@@ -4,9 +4,20 @@ export function Analytics() {
   return (
     <>
       {/* Init dataLayer + stub gtag early so any click that fires before the
-          heavy gtag.js arrives still gets queued instead of dropped. */}
+          heavy gtag.js arrives still gets queued instead of dropped.
+
+          Consent Mode v2: default to granted globally, override to denied for
+          EEA / UK / Switzerland / EFTA so GA4 + Ads run in cookieless mode in
+          those regions until the cookie banner gets explicit consent. Google
+          matches `region` against the user's IP, so US visitors don't pay the
+          banner tax. If a previous decision is in localStorage we replay it
+          immediately so the banner doesn't reappear on every visit. */}
       <Script id="analytics-init" strategy="afterInteractive">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;gtag('js',new Date());gtag('config','G-R1S0Z20GHD');gtag('config','AW-17996002178');`}
+        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=window.gtag||gtag;
+gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','GB','IS','LI','NO','CH'],wait_for_update:500});
+try{var s=JSON.parse(localStorage.getItem('nuvvoo_consent_v1')||'null');if(s){var v=s.granted?'granted':'denied';gtag('consent','update',{ad_storage:v,ad_user_data:v,ad_personalization:v,analytics_storage:v});}}catch(e){}
+gtag('js',new Date());gtag('config','G-R1S0Z20GHD');gtag('config','AW-17996002178');`}
       </Script>
 
       {/* gtag.js — fires events to GA4 (G-R1S0Z20GHD) and Google Ads

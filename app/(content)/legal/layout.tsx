@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Analytics } from '@/components/analytics';
 import { SourceTracker } from '@/components/source-tracker';
+import { CookieBanner } from '@/components/cookie-banner';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
@@ -34,6 +35,7 @@ export default async function LegalLayout({
         <SourceTracker />
         <NextIntlClientProvider locale="en" messages={messages}>
           {children}
+          <CookieBanner />
         </NextIntlClientProvider>
       </body>
     </html>

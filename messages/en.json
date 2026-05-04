@@ -125,6 +125,13 @@
     "description": "Get priority access and start tracking by chatting, not logging.",
     "button": "Get priority access"
   },
+  "cookieBanner": {
+    "label": "Cookie consent",
+    "body": "We use Google Analytics cookies to understand how you use our site. With your consent, this data helps us improve the experience.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "reject": "Reject"
+  },
   "languageSwitcher": {
     "label": "Language",
     "en": "English",

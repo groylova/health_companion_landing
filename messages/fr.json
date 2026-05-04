@@ -125,6 +125,13 @@
     "description": "Sois le premier à essayer, écris-nous dans le chat.",
     "button": "Télécharger"
   },
+  "cookieBanner": {
+    "label": "Consentement aux cookies",
+    "body": "Nous utilisons des cookies Google Analytics pour comprendre comment tu utilises notre site. Avec ton consentement, ces données nous aident à améliorer l'expérience.",
+    "learnMore": "En savoir plus",
+    "accept": "Accepter",
+    "reject": "Refuser"
+  },
   "languageSwitcher": {
     "label": "Langue",
     "en": "English",

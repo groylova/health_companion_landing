@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Analytics } from '@/components/analytics';
 import { SourceTracker } from '@/components/source-tracker';
+import { CookieBanner } from '@/components/cookie-banner';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
@@ -45,6 +46,7 @@ export default async function MainLayout({ children, params }: Props) {
         <SourceTracker />
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
+          <CookieBanner />
         </NextIntlClientProvider>
       </body>
     </html>

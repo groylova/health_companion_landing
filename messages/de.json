@@ -125,6 +125,13 @@
     "description": "Probier es als Erste:r aus, schreib uns im Chat.",
     "button": "Herunterladen"
   },
+  "cookieBanner": {
+    "label": "Cookie-Zustimmung",
+    "body": "Wir verwenden Google Analytics-Cookies, um zu verstehen, wie du unsere Seite nutzt. Mit deiner Zustimmung helfen uns diese Daten, das Erlebnis zu verbessern.",
+    "learnMore": "Mehr erfahren",
+    "accept": "Akzeptieren",
+    "reject": "Ablehnen"
+  },
   "languageSwitcher": {
     "label": "Sprache",
     "en": "English",
