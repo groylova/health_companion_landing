@@ -7,7 +7,7 @@ import { routing } from '@/i18n/routing';
 // (set by the article layout) and never make it to the sitemap.
 const TRANSLATED_SEO_SLUGS: Record<string, string[]> = {
   'alternative-to-myfitnesspal': ['en', 'de', 'ru', 'es', 'fr'],
-  'alternative-to-lose-it': ['en', 'es'],
+  'alternative-to-lose-it': ['en', 'es', 'de'],
 };
 
 // Slugs of SEO articles that exist only in English. A single entry per slug.
