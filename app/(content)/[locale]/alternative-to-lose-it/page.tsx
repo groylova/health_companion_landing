@@ -15,7 +15,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 // Locales with a real translation of this article. Others fall back to EN
 // content and keep the parent layout's noindex until translated.
-const TRANSLATED_LOCALES = new Set(['en', 'es', 'de', 'fr']);
+const TRANSLATED_LOCALES = new Set(['en', 'es', 'de', 'fr', 'ru']);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -73,6 +73,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitterDescription:
       "Marre des mises à jour compliquées et des abonnements payants de Lose It ? Suis tes calories par chat.",
   };
+  const ru = {
+    title:
+      'Лучшая альтернатива Lose It в 2026 году — отслеживай калории без лишних хлопот | Nuvvoo',
+    description:
+      'Надоели неудобные обновления и платные функции в Lose It? Nuvvoo позволяет отслеживать калории, просто отправляя SMS с информацией о том, что ты съел — без поиска в базе данных и без взвешивания. Работает на 5 языках.',
+    ogTitle:
+      'Лучшая альтернатива Lose It в 2026 году — отслеживай калории без лишних хлопот',
+    ogDescription:
+      'Надоели неудобные обновления и платные функции в Lose It? Nuvvoo позволяет отслеживать калории, просто отправляя SMS с информацией о том, что ты съел.',
+    twitterTitle: 'Лучшая альтернатива Lose It в 2026 году',
+    twitterDescription:
+      'Надоели неудобные обновления и платные функции в Lose It? Отслеживай калории через чат.',
+  };
 
   const copy =
     locale === 'es'
@@ -81,7 +94,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? de
         : locale === 'fr'
           ? fr
-          : en;
+          : locale === 'ru'
+            ? ru
+            : en;
   const isTranslated = TRANSLATED_LOCALES.has(locale);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
@@ -139,6 +154,7 @@ export default async function AlternativeToLoseIt({ params }: Props) {
   const isSpanish = locale === 'es';
   const isGerman = locale === 'de';
   const isFrench = locale === 'fr';
+  const isRussian = locale === 'ru';
 
   const h1 = isSpanish
     ? 'La mejor alternativa a Lose It en 2026: controla tus calorías sin complicaciones'
@@ -146,7 +162,9 @@ export default async function AlternativeToLoseIt({ params }: Props) {
       ? 'Beste Lose-It-Alternative 2026: Kalorien ohne Ärger tracken'
       : isFrench
         ? 'Meilleure alternative à Lose It en 2026 : suis tes calories sans tracas'
-        : 'Best Lose It Alternative 2026: Track Calories Without the Hassle';
+        : isRussian
+          ? 'Лучшая альтернатива Lose It в 2026 году: отслеживай калории без лишних хлопот'
+          : 'Best Lose It Alternative 2026: Track Calories Without the Hassle';
 
   const subtitle = isSpanish
     ? 'Lose It ha sido un buen controlador de calorías durante años, pero las últimas actualizaciones han dejado a muchos usuarios frustrados. Si pasas más tiempo navegando por los menús que controlando realmente lo que comes, tal vez sea hora de buscar un enfoque más sencillo. Nuvvoo reemplaza las búsquedas en la base de datos y la entrada manual con una sola idea: simplemente envía un mensaje de texto con lo que comiste.'
@@ -154,7 +172,9 @@ export default async function AlternativeToLoseIt({ params }: Props) {
       ? 'Lose It ist seit Jahren ein solider Kalorien-Tracker, aber die jüngsten Updates haben viele Nutzer frustriert. Wenn du mehr Zeit damit verbringst, durch Menüs zu navigieren, als tatsächlich Essen zu tracken, ist es vielleicht Zeit für einen einfacheren Ansatz. Nuvvoo ersetzt Datenbank-Suchen und manuelle Eingaben durch eine einzige Idee: Schreib einfach per SMS, was du gegessen hast.'
       : isFrench
         ? "Lose It est un outil de suivi des calories fiable depuis des années, mais ses récentes mises à jour ont frustré de nombreux utilisateurs. Si tu passes plus de temps à naviguer dans les menus qu’à suivre réellement ce que tu manges, il est peut-être temps d’adopter une approche plus simple. Nuvvoo remplace les recherches dans la base de données et la saisie manuelle par une idée simple : il suffit d’envoyer par SMS ce que tu as mangé."
-        : 'Lose It has been a solid calorie tracker for years, but recent updates have left many users frustrated. If you’re spending more time navigating menus than actually tracking food, it might be time for a simpler approach. Nuvvoo replaces database searches and manual entry with a single idea: just text what you ate.';
+        : isRussian
+          ? 'Lose It уже много лет является надёжным калькулятором калорий, но последние обновления разочаровали многих пользователей. Если ты тратишь больше времени на навигацию по меню, чем на фактическое отслеживание еды, возможно, пришло время перейти к более простому подходу. Nuvvoo заменяет поиск в базе данных и ручной ввод одной идеей: просто отправляй SMS с информацией о том, что ты съел.'
+          : 'Lose It has been a solid calorie tracker for years, but recent updates have left many users frustrated. If you’re spending more time navigating menus than actually tracking food, it might be time for a simpler approach. Nuvvoo replaces database searches and manual entry with a single idea: just text what you ate.';
 
   const imageAlt = isSpanish
     ? 'Nuvvoo da la bienvenida a un nuevo usuario — una alternativa más amigable al seguimiento de calorías de Lose It'
@@ -162,7 +182,9 @@ export default async function AlternativeToLoseIt({ params }: Props) {
       ? 'Nuvvoo begrüßt einen neuen Nutzer – eine freundlichere Alternative zum Kalorien-Tracking von Lose It'
       : isFrench
         ? "Nuvvoo accueille un nouvel utilisateur — une alternative plus conviviale au suivi des calories de Lose It"
-        : 'Nuvvoo welcoming a new user — a friendlier alternative to Lose It calorie tracking';
+        : isRussian
+          ? 'Nuvvoo приветствует нового пользователя — более дружелюбная альтернатива отслеживанию калорий в Lose It'
+          : 'Nuvvoo welcoming a new user — a friendlier alternative to Lose It calorie tracking';
 
   const faqs = isSpanish
     ? faqsEs
@@ -170,7 +192,9 @@ export default async function AlternativeToLoseIt({ params }: Props) {
       ? faqsDe
       : isFrench
         ? faqsFr
-        : faqsEn;
+        : isRussian
+          ? faqsRu
+          : faqsEn;
 
   return (
     <main>
@@ -205,6 +229,8 @@ export default async function AlternativeToLoseIt({ params }: Props) {
               <GermanBody />
             ) : isFrench ? (
               <FrenchBody />
+            ) : isRussian ? (
+              <RussianBody />
             ) : (
               <EnglishBody />
             )}
@@ -919,5 +945,180 @@ const faqsFr = [
     question: 'Nuvvoo est-il gratuit ?',
     answer:
       'Nuvvoo propose un accès anticipé. Rends-toi sur nuvvoo.app pour connaître les tarifs et la disponibilité actuels.',
+  },
+];
+
+/* ─── RUSSIAN BODY ─── */
+
+function RussianBody() {
+  return (
+    <>
+      <ContentSection title="Почему люди ищут альтернативы Lose It">
+        <p>
+          Lose It — это хорошо зарекомендовавший себя калькулятор калорий с лаконичным дизайном и лояльной аудиторией. Но несколько проблем заставляют людей искать что-то другое:
+        </p>
+        <ul>
+          <li><strong>Разочарования от последних обновлений:</strong> в результате последнего редизайна к ключевым функциям, таким как кнопка &laquo;Завершить ввод&raquo; и навигация по календарю, теперь требуется больше нажатий. То, что раньше делалось одним нажатием, теперь требует трёх или четырёх.</li>
+          <li><strong>Низкая производительность:</strong> пользователи отмечают, что приложение за последние месяцы заметно замедлилось — при поиске продуктов и вводе данных о еде оно зависает.</li>
+          <li><strong>Платные функции:</strong> индивидуальные цели по макроэлементам, разбивка макроэлементов по каждому приёму пищи и расширенные функции доступны только в Lose It Premium. Если ты сидишь на кето-диете или высокобелковой диете, бесплатная версия кажется намеренно ограниченной.</li>
+          <li><strong>Ловушки подписок:</strong> некоторые пользователи жалуются на сложности с отменой подписок, а службу поддержки описывают как &laquo;зацикленную&raquo;, которая не решает проблемы.</li>
+          <li><strong>Старый подход:</strong> несмотря на обновления, основной процесс по-прежнему выглядит так: поиск в базе данных → выбор порции → ручной ввод. Для многих именно этот процесс и становится причиной, по которой они перестают вести учёт.</li>
+        </ul>
+        <p>
+          Это не проблемы для всех. Lose It хорошо подходит тем, кто хочет структурированный трекер на основе базы данных. Но если именно ручной процесс заставляет тебя бросить, другой подход может помочь тебе <Link href="/how-to-stay-consistent-calorie-tracking">оставаться последовательным</Link>.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Различные подходы к отслеживанию питания">
+        <p>
+          <strong>Подход Lose It: визуальный учёт с точностью базы данных</strong>
+        </p>
+        <p>
+          Lose It предлагает красочный игровой интерфейс, построенный на поиске в базе данных продуктов и сканировании штрих-кодов. Ты находишь продукт, выбираешь размер порции, и приложение подсчитывает всё. Это хорошо работает, если ты:
+        </p>
+        <ul>
+          <li>Любишь визуально отслеживать прогресс в достижении ежедневных целей</li>
+          <li>Ешь много упакованных продуктов со штрих-кодами</li>
+          <li>Хочешь участвовать в челленджах сообщества и пользоваться социальными функциями</li>
+          <li>Не против тратить несколько минут на каждый приём пищи на ведение журнала</li>
+        </ul>
+        <p>
+          <strong>Подход Nuvvoo: осознанность через общение</strong>
+        </p>
+        <p>
+          Nuvvoo полностью обходит базу данных стороной. Вместо поиска и выбора <Link href="/chat-calorie-tracker">ты описываешь свой приём пищи своими словами</Link> — как будто пишешь SMS другу. ИИ занимается оценкой и расчётами. Это хорошо работает, если ты:
+        </p>
+        <ul>
+          <li>Бросил Lose It, потому что ведение дневника казалось рутинной работой</li>
+          <li>Хочешь вести учёт регулярно, не тратя более 5 минут на каждый приём пищи</li>
+          <li>Предпочитаешь говорить о еде, а не вводить данные</li>
+          <li>Ценишь осознанность больше, чем достижение точных цифр</li>
+        </ul>
+      </ContentSection>
+
+      <ContentSection title="Сравнение: Lose It vs. Nuvvoo">
+        <div className="prose-nuvvoo">
+          <table>
+            <thead>
+              <tr>
+                <th>Функция</th>
+                <th>Lose It</th>
+                <th>Nuvvoo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Способ ввода</td>
+                <td>Поиск в базе данных + сканирование штрих-кода</td>
+                <td>Чат на естественном языке</td>
+              </tr>
+              <tr>
+                <td>Время на одну запись</td>
+                <td>2&ndash;4 минуты</td>
+                <td>30&ndash;60 секунд</td>
+              </tr>
+              <tr>
+                <td>Кривая освоения</td>
+                <td>Умеренная (навигация по меню, поиск продуктов)</td>
+                <td>Минимальная (просто описываешь приёмы пищи)</td>
+              </tr>
+              <tr>
+                <td>Ограничения бесплатной версии</td>
+                <td>Цели по макроэлементам доступны только в Premium</td>
+                <td>Полное отслеживание доступно</td>
+              </tr>
+              <tr>
+                <td>Фокус</td>
+                <td>Игровое похудение с целями</td>
+                <td>Осознанность и постоянство</td>
+              </tr>
+              <tr>
+                <td>Тон</td>
+                <td>Ориентирован на достижения, значки и серии</td>
+                <td>Разговорный, без чувства вины</td>
+              </tr>
+              <tr>
+                <td>Языки</td>
+                <td>Английский</td>
+                <td>5 языков</td>
+              </tr>
+              <tr>
+                <td>Идеально подходит для</td>
+                <td>Структурированных пользователей, которым нравится геймификация</td>
+                <td>Людей, которые бросили приложения из-за сложностей</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>Когда Lose It может быть лучше:</strong>
+        </p>
+        <ul>
+          <li>Тебе нравится геймификация, серии и визуальные индикаторы прогресса</li>
+          <li>Ты ешь в основном готовые продукты и сканируешь штрих-коды</li>
+          <li>Тебе нужны челленджи сообщества и социальная ответственность</li>
+          <li>Тебе нужна интеграция с определёнными фитнес-гаджетами</li>
+        </ul>
+        <p>
+          <strong>Когда Nuvvoo может быть лучше:</strong>
+        </p>
+        <ul>
+          <li>Ты пробовал Lose It, но бросил, потому что ввод данных казался утомительным</li>
+          <li>Последние обновления приложения замедлили твой рабочий процесс</li>
+          <li>Ты не хочешь платить за Premium только для того, чтобы настроить макросы</li>
+          <li>Ты готовишь дома, и описывать блюда быстрее, чем искать их в базе данных</li>
+          <li>Тебе ближе <Link href="/calorie-tracking-without-stress">отслеживание без стресса и чувства вины</Link>, или ты говоришь на языке, отличном от английского</li>
+        </ul>
+      </ContentSection>
+
+      <SeoCta
+        title="Попробуй другой подход к отслеживанию"
+        description="Присоединяйся к раннему доступу Nuvvoo и испытай отслеживание калорий через диалог вместо баз данных."
+        buttonLocation="seo_loseit_alternative"
+      />
+
+      <ContentSection title="Переход на новое приложение">
+        <p>
+          <strong>Что ты получишь:</strong>
+        </p>
+        <ul>
+          <li><strong>Скорость:</strong> ввод данных через чат занимает 30&ndash;60 секунд, в отличие от навигации по меню и базам данных</li>
+          <li><strong>Нет платных ограничений на базовые функции:</strong> полное отслеживание без необходимости премиум-подписки для целей по макроэлементам</li>
+          <li><strong>Меньше неудобств:</strong> никаких поисков, никаких взвешиваний, никакого выбора размера порций</li>
+          <li><strong>Многоязычная поддержка:</strong> веди учёт на английском, немецком, русском, испанском или французском</li>
+          <li><strong>Никаких угрызений совести за пропущенные дни:</strong> пропусти день, вернись когда захочешь — серия не прервётся</li>
+        </ul>
+        <p>
+          <strong>Чем тебе придётся пожертвовать:</strong>
+        </p>
+        <ul>
+          <li><strong>Сканирование штрих-кодов:</strong> Nuvvoo пока не использует штрих-коды</li>
+          <li><strong>Геймификация:</strong> нет значков, испытаний или наград за серию</li>
+          <li><strong>Социальные функции:</strong> Nuvvoo ориентирован на личное отслеживание, а не на сообщество</li>
+          <li><strong>Детальный контроль:</strong> меньше возможностей для точной настройки каждого ингредиента</li>
+        </ul>
+        <p>
+          Лучший трекер — это тот, которым ты действительно будешь пользоваться регулярно. Если подход Lose It тебе подходит, продолжай им пользоваться. Если нет, Nuvvoo предлагает принципиально другой опыт — ближе к <Link href="/ai-food-journal">AI-дневнику питания</Link>, чем к поиску в базе данных.
+        </p>
+      </ContentSection>
+    </>
+  );
+}
+
+const faqsRu = [
+  {
+    question: 'Заменяет ли Nuvvoo Lose It полностью?',
+    answer:
+      'Это зависит от того, что тебе нужно. Если ты полагаешься на сканирование штрих-кодов и игровые цели, Lose It по-прежнему может лучше подходить тебе для этих конкретных задач. Но если тебя раздражает сам процесс ведения дневника, Nuvvoo предлагает более быструю и простую альтернативу, ориентированную на постоянство, а не на точность.',
+  },
+  {
+    question: 'Могу ли я перейти с Lose It на Nuvvoo?',
+    answer:
+      'Да. Ты можешь начать использовать Nuvvoo прямо сейчас — перенос данных не требуется, так как Nuvvoo создаёт твой профиль на основе разговора. Некоторые люди используют обе программы в переходный период.',
+  },
+  {
+    question: 'Nuvvoo бесплатен?',
+    answer:
+      'Nuvvoo предлагает ранний доступ. Проверь nuvvoo.app, чтобы узнать текущие цены и доступность.',
   },
 ];

@@ -21,19 +21,13 @@ const nextConfig = {
       },
       // English-only SEO articles: redirect any locale-prefixed URL back to
       // the canonical English version so Google doesn't index five copies of
-      // the same content. /alternative-to-myfitnesspal is not in this list
-      // because it has full translations across all locales.
+      // the same content. Slugs with real translations (e.g. /alternative-to-
+      // myfitnesspal, /alternative-to-lose-it) are not in this list — their
+      // localized URLs stay reachable and indexable.
       {
         source:
           '/:locale(de|ru|es|fr)/:slug(chat-calorie-tracker|ai-food-journal|calorie-tracking-without-stress|calorie-tracker-eating-disorders|no-dinner-ideas-calories|how-to-stay-consistent-calorie-tracking|photo-vs-chat-calorie-tracking)',
         destination: '/:slug',
-        permanent: true,
-      },
-      // /alternative-to-lose-it is translated to ES + DE + FR but not RU —
-      // strip the RU prefix back to canonical EN.
-      {
-        source: '/ru/alternative-to-lose-it',
-        destination: '/alternative-to-lose-it',
         permanent: true,
       },
     ];
