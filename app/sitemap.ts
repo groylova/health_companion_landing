@@ -1,9 +1,14 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 
-// Slugs of SEO articles that are fully translated across all locales. Each
-// locale gets its own sitemap entry with full hreflang alternates.
-const FULLY_TRANSLATED_SEO_SLUGS = ['alternative-to-myfitnesspal'];
+// SEO articles per slug, mapped to the locales they are translated to. The
+// default locale must be included. Sitemap entries and hreflang alternates
+// span only these locales; pages in other locales render EN with noindex
+// (set by the article layout) and never make it to the sitemap.
+const TRANSLATED_SEO_SLUGS: Record<string, string[]> = {
+  'alternative-to-myfitnesspal': ['en', 'de', 'ru', 'es', 'fr'],
+  'alternative-to-lose-it': ['en', 'es'],
+};
 
 // Slugs of SEO articles that exist only in English. A single entry per slug.
 const ENGLISH_ONLY_SEO_SLUGS = [
@@ -14,7 +19,6 @@ const ENGLISH_ONLY_SEO_SLUGS = [
   'no-dinner-ideas-calories',
   'how-to-stay-consistent-calorie-tracking',
   'photo-vs-chat-calorie-tracking',
-  'alternative-to-lose-it',
 ];
 
 function localizedUrl(base: string, locale: string, path = ''): string {
@@ -27,11 +31,12 @@ function localizedUrl(base: string, locale: string, path = ''): string {
 function buildLanguageAlternates(
   base: string,
   path: string,
+  locales: readonly string[] = routing.locales,
 ): Record<string, string> {
   const languages: Record<string, string> = {
     'x-default': localizedUrl(base, routing.defaultLocale, path),
   };
-  for (const loc of routing.locales) {
+  for (const loc of locales) {
     languages[loc] = localizedUrl(base, loc, path);
   }
   return languages;
@@ -55,11 +60,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // Fully translated SEO articles — one entry per locale
-  for (const slug of FULLY_TRANSLATED_SEO_SLUGS) {
+  // Translated SEO articles — one entry per translated locale, with
+  // hreflang alternates spanning only the locales we actually translated.
+  for (const [slug, locales] of Object.entries(TRANSLATED_SEO_SLUGS)) {
     const path = `/${slug}`;
-    const alternates = buildLanguageAlternates(base, path);
-    for (const loc of routing.locales) {
+    const alternates = buildLanguageAlternates(base, path, locales);
+    for (const loc of locales) {
       entries.push({
         url: localizedUrl(base, loc, path),
         lastModified: now,

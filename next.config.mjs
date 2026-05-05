@@ -25,8 +25,15 @@ const nextConfig = {
       // because it has full translations across all locales.
       {
         source:
-          '/:locale(de|ru|es|fr)/:slug(chat-calorie-tracker|ai-food-journal|calorie-tracking-without-stress|calorie-tracker-eating-disorders|no-dinner-ideas-calories|how-to-stay-consistent-calorie-tracking|photo-vs-chat-calorie-tracking|alternative-to-lose-it)',
+          '/:locale(de|ru|es|fr)/:slug(chat-calorie-tracker|ai-food-journal|calorie-tracking-without-stress|calorie-tracker-eating-disorders|no-dinner-ideas-calories|how-to-stay-consistent-calorie-tracking|photo-vs-chat-calorie-tracking)',
         destination: '/:slug',
+        permanent: true,
+      },
+      // /alternative-to-lose-it is translated to ES but not DE/RU/FR — strip
+      // only the un-translated locale prefixes back to canonical EN.
+      {
+        source: '/:locale(de|ru|fr)/alternative-to-lose-it',
+        destination: '/alternative-to-lose-it',
         permanent: true,
       },
     ];
