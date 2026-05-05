@@ -51,6 +51,9 @@ export async function Footer() {
               <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/alternative-to-myfitnesspal">
                 {t('mfpAlternative')}
               </NextLink>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/alternative-to-lose-it">
+                {t('loseItAlternative')}
+              </NextLink>
             </div>
 
             {/* Legal Links */}
