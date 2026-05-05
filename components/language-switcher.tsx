@@ -14,7 +14,11 @@ export function LanguageSwitcher() {
   if (pathname.startsWith('/legal')) return null;
 
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    router.replace(pathname, { locale: e.target.value });
+    const next = e.target.value;
+    // Persist explicit choice so the homepage middleware honors it on /
+    // instead of falling back to Accept-Language detection.
+    document.cookie = `nuvvoo_lang_choice=${next}; path=/; max-age=31536000; samesite=lax`;
+    router.replace(pathname, { locale: next });
   }
 
   return (
