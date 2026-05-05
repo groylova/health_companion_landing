@@ -29,10 +29,10 @@ const nextConfig = {
         destination: '/:slug',
         permanent: true,
       },
-      // /alternative-to-lose-it is translated to ES + DE but not RU/FR —
-      // strip only the un-translated locale prefixes back to canonical EN.
+      // /alternative-to-lose-it is translated to ES + DE + FR but not RU —
+      // strip the RU prefix back to canonical EN.
       {
-        source: '/:locale(ru|fr)/alternative-to-lose-it',
+        source: '/ru/alternative-to-lose-it',
         destination: '/alternative-to-lose-it',
         permanent: true,
       },
