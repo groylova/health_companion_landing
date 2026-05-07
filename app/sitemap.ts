@@ -19,6 +19,7 @@ const ENGLISH_ONLY_SEO_SLUGS = [
   'no-dinner-ideas-calories',
   'how-to-stay-consistent-calorie-tracking',
   'photo-vs-chat-calorie-tracking',
+  'food-diary-for-weight-loss',
 ];
 
 function localizedUrl(base: string, locale: string, path = ''): string {
