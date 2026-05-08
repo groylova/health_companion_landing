@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Research shows food diaries double weight loss — but most people quit because tracking is tedious. Nuvvoo makes it easy: just text what you ate.",
     url: `${siteUrl}/food-diary-for-weight-loss`,
-    images: [{ url: '/illustrations/loop-track.webp', width: 1200, height: 800 }],
+    images: [{ url: '/illustrations/scene-food-diary.webp', width: 1200, height: 800 }],
     type: 'article',
   },
   twitter: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: 'Food Diary for Weight Loss: The Method That Doubles Results',
     description:
       "Food diaries double weight loss, but most people quit. Here's how to keep one without the tedium.",
-    images: ['/illustrations/loop-track.webp'],
+    images: ['/illustrations/scene-food-diary.webp'],
   },
 };
 
@@ -92,8 +92,8 @@ export default async function FoodDiaryForWeightLoss({
           <div className="mx-auto mt-10 max-w-3xl">
             <div className="overflow-hidden rounded-[2rem]">
               <Image
-                src="/illustrations/loop-track.webp"
-                alt="A simple food diary entry on Nuvvoo — texting a meal instead of searching a database"
+                src="/illustrations/scene-food-diary.webp"
+                alt="Nuvvoo character writing in an open food diary, surrounded by chat bubbles of meals and drinks — a calm, friendly take on food tracking for weight loss"
                 width={1200}
                 height={800}
                 className="h-auto w-full"
