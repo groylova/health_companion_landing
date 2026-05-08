@@ -419,7 +419,7 @@ const faqsEn = [
   {
     question: 'Is Nuvvoo free?',
     answer:
-      'Nuvvoo is currently in early access. Check nuvvoo.app for current pricing and availability.',
+      'Yes — Nuvvoo has a Free Plan that covers the core tracking features, plus Pro Features for users who want more advanced capabilities. Check nuvvoo.app for current pricing and availability.',
   },
 ];
 
@@ -594,7 +594,7 @@ const faqsEs = [
   {
     question: '¿Nuvvoo es gratis?',
     answer:
-      'Nuvvoo ofrece acceso anticipado. Visita nuvvoo.app para conocer los precios y la disponibilidad actuales.',
+      'Sí — Nuvvoo tiene un Free Plan que cubre las funciones básicas de seguimiento, además de Pro Features para quienes quieran capacidades más avanzadas. Visita nuvvoo.app para conocer los precios y la disponibilidad actuales.',
   },
 ];
 
@@ -769,7 +769,7 @@ const faqsDe = [
   {
     question: 'Ist Nuvvoo kostenlos?',
     answer:
-      'Nuvvoo bietet einen Early-Access-Zugang an. Aktuelle Preise und Verfügbarkeit findest du auf nuvvoo.app.',
+      'Ja — Nuvvoo hat einen Free Plan mit den wichtigsten Tracking-Funktionen, dazu Pro Features für alle, die erweiterte Funktionen wollen. Aktuelle Preise und Verfügbarkeit findest du auf nuvvoo.app.',
   },
 ];
 
@@ -944,7 +944,7 @@ const faqsFr = [
   {
     question: 'Nuvvoo est-il gratuit ?',
     answer:
-      'Nuvvoo propose un accès anticipé. Rends-toi sur nuvvoo.app pour connaître les tarifs et la disponibilité actuels.',
+      'Oui — Nuvvoo propose un Free Plan qui couvre les fonctionnalités de suivi de base, ainsi que des Pro Features pour qui souhaite des capacités plus avancées. Rends-toi sur nuvvoo.app pour connaître les tarifs et la disponibilité actuels.',
   },
 ];
 
@@ -1119,6 +1119,6 @@ const faqsRu = [
   {
     question: 'Nuvvoo бесплатен?',
     answer:
-      'Nuvvoo предлагает ранний доступ. Проверь nuvvoo.app, чтобы узнать текущие цены и доступность.',
+      'Да — у Nuvvoo есть Free Plan с основными функциями отслеживания, а также Pro Features для тех, кому нужны расширенные возможности. Проверь nuvvoo.app, чтобы узнать текущие цены и доступность.',
   },
 ];

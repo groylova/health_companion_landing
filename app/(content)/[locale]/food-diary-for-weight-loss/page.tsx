@@ -71,7 +71,7 @@ export default async function FoodDiaryForWeightLoss({
     {
       question: 'Is Nuvvoo free?',
       answer:
-        'Nuvvoo offers early access. Check nuvvoo.app for current pricing and availability.',
+        'Yes — Nuvvoo has a Free Plan that covers the core tracking features, plus Pro Features for users who want more advanced capabilities. Check nuvvoo.app for current pricing and availability.',
     },
   ];
 

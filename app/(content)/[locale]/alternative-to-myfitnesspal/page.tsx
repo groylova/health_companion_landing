@@ -410,7 +410,7 @@ const faqsEn = [
   {
     question: 'Is Nuvvoo free?',
     answer:
-      'Nuvvoo is currently in early access. Pricing details will be announced closer to launch. Our goal is to offer a free tier that makes tracking accessible, with premium features for users who want advanced insights and personalization.',
+      'Yes — Nuvvoo has a Free Plan that covers the core tracking features, plus Pro Features for users who want more advanced capabilities. Check nuvvoo.app for current pricing and availability.',
   },
 ];
 
@@ -612,7 +612,7 @@ const faqsEs = [
   {
     question: '¿Es Nuvvoo gratis?',
     answer:
-      'Nuvvoo está actualmente en acceso anticipado. Los detalles de precios se anunciarán más cerca del lanzamiento. Nuestro objetivo es ofrecer un plan gratuito que haga accesible el seguimiento, con funciones premium para los usuarios que quieran información avanzada y personalización.',
+      'Sí — Nuvvoo tiene un Free Plan que cubre las funciones básicas de seguimiento, además de Pro Features para quienes quieran capacidades más avanzadas. Visita nuvvoo.app para conocer los precios y la disponibilidad actuales.',
   },
 ];
 
@@ -814,7 +814,7 @@ const faqsFr = [
   {
     question: 'Nuvvoo est-il gratuit ?',
     answer:
-      "Nuvvoo est actuellement en accès anticipé. Les détails sur les tarifs seront annoncés à l'approche du lancement. Notre objectif est de proposer une offre gratuite qui rende le suivi accessible, avec des fonctionnalités premium pour les utilisateurs qui souhaitent des analyses avancées et une personnalisation.",
+      'Oui — Nuvvoo propose un Free Plan qui couvre les fonctionnalités de suivi de base, ainsi que des Pro Features pour qui souhaite des capacités plus avancées. Rends-toi sur nuvvoo.app pour connaître les tarifs et la disponibilité actuels.',
   },
 ];
 
@@ -1016,7 +1016,7 @@ const faqsDe = [
   {
     question: 'Ist Nuvvoo kostenlos?',
     answer:
-      'Nuvvoo befindet sich derzeit in der Early-Access-Phase. Preisdetails werden kurz vor dem Start bekannt gegeben. Unser Ziel ist es, eine kostenlose Stufe anzubieten, die das Tracking zugänglich macht, mit Premium-Funktionen für Nutzer, die erweiterte Einblicke und Personalisierung wünschen.',
+      'Ja — Nuvvoo hat einen Free Plan mit den wichtigsten Tracking-Funktionen, dazu Pro Features für alle, die erweiterte Funktionen wollen. Aktuelle Preise und Verfügbarkeit findest du auf nuvvoo.app.',
   },
 ];
 
@@ -1218,6 +1218,6 @@ const faqsRu = [
   {
     question: 'Nuvvoo бесплатный?',
     answer:
-      'Nuvvoo сейчас находится в раннем доступе. Подробности о ценах будут объявлены ближе к запуску. Наша цель — предложить бесплатный тариф, который сделает отслеживание доступным, а также премиум-функции для пользователей, желающих получить расширенную аналитику и персонализацию.',
+      'Да — у Nuvvoo есть Free Plan с основными функциями отслеживания, а также Pro Features для тех, кому нужны расширенные возможности. Проверь nuvvoo.app, чтобы узнать текущие цены и доступность.',
   },
 ];
