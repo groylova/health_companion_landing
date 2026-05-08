@@ -8,6 +8,7 @@ import { routing } from '@/i18n/routing';
 const TRANSLATED_SEO_SLUGS: Record<string, string[]> = {
   'alternative-to-myfitnesspal': ['en', 'de', 'ru', 'es', 'fr'],
   'alternative-to-lose-it': ['en', 'de', 'ru', 'es', 'fr'],
+  'food-diary-for-weight-loss': ['en', 'fr'],
 };
 
 // Slugs of SEO articles that exist only in English. A single entry per slug.
@@ -19,7 +20,6 @@ const ENGLISH_ONLY_SEO_SLUGS = [
   'no-dinner-ideas-calories',
   'how-to-stay-consistent-calorie-tracking',
   'photo-vs-chat-calorie-tracking',
-  'food-diary-for-weight-loss',
 ];
 
 function localizedUrl(base: string, locale: string, path = ''): string {

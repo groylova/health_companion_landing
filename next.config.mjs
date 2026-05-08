@@ -26,8 +26,15 @@ const nextConfig = {
       // localized URLs stay reachable and indexable.
       {
         source:
-          '/:locale(de|ru|es|fr)/:slug(chat-calorie-tracker|ai-food-journal|calorie-tracking-without-stress|calorie-tracker-eating-disorders|no-dinner-ideas-calories|how-to-stay-consistent-calorie-tracking|photo-vs-chat-calorie-tracking|food-diary-for-weight-loss)',
+          '/:locale(de|ru|es|fr)/:slug(chat-calorie-tracker|ai-food-journal|calorie-tracking-without-stress|calorie-tracker-eating-disorders|no-dinner-ideas-calories|how-to-stay-consistent-calorie-tracking|photo-vs-chat-calorie-tracking)',
         destination: '/:slug',
+        permanent: true,
+      },
+      // /food-diary-for-weight-loss is translated to FR but not DE/RU/ES —
+      // strip only the un-translated locale prefixes back to canonical EN.
+      {
+        source: '/:locale(de|ru|es)/food-diary-for-weight-loss',
+        destination: '/food-diary-for-weight-loss',
         permanent: true,
       },
     ];
