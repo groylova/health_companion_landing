@@ -15,7 +15,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 // Locales with a real translation of this article. Others fall back to EN
 // content and keep the parent layout's noindex until translated.
-const TRANSLATED_LOCALES = new Set(['en', 'fr']);
+const TRANSLATED_LOCALES = new Set(['en', 'fr', 'de']);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -49,8 +49,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitterDescription:
       "Les journaux alimentaires doublent la perte de poids, mais la plupart des gens abandonnent. Voici comment en tenir un sans la corvée.",
   };
+  const de = {
+    title:
+      'Ernährungstagebuch zur Gewichtsabnahme: Die Methode, die die Ergebnisse verdoppelt (2026) | Nuvvoo',
+    description:
+      'Studien zeigen, dass Ernährungstagebücher die Gewichtsabnahme verdoppeln – aber die meisten geben auf, weil das Tracken mühsam ist. Mit Nuvvoo wird es einfach: schreib einfach, was du gegessen hast. Keine Datenbanken, kein Wiegen, keine Schuldgefühle.',
+    ogTitle:
+      'Ernährungstagebuch zur Gewichtsabnahme: Die Methode, die die Ergebnisse verdoppelt',
+    ogDescription:
+      'Studien zeigen, dass Ernährungstagebücher die Gewichtsabnahme verdoppeln – aber die meisten geben auf, weil das Tracken mühsam ist. Mit Nuvvoo wird es einfach: schreib einfach, was du gegessen hast.',
+    twitterTitle:
+      'Ernährungstagebuch zur Gewichtsabnahme: Die Methode, die die Ergebnisse verdoppelt',
+    twitterDescription:
+      'Ernährungstagebücher verdoppeln den Gewichtsverlust, doch die meisten geben auf. So führst du eines, ohne die Plackerei.',
+  };
 
-  const copy = locale === 'fr' ? fr : en;
+  const copy = locale === 'fr' ? fr : locale === 'de' ? de : en;
   const isTranslated = TRANSLATED_LOCALES.has(locale);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
@@ -106,20 +120,27 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
   setRequestLocale(locale);
 
   const isFrench = locale === 'fr';
+  const isGerman = locale === 'de';
 
   const h1 = isFrench
     ? 'Le journal alimentaire pour maigrir : la méthode qui double les résultats'
-    : 'Food Diary for Weight Loss: The Method That Doubles Results';
+    : isGerman
+      ? 'Ernährungstagebuch zur Gewichtsabnahme: Die Methode, die die Ergebnisse verdoppelt'
+      : 'Food Diary for Weight Loss: The Method That Doubles Results';
 
   const subtitle = isFrench
     ? "Tenir un journal alimentaire est l'une des stratégies de perte de poids les plus efficaces, comme le prouvent les études. Les personnes qui notent ce qu'elles mangent perdent systématiquement deux fois plus de poids que celles qui ne le font pas. Mais il y a un hic : la plupart des gens abandonnent au bout de quelques semaines, car la méthode traditionnelle est lente, fastidieuse et source de culpabilité. Et si le problème venait du journal lui-même, et non de la personne ?"
-    : 'Keeping a food diary is one of the most effective weight loss strategies backed by research. People who track what they eat consistently lose twice as much weight as those who don’t. But there’s a catch — most people quit within weeks because traditional food logging is slow, tedious, and guilt-inducing. What if the diary itself was the problem, not the person?';
+    : isGerman
+      ? 'Das Führen eines Ernährungstagebuchs ist eine der wirksamsten Strategien zur Gewichtsabnahme, die durch wissenschaftliche Studien belegt ist. Menschen, die konsequent aufzeichnen, was sie essen, nehmen doppelt so viel ab wie diejenigen, die das nicht tun. Aber es gibt einen Haken – die meisten geben innerhalb weniger Wochen auf, weil das herkömmliche Aufzeichnen von Mahlzeiten langsam, mühsam und schuldbewusst macht. Was wäre, wenn das Tagebuch selbst das Problem wäre, nicht die Person?'
+      : 'Keeping a food diary is one of the most effective weight loss strategies backed by research. People who track what they eat consistently lose twice as much weight as those who don’t. But there’s a catch — most people quit within weeks because traditional food logging is slow, tedious, and guilt-inducing. What if the diary itself was the problem, not the person?';
 
   const imageAlt = isFrench
     ? 'Le personnage de Nuvvoo écrit dans un journal alimentaire ouvert, entouré de bulles de chat avec des repas et des boissons — une approche calme et conviviale du suivi alimentaire pour la perte de poids'
-    : 'Nuvvoo character writing in an open food diary, surrounded by chat bubbles of meals and drinks — a calm, friendly take on food tracking for weight loss';
+    : isGerman
+      ? 'Die Nuvvoo-Figur schreibt in ein offenes Ernährungstagebuch, umgeben von Chat-Blasen mit Mahlzeiten und Getränken – eine ruhige, freundliche Sicht auf das Tracken zur Gewichtsabnahme'
+      : 'Nuvvoo character writing in an open food diary, surrounded by chat bubbles of meals and drinks — a calm, friendly take on food tracking for weight loss';
 
-  const faqs = isFrench ? faqsFr : faqsEn;
+  const faqs = isFrench ? faqsFr : isGerman ? faqsDe : faqsEn;
 
   return (
     <main>
@@ -148,7 +169,13 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
           </div>
 
           <div className="mx-auto mt-12 max-w-3xl space-y-12">
-            {isFrench ? <FrenchBody /> : <EnglishBody />}
+            {isFrench ? (
+              <FrenchBody />
+            ) : isGerman ? (
+              <GermanBody />
+            ) : (
+              <EnglishBody />
+            )}
 
             <div className="my-12 flex flex-col items-center gap-4 text-center">
               <AppStoreBadge buttonLocation="seo_food_diary" />
@@ -592,5 +619,221 @@ const faqsFr = [
     question: 'Nuvvoo est-il gratuit ?',
     answer:
       'Oui — Nuvvoo propose un Free Plan qui couvre les fonctionnalités de suivi de base, ainsi que des Pro Features pour qui souhaite des capacités plus avancées. Rends-toi sur nuvvoo.app pour connaître les tarifs et la disponibilité actuels.',
+  },
+];
+
+/* ─── GERMAN BODY ─── */
+
+function GermanBody() {
+  return (
+    <>
+      <ContentSection title="Die Wissenschaft: Warum Ernährungstagebücher funktionieren">
+        <p>
+          Die Beweislage ist eindeutig und konsistent — und das schon seit Jahrzehnten der Forschung.
+        </p>
+        <p>
+          <strong>Das Aufzeichnen verdoppelt den Gewichtsverlust.</strong> Eine bahnbrechende Studie von Kaiser Permanente ergab, dass Menschen, die täglich ihre Ernährung protokollierten, doppelt so viel Gewicht verloren wie diejenigen, die dies nicht taten. Das ist keine marginale Verbesserung – es ist ein 2-facher Unterschied.
+        </p>
+        <p>
+          <strong>Konsistenz ist entscheidend.</strong> Eine im Journal of the Academy of Nutrition and Dietetics veröffentlichte Studie zeigte, dass Teilnehmer, die an mehr als 66&nbsp;% der Tage ihre Ernährung protokollierten, fast 10&nbsp;Pfund abnahmen. Je konsequenter jemand protokolliert, desto mehr Gewicht verliert er. Die Häufigkeit der Protokollierung ist wichtiger als Perfektion.
+        </p>
+        <p>
+          <strong>Bewusstsein verändert das Verhalten automatisch.</strong> Studien zeigen, dass man, wenn man damit rechnet, seine Mahlzeiten aufzuschreiben, eher nährstoffreiche Lebensmittel wählt und am Ball bleibt. Das Aufzeichnen selbst schafft eine Rückkopplungsschleife – du erkennst Muster, merkst unbewusstes Essen und triffst bessere Entscheidungen, ohne Willenskraft aufbringen zu müssen.
+        </p>
+        <p>
+          <strong>Kalorienkonsistenz sagt den Erfolg voraus.</strong> Eine Studie aus dem Jahr 2026 ergab, dass mit jeder Zunahme der täglichen Schwankungen um 100&nbsp;Kalorien der Gewichtsverlust um etwa 0,6&nbsp;% abnahm. Ernährungstagebücher helfen, diese Schwankungen auszugleichen, indem sie die tägliche Aufnahme sichtbar machen.
+        </p>
+        <p>
+          Die Wissenschaft ist unumstritten. Ernährungstagebücher funktionieren. Die Frage ist: Warum hören die meisten Menschen auf, sie zu führen?
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Das Problem: Warum geben die Leute auf?">
+        <p>
+          Wenn Ernährungstagebücher so effektiv sind, warum hört dann fast jeder damit auf? Eine Studie der Carnegie Mellon University identifizierte die Hauptbarrieren, indem sie 141 aktuelle und ehemalige Nutzer von Ernährungstagebüchern befragte und Tausende von Beiträgen in Community-Foren analysierte.
+        </p>
+        <p>
+          <strong>Es ist langsam und mühsam.</strong> Nutzer beschreiben das Führen eines Ernährungstagebuchs als &bdquo;einen so langsamen und mühsamen Prozess&ldquo;. Datenbanken durchsuchen, Portionen auswählen, jede Zutat für selbstgekochte Mahlzeiten eingeben – das dauert 3&ndash;7 Minuten pro Mahlzeit, drei- oder mehrmals am Tag. Das sind bis zu 20 Minuten tägliche Dateneingabe.
+        </p>
+        <p>
+          <strong>Datenbanken sind frustrierend.</strong> Suchergebnisse sind oft falsch oder überwältigend. Zu viele Optionen für dasselbe Lebensmittel, irrelevante Einträge und fehlende Angaben für selbstgemachte oder regionale Gerichte. Das Tool, das eigentlich helfen soll, wird zur Quelle von Reibungspunkten.
+        </p>
+        <p>
+          <strong>Schuldgefühle und Scham verstärken sich.</strong> Vier häufige emotionale Hindernisse beim Führen eines Ernährungstagebuchs: Verlegenheit darüber, was man gegessen hat, ein schlechtes Gewissen, wenn man &bdquo;ausrutscht&ldquo;, das Gefühl, dass es sowieso nichts bringt, und die Vorstellung, dass es zu umständlich ist. Herkömmliche Tracker verstärken diese Gefühle noch mit Streak-Zählern, roten Warnungen und Defizit-Alarmen.
+        </p>
+        <p>
+          <strong>Die Methode versagt, nicht die Person.</strong> Den meisten Menschen, die mit dem Ernährungstagebuch aufhören, fehlt es nicht an Disziplin. Sie nutzen Tools, die aus einem einfachen Konzept – aufschreiben, was man isst – einen komplexen, zeitaufwändigen Prozess machen. Der doppelte Gewichtsverlust-Effekt verschwindet, wenn man nach zwei Wochen aufhört zu tracken.
+        </p>
+        <p>
+          Das ist der Kernkonflikt: <strong>Ernährungstagebücher funktionieren, aber traditionelle Tools dafür funktionieren für die meisten Menschen nicht</strong>. Wenn du <Link href="/alternative-to-myfitnesspal">MyFitnessPal</Link> oder <Link href="/alternative-to-lose-it">Lose It</Link> nach ein paar Wochen aufgegeben hast, bist du keine Ausnahme – du bist die Regel.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Eine andere Art von Ernährungstagebuch">
+        <p>
+          Was wäre, wenn du die Vorteile der Ernährungsprotokollierung – das Bewusstsein, die Beständigkeit, den doppelten Gewichtsverlust – ohne die mühsame Dateneingabe nutzen könntest?
+        </p>
+        <p>
+          Das ist die Idee hinter Nuvvoo. Anstatt Datenbanken zu durchsuchen und Portionsgrößen auszuwählen, <Link href="/chat-calorie-tracker">beschreibst du deine Mahlzeiten so, wie du es einem Freund in einer SMS schreiben würdest</Link>:
+        </p>
+        <ul>
+          <li>&bdquo;Hatte Haferflocken mit Banane und Kaffee zum Frühstück&ldquo;</li>
+          <li>&bdquo;Habe mir zum Mittagessen einen Chicken-Wrap und Pommes geholt&ldquo;</li>
+          <li>&bdquo;Habe zum Abendessen Pasta mit Pesto und Salat gemacht&ldquo;</li>
+        </ul>
+        <p>
+          Die KI übernimmt die Schätzung. Kalorien und Makros werden in Sekundenschnelle angezeigt. Kein Durchsuchen von Datenbanken, keine Dropdown-Menüs für Portionsgrößen, kein Scannen von Barcodes erforderlich.
+        </p>
+        <p>
+          <strong>Warum dieser Ansatz alles verändert:</strong>
+        </p>
+        <p>
+          <strong>30 Sekunden statt 5 Minuten.</strong> Wenn das Protokollieren weniger als eine Minute dauert, fühlt es sich nicht mehr wie eine lästige Pflicht an. Die Hürde für die Kontinuität sinkt drastisch.
+        </p>
+        <p>
+          <strong>Schätzungen sind erwünscht.</strong> Du musst dein Hähnchen nicht auf das Gramm genau wiegen. &bdquo;Ein großer Teller Reis mit Hähnchen&ldquo; reicht aus. Studien zeigen, dass der Bewusstseinsgewinn durch das Protokollieren keine Laborpräzision erfordert – sondern Kontinuität. Und du bist konsequenter, wenn das Tool dich nicht für Ungenauigkeiten bestraft.
+        </p>
+        <p>
+          <strong>Keine Schuldgefühle bei versäumten Tagen.</strong> Nuvvoo verwendet keine Serien, roten Warnungen oder beschämenden Benachrichtigungen. Einen Tag versäumt? Komm morgen wieder. Dein Fortschritt wird nicht zurückgesetzt. Das ist wichtig, denn Schuldgefühle sind einer der Hauptgründe, warum Menschen ihre Ernährungstagebücher ganz aufgeben – sieh dir an, wie <Link href="/calorie-tracking-without-stress">stressfreies Protokollieren</Link> die Ergebnisse verändert.
+        </p>
+        <p>
+          <strong>Mehr als nur Essen.</strong> Nuvvoo erfasst Schlaf, Bewegung, Stimmung und Wasser im gleichen dialogorientierten Format. Das gibt dir ein umfassenderes Bild – eher wie ein <Link href="/ai-food-journal">KI-Ernährungstagebuch</Link> als eine Datenbank-App –, in dem du Zusammenhänge zwischen deinem Schlaf, deiner Ernährung und deinem Befinden erkennst.
+        </p>
+        <p>
+          <strong>Funktioniert in 5 Sprachen.</strong> Erfasse deine Daten auf Englisch, Deutsch, Russisch, Spanisch oder Französisch. Beschreibe deine Mahlzeiten in deiner eigenen Sprache mit lokalen Bezeichnungen – du musst &bdquo;борщ&ldquo; oder &bdquo;Schnitzel&ldquo; nicht in englische Datenbankeinträge übersetzen.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Traditionelles Ernährungstagebuch vs. Chat-basiertes Ernährungstagebuch">
+        <div className="prose-nuvvoo">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Traditionelle Tagebuch-Apps</th>
+                <th>Nuvvoo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>So protokollierst du</td>
+                <td>Suche in der Datenbank → Artikel auswählen → Portion wählen</td>
+                <td>Beschreibe es mit deinen eigenen Worten</td>
+              </tr>
+              <tr>
+                <td>Zeitaufwand pro Mahlzeit</td>
+                <td>3&ndash;7 Minuten</td>
+                <td>30&ndash;60 Sekunden</td>
+              </tr>
+              <tr>
+                <td>Selbstgekochte Mahlzeiten</td>
+                <td>Erstelle ein benutzerdefiniertes Rezept (mühsam)</td>
+                <td>&bdquo;Hühnchen-Pfanne mit Reis&ldquo;</td>
+              </tr>
+              <tr>
+                <td>Regionale/lokale Gerichte</td>
+                <td>Fehlen oft in der Datenbank</td>
+                <td>Beschreibe es – KI versteht es</td>
+              </tr>
+              <tr>
+                <td>Verpasste Tage</td>
+                <td>Serie unterbrochen, Schuldgefühle auslösende Benachrichtigungen</td>
+                <td>&bdquo;Komm zurück, wenn du bereit bist&ldquo;</td>
+              </tr>
+              <tr>
+                <td>Lernkurve</td>
+                <td>Mäßig (in der Datenbank navigieren, Portionen verstehen)</td>
+                <td>Keine (einfach eintippen)</td>
+              </tr>
+              <tr>
+                <td>Emotionaler Ton</td>
+                <td>Leistungsorientiert, seriengetrieben</td>
+                <td>Ruhig, kein Druck</td>
+              </tr>
+              <tr>
+                <td>Was du trackst</td>
+                <td>Nur Essen (die meisten Apps)</td>
+                <td>Essen, Schlaf, Bewegung, Stimmung, Wasser</td>
+              </tr>
+              <tr>
+                <td>Sprachen</td>
+                <td>Meist nur Englisch</td>
+                <td>5 Sprachen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ContentSection>
+
+      <ContentSection title="Für wen ist ein chatbasiertes Ernährungstagebuch gedacht?">
+        <p>
+          <strong>Leute, die es schon mal versucht haben und aufgegeben haben.</strong> Wenn du MyFitnessPal, Lose It oder Yazio heruntergeladen und innerhalb eines Monats wieder aufgehört hast, lag das Problem wahrscheinlich nicht bei dir – sondern bei der Methode. Ein chatbasiertes Tagebuch beseitigt die Reibungspunkte, die dich zum Aufhören gebracht haben.
+        </p>
+        <p>
+          <strong>Menschen, die zu Hause kochen.</strong> Herkömmliche Datenbanken sind für verpackte Lebensmittel mit Barcodes ausgelegt. Wenn du von Grund auf selbst kochst, wird jede Mahlzeit zu einer Übung im Erstellen von Rezepten. In einem Chat-Tagebuch reicht &bdquo;Linsensuppe mit Brot&ldquo; völlig aus.
+        </p>
+        <p>
+          <strong>Menschen, die Gerichte aus verschiedenen Kulturen essen.</strong> Wenn deine Mahlzeiten Gerichte enthalten, die westliche Lebensmitteldatenbanken nicht oder nur unzureichend erkennen, ist es schneller und genauer, sie in deiner eigenen Sprache zu beschreiben, als nach englischen Entsprechungen zu suchen.
+        </p>
+        <p>
+          <strong>Menschen, die Achtsamkeit wollen, keine Besessenheit.</strong> Wenn du deine Essgewohnheiten verstehen willst, ohne jedes Gramm abzuwiegen und jeden Mikronährstoff zu erfassen, sorgt ein lockerer Ansatz beim Protokollieren für die Vorteile ohne Burnout.
+        </p>
+        <p>
+          <strong>Menschen, die gerade mit dem Abnehmen beginnen.</strong> Wenn du noch nie deine Ernährung protokolliert hast, kann der Einstieg mit einer komplexen Datenbank-App überwältigend sein. Ein Chat-Tagebuch hat null Lernkurve – wenn du eine SMS senden kannst, kannst du deine Ernährung protokollieren.
+        </p>
+      </ContentSection>
+
+      <SeoCta
+        title="Starte noch heute dein Ernährungstagebuch"
+        description="Nimm am Early Access von Nuvvoo teil und erlebe die Ernährungsprotokollierung durch Unterhaltung – die Methode, die dafür entwickelt wurde, dass du dranbleibst."
+        buttonLocation="seo_food_diary"
+      />
+
+      <ContentSection title="So holst du das Beste aus deinem Ernährungstagebuch heraus">
+        <p>
+          Egal, ob du Nuvvoo oder ein anderes Tool nutzt, diese Prinzipien machen Ernährungstagebücher effektiver:
+        </p>
+        <p>
+          <strong>Protokolliere konsequent, nicht perfekt.</strong> Studien zeigen, dass die Häufigkeit der Erfassung wichtiger ist als die Genauigkeit. 80&nbsp;% deiner Mahlzeiten mit groben Schätzungen zu erfassen ist besser, als 30&nbsp;% mit exakten Messungen. Sieh dir an, <Link href="/how-to-stay-consistent-calorie-tracking">wie du bei der Kalorienerfassung konsequent bleibst</Link>, um eine praktische Umsetzung zu erfahren.
+        </p>
+        <p>
+          <strong>Warte nicht bis zum Ende des Tages.</strong> Erfasse Mahlzeiten direkt beim Essen oder kurz danach. Sich am Ende des Tages zu erinnern ist ungenauer und fühlt sich wie Hausaufgaben an. Eine schnelle Erfassung in Echtzeit ist leichter durchzuhalten.
+        </p>
+        <p>
+          <strong>Erfasse den Kontext, nicht nur das Essen.</strong> Notiere, wie du dich gefühlt hast, wie du geschlafen hast, ob du gestresst warst. Mit der Zeit zeigen sich Muster – vielleicht isst du an Tagen, an denen du schlecht schläfst, zu viel, oder naschst mehr, wenn du gestresst bist. Dieses Bewusstsein ist wertvoller als zu wissen, dass du 47&nbsp;g Protein zu dir genommen hast.
+        </p>
+        <p>
+          <strong>Bestrafe dich nicht für ausgelassene Tage.</strong> Wenn du einen Tag (oder eine Woche) auslässt, fang einfach wieder an. Die Forschung zu Ernährungstagebüchern verlangt keine Perfektion – sie verlangt Ausdauer. Ein Tagebuch, zu dem du nach einer Pause zurückkehrst, ist unendlich viel wertvoller als eines, das du endgültig aufgibst.
+        </p>
+      </ContentSection>
+    </>
+  );
+}
+
+const faqsDe = [
+  {
+    question: 'Helfen Ernährungstagebücher tatsächlich beim Abnehmen?',
+    answer:
+      'Ja. Mehrere Studien bestätigen, dass konsequentes Aufzeichnen der Ernährung mit deutlich mehr Gewichtsverlust verbunden ist. Das am häufigsten zitierte Ergebnis: Menschen, die täglich ihre Ernährung protokollieren, nehmen doppelt so viel ab wie diejenigen, die dies nicht tun. Der Schlüssel ist Konsequenz – es ist wichtiger, an den meisten Tagen zu protokollieren, als jede Mahlzeit perfekt zu erfassen.',
+  },
+  {
+    question: 'Wie unterscheidet sich ein chatbasiertes Ernährungstagebuch von MyFitnessPal?',
+    answer:
+      'Bei herkömmlichen Apps wie MyFitnessPal musst du eine Datenbank durchsuchen, das genaue Lebensmittel auswählen und die Portionsgrößen angeben. Ein chatbasiertes Tagebuch wie Nuvvoo ermöglicht es dir, Mahlzeiten in natürlicher Sprache zu beschreiben – „Hühnchensandwich und einen Kaffee" – und die KI schätzt die Kalorien automatisch. Das ist schneller, einfacher und langfristig leichter durchzuhalten.',
+  },
+  {
+    question: 'Wie genau ist die KI-basierte Ernährungsprotokollierung?',
+    answer:
+      'Die KI-Schätzung ist weniger präzise als das Nachschlagen exakter Datenbankeinträge für verpackte Lebensmittel. Aber für die meisten Menschen ist die Genauigkeit mehr als ausreichend, um abzunehmen. Studien zeigen immer wieder, dass die Regelmäßigkeit der Erfassung wichtiger ist als die Genauigkeit – und du bist regelmäßiger, wenn das Tool einfach zu bedienen ist.',
+  },
+  {
+    question: 'Kann ich Nuvvoo als mein einziges Ernährungstagebuch nutzen?',
+    answer:
+      'Ja. Nuvvoo erfasst Essen, Kalorien, Makros, Wasser, Schlaf, Bewegung und Stimmung – alles per Chat oder Sprachnachricht. Für die meisten Menschen, die durch Achtsamkeit und Beständigkeit abnehmen wollen, deckt es alles ab, was du brauchst.',
+  },
+  {
+    question: 'Ist Nuvvoo kostenlos?',
+    answer:
+      'Ja — Nuvvoo hat einen Free Plan mit den wichtigsten Tracking-Funktionen, dazu Pro Features für alle, die erweiterte Funktionen wollen. Aktuelle Preise und Verfügbarkeit findest du auf nuvvoo.app.',
   },
 ];

@@ -30,10 +30,10 @@ const nextConfig = {
         destination: '/:slug',
         permanent: true,
       },
-      // /food-diary-for-weight-loss is translated to FR but not DE/RU/ES —
+      // /food-diary-for-weight-loss is translated to FR + DE but not RU/ES —
       // strip only the un-translated locale prefixes back to canonical EN.
       {
-        source: '/:locale(de|ru|es)/food-diary-for-weight-loss',
+        source: '/:locale(ru|es)/food-diary-for-weight-loss',
         destination: '/food-diary-for-weight-loss',
         permanent: true,
       },
