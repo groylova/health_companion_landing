@@ -62,16 +62,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const fr = {
     title:
-      'La meilleure alternative à Lose It en 2026 — Suis tes calories sans tracas | Nuvvoo',
+      'Meilleure alternative à Lose It en 2026 — Suis tes calories sans tracas | Nuvvoo',
     description:
-      "Tu en as marre des mises à jour compliquées et des abonnements payants de Lose It ? Nuvvoo te permet de suivre tes calories en envoyant par SMS ce que tu as mangé — pas besoin de chercher dans une base de données, ni de peser quoi que ce soit. Disponible en 5 langues.",
+      "Tu en as marre des mises à jour maladroites et des abonnements payants de Lose It ? Nuvvoo te permet de suivre tes calories en envoyant par SMS ce que tu as mangé — pas besoin de chercher dans une base de données, ni de peser quoi que ce soit. Fonctionne en 5 langues.",
     ogTitle:
-      'La meilleure alternative à Lose It en 2026 — Suis tes calories sans tracas',
+      'Meilleure alternative à Lose It en 2026 — Suis tes calories sans tracas',
     ogDescription:
-      "Tu en as marre des mises à jour compliquées et des abonnements payants de Lose It ? Nuvvoo te permet de suivre tes calories en envoyant par SMS ce que tu as mangé.",
-    twitterTitle: 'La meilleure alternative à Lose It en 2026',
+      "Tu en as marre des mises à jour maladroites et des abonnements payants de Lose It ? Nuvvoo te permet de suivre tes calories en envoyant par SMS ce que tu as mangé.",
+    twitterTitle: 'Meilleure alternative à Lose It en 2026',
     twitterDescription:
-      "Marre des mises à jour compliquées et des abonnements payants de Lose It ? Suis tes calories par chat.",
+      "Marre des mises à jour maladroites et des abonnements payants de Lose It ? Suis tes calories par chat.",
   };
   const ru = {
     title:
@@ -790,7 +790,7 @@ function FrenchBody() {
           <li><strong>Toujours la même approche :</strong> malgré les mises à jour, l&rsquo;expérience de base reste la même : recherche dans la base de données → sélectionner une portion → enregistrer manuellement. Pour beaucoup, c&rsquo;est ce processus lui-même qui les pousse à arrêter de suivre leur alimentation.</li>
         </ul>
         <p>
-          Ces problèmes ne concernent pas tout le monde. Lose It fonctionne bien pour ceux qui recherchent un outil de suivi structuré et basé sur une base de données. Mais si c&apos;est le processus manuel qui te fait abandonner, une approche différente pourrait t&apos;aider à <Link href="/how-to-stay-consistent-calorie-tracking">rester assidu</Link>.
+          Ces problèmes ne concernent pas tout le monde. Lose It fonctionne bien pour ceux qui veulent un outil de suivi structuré et basé sur une base de données. Mais si c&apos;est le processus manuel qui te fait abandonner, une approche différente pourrait t&apos;aider à <Link href="/how-to-stay-consistent-calorie-tracking">rester assidu</Link>.
         </p>
       </ContentSection>
 
@@ -805,17 +805,17 @@ function FrenchBody() {
           <li>Aimes voir tes progrès visuels pour atteindre tes objectifs quotidiens</li>
           <li>Manges beaucoup d&apos;aliments emballés avec des codes-barres</li>
           <li>Souhaites des défis communautaires et des fonctionnalités sociales</li>
-          <li>N&rsquo;es pas dérangé de passer quelques minutes par repas à enregistrer</li>
+          <li>N&rsquo;as pas d&rsquo;objection à passer quelques minutes par repas à enregistrer tes données</li>
         </ul>
         <p>
           <strong>L&apos;approche de Nuvvoo : la prise de conscience par la conversation</strong>
         </p>
         <p>
-          Nuvvoo fait l&apos;impasse sur la base de données. Au lieu de rechercher et de sélectionner, <Link href="/chat-calorie-tracker">tu décris ton repas avec tes propres mots</Link> — comme si tu envoyais un SMS à un ami. L&apos;IA se charge de l&apos;estimation et du calcul. Ça fonctionne bien si tu :
+          Nuvvoo fait l&apos;impasse sur la base de données. Au lieu de rechercher et de sélectionner, <Link href="/chat-calorie-tracker">tu décris ton repas avec tes propres mots</Link> — comme si tu envoyais un SMS à un ami. L&apos;IA se charge de l&apos;estimation et du calcul. Cela fonctionne bien si :
         </p>
         <ul>
           <li>As arrêté Lose It parce que la saisie te semblait fastidieuse</li>
-          <li>Veux suivre tes progrès de manière régulière sans passer plus de 5 minutes par repas</li>
+          <li>Souhaites suivre tes progrès de manière régulière sans passer plus de 5 minutes par repas</li>
           <li>Préfères parler de tes repas plutôt que de saisir des données</li>
           <li>Accordes plus d&rsquo;importance à la prise de conscience qu&rsquo;à l&rsquo;atteinte de chiffres exacts</li>
         </ul>
