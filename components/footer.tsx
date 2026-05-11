@@ -32,6 +32,9 @@ export async function Footer() {
               <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/photo-vs-chat-calorie-tracking">
                 {t('photoVsChat')}
               </NextLink>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/food-diary-for-weight-loss">
+                {t('foodDiary')}
+              </NextLink>
             </div>
 
             {/* Resources — Column 2 */}
@@ -50,6 +53,9 @@ export async function Footer() {
               </NextLink>
               <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/alternative-to-myfitnesspal">
                 {t('mfpAlternative')}
+              </NextLink>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/alternative-to-lose-it">
+                {t('loseItAlternative')}
               </NextLink>
             </div>
 
