@@ -1,0 +1,50 @@
+{
+  "breakfast": [
+    { "id": "oatmeal_berries_walnuts", "kcal": 350, "p": 12, "c": 55, "f": 9 },
+    { "id": "greek_yogurt_honey_granola", "kcal": 300, "p": 22, "c": 38, "f": 6 },
+    { "id": "scrambled_eggs_avocado_toast", "kcal": 420, "p": 22, "c": 30, "f": 24 },
+    { "id": "protein_smoothie_banana_oats", "kcal": 380, "p": 28, "c": 50, "f": 8 },
+    { "id": "cottage_cheese_fruit", "kcal": 260, "p": 24, "c": 24, "f": 6 },
+    { "id": "veggie_omelette_feta", "kcal": 330, "p": 24, "c": 8, "f": 22 },
+    { "id": "overnight_oats_chia_almond", "kcal": 360, "p": 14, "c": 50, "f": 12 },
+    { "id": "wholegrain_toast_peanut_butter_banana", "kcal": 400, "p": 14, "c": 52, "f": 16 },
+    { "id": "tofu_scramble_spinach", "kcal": 310, "p": 22, "c": 14, "f": 18 },
+    { "id": "buckwheat_bowl_egg_greens", "kcal": 380, "p": 18, "c": 50, "f": 12 }
+  ],
+  "lunch": [
+    { "id": "grilled_chicken_quinoa_veg", "kcal": 520, "p": 42, "c": 50, "f": 14 },
+    { "id": "salmon_brown_rice_broccoli", "kcal": 560, "p": 36, "c": 55, "f": 18 },
+    { "id": "turkey_wrap_hummus", "kcal": 460, "p": 32, "c": 45, "f": 14 },
+    { "id": "chicken_caesar_no_croutons", "kcal": 420, "p": 38, "c": 12, "f": 24 },
+    { "id": "tuna_salad_wholegrain_crackers", "kcal": 440, "p": 30, "c": 35, "f": 18 },
+    { "id": "lentil_soup_wholegrain_bread", "kcal": 480, "p": 22, "c": 70, "f": 10 },
+    { "id": "chickpea_bowl_tahini_greens", "kcal": 500, "p": 20, "c": 60, "f": 18 },
+    { "id": "shrimp_stir_fry_rice", "kcal": 510, "p": 32, "c": 60, "f": 12 },
+    { "id": "beef_bowl_brown_rice_kimchi", "kcal": 560, "p": 38, "c": 55, "f": 18 },
+    { "id": "mediterranean_bowl_falafel_cucumber", "kcal": 500, "p": 18, "c": 60, "f": 18 }
+  ],
+  "dinner": [
+    { "id": "baked_chicken_sweet_potato_greens", "kcal": 560, "p": 42, "c": 55, "f": 14 },
+    { "id": "pan_seared_salmon_quinoa_asparagus", "kcal": 600, "p": 40, "c": 50, "f": 22 },
+    { "id": "lean_beef_stir_fry_vegetables_rice", "kcal": 620, "p": 38, "c": 65, "f": 18 },
+    { "id": "tofu_curry_basmati_rice", "kcal": 540, "p": 22, "c": 70, "f": 16 },
+    { "id": "turkey_meatballs_zoodles_marinara", "kcal": 460, "p": 38, "c": 30, "f": 18 },
+    { "id": "white_fish_lemon_potatoes_salad", "kcal": 500, "p": 36, "c": 50, "f": 12 },
+    { "id": "chicken_fajita_bowl_corn_beans", "kcal": 580, "p": 38, "c": 60, "f": 16 },
+    { "id": "shrimp_pasta_tomato_basil", "kcal": 560, "p": 32, "c": 70, "f": 14 },
+    { "id": "veggie_chili_rice", "kcal": 520, "p": 22, "c": 80, "f": 8 },
+    { "id": "grilled_chicken_pesto_couscous", "kcal": 580, "p": 40, "c": 55, "f": 18 }
+  ],
+  "snack": [
+    { "id": "apple_almond_butter", "kcal": 220, "p": 6, "c": 28, "f": 12 },
+    { "id": "rice_cakes_cottage_cheese", "kcal": 180, "p": 14, "c": 22, "f": 4 },
+    { "id": "handful_almonds_dark_chocolate", "kcal": 220, "p": 6, "c": 18, "f": 16 },
+    { "id": "carrot_sticks_hummus", "kcal": 160, "p": 6, "c": 20, "f": 8 },
+    { "id": "boiled_eggs_cucumber", "kcal": 180, "p": 14, "c": 4, "f": 12 },
+    { "id": "protein_bar", "kcal": 200, "p": 18, "c": 22, "f": 6 },
+    { "id": "greek_yogurt_berries", "kcal": 170, "p": 16, "c": 18, "f": 4 },
+    { "id": "edamame_sea_salt", "kcal": 200, "p": 18, "c": 18, "f": 8 },
+    { "id": "banana_peanut_butter", "kcal": 240, "p": 8, "c": 30, "f": 12 },
+    { "id": "trail_mix_nuts_dried_fruit", "kcal": 220, "p": 6, "c": 22, "f": 14 }
+  ]
+}
