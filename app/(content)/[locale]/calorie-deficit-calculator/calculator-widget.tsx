@@ -19,7 +19,14 @@ import {
   type ValidationError,
   type WeightUnit,
 } from '@/lib/deficit/calc';
-import type { Plan } from '@/lib/deficit/plan';
+import {
+  fetchSession,
+  generatePlan,
+  type ApiDiet,
+  type ApiLanguage,
+  type ApiPlan,
+  type ApiSlot,
+} from '@/lib/deficit/meal-plan-api';
 import { useAppStoreLink } from '@/lib/use-app-store-link';
 
 // gtag is declared globally in lib/use-app-store-link.ts as
@@ -41,6 +48,8 @@ type FormState = {
   activity: Activity | '';
   goal: Goal;
   pace: Pace;
+  diet: ApiDiet;
+  allergies: string[];
 };
 
 const DEFAULT_FORM: FormState = {
@@ -55,18 +64,41 @@ const DEFAULT_FORM: FormState = {
   activity: '',
   goal: 'lose',
   pace: 'normal',
+  diet: 'none',
+  allergies: [],
 };
+
+const DIET_OPTIONS: ApiDiet[] = ['none', 'vegetarian', 'pescatarian', 'vegan'];
+const MAX_ALLERGIES = 8;
+const MAX_ALLERGY_LEN = 32;
 
 const STORAGE_KEY_USED = 'nuvvoo_deficit_plan_used';
 const STORAGE_KEY_DATA = 'nuvvoo_deficit_plan_data';
-const STORAGE_VERSION = 4;
+// Bumped to 6 when FormState gained diet + allergies — old payloads lack
+// those fields and would crash the chip input on rehydrate. The version
+// gate at load time drops stale entries instead of trying to migrate them.
+const STORAGE_VERSION = 6;
+
+// TEMP: disables the "1 generation per browser" gate so we can iterate on
+// the AI prompt + UI without clearing localStorage each click. Flip back to
+// true before shipping — the gate is part of the public spec.
+const PLAN_LIMIT_ENABLED = false;
 
 type StoredData = {
   v: number;
   form: FormState;
   result: CalcResult;
-  plan: Plan;
+  plan: ApiPlan;
 };
+
+const API_LANGUAGES: ApiLanguage[] = ['en', 'de', 'ru', 'es', 'fr'];
+
+function toApiLanguage(locale: string): ApiLanguage {
+  if ((API_LANGUAGES as string[]).includes(locale)) {
+    return locale as ApiLanguage;
+  }
+  return 'en';
+}
 
 function track(name: string, params?: Record<string, unknown>): void {
   if (typeof window === 'undefined') {
@@ -174,14 +206,20 @@ export function CalculatorWidget() {
   const [form, setForm] = useState<FormState>(DEFAULT_FORM);
   const [error, setError] = useState<ValidationError | null>(null);
   const [result, setResult] = useState<CalcResult | null>(null);
-  const [plan, setPlan] = useState<Plan | null>(null);
+  const [plan, setPlan] = useState<ApiPlan | null>(null);
   const [planLoading, setPlanLoading] = useState(false);
   const [planError, setPlanError] = useState<string | null>(null);
   const [alreadyUsed, setAlreadyUsed] = useState(false);
 
+  // Session token is fetched once on mount per the API contract; we cache it
+  // in a ref so the click handler can read the latest value (and replace it
+  // without triggering re-renders when we transparently rotate after 401).
+  const sessionTokenRef = useRef<string | null>(null);
   const viewedRef = useRef(false);
 
-  // Hydrate from localStorage on mount + fire calculator_viewed once.
+  // Hydrate from localStorage on mount, fire calculator_viewed once, and
+  // bootstrap an API session token in parallel. The session call is fire-
+  // and-forget on mount; if it fails we'll lazy-retry on first plan click.
   useEffect(() => {
     if (viewedRef.current) {
       return;
@@ -189,10 +227,18 @@ export function CalculatorWidget() {
     viewedRef.current = true;
     track('calculator_viewed', { page: 'calorie_deficit_calculator', locale });
 
+    void fetchSession().then((session) => {
+      if (session !== null) {
+        sessionTokenRef.current = session.session_token;
+      }
+    });
+
     try {
-      const used = window.localStorage.getItem(STORAGE_KEY_USED);
-      if (used === '1') {
-        setAlreadyUsed(true);
+      if (PLAN_LIMIT_ENABLED) {
+        const used = window.localStorage.getItem(STORAGE_KEY_USED);
+        if (used === '1') {
+          setAlreadyUsed(true);
+        }
       }
       const dataRaw = window.localStorage.getItem(STORAGE_KEY_DATA);
       if (dataRaw !== null) {
@@ -208,6 +254,20 @@ export function CalculatorWidget() {
       // localStorage parse error — ignore, start fresh.
     }
   }, [locale]);
+
+  // Ensure we have a session token before posting. Returns null on failure;
+  // callers treat that as a transient backend issue.
+  async function ensureSessionToken(): Promise<string | null> {
+    if (sessionTokenRef.current !== null) {
+      return sessionTokenRef.current;
+    }
+    const session = await fetchSession();
+    if (session === null) {
+      return null;
+    }
+    sessionTokenRef.current = session.session_token;
+    return session.session_token;
+  }
 
   function handleField<K extends keyof FormState>(key: K, value: FormState[K]): void {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -257,64 +317,82 @@ export function CalculatorWidget() {
     setPlanLoading(true);
     setPlanError(null);
 
-    try {
-      // Reuse the same canonical input the form already validated, plus the
-      // resolved kcal target so the server doesn't re-derive it.
-      const calcInput = toCalcInput(form);
-      const response = await fetch('/api/deficit-plan', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          target: result.target,
-          weight: calcInput.weight,
-          weightUnit: calcInput.weightUnit,
-          height: calcInput.height,
-          heightUnit: calcInput.heightUnit,
-          age: calcInput.age,
-          gender: calcInput.gender,
-          activity: calcInput.activity,
-          goal: calcInput.goal,
-          pace: calcInput.pace,
-        }),
-      });
+    const token = await ensureSessionToken();
+    if (token === null) {
+      setPlanError('generic');
+      setPlanLoading(false);
+      return;
+    }
 
-      if (response.status === 429) {
-        setPlanError('rateLimited');
-        setPlanLoading(false);
-        return;
-      }
+    const payload = {
+      calories_target: result.target,
+      weight_kg: result.weightKg,
+      goal: form.goal,
+      language: toApiLanguage(locale),
+      session_token: token,
+      // Send the same macro split we show on the result screen so the AI
+      // plan honors it (otherwise it'd compute its own and the displayed
+      // targets would drift from what arrives back).
+      protein_g: result.proteinG,
+      carbs_g: result.carbsG,
+      fat_g: result.fatG,
+      diet: form.diet,
+      // Backend caps at 8 chips × 32 chars; FormState already enforces that.
+      allergies: form.allergies.length > 0 ? form.allergies : undefined,
+    };
 
-      if (!response.ok) {
+    // First attempt with the cached session token. If the backend rejects
+    // it as expired (401), drop the cached value, fetch a fresh one, and
+    // try once more — token TTL is 30 min so this is a real possibility
+    // when a user lingers on the page.
+    let response = await generatePlan(payload);
+    if (!response.ok && response.error.kind === 'session_expired') {
+      sessionTokenRef.current = null;
+      const fresh = await ensureSessionToken();
+      if (fresh === null) {
         setPlanError('generic');
         setPlanLoading(false);
         return;
       }
-
-      const data = (await response.json()) as { plan: Plan };
-      setPlan(data.plan);
-      setPhase('plan');
-      setAlreadyUsed(true);
-
-      const stored: StoredData = { v: STORAGE_VERSION, form, result, plan: data.plan };
-      try {
-        window.localStorage.setItem(STORAGE_KEY_USED, '1');
-        window.localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(stored));
-      } catch {
-        // Storage full / disabled — feature still works for this session.
-      }
-
-      track('plan_generated', {
-        target_kcal: result.target,
-        total_kcal: data.plan.totalKcal,
-        meal_count: data.plan.meals.length,
-        goal: form.goal,
-        locale,
-      });
-    } catch {
-      setPlanError('generic');
-    } finally {
-      setPlanLoading(false);
+      response = await generatePlan({ ...payload, session_token: fresh });
     }
+
+    if (!response.ok) {
+      if (response.error.kind === 'rate_limited') {
+        setPlanError('rateLimited');
+      } else {
+        setPlanError('generic');
+      }
+      setPlanLoading(false);
+      return;
+    }
+
+    const apiPlan = response.plan;
+    setPlan(apiPlan);
+    setPhase('plan');
+    if (PLAN_LIMIT_ENABLED) {
+      setAlreadyUsed(true);
+    }
+
+    const stored: StoredData = { v: STORAGE_VERSION, form, result, plan: apiPlan };
+    try {
+      if (PLAN_LIMIT_ENABLED) {
+        window.localStorage.setItem(STORAGE_KEY_USED, '1');
+      }
+      window.localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(stored));
+    } catch {
+      // Storage full / disabled — feature still works for this session.
+    }
+
+    track('plan_generated', {
+      target_kcal: result.target,
+      total_kcal: apiPlan.totals.calories,
+      meal_count: apiPlan.meals.length,
+      goal: form.goal,
+      locale,
+    });
+
+    setPlanLoading(false);
   }
 
   return (
@@ -337,6 +415,7 @@ export function CalculatorWidget() {
           planError={planError}
           onEdit={handleEdit}
           onGetPlan={handleGetPlan}
+          onField={handleField}
           t={t}
         />
       )}
@@ -611,6 +690,93 @@ function FormView({
   );
 }
 
+function AllergiesInput({
+  value,
+  onChange,
+  t,
+}: {
+  value: string[];
+  onChange: (next: string[]) => void;
+  t: Translator;
+}) {
+  const [draft, setDraft] = useState('');
+
+  function commit(): void {
+    const cleaned = draft.trim().slice(0, MAX_ALLERGY_LEN);
+    if (cleaned.length === 0) {
+      return;
+    }
+    if (value.includes(cleaned)) {
+      setDraft('');
+      return;
+    }
+    if (value.length >= MAX_ALLERGIES) {
+      return;
+    }
+    onChange([...value, cleaned]);
+    setDraft('');
+  }
+
+  function remove(idx: number): void {
+    onChange(value.filter((_, i) => i !== idx));
+  }
+
+  const atCap = value.length >= MAX_ALLERGIES;
+
+  return (
+    <div>
+      <label className="block text-sm font-medium text-slate-700">{t('form.allergiesLabel')}</label>
+      <div className="mt-1 flex flex-wrap gap-2">
+        {value.map((chip, idx) => (
+          <span
+            key={`${chip}-${idx}`}
+            className="inline-flex items-center gap-1 rounded-full bg-nuvvooGreen-50 px-3 py-1 text-sm text-nuvvooGreen-800"
+          >
+            {chip}
+            <button
+              type="button"
+              onClick={() => remove(idx)}
+              aria-label={t('form.allergiesRemove')}
+              className="text-nuvvooGreen-700 hover:text-nuvvooGreen-900"
+            >
+              ×
+            </button>
+          </span>
+        ))}
+      </div>
+      <div className="mt-2 flex gap-2">
+        <input
+          type="text"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => {
+            // Enter or comma commits the chip; we swallow the key so the
+            // form doesn't submit on Enter and so the comma never makes it
+            // into the chip text.
+            if (e.key === 'Enter' || e.key === ',') {
+              e.preventDefault();
+              commit();
+            }
+          }}
+          maxLength={MAX_ALLERGY_LEN}
+          disabled={atCap}
+          placeholder={atCap ? t('form.allergiesAtCap') : t('form.allergiesPlaceholder')}
+          className="h-11 flex-1 rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100 disabled:bg-slate-100 disabled:text-slate-400"
+        />
+        <button
+          type="button"
+          onClick={commit}
+          disabled={atCap || draft.trim().length === 0}
+          className="h-11 rounded-xl border border-slate-300 bg-white px-4 text-sm font-medium text-slate-700 hover:border-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {t('form.allergiesAdd')}
+        </button>
+      </div>
+      <p className="mt-1 text-xs text-slate-500">{t('form.allergiesHint', { count: value.length, max: MAX_ALLERGIES })}</p>
+    </div>
+  );
+}
+
 type UnitToggleOption = { value: string; label: string };
 
 function UnitToggle({
@@ -674,6 +840,7 @@ function ResultView({
   planError,
   onEdit,
   onGetPlan,
+  onField,
   t,
 }: {
   form: FormState;
@@ -683,6 +850,7 @@ function ResultView({
   planError: string | null;
   onEdit: () => void;
   onGetPlan: () => void;
+  onField: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
   t: Translator;
 }) {
   const titleKey =
@@ -735,7 +903,54 @@ function ResultView({
         </div>
       </div>
 
+      {/* Macro split. Mirrors the backend formula so what we show here is
+         exactly what the AI plan will hit when generated. */}
+      <div>
+        <p className="text-sm font-medium text-slate-700">{t('result.macrosLabel')}</p>
+        <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
+          <div>
+            <p className="text-slate-500">{t('result.macroProtein')}</p>
+            <p className="font-semibold text-slate-900">{result.proteinG.toLocaleString()} g</p>
+          </div>
+          <div>
+            <p className="text-slate-500">{t('result.macroCarbs')}</p>
+            <p className="font-semibold text-slate-900">{result.carbsG.toLocaleString()} g</p>
+          </div>
+          <div>
+            <p className="text-slate-500">{t('result.macroFat')}</p>
+            <p className="font-semibold text-slate-900">{result.fatG.toLocaleString()} g</p>
+          </div>
+        </div>
+      </div>
+
       {result.clamped && <p className="text-xs text-amber-700">{t('result.clampedNote')}</p>}
+
+      {/* Plan-only inputs: don't affect the kcal/macros math, only the AI
+         meal plan. Kept on the result screen so the form stays focused on
+         the calculation itself. */}
+      <div className="space-y-4 border-t border-slate-200 pt-5">
+        <div>
+          <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
+          {/* 2×2 always — 4-in-a-row inside the half-width hero column
+             clips longer labels (Pescatarian / Pescetarisch / Вегетарианство). */}
+          <div className="mt-1 grid grid-cols-2 gap-2">
+            {DIET_OPTIONS.map((d) => (
+              <SegmentButton
+                key={d}
+                selected={form.diet === d}
+                onClick={() => onField('diet', d)}
+                label={t(`form.diet_${d}`)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <AllergiesInput
+          value={form.allergies}
+          onChange={(next) => onField('allergies', next)}
+          t={t}
+        />
+      </div>
 
       <div className="border-t border-slate-200 pt-5">
         <p className="text-sm text-slate-600">{t('result.ctaText')}</p>
@@ -764,29 +979,13 @@ function PlanView({
 }: {
   form: FormState;
   result: CalcResult;
-  plan: Plan;
+  plan: ApiPlan;
   onEdit: () => void;
   t: Translator;
 }) {
   const { url, handleClick } = useAppStoreLink('deficit_calculator_plan');
 
-  function fitsCopy(): string {
-    const weeklyAbs = Math.abs(form.weightUnit === 'kg' ? result.weeklyDeltaKg : result.weeklyDeltaLb);
-    const weight = form.weightUnit === 'kg' ? result.weightKg : Math.round(result.weightKg * 2.20462 * 10) / 10;
-    if (form.goal === 'maintain') {
-      const key = form.weightUnit === 'kg' ? 'plan.fitsMaintainKg' : 'plan.fitsMaintainLb';
-      return t(key, { weight: weight.toFixed(1) });
-    }
-    if (form.goal === 'gain') {
-      const key = form.weightUnit === 'kg' ? 'plan.fitsGainKg' : 'plan.fitsGainLb';
-      return t(key, { weight: weight.toFixed(1), weekly: weeklyAbs.toFixed(1) });
-    }
-    const key = form.weightUnit === 'kg' ? 'plan.fitsLoseKg' : 'plan.fitsLoseLb';
-    const deficit = Math.abs(result.target - result.tdee);
-    return t(key, { weight: weight.toFixed(1), deficit: deficit.toString(), weekly: weeklyAbs.toFixed(1) });
-  }
-
-  function slotLabel(slot: string): string {
+  function slotLabel(slot: ApiSlot): string {
     if (slot === 'breakfast') {
       return t('plan.slotBreakfast');
     }
@@ -829,14 +1028,16 @@ function PlanView({
               <p className="text-xs font-medium uppercase tracking-wide text-nuvvooGreen-700">
                 {slotLabel(meal.slot)}
               </p>
-              <p className="mt-1 text-sm font-medium text-slate-900">{t(`meals.${meal.id}`)}</p>
-              <p className="mt-1 text-xs text-slate-500">{t('plan.macros', { p: meal.protein, c: meal.carbs, f: meal.fat })}</p>
-              {meal.factor !== 1.0 && (
-                <p className="mt-1 text-xs text-slate-500">{t('plan.portionFactor', { factor: meal.factor.toFixed(1) })}</p>
+              <p className="mt-1 text-sm font-medium text-slate-900">{meal.name}</p>
+              {meal.description.length > 0 && (
+                <p className="mt-1 text-xs leading-relaxed text-slate-500">{meal.description}</p>
               )}
+              <p className="mt-1 text-xs text-slate-500">
+                {t('plan.macros', { p: meal.protein_g, c: meal.carbs_g, f: meal.fat_g })}
+              </p>
             </div>
             <div className="shrink-0 text-right">
-              <p className="text-base font-semibold text-slate-900">{meal.kcal.toLocaleString()}</p>
+              <p className="text-base font-semibold text-slate-900">{meal.calories.toLocaleString()}</p>
               <p className="text-xs text-slate-500">{t('plan.kcalUnit')}</p>
             </div>
           </li>
@@ -846,13 +1047,15 @@ function PlanView({
       <div className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
         <span className="text-sm font-medium text-slate-700">{t('plan.totalLabel')}</span>
         <span className="text-base font-bold text-slate-900">
-          {plan.totalKcal.toLocaleString()} {t('plan.kcalUnit')}
+          {plan.totals.calories.toLocaleString()} {t('plan.kcalUnit')}
         </span>
       </div>
 
-      <p className="rounded-2xl border border-nuvvooGreen-200 bg-nuvvooGreen-50/40 p-4 text-sm leading-relaxed text-slate-700">
-        {fitsCopy()}
-      </p>
+      {plan.rationale.length > 0 && (
+        <p className="rounded-2xl border border-nuvvooGreen-200 bg-nuvvooGreen-50/40 p-4 text-sm leading-relaxed text-slate-700">
+          {plan.rationale}
+        </p>
+      )}
 
       <a
         href={url}

@@ -144,6 +144,13 @@ export type CalcResult = {
   // weekly delta doesn't read as a lie.
   clamped: boolean;
   weightKg: number;
+  // Suggested macro split for the kcal target. Protein anchored to bodyweight
+  // (preserves lean mass during a deficit), fat held at 25% of kcal (safe
+  // floor for hormone production), carbs back-filled. These are starter
+  // targets — the AI plan honors them when sent as protein_g/carbs_g/fat_g.
+  proteinG: number;
+  carbsG: number;
+  fatG: number;
 };
 
 function mifflin(kg: number, cm: number, age: number, gender: Gender): number {
@@ -173,14 +180,76 @@ export function calculate(input: CalcInput): CalcResult {
   const weeklyKg = (effectiveDailyDelta * 7) / KCAL_PER_KG;
   const weeklyLb = kgToLb(weeklyKg);
 
+  const roundedTarget = Math.round(target / 10) * 10;
+  const macros = macroSplit(roundedTarget, kg, input.goal);
+
   return {
     bmr: Math.round(bmr),
     tdee: Math.round(tdee),
-    target: Math.round(target / 10) * 10,
+    target: roundedTarget,
     weeklyDeltaKg: Math.round(weeklyKg * 10) / 10,
     weeklyDeltaLb: Math.round(weeklyLb * 10) / 10,
     clamped,
     weightKg: Math.round(kg * 10) / 10,
+    proteinG: macros.protein,
+    carbsG: macros.carbs,
+    fatG: macros.fat,
+  };
+}
+
+// Macro split mirrors the Nuvvoo backend (_compute_macro_targets in
+// app/agent/calorie/goals.py). We replicate it client-side so the targets
+// the user sees on the result screen are exactly what the AI plan will
+// honor when we send them in /public/meal-plan.
+//
+// Steps:
+//   1. Protein = weight × per-kg factor (goal-dependent).
+//   2. Fat = max(weight × 0.6, target × 25% / 9) — never below the
+//      hormone-floor, never below 25% of kcal.
+//   3. Carbs = remainder.
+//   4. Guardrail: if carbs < 100 g, pull from protein to bring carbs to 100.
+//   5. Clamp protein to [weight×1.4, weight×2.2] — ISSN safe band.
+//   6. Recompute carbs so the kcal sum stays exact after protein clamp.
+const PROTEIN_PER_KG: Record<Goal, number> = {
+  lose: 2.0,
+  maintain: 1.7,
+  gain: 1.8,
+};
+const FAT_KCAL_SHARE = 0.25;
+const FAT_FLOOR_PER_KG = 0.6;
+const CARBS_FLOOR_G = 100;
+const PROTEIN_MIN_PER_KG = 1.4;
+const PROTEIN_MAX_PER_KG = 2.2;
+
+const KCAL_PER_G_PROTEIN = 4;
+const KCAL_PER_G_CARBS = 4;
+const KCAL_PER_G_FAT = 9;
+
+function macroSplit(
+  targetKcal: number,
+  weightKg: number,
+  goal: Goal,
+): { protein: number; carbs: number; fat: number } {
+  let protein = weightKg * PROTEIN_PER_KG[goal];
+  const fat = Math.max(weightKg * FAT_FLOOR_PER_KG, (targetKcal * FAT_KCAL_SHARE) / KCAL_PER_G_FAT);
+  let carbs = (targetKcal - protein * KCAL_PER_G_PROTEIN - fat * KCAL_PER_G_FAT) / KCAL_PER_G_CARBS;
+
+  if (carbs < CARBS_FLOOR_G) {
+    const deficitG = CARBS_FLOOR_G - carbs;
+    protein -= deficitG;
+    carbs = CARBS_FLOOR_G;
+  }
+
+  const proteinMin = weightKg * PROTEIN_MIN_PER_KG;
+  const proteinMax = weightKg * PROTEIN_MAX_PER_KG;
+  protein = Math.max(proteinMin, Math.min(proteinMax, protein));
+
+  carbs = (targetKcal - protein * KCAL_PER_G_PROTEIN - fat * KCAL_PER_G_FAT) / KCAL_PER_G_CARBS;
+
+  return {
+    protein: Math.round(protein),
+    carbs: Math.round(Math.max(0, carbs)),
+    fat: Math.round(fat),
   };
 }
 
