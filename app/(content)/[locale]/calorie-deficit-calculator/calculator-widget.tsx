@@ -856,6 +856,35 @@ function ResultView({
   onField: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
   t: Translator;
 }) {
+  // When alreadyUsed=true the CTA section morphs from "Get my first day plan"
+  // (disabled, useless) into the App Store conversion stack. Pulled in the
+  // same way as PlanView so reporting can distinguish funnel positions via
+  // button_location ("deficit_calculator_result_used*").
+  const tHero = useTranslations('hero');
+  const locale = useLocale();
+  const { url: appUrl, handleClick: appHandleClick } = useAppStoreLink(
+    'deficit_calculator_result_used',
+  );
+
+  function fireAppClick(buttonLocation: string): void {
+    const trafficSource =
+      typeof window !== 'undefined' && typeof window.sessionStorage !== 'undefined'
+        ? window.sessionStorage.getItem('nuvvoo_source') || 'direct'
+        : 'direct';
+    track('app_click', {
+      button_location: buttonLocation,
+      traffic_source: trafficSource,
+      locale,
+      target_kcal: result.target,
+      goal: form.goal,
+    });
+  }
+
+  function handleResultUsedCtaClick(): void {
+    fireAppClick('deficit_calculator_result_used');
+    appHandleClick();
+  }
+
   const titleKey =
     form.goal === 'maintain'
       ? 'result.maintainTitle'
@@ -961,21 +990,49 @@ function ResultView({
         />
       </div>
 
-      <div className="border-t border-slate-200 pt-5">
-        <p className="text-sm text-slate-600">{t('result.ctaText')}</p>
-        <button
-          onClick={onGetPlan}
-          disabled={planLoading || alreadyUsed}
-          className="group mt-3 inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          <span>{planLoading ? t('plan.loading') : t('result.ctaButton')}</span>
-          {!planLoading && (
-            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-          )}
-        </button>
-        {alreadyUsed && <p className="mt-2 text-xs text-slate-500">{t('result.ctaUsedNote')}</p>}
-        {errorMessage !== null && <p className="mt-2 text-xs text-red-600">{errorMessage}</p>}
-      </div>
+      {alreadyUsed ? (
+        // Free plan already spent — replace the generation CTA with the
+        // App Store conversion stack so the result page doesn't dead-end
+        // into a disabled button.
+        <div className="border-t border-slate-200 pt-5">
+          <p className="text-sm text-slate-600">{t('result.ctaUsedNote')}</p>
+          <div className="mt-4 flex flex-col items-center gap-3">
+            <a
+              href={appUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleResultUsedCtaClick}
+              className="inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)]"
+            >
+              {t('conversion.cta')}
+            </a>
+            <AppStoreBadge
+              buttonLocation="deficit_calculator_result_used_badge"
+              size="sm"
+              onClick={() => fireAppClick('deficit_calculator_result_used_badge')}
+            />
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
+              <span>💚 {tHero('trustFree')}</span>
+              <span>🔒 {tHero('trustPrivacy')}</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="border-t border-slate-200 pt-5">
+          <p className="text-sm text-slate-600">{t('result.ctaText')}</p>
+          <button
+            onClick={onGetPlan}
+            disabled={planLoading}
+            className="group mt-3 inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span>{planLoading ? t('plan.loading') : t('result.ctaButton')}</span>
+            {!planLoading && (
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+            )}
+          </button>
+          {errorMessage !== null && <p className="mt-2 text-xs text-red-600">{errorMessage}</p>}
+        </div>
+      )}
     </div>
   );
 }
