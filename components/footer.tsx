@@ -20,6 +20,9 @@ export async function Footer() {
               <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 {t('resources')}
               </div>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-deficit-calculator">
+                {t('calculator')}
+              </NextLink>
               <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-tracker-eating-disorders">
                 {t('eatingDisorderSafety')}
               </NextLink>
