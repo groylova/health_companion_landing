@@ -30,13 +30,8 @@ const nextConfig = {
         destination: '/:slug',
         permanent: true,
       },
-      // /food-diary-for-weight-loss is translated to FR + DE + ES but not RU —
-      // strip only the un-translated locale prefixes back to canonical EN.
-      {
-        source: '/:locale(ru)/food-diary-for-weight-loss',
-        destination: '/food-diary-for-weight-loss',
-        permanent: true,
-      },
+      // /food-diary-for-weight-loss is now translated to all 5 locales —
+      // no redirect needed.
     ];
   },
   // Keep default (SSR/SSG) for best SEO + API routes.

@@ -16,7 +16,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 // Locales with a real translation of this article. Others fall back to EN
 // content and keep the parent layout's noindex until translated.
-const TRANSLATED_LOCALES = new Set(['en', 'fr', 'de', 'es']);
+const TRANSLATED_LOCALES = new Set(['en', 'fr', 'de', 'es', 'ru']);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -78,8 +78,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitterDescription:
       'Los diarios alimenticios duplican la pérdida de peso, pero la mayoría de la gente lo deja. Así puedes llevar uno sin la tediosa rutina.',
   };
+  const ru = {
+    title:
+      'Пищевой дневник для похудения: метод, который удваивает результаты (2026) | Nuvvoo',
+    description:
+      'Исследования показывают, что ведение пищевого дневника удваивает эффективность похудения, но большинство людей бросают это занятие, потому что отслеживание еды — утомительный процесс. Nuvvoo упрощает задачу: просто напиши в чате, что ты съел. Никаких баз данных, никаких взвешиваний, никаких угрызений совести.',
+    ogTitle:
+      'Пищевой дневник для похудения: метод, который удваивает результаты',
+    ogDescription:
+      'Исследования показывают, что ведение пищевого дневника удваивает эффективность похудения, но большинство людей бросают это занятие, потому что отслеживание еды — утомительный процесс. Nuvvoo упрощает задачу: просто напиши, что ты съел.',
+    twitterTitle:
+      'Пищевой дневник для похудения: метод, который удваивает результаты',
+    twitterDescription:
+      'Пищевые дневники удваивают потерю веса, но большинство бросает. Вот как вести его без рутины.',
+  };
 
-  const copy = locale === 'fr' ? fr : locale === 'de' ? de : locale === 'es' ? es : en;
+  const copy = locale === 'fr' ? fr : locale === 'de' ? de : locale === 'es' ? es : locale === 'ru' ? ru : en;
   const isTranslated = TRANSLATED_LOCALES.has(locale);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
@@ -137,6 +151,7 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
   const isFrench = locale === 'fr';
   const isGerman = locale === 'de';
   const isSpanish = locale === 'es';
+  const isRussian = locale === 'ru';
 
   const h1 = isFrench
     ? 'Le journal alimentaire pour maigrir : la méthode qui double les résultats'
@@ -144,7 +159,9 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
       ? 'Ernährungstagebuch zur Gewichtsabnahme: Die Methode, die die Ergebnisse verdoppelt'
       : isSpanish
         ? 'Diario de alimentación para bajar de peso: el método que duplica los resultados'
-        : 'Food Diary for Weight Loss: The Method That Doubles Results';
+        : isRussian
+          ? 'Пищевой дневник для похудения: метод, который удваивает результаты'
+          : 'Food Diary for Weight Loss: The Method That Doubles Results';
 
   const subtitle = isFrench
     ? "Tenir un journal alimentaire est l'une des stratégies de perte de poids les plus efficaces, comme le prouvent les études. Les personnes qui notent ce qu'elles mangent perdent systématiquement deux fois plus de poids que celles qui ne le font pas. Mais il y a un hic : la plupart des gens abandonnent au bout de quelques semaines, car la méthode traditionnelle est lente, fastidieuse et source de culpabilité. Et si le problème venait du journal lui-même, et non de la personne ?"
@@ -152,7 +169,9 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
       ? 'Das Führen eines Ernährungstagebuchs ist eine der wirksamsten Strategien zur Gewichtsabnahme, die durch wissenschaftliche Studien belegt ist. Menschen, die konsequent aufzeichnen, was sie essen, nehmen doppelt so viel ab wie diejenigen, die das nicht tun. Aber es gibt einen Haken – die meisten geben innerhalb weniger Wochen auf, weil das herkömmliche Aufzeichnen von Mahlzeiten langsam, mühsam und schuldbewusst macht. Was wäre, wenn das Tagebuch selbst das Problem wäre, nicht die Person?'
       : isSpanish
         ? 'Llevar un diario de alimentación es una de las estrategias más efectivas para bajar de peso, respaldada por investigaciones. Las personas que registran lo que comen de manera constante pierden el doble de peso que aquellas que no lo hacen. Pero hay un problema: la mayoría de la gente lo deja a las pocas semanas porque el registro tradicional de alimentos es lento, tedioso y genera culpa. ¿Y si el problema fuera el diario en sí, y no la persona?'
-        : 'Keeping a food diary is one of the most effective weight loss strategies backed by research. People who track what they eat consistently lose twice as much weight as those who don’t. But there’s a catch — most people quit within weeks because traditional food logging is slow, tedious, and guilt-inducing. What if the diary itself was the problem, not the person?';
+        : isRussian
+          ? 'Ведение пищевого дневника — одна из самых эффективных стратегий похудения, подтверждённая исследованиями. Люди, которые отслеживают, что они едят, в среднем теряют в два раза больше веса, чем те, кто этого не делает. Но есть одна загвоздка — большинство бросает это дело через несколько недель, потому что традиционное ведение дневника — это медленный, утомительный процесс, вызывающий чувство вины. А что, если проблема не в человеке, а в самом дневнике?'
+          : 'Keeping a food diary is one of the most effective weight loss strategies backed by research. People who track what they eat consistently lose twice as much weight as those who don’t. But there’s a catch — most people quit within weeks because traditional food logging is slow, tedious, and guilt-inducing. What if the diary itself was the problem, not the person?';
 
   const imageAlt = isFrench
     ? 'Le personnage de Nuvvoo écrit dans un journal alimentaire ouvert, entouré de bulles de chat avec des repas et des boissons — une approche calme et conviviale du suivi alimentaire pour la perte de poids'
@@ -160,9 +179,11 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
       ? 'Die Nuvvoo-Figur schreibt in ein offenes Ernährungstagebuch, umgeben von Chat-Blasen mit Mahlzeiten und Getränken – eine ruhige, freundliche Sicht auf das Tracken zur Gewichtsabnahme'
       : isSpanish
         ? 'El personaje de Nuvvoo escribiendo en un diario de alimentación abierto, rodeado de burbujas de chat con comidas y bebidas — una mirada tranquila y amigable al registro de comidas para bajar de peso'
-        : 'Nuvvoo character writing in an open food diary, surrounded by chat bubbles of meals and drinks — a calm, friendly take on food tracking for weight loss';
+        : isRussian
+          ? 'Персонаж Nuvvoo пишет в открытом пищевом дневнике, вокруг — чат-облака с блюдами и напитками — спокойный, дружелюбный взгляд на дневник питания для похудения'
+          : 'Nuvvoo character writing in an open food diary, surrounded by chat bubbles of meals and drinks — a calm, friendly take on food tracking for weight loss';
 
-  const faqs = isFrench ? faqsFr : isGerman ? faqsDe : isSpanish ? faqsEs : faqsEn;
+  const faqs = isFrench ? faqsFr : isGerman ? faqsDe : isSpanish ? faqsEs : isRussian ? faqsRu : faqsEn;
 
   return (
     <main>
@@ -197,6 +218,8 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
               <GermanBody />
             ) : isSpanish ? (
               <SpanishBody />
+            ) : isRussian ? (
+              <RussianBody />
             ) : (
               <EnglishBody />
             )}
@@ -1077,5 +1100,221 @@ const faqsEs = [
     question: '¿Nuvvoo es gratis?',
     answer:
       'Sí — Nuvvoo tiene un Plan Gratuito con las funciones de seguimiento esenciales, además de funciones Pro para quien quiera capacidades avanzadas. Consulta los precios y la disponibilidad actuales en nuvvoo.app.',
+  },
+];
+
+/* ─── RUSSIAN BODY ─── */
+
+function RussianBody() {
+  return (
+    <>
+      <ContentSection title="Наука: почему дневники питания работают">
+        <p>
+          Доказательства ясны и согласуются с результатами десятилетий исследований.
+        </p>
+        <p>
+          <strong>Ведение дневника удваивает потерю веса.</strong> Знаковое исследование Kaiser Permanente показало, что люди, которые ежедневно записывали своё питание, теряли в два раза больше веса, чем те, кто этого не делал. Это не незначительное улучшение — это разница в 2 раза.
+        </p>
+        <p>
+          <strong>Важна именно последовательность.</strong> Исследование, опубликованное в Journal of the Academy of Nutrition and Dietetics, показало, что участники, которые вели учёт более чем в 66&nbsp;% дней, похудели почти на 10&nbsp;фунтов. Чем последовательнее человек ведёт записи, тем больше веса он теряет. Частота ведения учёта важнее, чем его идеальность.
+        </p>
+        <p>
+          <strong>Осознанность автоматически меняет поведение.</strong> Исследования показывают, что когда ты заранее знаешь, что будешь записывать свои приёмы пищи, ты с большей вероятностью выбираешь питательную еду и не сбиваешься с курса. Сам процесс записи создаёт цикл обратной связи — ты замечаешь закономерности, ловишь себя на бессмысленном переедании и делаешь лучший выбор без особых усилий.
+        </p>
+        <p>
+          <strong>Стабильность калорийности предсказывает успех.</strong> Исследование 2026 года показало, что с каждым увеличением суточного колебания на 100&nbsp;калорий похудение снижалось примерно на 0,6&nbsp;%. Пищевые дневники помогают сгладить эти колебания, делая суточное потребление видимым.
+        </p>
+        <p>
+          Научные данные не вызывают споров. Пищевые дневники работают. Вопрос в том: почему большинство людей перестают их использовать?
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Проблема: почему люди бросают">
+        <p>
+          Если пищевые дневники так эффективны, почему почти все бросают? Исследование Университета Карнеги-Меллона выявило основные препятствия, опросив 141 человека, ведущих или бросивших вести пищевые дневники, и проанализировав тысячи постов на форумах.
+        </p>
+        <p>
+          <strong>Это медленно и утомительно.</strong> Пользователи описывают ведение дневника питания как «такой медленный и утомительный процесс». Поиск в базах данных, выбор порций, ввод каждого ингредиента для домашних блюд — на это уходит 3–7&nbsp;минут на каждый приём пищи, три или более раз в день. Это до 20&nbsp;минут ежедневного ввода данных.
+        </p>
+        <p>
+          <strong>Базы данных вызывают разочарование.</strong> Результаты поиска часто бывают неверными или перегруженными. Слишком много вариантов для одного и того же блюда, нерелевантные записи и отсутствующие позиции для домашних или региональных блюд. Инструмент, призванный помочь, становится источником раздражения.
+        </p>
+        <p>
+          <strong>Чувство вины и стыда усугубляется.</strong> Четыре распространённых эмоциональных препятствия для ведения пищевого дневника: стыд за то, что ты съел, плохое самочувствие, когда ты «сорвался», ощущение, что это всё равно не поможет, и то, что это слишком неудобно. Традиционные трекеры усиливают эти чувства с помощью счётчиков серий, красных предупреждений и оповещений о дефиците.
+        </p>
+        <p>
+          <strong>Неудача — в методе, а не в человеке.</strong> Большинству людей, которые бросают вести дневники питания, не хватает не дисциплины. Они используют инструменты, которые превращают простую концепцию — записывать то, что ты ешь — в сложный, отнимающий много времени процесс. Преимущество в виде удвоенного похудения исчезает, когда ты прекращаешь вести дневник через две недели.
+        </p>
+        <p>
+          В этом и заключается основная проблема: <strong>дневники питания работают, но традиционные инструменты для их ведения не работают для большинства людей</strong>. Если ты бросил <Link href="/alternative-to-myfitnesspal">MyFitnessPal</Link> или <Link href="/alternative-to-lose-it">Lose It</Link> через пару недель, ты не исключение — ты норма.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Пищевой дневник другого рода">
+        <p>
+          А что, если бы ты мог получить все преимущества отслеживания питания — осознанность, последовательность, удвоенный эффект похудения — без утомительного ввода данных?
+        </p>
+        <p>
+          Именно в этом и заключается идея Nuvvoo. Вместо поиска в базах данных и выбора порций <Link href="/chat-calorie-tracker">ты описываешь свои приёмы пищи так, как будто пишешь сообщение другу</Link>:
+        </p>
+        <ul>
+          <li>«На завтрак съел овсянку с бананом и кофе»</li>
+          <li>«На обед взял ролл с курицей и картошку фри»</li>
+          <li>«На ужин приготовил пасту с песто и салат»</li>
+        </ul>
+        <p>
+          ИИ сам занимается расчётами. Калории и макроэлементы появляются за секунды. Не нужно искать в базах данных, выбирать размер порций из списка или сканировать штрих-коды.
+        </p>
+        <p>
+          <strong>Почему этот подход меняет ситуацию:</strong>
+        </p>
+        <p>
+          <strong>30 секунд вместо 5 минут.</strong> Когда запись занимает меньше минуты, это перестаёт казаться рутинной работой. Барьер для постоянства резко снижается.
+        </p>
+        <p>
+          <strong>Приветствуются приблизительные оценки.</strong> Тебе не нужно взвешивать курицу с точностью до грамма. Достаточно написать «большая тарелка риса с курицей». Исследования показывают, что для осознания пользы от ведения дневника не нужна лабораторная точность — нужно постоянство. А ты будешь более последователен, если инструмент не будет наказывать за приблизительные оценки.
+        </p>
+        <p>
+          <strong>Никаких угрызений совести за пропущенные дни.</strong> Nuvvoo не использует серии, красные предупреждения или уведомления, вызывающие чувство стыда. Пропустил день? Вернись завтра. Твой прогресс не сбрасывается. Это важно, потому что чувство вины — одна из главных причин, по которой люди полностью бросают вести дневники питания — посмотри, как <Link href="/calorie-tracking-without-stress">трекинг без стресса</Link> меняет результат.
+        </p>
+        <p>
+          <strong>Не только еда.</strong> Nuvvoo отслеживает сон, физическую активность, настроение и потребление воды в том же разговорном формате. Это даёт тебе более полную картину — ближе к <Link href="/ai-food-journal">AI-дневнику питания</Link>, чем к приложению с базой данных, — где ты начинаешь видеть связи между тем, как ты спал, что ел и как себя чувствуешь.
+        </p>
+        <p>
+          <strong>Работает на 5 языках.</strong> Веди дневник на английском, немецком, русском, испанском или французском. Описывай свои блюда на родном языке, используя местные названия продуктов — не нужно переводить «борщ» или «шницель» в записи базы данных на английском.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Традиционный дневник питания vs. дневник питания в формате чата">
+        <div className="prose-nuvvoo">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Традиционные приложения-дневники</th>
+                <th>Nuvvoo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Как вести записи</td>
+                <td>Поиск в базе данных → выбор продукта → выбор порции</td>
+                <td>Опиши своими словами</td>
+              </tr>
+              <tr>
+                <td>Время на один приём пищи</td>
+                <td>3–7&nbsp;минут</td>
+                <td>30–60&nbsp;секунд</td>
+              </tr>
+              <tr>
+                <td>Домашние блюда</td>
+                <td>Создание собственного рецепта (утомительно)</td>
+                <td>«Курица с рисом, приготовленная в воке»</td>
+              </tr>
+              <tr>
+                <td>Региональные/местные блюда</td>
+                <td>Часто отсутствуют в базе данных</td>
+                <td>Опиши их — ИИ поймёт</td>
+              </tr>
+              <tr>
+                <td>Пропущенные дни</td>
+                <td>Серия прервана, уведомления о вине</td>
+                <td>«Вернись, когда будешь готов»</td>
+              </tr>
+              <tr>
+                <td>Кривая обучения</td>
+                <td>Умеренная (навигация по базе данных, понимание порций)</td>
+                <td>Нет (просто печатай)</td>
+              </tr>
+              <tr>
+                <td>Эмоциональный тон</td>
+                <td>Ориентирован на достижения, движим серией</td>
+                <td>Спокойный, без давления</td>
+              </tr>
+              <tr>
+                <td>Что ты отслеживаешь</td>
+                <td>Только еду (большинство приложений)</td>
+                <td>Еду, сон, физическую активность, настроение, воду</td>
+              </tr>
+              <tr>
+                <td>Языки</td>
+                <td>Обычно только английский</td>
+                <td>5&nbsp;языков</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ContentSection>
+
+      <ContentSection title="Для кого предназначен пищевой дневник на основе чата?">
+        <p>
+          <strong>Людям, которые раньше пробовали вести учёт, но бросили.</strong> Если ты скачивал MyFitnessPal, Lose It или Yazio и перестал ими пользоваться в течение месяца, проблема, скорее всего, была не в тебе — а в методе. Дневник на основе чата устраняет те препятствия, из-за которых ты бросил.
+        </p>
+        <p>
+          <strong>Людям, которые готовят дома.</strong> Традиционные базы данных созданы для упакованных продуктов со штрих-кодами. Если ты готовишь с нуля, каждый приём пищи превращается в составление рецепта. В чат-дневнике достаточно просто написать «чечевичный суп с хлебом».
+        </p>
+        <p>
+          <strong>Людям, которые едят блюда разных культур.</strong> Если в твоём рационе есть блюда, которые западные базы данных не распознают — или распознают плохо — описать их на своём языке быстрее и точнее, чем искать приблизительные варианты на английском.
+        </p>
+        <p>
+          <strong>Тем, кому нужна осознанность, а не одержимость.</strong> Если ты хочешь понять свои пищевые привычки, не взвешивая каждый грамм и не отслеживая каждый микроэлемент, более лёгкий подход к ведению дневника сохранит все преимущества без переутомления.
+        </p>
+        <p>
+          <strong>Тем, кто начинает свой путь к похудению.</strong> Если ты никогда раньше не вёл дневник питания, начать со сложного приложения с базой данных может быть сложно. Чат-дневник не требует никакого обучения — если ты можешь отправить сообщение, ты можешь вести дневник питания.
+        </p>
+      </ContentSection>
+
+      <SeoCta
+        title="Начни вести пищевой дневник сегодня"
+        description="Присоединяйся к раннему доступу Nuvvoo и попробуй отслеживание питания через разговоры — метод, разработанный, чтобы помочь тебе не сбиваться с курса."
+        buttonLocation="seo_food_diary"
+      />
+
+      <ContentSection title="Как получить максимальную пользу от своего пищевого дневника">
+        <p>
+          Независимо от того, используешь ли ты Nuvvoo или любой другой инструмент, эти принципы сделают пищевые дневники более эффективными:
+        </p>
+        <p>
+          <strong>Веди учёт последовательно, а не идеально.</strong> Исследования показывают, что частота учёта важнее точности. Запись 80&nbsp;% твоих приёмов пищи с приблизительными оценками лучше, чем запись 30&nbsp;% с точными измерениями. Посмотри <Link href="/how-to-stay-consistent-calorie-tracking">как не сбиваться с курса при подсчёте калорий</Link> — это практическая версия принципа.
+        </p>
+        <p>
+          <strong>Не жди до конца дня.</strong> Записывай приёмы пищи по мере их употребления или сразу после. Воспоминания в конце дня менее точны и похожи на домашнюю работу. Быстрое ведение записей в режиме реального времени легче поддерживать.
+        </p>
+        <p>
+          <strong>Учитывай контекст, а не только еду.</strong> Отмечай, как ты себя чувствовал, как спал, был ли ты в стрессе. Со временем вырисовываются закономерности — может быть, ты переедаешь в дни, когда плохо спишь, или больше перекусываешь, когда нервничаешь. Это осознание ценнее, чем знание о том, что ты съел 47&nbsp;г белка.
+        </p>
+        <p>
+          <strong>Не наказывай себя за пропущенные дни.</strong> Если ты пропустил день (или неделю), просто начни заново. Исследования по пищевым дневникам не требуют совершенства — они требуют настойчивости. Дневник, к которому ты возвращаешься после перерыва, бесконечно ценнее того, который ты бросил навсегда.
+        </p>
+      </ContentSection>
+    </>
+  );
+}
+
+const faqsRu = [
+  {
+    question: 'Действительно ли дневники питания помогают похудеть?',
+    answer:
+      'Да. Многочисленные исследования подтверждают, что регулярное отслеживание питания связано со значительно большей потерей веса. Самый цитируемый вывод: люди, которые ведут ежедневные записи о еде, теряют в два раза больше веса, чем те, кто не ведёт дневник. Ключ — в постоянстве: отслеживать большинство дней важнее, чем идеально фиксировать каждый приём пищи.',
+  },
+  {
+    question: 'Чем дневник питания на основе чата отличается от MyFitnessPal?',
+    answer:
+      'Традиционные приложения, такие как MyFitnessPal, требуют от тебя поиска в базе данных, выбора точного продукта и указания размера порции. Дневник на основе чата, такой как Nuvvoo, позволяет описывать еду естественным языком — «сэндвич с курицей и кофе» — и ИИ автоматически рассчитывает калории. Это быстрее, проще и легче поддерживать в долгосрочной перспективе.',
+  },
+  {
+    question: 'Насколько точно отслеживание питания с помощью ИИ?',
+    answer:
+      'Оценка ИИ менее точна, чем поиск точных записей в базе данных для упакованных продуктов. Но для большинства людей этой точности более чем достаточно для похудения. Исследования постоянно показывают, что постоянство в отслеживании важнее точности — а ты будешь более последователен, если инструмент прост в использовании.',
+  },
+  {
+    question: 'Могу ли я использовать Nuvvoo в качестве единственного дневника питания?',
+    answer:
+      'Да. Nuvvoo отслеживает еду, калории, макроэлементы, воду, сон, физическую активность и настроение — всё это через чат. Для большинства людей, стремящихся похудеть за счёт осознанности и постоянства, это покрывает всё необходимое.',
+  },
+  {
+    question: 'Nuvvoo бесплатен?',
+    answer:
+      'Да — у Nuvvoo есть бесплатный план с базовыми функциями трекинга, плюс Pro-функции для тех, кому нужны расширенные возможности. Актуальные цены и условия — на nuvvoo.app.',
   },
 ];
