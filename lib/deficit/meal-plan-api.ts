@@ -1,10 +1,12 @@
 // Thin client wrapper for the public Meal-Plan API.
 // Spec: GET /public/meal-plan/session → token (IP-bound, 30 min TTL)
 //       POST /public/meal-plan        → AI-generated day plan
-// Base URL comes from NEXT_PUBLIC_MEAL_PLAN_API_URL; we keep a localhost
-// default so dev works without extra setup. In prod this must be set.
+// Base URL comes from NEXT_PUBLIC_MEAL_PLAN_API_URL; the production
+// Nuvvoo backend at app.kentryx.org is the default so the prod build
+// works without explicit env config. Override locally to hit a dev
+// instance (e.g. NEXT_PUBLIC_MEAL_PLAN_API_URL=http://localhost:8000).
 
-const DEFAULT_BASE_URL = 'http://localhost:8000';
+const DEFAULT_BASE_URL = 'https://app.kentryx.org';
 
 export function mealPlanApiBaseUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_MEAL_PLAN_API_URL;
