@@ -61,6 +61,13 @@ export function SourceTracker() {
 
     sessionStorage.setItem(STORAGE_KEY, source);
 
+    // Notify any mounted useAppStoreLink hooks so they can rebuild URLs
+    // with the freshly captured ct=<source> param. The SourceTracker lives
+    // in a layout above the pages that use the hook, so its useEffect fires
+    // AFTER the hook's — without this nudge, App Store URLs render with
+    // ct=direct on first-touch visits with UTM params.
+    window.dispatchEvent(new Event('nuvvoo-source-updated'));
+
     if (typeof window.gtag === 'function') {
       window.gtag('set', 'user_properties', { traffic_source: source });
     }

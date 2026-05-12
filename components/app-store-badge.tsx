@@ -24,19 +24,31 @@ const SIZES: Record<Size, { w: number; h: number; cls: string }> = {
   sm: { w: 120, h: 40, cls: 'h-[40px] w-auto' },
 };
 
-type Props = { buttonLocation: string; size?: Size };
+type Props = {
+  buttonLocation: string;
+  size?: Size;
+  // Optional callback fired after the built-in click_platform event. Used by
+  // pages that need a funnel-specific event (e.g. the calculator's app_click)
+  // without losing the site-wide click_platform tracking.
+  onClick?: () => void;
+};
 
-export function AppStoreBadge({ buttonLocation, size = 'md' }: Props) {
+export function AppStoreBadge({ buttonLocation, size = 'md', onClick }: Props) {
   const { url, handleClick, locale } = useAppStoreLink(buttonLocation);
   const badgeSrc = BADGE_BY_LOCALE[locale] || FALLBACK_BADGE;
   const { w, h, cls } = SIZES[size];
+
+  function composedClick(): void {
+    handleClick();
+    onClick?.();
+  }
 
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={handleClick}
+      onClick={composedClick}
       aria-label="Download on the App Store"
       className="inline-block transition-opacity hover:opacity-85"
     >
