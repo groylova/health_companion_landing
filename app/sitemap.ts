@@ -8,7 +8,7 @@ import { routing } from '@/i18n/routing';
 const TRANSLATED_SEO_SLUGS: Record<string, string[]> = {
   'alternative-to-myfitnesspal': ['en', 'de', 'ru', 'es', 'fr'],
   'alternative-to-lose-it': ['en', 'de', 'ru', 'es', 'fr'],
-  'food-diary-for-weight-loss': ['en', 'fr', 'de'],
+  'food-diary-for-weight-loss': ['en', 'fr', 'de', 'es'],
   'calorie-deficit-calculator': ['en', 'de', 'ru', 'es', 'fr'],
 };
 

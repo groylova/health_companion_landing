@@ -16,7 +16,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 // Locales with a real translation of this article. Others fall back to EN
 // content and keep the parent layout's noindex until translated.
-const TRANSLATED_LOCALES = new Set(['en', 'fr', 'de']);
+const TRANSLATED_LOCALES = new Set(['en', 'fr', 'de', 'es']);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -64,8 +64,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitterDescription:
       'Ernährungstagebücher verdoppeln den Gewichtsverlust, doch die meisten geben auf. So führst du eines, ohne die Plackerei.',
   };
+  const es = {
+    title:
+      'Diario alimenticio para bajar de peso: el método que duplica los resultados (2026) | Nuvvoo',
+    description:
+      'Las investigaciones demuestran que los diarios alimenticios duplican la pérdida de peso, pero la mayoría de la gente lo deja porque llevar un registro es tedioso. Nuvvoo lo hace fácil: solo envía un mensaje de texto con lo que comiste. Sin bases de datos, sin pesajes, sin culpa.',
+    ogTitle:
+      'Diario alimenticio para bajar de peso: el método que duplica los resultados',
+    ogDescription:
+      'Las investigaciones demuestran que los diarios alimenticios duplican la pérdida de peso, pero la mayoría de la gente lo deja porque llevar un registro es tedioso. Nuvvoo lo hace fácil: solo envía un mensaje con lo que comiste.',
+    twitterTitle:
+      'Diario alimenticio para bajar de peso: el método que duplica los resultados',
+    twitterDescription:
+      'Los diarios alimenticios duplican la pérdida de peso, pero la mayoría de la gente lo deja. Así puedes llevar uno sin la tediosa rutina.',
+  };
 
-  const copy = locale === 'fr' ? fr : locale === 'de' ? de : en;
+  const copy = locale === 'fr' ? fr : locale === 'de' ? de : locale === 'es' ? es : en;
   const isTranslated = TRANSLATED_LOCALES.has(locale);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
@@ -122,26 +136,33 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
 
   const isFrench = locale === 'fr';
   const isGerman = locale === 'de';
+  const isSpanish = locale === 'es';
 
   const h1 = isFrench
     ? 'Le journal alimentaire pour maigrir : la méthode qui double les résultats'
     : isGerman
       ? 'Ernährungstagebuch zur Gewichtsabnahme: Die Methode, die die Ergebnisse verdoppelt'
-      : 'Food Diary for Weight Loss: The Method That Doubles Results';
+      : isSpanish
+        ? 'Diario de alimentación para bajar de peso: el método que duplica los resultados'
+        : 'Food Diary for Weight Loss: The Method That Doubles Results';
 
   const subtitle = isFrench
     ? "Tenir un journal alimentaire est l'une des stratégies de perte de poids les plus efficaces, comme le prouvent les études. Les personnes qui notent ce qu'elles mangent perdent systématiquement deux fois plus de poids que celles qui ne le font pas. Mais il y a un hic : la plupart des gens abandonnent au bout de quelques semaines, car la méthode traditionnelle est lente, fastidieuse et source de culpabilité. Et si le problème venait du journal lui-même, et non de la personne ?"
     : isGerman
       ? 'Das Führen eines Ernährungstagebuchs ist eine der wirksamsten Strategien zur Gewichtsabnahme, die durch wissenschaftliche Studien belegt ist. Menschen, die konsequent aufzeichnen, was sie essen, nehmen doppelt so viel ab wie diejenigen, die das nicht tun. Aber es gibt einen Haken – die meisten geben innerhalb weniger Wochen auf, weil das herkömmliche Aufzeichnen von Mahlzeiten langsam, mühsam und schuldbewusst macht. Was wäre, wenn das Tagebuch selbst das Problem wäre, nicht die Person?'
-      : 'Keeping a food diary is one of the most effective weight loss strategies backed by research. People who track what they eat consistently lose twice as much weight as those who don’t. But there’s a catch — most people quit within weeks because traditional food logging is slow, tedious, and guilt-inducing. What if the diary itself was the problem, not the person?';
+      : isSpanish
+        ? 'Llevar un diario de alimentación es una de las estrategias más efectivas para bajar de peso, respaldada por investigaciones. Las personas que registran lo que comen de manera constante pierden el doble de peso que aquellas que no lo hacen. Pero hay un problema: la mayoría de la gente lo deja a las pocas semanas porque el registro tradicional de alimentos es lento, tedioso y genera culpa. ¿Y si el problema fuera el diario en sí, y no la persona?'
+        : 'Keeping a food diary is one of the most effective weight loss strategies backed by research. People who track what they eat consistently lose twice as much weight as those who don’t. But there’s a catch — most people quit within weeks because traditional food logging is slow, tedious, and guilt-inducing. What if the diary itself was the problem, not the person?';
 
   const imageAlt = isFrench
     ? 'Le personnage de Nuvvoo écrit dans un journal alimentaire ouvert, entouré de bulles de chat avec des repas et des boissons — une approche calme et conviviale du suivi alimentaire pour la perte de poids'
     : isGerman
       ? 'Die Nuvvoo-Figur schreibt in ein offenes Ernährungstagebuch, umgeben von Chat-Blasen mit Mahlzeiten und Getränken – eine ruhige, freundliche Sicht auf das Tracken zur Gewichtsabnahme'
-      : 'Nuvvoo character writing in an open food diary, surrounded by chat bubbles of meals and drinks — a calm, friendly take on food tracking for weight loss';
+      : isSpanish
+        ? 'El personaje de Nuvvoo escribiendo en un diario de alimentación abierto, rodeado de burbujas de chat con comidas y bebidas — una mirada tranquila y amigable al registro de comidas para bajar de peso'
+        : 'Nuvvoo character writing in an open food diary, surrounded by chat bubbles of meals and drinks — a calm, friendly take on food tracking for weight loss';
 
-  const faqs = isFrench ? faqsFr : isGerman ? faqsDe : faqsEn;
+  const faqs = isFrench ? faqsFr : isGerman ? faqsDe : isSpanish ? faqsEs : faqsEn;
 
   return (
     <main>
@@ -174,6 +195,8 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
               <FrenchBody />
             ) : isGerman ? (
               <GermanBody />
+            ) : isSpanish ? (
+              <SpanishBody />
             ) : (
               <EnglishBody />
             )}
@@ -838,5 +861,221 @@ const faqsDe = [
     question: 'Ist Nuvvoo kostenlos?',
     answer:
       'Ja — Nuvvoo hat einen Free Plan mit den wichtigsten Tracking-Funktionen, dazu Pro Features für alle, die erweiterte Funktionen wollen. Aktuelle Preise und Verfügbarkeit findest du auf nuvvoo.app.',
+  },
+];
+
+/* ─── SPANISH BODY ─── */
+
+function SpanishBody() {
+  return (
+    <>
+      <ContentSection title="La ciencia: por qué funcionan los diarios de alimentación">
+        <p>
+          La evidencia es clara y consistente a lo largo de décadas de investigación.
+        </p>
+        <p>
+          <strong>Llevar un registro duplica la pérdida de peso.</strong> Un estudio histórico de Kaiser Permanente descubrió que las personas que llevaban un registro diario de lo que comían perdían el doble de peso que las que no lo hacían. No se trata de una mejora marginal, sino de una diferencia del doble.
+        </p>
+        <p>
+          <strong>La constancia es lo que importa.</strong> Una investigación publicada en el Journal of the Academy of Nutrition and Dietetics mostró que los participantes que registraron más del 66&nbsp;% de los días perdieron casi 4,5&nbsp;kilos. Cuanto más constante es alguien al registrar, más peso pierde. La frecuencia del registro importa más que la perfección.
+        </p>
+        <p>
+          <strong>La conciencia cambia el comportamiento automáticamente.</strong> Los estudios muestran que cuando anticipas que vas a anotar tus comidas, es más probable que elijas alimentos ricos en nutrientes y te mantengas en el camino correcto. El simple hecho de anotar crea un ciclo de retroalimentación: notas patrones, detectas el comer sin pensar y tomas mejores decisiones sin necesidad de fuerza de voluntad.
+        </p>
+        <p>
+          <strong>La consistencia calórica predice el éxito.</strong> Un estudio de 2026 descubrió que por cada aumento de 100&nbsp;calorías en la fluctuación diaria, la pérdida de peso disminuía en aproximadamente un 0,6&nbsp;%. Los diarios de comida ayudan a suavizar estas fluctuaciones al hacer visible la ingesta diaria.
+        </p>
+        <p>
+          La ciencia no es controvertida. Los diarios de comida funcionan. La pregunta es: ¿por qué la mayoría de la gente deja de usarlos?
+        </p>
+      </ContentSection>
+
+      <ContentSection title="El problema: por qué la gente lo deja">
+        <p>
+          Si los diarios de comida son tan eficaces, ¿por qué casi todo el mundo los deja? Una investigación de la Universidad Carnegie Mellon identificó las principales barreras al encuestar a 141 personas que llevan o han llevado un diario de comida y al analizar miles de publicaciones en foros comunitarios.
+        </p>
+        <p>
+          <strong>Es lento y tedioso.</strong> Los usuarios describen llevar un diario de comida como «un proceso muy lento y tedioso». Buscar en bases de datos, seleccionar porciones, ingresar cada ingrediente de las comidas caseras: esto lleva de 3 a 7&nbsp;minutos por comida, tres o más veces al día. Eso son hasta 20&nbsp;minutos diarios de ingresar datos.
+        </p>
+        <p>
+          <strong>Las bases de datos son frustrantes.</strong> Los resultados de búsqueda suelen ser incorrectos o abrumadores. Demasiadas opciones para el mismo alimento, entradas irrelevantes y faltas de datos para platos caseros o regionales. La herramienta diseñada para ayudar se convierte en una fuente de fricción.
+        </p>
+        <p>
+          <strong>La culpa y la vergüenza se acumulan.</strong> Cuatro obstáculos emocionales comunes para llevar un diario de alimentación: vergüenza por lo que comiste, sentirte mal cuando «te descuidas», la sensación de que de todos modos no servirá de nada y encontrarlo demasiado incómodo. Los rastreadores tradicionales amplifican estos sentimientos con contadores de rachas, advertencias en rojo y alertas de déficit.
+        </p>
+        <p>
+          <strong>El método falla, no la persona.</strong> La mayoría de las personas que dejan los diarios de alimentación no carecen de disciplina. Están usando herramientas que convierten un concepto simple —anotar lo que comes— en un proceso complejo que lleva mucho tiempo. El beneficio de perder el doble de peso desaparece cuando dejas de llevar el registro después de dos semanas.
+        </p>
+        <p>
+          Esta es la tensión principal: <strong>los diarios de alimentación funcionan, pero las herramientas tradicionales para llevarlos no funcionan para la mayoría de las personas</strong>. Si dejaste <Link href="/alternative-to-myfitnesspal">MyFitnessPal</Link> o <Link href="/alternative-to-lose-it">Lose It</Link> al cabo de unas semanas, no eres la excepción, eres la norma.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Un tipo diferente de diario de comida">
+        <p>
+          ¿Y si pudieras obtener los beneficios del seguimiento de la comida —la conciencia, la constancia, la pérdida de peso duplicada— sin la tediosa entrada de datos?
+        </p>
+        <p>
+          Esa es la idea detrás de Nuvvoo. En lugar de buscar en bases de datos y seleccionar porciones, <Link href="/chat-calorie-tracker">describes tus comidas como si le enviaras un mensaje a un amigo</Link>:
+        </p>
+        <ul>
+          <li>«Desayuné avena con plátano y café»</li>
+          <li>«Me comí un wrap de pollo con papas fritas para el almuerzo»</li>
+          <li>«Hice pasta con pesto y ensalada para la cena»</li>
+        </ul>
+        <p>
+          La IA se encarga de la estimación. Las calorías y los macronutrientes aparecen en segundos. No hay que navegar por bases de datos, ni usar menús desplegables de tamaños de porciones, ni escanear códigos de barras.
+        </p>
+        <p>
+          <strong>Por qué este enfoque cambia la ecuación:</strong>
+        </p>
+        <p>
+          <strong>30 segundos en lugar de 5&nbsp;minutos.</strong> Cuando registrar lo que comes te lleva menos de un minuto, deja de parecer una tarea pesada. La barrera para la constancia se reduce drásticamente.
+        </p>
+        <p>
+          <strong>Se fomentan las estimaciones.</strong> No necesitas pesar el pollo al gramo. «Un plato grande de arroz con pollo» es suficiente. Las investigaciones demuestran que el beneficio de la conciencia que aporta el seguimiento no requiere precisión de laboratorio, sino constancia. Y eres más constante cuando la herramienta no castiga las aproximaciones.
+        </p>
+        <p>
+          <strong>Sin culpa por los días que te saltas.</strong> Nuvvoo no usa rachas, advertencias rojas ni notificaciones que te hagan sentir mal. ¿Te saltaste un día? Vuelve mañana. Tu progreso no se reinicia. Esto es importante porque la culpa es una de las principales razones por las que la gente abandona por completo los diarios de alimentación — descubre cómo un <Link href="/calorie-tracking-without-stress">seguimiento sin estrés</Link> cambia los resultados.
+        </p>
+        <p>
+          <strong>Más allá de la comida.</strong> Nuvvoo lleva un registro del sueño, el ejercicio, el estado de ánimo y el consumo de agua en el mismo formato coloquial. Esto te da una visión más completa — más cercana a un <Link href="/ai-food-journal">diario de alimentación con IA</Link> que a una app de base de datos — donde empiezas a ver conexiones entre cómo dormiste, qué comiste y cómo te sientes.
+        </p>
+        <p>
+          <strong>Funciona en 5 idiomas.</strong> Lleva un registro en inglés, alemán, ruso, español o francés. Describe tus comidas en tu propio idioma, con los nombres locales de los alimentos: no hace falta traducir «борщ» o «Schnitzel» a entradas de la base de datos en inglés.
+        </p>
+      </ContentSection>
+
+      <ContentSection title="Diario de comida tradicional vs. diario de comida basado en chat">
+        <div className="prose-nuvvoo">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Aplicaciones de diario tradicionales</th>
+                <th>Nuvvoo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cómo registras</td>
+                <td>Buscar en la base de datos → seleccionar el alimento → elegir la porción</td>
+                <td>Describir con tus propias palabras</td>
+              </tr>
+              <tr>
+                <td>Tiempo por comida</td>
+                <td>3–7&nbsp;minutos</td>
+                <td>30–60&nbsp;segundos</td>
+              </tr>
+              <tr>
+                <td>Comidas caseras</td>
+                <td>Crear una receta personalizada (tedioso)</td>
+                <td>«Pollo salteado con arroz»</td>
+              </tr>
+              <tr>
+                <td>Comida regional/local</td>
+                <td>A menudo no aparece en la base de datos</td>
+                <td>Descríbela: la IA la entiende</td>
+              </tr>
+              <tr>
+                <td>Días perdidos</td>
+                <td>Racha rota, notificaciones de culpa</td>
+                <td>«Vuelve cuando estés listo»</td>
+              </tr>
+              <tr>
+                <td>Curva de aprendizaje</td>
+                <td>Moderada (navegar por la base de datos, entender las porciones)</td>
+                <td>Ninguna (solo escribe)</td>
+              </tr>
+              <tr>
+                <td>Tono emocional</td>
+                <td>Basado en logros, impulsado por rachas</td>
+                <td>Tranquilo, sin presión</td>
+              </tr>
+              <tr>
+                <td>Lo que registras</td>
+                <td>Solo comida (la mayoría de las apps)</td>
+                <td>Comida, sueño, ejercicio, estado de ánimo, agua</td>
+              </tr>
+              <tr>
+                <td>Idiomas</td>
+                <td>Normalmente solo inglés</td>
+                <td>5&nbsp;idiomas</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ContentSection>
+
+      <ContentSection title="¿Para quién es un diario de comida basado en chat?">
+        <p>
+          <strong>Personas que han intentado llevar un registro antes y lo han dejado.</strong> Si descargaste MyFitnessPal, Lose It o Yazio y dejaste de usarlas en menos de un mes, probablemente el problema no eras tú, sino el método. Un diario basado en chat elimina la fricción que te hizo dejarlo.
+        </p>
+        <p>
+          <strong>Personas que cocinan en casa.</strong> Las bases de datos tradicionales están diseñadas para alimentos envasados con códigos de barras. Si cocinas desde cero, cada comida se convierte en un ejercicio de creación de recetas. En un diario de chat, «sopa de lentejas con pan» es todo lo que necesitas.
+        </p>
+        <p>
+          <strong>Personas que comen comida de diferentes culturas.</strong> Si tus comidas incluyen platos que las bases de datos de comida occidental no reconocen —o reconocen mal—, describirlos en tu propio idioma es más rápido y preciso que buscar aproximaciones en inglés.
+        </p>
+        <p>
+          <strong>Personas que buscan conciencia, no obsesión.</strong> Si quieres entender tus patrones alimenticios sin pesar cada gramo ni llevar un registro de cada micronutriente, un enfoque más sencillo para llevar un registro te permite obtener los beneficios sin agotarte.
+        </p>
+        <p>
+          <strong>Personas que están comenzando su camino hacia la pérdida de peso.</strong> Si nunca has llevado un registro de lo que comes, empezar con una aplicación de base de datos compleja puede ser abrumador. Un diario de chat no tiene curva de aprendizaje: si puedes enviar un mensaje de texto, puedes llevar un registro de lo que comes.
+        </p>
+      </ContentSection>
+
+      <SeoCta
+        title="Empieza tu diario de alimentación hoy mismo"
+        description="Únete al acceso anticipado de Nuvvoo y experimenta el seguimiento de la alimentación a través de la conversación: el método diseñado para que seas constante."
+        buttonLocation="seo_food_diary"
+      />
+
+      <ContentSection title="Cómo sacar el máximo provecho de tu diario de alimentos">
+        <p>
+          Ya sea que uses Nuvvoo o cualquier otra herramienta, estos principios hacen que los diarios de alimentos sean más efectivos:
+        </p>
+        <p>
+          <strong>Lleva un registro de manera constante, no perfecta.</strong> Las investigaciones muestran que la frecuencia del registro importa más que la precisión. Registrar el 80&nbsp;% de tus comidas con estimaciones aproximadas es mejor que registrar el 30&nbsp;% con medidas exactas. Descubre <Link href="/how-to-stay-consistent-calorie-tracking">cómo mantener la constancia en el seguimiento de calorías</Link> para la versión práctica de este principio.
+        </p>
+        <p>
+          <strong>No esperes hasta el final del día.</strong> Registra las comidas a medida que las comes, o poco después. Recordar al final del día es menos preciso y se siente como una tarea. El registro rápido y en tiempo real es más fácil de mantener.
+        </p>
+        <p>
+          <strong>Incluye el contexto, no solo la comida.</strong> Anota cómo te sentiste, cómo dormiste, si estabas estresado. Con el tiempo, surgen patrones: tal vez comes de más los días que duermes mal, o picas más cuando estás estresado. Esta conciencia es más valiosa que saber que consumiste 47&nbsp;g de proteína.
+        </p>
+        <p>
+          <strong>No te castigues por los días que te saltas.</strong> Si te saltas un día (o una semana), simplemente vuelve a empezar. Las investigaciones sobre los diarios de alimentación no exigen perfección, sino constancia. Un diario al que vuelves después de un descanso es infinitamente más valioso que uno que abandonas para siempre.
+        </p>
+      </ContentSection>
+    </>
+  );
+}
+
+const faqsEs = [
+  {
+    question: '¿Los diarios de alimentación realmente te ayudan a bajar de peso?',
+    answer:
+      'Sí. Múltiples estudios confirman que el seguimiento constante de la alimentación está asociado con una pérdida de peso significativamente mayor. El hallazgo más citado: las personas que llevan registros diarios de lo que comen pierden el doble de peso que quienes no lo hacen. La clave es la constancia: llevar un registro la mayoría de los días es más importante que registrar cada comida a la perfección.',
+  },
+  {
+    question: '¿En qué se diferencia un diario de alimentación basado en chat de MyFitnessPal?',
+    answer:
+      'Las apps tradicionales como MyFitnessPal te obligan a buscar en una base de datos, seleccionar el alimento exacto y especificar el tamaño de las porciones. Un diario basado en chat como Nuvvoo te permite describir las comidas en lenguaje natural —«sándwich de pollo y un café»— y la IA calcula las calorías automáticamente. Es más rápido, más sencillo y más fácil de mantener a largo plazo.',
+  },
+  {
+    question: '¿Qué tan preciso es el registro de alimentos basado en IA?',
+    answer:
+      'La estimación de la IA es menos precisa que buscar entradas exactas en la base de datos para alimentos envasados. Pero para la mayoría de las personas, la precisión es más que suficiente para bajar de peso. Las investigaciones demuestran sistemáticamente que la constancia en el seguimiento importa más que la precisión del seguimiento, y eres más constante cuando la herramienta es fácil de usar.',
+  },
+  {
+    question: '¿Puedo usar Nuvvoo como mi único diario de alimentos?',
+    answer:
+      'Sí. Nuvvoo registra alimentos, calorías, macronutrientes, agua, sueño, ejercicio y estado de ánimo, todo a través de una conversación. Para la mayoría de las personas que buscan perder peso a través de la conciencia y la constancia, cubre todo lo que necesitas.',
+  },
+  {
+    question: '¿Nuvvoo es gratis?',
+    answer:
+      'Sí — Nuvvoo tiene un Plan Gratuito con las funciones de seguimiento esenciales, además de funciones Pro para quien quiera capacidades avanzadas. Consulta los precios y la disponibilidad actuales en nuvvoo.app.',
   },
 ];
