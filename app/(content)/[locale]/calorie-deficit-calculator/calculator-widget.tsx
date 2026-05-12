@@ -80,10 +80,10 @@ const STORAGE_KEY_DATA = 'nuvvoo_deficit_plan_data';
 // gate at load time drops stale entries instead of trying to migrate them.
 const STORAGE_VERSION = 6;
 
-// TEMP: disables the "1 generation per browser" gate so we can iterate on
-// the AI prompt + UI without clearing localStorage each click. Flip back to
-// true before shipping — the gate is part of the public spec.
-const PLAN_LIMIT_ENABLED = false;
+// Enforces the "1 generation per browser" gate from the public AC. When
+// false, the gate is bypassed for local iteration on prompt/UI — flip back
+// to true before shipping so production stays within the spec.
+const PLAN_LIMIT_ENABLED = true;
 
 type StoredData = {
   v: number;
