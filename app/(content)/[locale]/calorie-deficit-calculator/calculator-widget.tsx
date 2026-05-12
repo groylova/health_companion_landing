@@ -964,31 +964,33 @@ function ResultView({
       {result.clamped && <p className="text-xs text-amber-700">{t('result.clampedNote')}</p>}
 
       {/* Plan-only inputs: don't affect the kcal/macros math, only the AI
-         meal plan. Kept on the result screen so the form stays focused on
-         the calculation itself. */}
-      <div className="space-y-4 border-t border-slate-200 pt-5">
-        <div>
-          <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
-          {/* 2×2 always — 4-in-a-row inside the half-width hero column
-             clips longer labels (Pescatarian / Pescetarisch / Вегетарианство). */}
-          <div className="mt-1 grid grid-cols-2 gap-2">
-            {DIET_OPTIONS.map((d) => (
-              <SegmentButton
-                key={d}
-                selected={form.diet === d}
-                onClick={() => onField('diet', d)}
-                label={t(`form.diet_${d}`)}
-              />
-            ))}
+         meal plan. Hidden once alreadyUsed flips on — they'd be inert
+         clutter when there's no plan left to generate. */}
+      {!alreadyUsed && (
+        <div className="space-y-4 border-t border-slate-200 pt-5">
+          <div>
+            <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
+            {/* 2×2 always — 4-in-a-row inside the half-width hero column
+               clips longer labels (Pescatarian / Pescetarisch / Вегетарианство). */}
+            <div className="mt-1 grid grid-cols-2 gap-2">
+              {DIET_OPTIONS.map((d) => (
+                <SegmentButton
+                  key={d}
+                  selected={form.diet === d}
+                  onClick={() => onField('diet', d)}
+                  label={t(`form.diet_${d}`)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
 
-        <AllergiesInput
-          value={form.allergies}
-          onChange={(next) => onField('allergies', next)}
-          t={t}
-        />
-      </div>
+          <AllergiesInput
+            value={form.allergies}
+            onChange={(next) => onField('allergies', next)}
+            t={t}
+          />
+        </div>
+      )}
 
       {alreadyUsed ? (
         // Free plan already spent — replace the generation CTA with the
