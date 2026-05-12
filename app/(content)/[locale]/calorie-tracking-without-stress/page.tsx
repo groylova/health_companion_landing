@@ -207,7 +207,7 @@ export default async function CalorieTrackingWithoutStress({
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['foodDiary', 'stayConsistent', 'eatingDisorderSafety', 'chatTracker']} />
+            <RelatedGuides slugs={['calculator', 'foodDiary', 'stayConsistent', 'chatTracker']} />
           </div>
         </Container>
       </article>

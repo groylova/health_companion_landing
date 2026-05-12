@@ -210,7 +210,7 @@ export default async function PhotoVsChatCalorieTracking({
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['chatTracker', 'aiFoodJournal', 'stressFree', 'mfpAlternative']} />
+            <RelatedGuides slugs={['calculator', 'chatTracker', 'aiFoodJournal', 'stressFree']} />
           </div>
         </Container>
       </article>

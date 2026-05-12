@@ -180,7 +180,7 @@ export default async function ChatCalorieTracker({
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['aiFoodJournal', 'foodDiary', 'mfpAlternative', 'stressFree']} />
+            <RelatedGuides slugs={['calculator', 'aiFoodJournal', 'foodDiary', 'stressFree']} />
           </div>
         </Container>
       </article>

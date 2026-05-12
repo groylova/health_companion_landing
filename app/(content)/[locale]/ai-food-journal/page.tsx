@@ -190,7 +190,7 @@ export default async function AiFoodJournal({
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['chatTracker', 'foodDiary', 'stressFree', 'mfpAlternative']} />
+            <RelatedGuides slugs={['calculator', 'chatTracker', 'foodDiary', 'stressFree']} />
           </div>
         </Container>
       </article>
