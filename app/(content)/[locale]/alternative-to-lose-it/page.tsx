@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const en = {
-    title: 'Best Lose It Alternative 2026 — Track Calories Without the Hassle | Nuvvoo',
+    title: 'Best Lose It Alternative 2026 — Track Calories Without the Hassle',
     description:
       "Frustrated with Lose It's clunky updates and premium paywalls? Nuvvoo lets you track calories by texting what you ate — no database searching, no weighing. Works in 5 languages.",
     ogTitle: 'Best Lose It Alternative 2026 — Track Calories Without the Hassle',
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const es = {
     title:
-      'La mejor alternativa a Lose It en 2026: controla tus calorías sin complicaciones | Nuvvoo',
+      'La mejor alternativa a Lose It en 2026: controla tus calorías sin complicaciones',
     description:
       '¿Frustrado con las actualizaciones complicadas y los muros de pago de Lose It? Nuvvoo te permite controlar tus calorías enviando un mensaje de texto con lo que comiste: sin buscar en bases de datos ni pesar nada. Funciona en 5 idiomas.',
     ogTitle:
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const de = {
     title:
-      'Die beste Alternative zu Lose It 2026 – Kalorien zählen ohne Stress | Nuvvoo',
+      'Die beste Alternative zu Lose It 2026 – Kalorien zählen ohne Stress',
     description:
       'Bist du genervt von den umständlichen Updates und den Premium-Bezahlschranken bei Lose It? Mit Nuvvoo kannst du Kalorien zählen, indem du einfach per SMS eintippst, was du gegessen hast – kein Suchen in Datenbanken, kein Abwiegen. Funktioniert in 5 Sprachen.',
     ogTitle: 'Die beste Alternative zu Lose It 2026 – Kalorien zählen ohne Stress',
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const fr = {
     title:
-      'Meilleure alternative à Lose It en 2026 — Suis tes calories sans tracas | Nuvvoo',
+      'Meilleure alternative à Lose It en 2026 — Suis tes calories sans tracas',
     description:
       "Tu en as marre des mises à jour maladroites et des abonnements payants de Lose It ? Nuvvoo te permet de suivre tes calories en envoyant par SMS ce que tu as mangé — pas besoin de chercher dans une base de données, ni de peser quoi que ce soit. Fonctionne en 5 langues.",
     ogTitle:
@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const ru = {
     title:
-      'Лучшая альтернатива Lose It в 2026 году — отслеживай калории без лишних хлопот | Nuvvoo',
+      'Лучшая альтернатива Lose It в 2026 году — отслеживай калории без лишних хлопот',
     description:
       'Надоели неудобные обновления и платные функции в Lose It? Nuvvoo позволяет отслеживать калории, просто отправляя SMS с информацией о том, что ты съел — без поиска в базе данных и без взвешивания. Работает на 5 языках.',
     ogTitle:

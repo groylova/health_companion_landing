@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const en = {
-    title: 'Best MyFitnessPal Alternative 2026 — Just Text What You Ate | Nuvvoo',
+    title: 'Best MyFitnessPal Alternative 2026 — Just Text What You Ate',
     description:
       'Tired of searching databases and weighing portions? Nuvvoo tracks calories through chat — describe your meal, get calories in seconds. Works in 5 languages.',
     ogDescription:

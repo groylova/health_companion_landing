@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   const en = {
-    title: 'Food Diary for Weight Loss: The Method That Doubles Results (2026) | Nuvvoo',
+    title: 'Food Diary for Weight Loss: The Method That Doubles Results (2026)',
     description:
       "Research shows food diaries double weight loss — but most people quit because tracking is tedious. Nuvvoo makes it easy: just text what you ate. No databases, no weighing, no guilt.",
     ogTitle: 'Food Diary for Weight Loss: The Method That Doubles Results',
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const fr = {
     title:
-      "Le journal alimentaire pour maigrir : la méthode qui double les résultats (2026) | Nuvvoo",
+      "Le journal alimentaire pour maigrir : la méthode qui double les résultats (2026)",
     description:
       "Les études montrent que les journaux alimentaires doublent la perte de poids — mais la plupart des gens abandonnent parce que le suivi est fastidieux. Avec Nuvvoo, c'est simple : il suffit d'écrire ce que tu as mangé. Pas de bases de données, pas de pesée, pas de culpabilité.",
     ogTitle:
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const de = {
     title:
-      'Ernährungstagebuch zur Gewichtsabnahme: Die Methode, die die Ergebnisse verdoppelt (2026) | Nuvvoo',
+      'Ernährungstagebuch zur Gewichtsabnahme: Die Methode, die die Ergebnisse verdoppelt (2026)',
     description:
       'Studien zeigen, dass Ernährungstagebücher die Gewichtsabnahme verdoppeln – aber die meisten geben auf, weil das Tracken mühsam ist. Mit Nuvvoo wird es einfach: schreib einfach, was du gegessen hast. Keine Datenbanken, kein Wiegen, keine Schuldgefühle.',
     ogTitle:
@@ -66,7 +66,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const es = {
     title:
-      'Diario alimenticio para bajar de peso: el método que duplica los resultados (2026) | Nuvvoo',
+      'Diario alimenticio para bajar de peso: el método que duplica los resultados (2026)',
     description:
       'Las investigaciones demuestran que los diarios alimenticios duplican la pérdida de peso, pero la mayoría de la gente lo deja porque llevar un registro es tedioso. Nuvvoo lo hace fácil: solo envía un mensaje de texto con lo que comiste. Sin bases de datos, sin pesajes, sin culpa.',
     ogTitle:
@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
   const ru = {
     title:
-      'Пищевой дневник для похудения: метод, который удваивает результаты (2026) | Nuvvoo',
+      'Пищевой дневник для похудения: метод, который удваивает результаты (2026)',
     description:
       'Исследования показывают, что ведение пищевого дневника удваивает эффективность похудения, но большинство людей бросают это занятие, потому что отслеживание еды — утомительный процесс. Nuvvoo упрощает задачу: просто напиши в чате, что ты съел. Никаких баз данных, никаких взвешиваний, никаких угрызений совести.',
     ogTitle:
