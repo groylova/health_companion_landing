@@ -36,8 +36,18 @@ export function useAppStoreLink(buttonLocation: string) {
   const [url, setUrl] = useState(buildUrl(country, DEFAULT_SOURCE));
 
   useEffect(() => {
-    const source = sessionStorage.getItem(STORAGE_KEY) || DEFAULT_SOURCE;
-    setUrl(buildUrl(country, source));
+    // Rebuild the URL whenever the captured traffic source changes. The
+    // initial read happens right after mount. SourceTracker lives in a
+    // parent layout, so its useEffect runs after ours — without the event
+    // listener below, our first read sees an empty sessionStorage and the
+    // URL bakes in ct=direct even for visits that arrived with UTM params.
+    const rebuild = () => {
+      const source = sessionStorage.getItem(STORAGE_KEY) || DEFAULT_SOURCE;
+      setUrl(buildUrl(country, source));
+    };
+    rebuild();
+    window.addEventListener('nuvvoo-source-updated', rebuild);
+    return () => window.removeEventListener('nuvvoo-source-updated', rebuild);
   }, [country]);
 
   const handleClick = () => {

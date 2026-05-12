@@ -28,6 +28,7 @@ import {
   type ApiSlot,
 } from '@/lib/deficit/meal-plan-api';
 import { useAppStoreLink } from '@/lib/use-app-store-link';
+import { AppStoreBadge } from '@/components/app-store-badge';
 
 // gtag is declared globally in lib/use-app-store-link.ts as
 // `(...args: any[]) => void`; we don't redeclare it here.
@@ -358,8 +359,10 @@ export function CalculatorWidget() {
     }
 
     if (!response.ok) {
-      if (response.error.kind === 'rate_limited') {
-        setPlanError('rateLimited');
+      if (response.error.kind === 'rate_limited_hourly') {
+        setPlanError('rateLimitedHourly');
+      } else if (response.error.kind === 'rate_limited_daily') {
+        setPlanError('rateLimitedDaily');
       } else {
         setPlanError('generic');
       }
@@ -868,7 +871,13 @@ function ResultView({
       : form.weightUnit === 'kg' ? 'result.weeklyLossKg' : 'result.weeklyLossLb';
 
   const errorMessage =
-    planError === 'rateLimited' ? t('plan.rateLimited') : planError === 'generic' ? t('plan.errorTitle') : null;
+    planError === 'rateLimitedHourly'
+      ? t('plan.rateLimitedHourly')
+      : planError === 'rateLimitedDaily'
+      ? t('plan.rateLimitedDaily')
+      : planError === 'generic'
+      ? t('plan.errorTitle')
+      : null;
 
   return (
     <div className="space-y-6">
@@ -957,9 +966,12 @@ function ResultView({
         <button
           onClick={onGetPlan}
           disabled={planLoading || alreadyUsed}
-          className="mt-3 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] disabled:cursor-not-allowed disabled:opacity-60"
+          className="group mt-3 inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {planLoading ? t('plan.loading') : t('result.ctaButton')}
+          <span>{planLoading ? t('plan.loading') : t('result.ctaButton')}</span>
+          {!planLoading && (
+            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+          )}
         </button>
         {alreadyUsed && <p className="mt-2 text-xs text-slate-500">{t('result.ctaUsedNote')}</p>}
         {errorMessage !== null && <p className="mt-2 text-xs text-red-600">{errorMessage}</p>}
@@ -983,7 +995,31 @@ function PlanView({
   onEdit: () => void;
   t: Translator;
 }) {
+  // Trust line on the home page hero is sourced from the top-level `hero`
+  // namespace, so we read directly from the locale messages rather than
+  // duplicating the keys under deficitCalculator.
+  const tHero = useTranslations('hero');
+  const locale = useLocale();
   const { url, handleClick } = useAppStoreLink('deficit_calculator_plan');
+
+  // Fires the calculator-funnel-specific `app_click` event with the same
+  // shape used everywhere on this page: button_location distinguishes CTA
+  // vs badge, traffic_source/locale come straight from the SourceTracker
+  // session capture. The site-wide `click_platform` event still fires from
+  // useAppStoreLink.handleClick — having both lets reporting filter by
+  // either the calc-only funnel or the global app-store install intent.
+  function fireAppClick(buttonLocation: string, extras: Record<string, unknown> = {}): void {
+    const trafficSource =
+      typeof window !== 'undefined' && typeof window.sessionStorage !== 'undefined'
+        ? window.sessionStorage.getItem('nuvvoo_source') || 'direct'
+        : 'direct';
+    track('app_click', {
+      button_location: buttonLocation,
+      traffic_source: trafficSource,
+      locale,
+      ...extras,
+    });
+  }
 
   function slotLabel(slot: ApiSlot): string {
     if (slot === 'breakfast') {
@@ -999,8 +1035,7 @@ function PlanView({
   }
 
   function trackAppClick(): void {
-    track('app_click', {
-      button_location: 'deficit_calculator_plan',
+    fireAppClick('deficit_calculator_plan', {
       target_kcal: result.target,
       goal: form.goal,
     });
@@ -1023,23 +1058,27 @@ function PlanView({
 
       <ul className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
         {plan.meals.map((meal) => (
-          <li key={meal.slot} className="flex items-start justify-between gap-3 p-4">
-            <div className="min-w-0">
-              <p className="text-xs font-medium uppercase tracking-wide text-nuvvooGreen-700">
-                {slotLabel(meal.slot)}
-              </p>
-              <p className="mt-1 text-sm font-medium text-slate-900">{meal.name}</p>
-              {meal.description.length > 0 && (
-                <p className="mt-1 text-xs leading-relaxed text-slate-500">{meal.description}</p>
-              )}
-              <p className="mt-1 text-xs text-slate-500">
-                {t('plan.macros', { p: meal.protein_g, c: meal.carbs_g, f: meal.fat_g })}
-              </p>
+          <li key={meal.slot} className="p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-xs font-medium uppercase tracking-wide text-nuvvooGreen-700">
+                  {slotLabel(meal.slot)}
+                </p>
+                <p className="mt-1 text-sm font-medium text-slate-900">{meal.name}</p>
+                {meal.description.length > 0 && (
+                  <p className="mt-1 text-xs leading-relaxed text-slate-500">{meal.description}</p>
+                )}
+              </div>
+              <div className="shrink-0 text-right">
+                <p className="text-base font-semibold text-slate-900">{meal.calories.toLocaleString()}</p>
+                <p className="text-xs text-slate-500">{t('plan.kcalUnit')}</p>
+              </div>
             </div>
-            <div className="shrink-0 text-right">
-              <p className="text-base font-semibold text-slate-900">{meal.calories.toLocaleString()}</p>
-              <p className="text-xs text-slate-500">{t('plan.kcalUnit')}</p>
-            </div>
+            {/* Thin separator before macros so "what to eat" and "macros"
+               read as distinct layers without inflating macro visual weight. */}
+            <p className="mt-3 border-t border-slate-100 pt-2 text-xs text-slate-500">
+              {t('plan.macros', { p: meal.protein_g, c: meal.carbs_g, f: meal.fat_g })}
+            </p>
           </li>
         ))}
       </ul>
@@ -1057,15 +1096,26 @@ function PlanView({
         </p>
       )}
 
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={trackAppClick}
-        className="inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860]"
-      >
-        {t('conversion.cta')}
-      </a>
+      <div className="flex flex-col items-center gap-3">
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={trackAppClick}
+          className="inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)]"
+        >
+          {t('conversion.cta')}
+        </a>
+        <AppStoreBadge
+          buttonLocation="deficit_calculator_plan_badge"
+          size="sm"
+          onClick={() => fireAppClick('deficit_calculator_plan_badge')}
+        />
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
+          <span>💚 {tHero('trustFree')}</span>
+          <span>🔒 {tHero('trustPrivacy')}</span>
+        </div>
+      </div>
     </div>
   );
 }

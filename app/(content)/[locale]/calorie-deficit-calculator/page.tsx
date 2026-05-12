@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Container } from '@/components/container';
 import { Nav } from '@/components/nav';
@@ -58,6 +59,10 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('deficitCalculator');
+  // Footer namespace owns the short titles for all SEO cross-link targets
+  // (foodDiary, mfpAlternative, stayConsistent, stressFree) — we reuse them
+  // here so card headings stay in sync if footer copy changes.
+  const tFooter = await getTranslations('footer');
 
   const faqs = [
     { question: t('faq.q1'), answer: t('faq.a1') },
@@ -74,8 +79,18 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
       {/* ─── HERO with calculator on the right ─── */}
       <section className="pt-12 md:pt-16">
         <Container>
+          {/* min-w-0 on both grid cells overrides the default min-width:auto
+             on grid items, otherwise long content inside the widget (long
+             <select> options, wide flex rows) prevents the column from
+             shrinking and the widget overflows past the viewport at the
+             md/lg in-between viewport widths. */}
+          {/* min-w-0 on both grid cells overrides the default min-width:auto
+             on grid items, otherwise long content inside the widget (long
+             <select> options, wide flex rows) prevents the column from
+             shrinking and the widget overflows past the viewport at the
+             md/lg in-between viewport widths. */}
           <div className="grid items-start gap-10 md:grid-cols-2 md:gap-12">
-            <div className="md:pt-6">
+            <div className="min-w-0 md:pt-6">
               <h1
                 style={{ fontFamily: "'Thicccboi', sans-serif" }}
                 className="text-4xl font-extrabold tracking-tight text-[#1F2A24] md:text-5xl lg:text-[3.25rem] lg:leading-[1.15]"
@@ -92,7 +107,10 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
               </div>
             </div>
 
-            <div className="w-full">
+            {/* On mobile, pull the widget past Container's px-5 with a
+               negative margin so the white card uses nearly the full
+               viewport width. md+ reverts to standard grid placement. */}
+            <div className="-mx-2 w-auto min-w-0 md:mx-0 md:w-full">
               <CalculatorWidget />
             </div>
           </div>
@@ -116,9 +134,28 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
             </ContentSection>
 
             <ContentSection title={t('seo.h2_plan')}>
-              <p>{t('seo.plan_p1')}</p>
+              {/* Rich-text via t.rich — the <food> / <chat> markers in the
+                 translation strings get replaced with <Link> components for
+                 contextual SEO cross-links to related guides. */}
+              <p>
+                {t.rich('seo.plan_p1', {
+                  food: (chunks) => (
+                    <Link href="/food-diary-for-weight-loss" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
+                      {chunks}
+                    </Link>
+                  ),
+                })}
+              </p>
               <p>{t('seo.plan_p2')}</p>
-              <p>{t('seo.plan_p3')}</p>
+              <p>
+                {t.rich('seo.plan_p3', {
+                  chat: (chunks) => (
+                    <Link href="/chat-calorie-tracker" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
+                      {chunks}
+                    </Link>
+                  ),
+                })}
+              </p>
             </ContentSection>
 
             {/* ─── CONVERSION BLOCK ─── */}
@@ -135,11 +172,65 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
             </div>
 
             <FaqSection faqs={faqs} />
+
+            {/* ─── RELATED GUIDES — internal cross-links ─── */}
+            <section className="mt-12">
+              <h2 className="text-xl font-semibold tracking-tight text-slate-900">
+                {t('related.heading')}
+              </h2>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <RelatedCard
+                  href="/food-diary-for-weight-loss"
+                  title={tFooter('foodDiary')}
+                  description={t('related.descFoodDiary')}
+                />
+                <RelatedCard
+                  href="/alternative-to-myfitnesspal"
+                  title={tFooter('mfpAlternative')}
+                  description={t('related.descMfpAlternative')}
+                />
+                <RelatedCard
+                  href="/how-to-stay-consistent-calorie-tracking"
+                  title={tFooter('stayConsistent')}
+                  description={t('related.descStayConsistent')}
+                />
+                <RelatedCard
+                  href="/calorie-tracking-without-stress"
+                  title={tFooter('stressFree')}
+                  description={t('related.descStressFree')}
+                />
+              </div>
+            </section>
           </div>
         </Container>
       </article>
 
       <Footer />
     </main>
+  );
+}
+
+function RelatedCard({
+  href,
+  title,
+  description,
+}: {
+  href: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group block rounded-2xl border border-slate-200 bg-white/70 p-5 transition hover:border-nuvvooGreen-300 hover:shadow-soft"
+    >
+      <h3 className="text-base font-semibold tracking-tight text-slate-900">
+        {title}{' '}
+        <span aria-hidden className="inline-block text-nuvvooGreen-700 transition-transform group-hover:translate-x-0.5">
+          →
+        </span>
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
+    </Link>
   );
 }

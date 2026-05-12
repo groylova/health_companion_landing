@@ -66,7 +66,11 @@ export type GeneratePlanInput = {
 
 export type GeneratePlanError =
   | { kind: 'session_expired' }
-  | { kind: 'rate_limited' }
+  // Backend enforces two rate windows: 5/hour and 20/day per IP. The 429
+  // body distinguishes them ("hourly..." vs "daily..."), which we surface
+  // so the UI can tell the user the correct wait time.
+  | { kind: 'rate_limited_hourly' }
+  | { kind: 'rate_limited_daily' }
   | { kind: 'service_unavailable' }
   | { kind: 'origin_blocked' }
   | { kind: 'invalid_input' }
@@ -138,7 +142,13 @@ export async function generatePlan(input: GeneratePlanInput): Promise<GeneratePl
     return { ok: false, error: { kind: 'invalid_input' } };
   }
   if (response.status === 429) {
-    return { ok: false, error: { kind: 'rate_limited' } };
+    // Body shape: {"detail": "hourly meal-plan limit reached, ..."} — pick
+    // hourly vs daily off the substring; default to hourly if unparseable.
+    const isDaily = body.includes('daily');
+    return {
+      ok: false,
+      error: { kind: isDaily ? 'rate_limited_daily' : 'rate_limited_hourly' },
+    };
   }
   if (response.status === 503) {
     return { ok: false, error: { kind: 'service_unavailable' } };

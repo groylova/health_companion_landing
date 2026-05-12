@@ -150,10 +150,10 @@
       "ogDescription": "Berechne dein Kaloriendefizit und mach in Sekunden einen echten Essensplan daraus."
     },
     "h1": "Kaloriendefizit-Rechner",
-    "intro": "Finde dein t\u00e4gliches Kalorienziel und mach daraus einen Tagesplan, dem du wirklich folgen kannst. Kein Konto, kein Setup \u2014 beantworte sechs kurze Fragen und du siehst, was du heute essen kannst.",
+    "intro": "Finde dein t\u00e4gliches Kalorienziel heraus und verwandle es in einen Tagesplan, den du auch wirklich einhalten kannst. Keine Registrierung, kein Einrichten. Beantworte sechs kurze Fragen und wir zeigen dir, was du heute essen solltest.",
     "trustFree": "Kostenlos",
     "trustNoAccount": "Ohne Konto",
-    "trustPrivate": "Privat by Default",
+    "trustPrivate": "Datenschutz zuerst",
     "form": {
       "weightLabel": "Gewicht",
       "heightLabel": "Gr\u00f6\u00dfe",
@@ -167,7 +167,7 @@
       "activityLight": "Leicht aktiv (1\u20133 Tage/Woche)",
       "activityModerate": "Moderat aktiv (3\u20135 Tage/Woche)",
       "activityVery": "Sehr aktiv (6\u20137 Tage/Woche)",
-      "activityExtra": "Extrem aktiv (zweimal t\u00e4glich / k\u00f6rperlicher Job)",
+      "activityExtra": "Extrem aktiv (2 Trainings t\u00e4glich / k\u00f6rperliche Arbeit)",
       "goalLabel": "Ziel",
       "goalLose": "Abnehmen",
       "goalMaintain": "Halten",
@@ -176,8 +176,8 @@
       "pace_slow": "Langsam",
       "pace_normal": "Normal",
       "pace_fast": "Schnell",
-      "paceRateKg": "{name} — {rate} kg/Woche",
-      "paceRateLb": "{name} — {rate} lb/Woche",
+      "paceRateKg": "{name}: {rate} kg/Woche",
+      "paceRateLb": "{name}: {rate} lb/Woche",
       "submit": "Berechnen",
       "errorRequired": "Bitte f\u00fclle dieses Feld aus.",
       "errorRange": "Bitte gib einen Wert im erlaubten Bereich ein.",
@@ -194,7 +194,7 @@
       "allergiesAdd": "Hinzuf\u00fcgen",
       "allergiesRemove": "Entfernen",
       "allergiesAtCap": "Limit erreicht",
-      "allergiesHint": "{count}/{max} \u2014 Enter zum Hinzuf\u00fcgen"
+      "allergiesHint": "{count}/{max} \u00b7 Enter zum Hinzuf\u00fcgen"
     },
     "result": {
       "edit": "Antworten \u00e4ndern",
@@ -221,7 +221,8 @@
       "loading": "Plan wird erstellt\u2026",
       "errorTitle": "Plan konnte nicht erstellt werden",
       "errorRetry": "Erneut versuchen",
-      "rateLimited": "Zu viele Anfragen. Bitte warte eine Minute und versuche es erneut.",
+      "rateLimitedHourly": "Du hast das Stündlich-Limit erreicht. Versuch es in einer Stunde noch einmal.",
+      "rateLimitedDaily": "Du hast das Tageslimit erreicht. Versuch es morgen noch einmal.",
       "heading": "Dein Tagesplan",
       "totalLabel": "Gesamt",
       "kcalUnit": "kcal",
@@ -240,22 +241,22 @@
     },
     "conversion": {
       "title": "Willst du jeden Tag einen neuen Plan und automatisches Tracking?",
-      "subtitle": "Nuvvoo lernt deine Gewohnheiten und baut deinen Plan unterwegs \u2014 ohne Tabellen, Waagen oder schlechtes Gewissen.",
-      "cta": "Nuvvoo ausprobieren"
+      "subtitle": "Probier Nuvvoo, den modernen Kalorien-Tracker.",
+      "cta": "Jeden Tag so einen Plan →"
     },
     "seo": {
       "h2_what": "Was ist ein Kaloriendefizit?",
-      "what_p1": "Ein Kaloriendefizit ist die L\u00fccke zwischen den Kalorien, die dein K\u00f6rper jeden Tag verbraucht, und denen, die du isst. Wenn die L\u00fccke negativ ist \u2014 du isst weniger als du verbrauchst \u2014 greift dein K\u00f6rper auf Reserven zur\u00fcck und du nimmst mit der Zeit ab.",
-      "what_p2": "Die meisten Erwachsenen k\u00f6nnen nachhaltig etwa 0,5 kg pro Woche abnehmen mit einem t\u00e4glichen Defizit von rund 500 kcal. Das ist die Standardeinstellung dieses Rechners \u2014 und das Niveau, das die WHO und klinische Leitlinien als sicher beschreiben.",
+      "what_p1": "Ein Kaloriendefizit ist die L\u00fccke zwischen den Kalorien, die dein K\u00f6rper jeden Tag verbraucht, und denen, die du isst. Wenn die L\u00fccke negativ ist (du isst weniger als du verbrauchst), greift dein K\u00f6rper auf Reserven zur\u00fcck und du nimmst mit der Zeit ab.",
+      "what_p2": "Die meisten Erwachsenen k\u00f6nnen nachhaltig etwa 0,5 kg pro Woche abnehmen mit einem t\u00e4glichen Defizit von rund 500 kcal. Das ist die Standardeinstellung dieses Rechners, und das Niveau, das die WHO und klinische Leitlinien als sicher beschreiben.",
       "what_p3": "Die Mathematik ist simpel, aber im Defizit zu bleiben ist der schwierige Teil. Deshalb tut diese Seite zwei Dinge: sie gibt dir die Zahl, und sie macht aus der Zahl einen Plan, den du heute essen kannst.",
       "h2_how": "Wie der Kaloriendefizit-Rechner funktioniert",
-      "how_p1": "Wir verwenden die Mifflin-St-Jeor-Formel, auf die sich \u00c4rzte und Ern\u00e4hrungswissenschaftler am h\u00e4ufigsten verlassen. Sie sch\u00e4tzt deinen Grundumsatz (BMR) \u2014 die Kalorien, die du im Ruhezustand verbrennst \u2014 anhand von Gewicht, Gr\u00f6\u00dfe, Alter und Geschlecht.",
+      "how_p1": "Wir verwenden die Mifflin-St-Jeor-Formel, auf die sich \u00c4rzte und Ern\u00e4hrungswissenschaftler am h\u00e4ufigsten verlassen. Sie sch\u00e4tzt deinen Grundumsatz (BMR): die Kalorien, die du im Ruhezustand verbrennst. Berechnet wird das aus Gewicht, Gr\u00f6\u00dfe, Alter und Geschlecht.",
       "how_p2": "Wir multiplizieren den BMR mit einem Aktivit\u00e4tsfaktor (1,2\u20131,9), um den Gesamtumsatz (TDEE) zu sch\u00e4tzen. Dann ziehen wir 500 kcal f\u00fcr die Fettreduktion ab, halten ihn f\u00fcr die Erhaltung oder addieren 300 kcal f\u00fcr einen Lean Bulk.",
-      "how_p3": "Es gibt eine Sicherheitsgrenze: 1.200 kcal/Tag f\u00fcr Frauen und 1.500 kcal/Tag f\u00fcr M\u00e4nner. Wenn dein Defizit das Ziel darunter dr\u00fcckt, begrenzen wir es. Langfristig weniger zu essen geht meistens nach hinten los \u2014 der Stoffwechsel passt sich an, die Energie sinkt, und die meisten brechen ab.",
+      "how_p3": "Es gibt eine Sicherheitsgrenze: 1.200 kcal/Tag f\u00fcr Frauen und 1.500 kcal/Tag f\u00fcr M\u00e4nner. Wenn dein Defizit das Ziel darunter dr\u00fcckt, begrenzen wir es. Langfristig weniger zu essen geht meistens nach hinten los. Der Stoffwechsel passt sich an, die Energie sinkt, und die meisten brechen ab.",
       "h2_plan": "Vom Ziel zum Defizit-Plan",
-      "plan_p1": "Zu wissen, dass du 1.650 kcal brauchst, sagt dir nicht, was du essen sollst. Genau hier h\u00f6ren die meisten Rechner auf \u2014 und genau dort scheitern die meisten Di\u00e4ten.",
+      "plan_p1": "Zu wissen, dass du 1.650 kcal brauchst, sagt dir nicht, was du essen sollst. Genau hier h\u00f6ren die meisten Rechner auf, und genau dort scheitern die meisten <food>Ern\u00e4hrungstageb\u00fccher</food> die meisten Di\u00e4ten.",
       "plan_p2": "Klick auf \u201eMeinen ersten Tagesplan holen\u201c, und wir bauen einen echten Tag um dein Ziel: 3\u20134 Mahlzeiten, Gesamtsumme innerhalb von 10 % deiner Zahl, mit angepassten Portionsgr\u00f6\u00dfen, damit du nicht im Kopf rechnen musst.",
-      "plan_p3": "Es ist ein Plan, auf uns. Wenn du jeden Tag einen frischen Plan willst \u2014 plus automatisches Kalorientracking, das deine Gewohnheiten lernt \u2014 macht das Nuvvoo."
+      "plan_p3": "Dieser eine Plan geht auf uns. Wenn du jeden Tag einen frischen Plan willst, plus automatisches <chat>Kalorientracking</chat>, das deine Gewohnheiten lernt \u2014 das macht Nuvvoo."
     },
     "faq": {
       "q1": "Ist ein Defizit von 500 kcal/Tag sicher?",
@@ -263,11 +264,18 @@
       "q2": "Wie schnell werde ich tats\u00e4chlich abnehmen?",
       "a2": "Die Faustregel 7.700 kcal \u2248 1 kg ist ein Durchschnittswert; reale Ergebnisse variieren. In der ersten Woche zeigt die Waage oft mehr durch Wasser- und Glykogenverlust, danach n\u00e4hert sich der w\u00f6chentliche Verlust dem berechneten Wert an. Vertraue dem Trend \u00fcber zwei bis vier Wochen, nicht einer einzelnen Messung.",
       "q3": "Was, wenn ich bei diesem Ziel nicht abnehme?",
-      "a3": "Zwei h\u00e4ufige Gr\u00fcnde: die TDEE-Sch\u00e4tzung war zu hoch (Aktivit\u00e4tsfaktoren sind grob), oder die tats\u00e4chliche Aufnahme ist h\u00f6her als die gesch\u00e4tzte (Getr\u00e4nke, kleine Bissen, Saucen, \u00d6l). Tracke eine Woche eng \u2014 wenn der Trend flach bleibt, senke das Ziel um 100\u2013150 kcal und beobachte zwei weitere Wochen.",
+      "a3": "Zwei h\u00e4ufige Gr\u00fcnde: die TDEE-Sch\u00e4tzung war zu hoch (Aktivit\u00e4tsfaktoren sind grob), oder die tats\u00e4chliche Aufnahme ist h\u00f6her als die gesch\u00e4tzte (Getr\u00e4nke, kleine Bissen, Saucen, \u00d6l). Tracke eine Woche eng. Wenn der Trend flach bleibt, senke das Ziel um 100\u2013150 kcal und beobachte zwei weitere Wochen.",
       "q4": "Muss ich f\u00fcr immer Kalorien z\u00e4hlen?",
       "a4": "Nein. Z\u00e4hlen ist ein Werkzeug, um zu lernen, wie Portionen und Mahlzeiten in deinem Ziel aussehen. Die meisten nutzen es 4\u201312 Wochen, verinnerlichen die Muster und gehen danach zu lockerer Achtsamkeit \u00fcber. Ziel ist Intuition, nicht Bissenz\u00e4hlen f\u00fcr immer.",
       "q5": "Wie unterscheidet sich das von MyFitnessPal & Co.?",
-      "a5": "Klassische Apps geben dir eine Zahl und eine Datenbank zum Eintragen \u2014 der Rest liegt bei dir. Dieser Rechner gibt dir die Zahl und einen Plan in einem Schritt, damit du morgens nicht vor einem leeren Tagebuch sitzt. Nuvvoo geht noch weiter: du beschreibst Mahlzeiten in normaler Sprache und die App trackt sie f\u00fcr dich, lernt deine \u00fcblichen Portionen und Gerichte mit der Zeit."
+      "a5": "Klassische Apps geben dir eine Zahl und eine Datenbank zum Eintragen. Der Rest liegt bei dir. Dieser Rechner gibt dir die Zahl und einen Plan in einem Schritt, damit du morgens nicht vor einem leeren Tagebuch sitzt. Nuvvoo geht noch weiter: du beschreibst Mahlzeiten in normaler Sprache und die App trackt sie f\u00fcr dich, lernt deine \u00fcblichen Portionen und Gerichte mit der Zeit."
+    },
+    "related": {
+      "heading": "Verwandte Anleitungen",
+      "descFoodDiary": "Mach aus deinem Ziel ein Chat-Tagebuch, das nicht nach Hausaufgabe klingt.",
+      "descMfpAlternative": "Was sich \u00e4ndert, wenn Kalorientracking wie ein Gespr\u00e4ch funktioniert.",
+      "descStayConsistent": "80 % grob loggen schl\u00e4gt 30 % perfekt \u2014 so bleibst du wirklich dran.",
+      "descStressFree": "Im Defizit bleiben \u2014 ohne Tabellen, Waagen oder schlechtes Gewissen."
     },
     "meals": {
       "oatmeal_berries_walnuts": "Haferbrei mit Beeren und Waln\u00fcssen",

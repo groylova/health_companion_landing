@@ -144,16 +144,16 @@
   },
   "deficitCalculator": {
     "metadata": {
-      "title": "Calculateur de D\u00e9ficit Calorique : Plan du jour gratuit | Nuvvoo",
+      "title": "Calculateur de d\u00e9ficit calorique : plan du jour gratuit | Nuvvoo",
       "description": "Calculateur de d\u00e9ficit calorique gratuit. Obtiens ton objectif calorique quotidien et un plan du jour g\u00e9n\u00e9r\u00e9 par IA, cal\u00e9 sur ton d\u00e9ficit.",
       "ogTitle": "Calculateur de d\u00e9ficit calorique avec plan IA",
       "ogDescription": "Calcule ton d\u00e9ficit calorique et transforme-le en plan repas en quelques secondes."
     },
     "h1": "Calculateur de d\u00e9ficit calorique",
-    "intro": "Trouve ton objectif calorique du jour et transforme-le en un plan que tu peux vraiment suivre. Pas de compte, pas de configuration \u2014 r\u00e9ponds \u00e0 six questions et on te montre quoi manger aujourd'hui.",
+    "intro": "D\u00e9termine ton apport calorique quotidien et transforme-le en un programme d'une journ\u00e9e que tu pourras vraiment suivre. Pas besoin de compte ni de configuration. R\u00e9ponds \u00e0 six questions rapides et on te dira quoi manger aujourd'hui.",
     "trustFree": "Gratuit",
     "trustNoAccount": "Sans compte",
-    "trustPrivate": "Priv\u00e9 par d\u00e9faut",
+    "trustPrivate": "Confidentialit\u00e9 par d\u00e9faut",
     "form": {
       "weightLabel": "Poids",
       "heightLabel": "Taille",
@@ -167,17 +167,17 @@
       "activityLight": "L\u00e9g\u00e8rement actif (1\u20133 jours/semaine)",
       "activityModerate": "Mod\u00e9r\u00e9ment actif (3\u20135 jours/semaine)",
       "activityVery": "Tr\u00e8s actif (6\u20137 jours/semaine)",
-      "activityExtra": "Extr\u00eamement actif (deux fois par jour / travail physique)",
+      "activityExtra": "Extr\u00eamement actif (2 s\u00e9ances par jour / travail physique)",
       "goalLabel": "Objectif",
-      "goalLose": "Perdre du poids",
+      "goalLose": "Perdre",
       "goalMaintain": "Maintenir",
-      "goalGain": "Prendre du poids",
+      "goalGain": "Prendre",
       "paceLabel": "Rythme",
       "pace_slow": "Lent",
       "pace_normal": "Normal",
       "pace_fast": "Rapide",
-      "paceRateKg": "{name} — {rate} kg/semaine",
-      "paceRateLb": "{name} — {rate} lb/semaine",
+      "paceRateKg": "{name}: {rate} kg/semaine",
+      "paceRateLb": "{name}: {rate} lb/semaine",
       "submit": "Calculer",
       "errorRequired": "Merci de remplir ce champ.",
       "errorRange": "Saisis une valeur dans la plage autoris\u00e9e.",
@@ -194,7 +194,7 @@
       "allergiesAdd": "Ajouter",
       "allergiesRemove": "Supprimer",
       "allergiesAtCap": "Limite atteinte",
-      "allergiesHint": "{count}/{max} \u2014 Entr\u00e9e pour ajouter"
+      "allergiesHint": "{count}/{max} \u00b7 Entr\u00e9e pour ajouter"
     },
     "result": {
       "edit": "Modifier les r\u00e9ponses",
@@ -221,7 +221,8 @@
       "loading": "G\u00e9n\u00e9ration de ton plan\u2026",
       "errorTitle": "Impossible de g\u00e9n\u00e9rer le plan",
       "errorRetry": "R\u00e9essayer",
-      "rateLimited": "Trop de requ\u00eates. Patiente une minute et r\u00e9essaie.",
+      "rateLimitedHourly": "Tu as atteint la limite de plans de cette heure. R\u00e9essaie dans une heure.",
+      "rateLimitedDaily": "Tu as atteint la limite de plans d'aujourd'hui. R\u00e9essaie demain.",
       "heading": "Ton plan du jour",
       "totalLabel": "Total",
       "kcalUnit": "kcal",
@@ -240,22 +241,22 @@
     },
     "conversion": {
       "title": "Tu veux un nouveau plan chaque jour et un suivi automatique ?",
-      "subtitle": "Nuvvoo apprend tes habitudes et construit ton plan au fil de l'eau \u2014 sans tableurs, sans balance, sans culpabilit\u00e9.",
-      "cta": "Essayer Nuvvoo"
+      "subtitle": "Essaie Nuvvoo, le tracker de calories moderne.",
+      "cta": "Un plan comme \u00e7a chaque jour \u2192"
     },
     "seo": {
       "h2_what": "Qu'est-ce qu'un d\u00e9ficit calorique ?",
-      "what_p1": "Un d\u00e9ficit calorique, c'est l'\u00e9cart entre les calories que ton corps d\u00e9pense chaque jour et celles que tu manges. Quand cet \u00e9cart est n\u00e9gatif \u2014 tu manges moins que tu ne br\u00fbles \u2014 le corps puise dans ses r\u00e9serves et tu perds du poids avec le temps.",
-      "what_p2": "La plupart des adultes peuvent perdre durablement environ 0,5 kg (\u00e0 peu pr\u00e8s 1 livre) par semaine avec un d\u00e9ficit quotidien d'environ 500 kcal. C'est la valeur par d\u00e9faut de ce calculateur \u2014 et le niveau que l'OMS et la plupart des recommandations cliniques d\u00e9crivent comme s\u00fbr.",
-      "what_p3": "Le calcul est simple, c'est tenir le d\u00e9ficit qui est dur. C'est pour \u00e7a que cette page fait deux choses : elle te donne le chiffre, puis elle transforme ce chiffre en plan que tu peux manger aujourd'hui.",
+      "what_p1": "Un d\u00e9ficit calorique, c'est l'\u00e9cart entre les calories que ton corps d\u00e9pense chaque jour et celles que tu manges. Quand cet \u00e9cart est n\u00e9gatif (tu manges moins que tu ne br\u00fbles), le corps puise dans ses r\u00e9serves et tu perds du poids avec le temps.",
+      "what_p2": "La plupart des adultes peuvent perdre durablement environ 0,5 kg (\u00e0 peu pr\u00e8s 1 livre) par semaine avec un d\u00e9ficit quotidien d'environ 500 kcal. C'est la valeur par d\u00e9faut de ce calculateur, et le niveau que l'OMS et la plupart des recommandations cliniques d\u00e9crivent comme s\u00fbr.",
+      "what_p3": "Le calcul est simple\u00a0; le plus dur, c'est de tenir le d\u00e9ficit. C'est pour \u00e7a que cette page fait deux choses : elle te donne le chiffre, puis elle transforme ce chiffre en plan que tu peux manger aujourd'hui.",
       "h2_how": "Comment fonctionne le calculateur de d\u00e9ficit calorique",
-      "how_p1": "On utilise l'\u00e9quation de Mifflin\u2013St Jeor, la formule sur laquelle s'appuient le plus les di\u00e9t\u00e9ticiens et les cliniciens. Elle estime ton m\u00e9tabolisme de base (BMR) \u2014 les calories br\u00fbl\u00e9es au repos \u2014 \u00e0 partir de ton poids, ta taille, ton \u00e2ge et ton sexe.",
+      "how_p1": "On utilise l'\u00e9quation de Mifflin\u2013St Jeor, la formule sur laquelle s'appuient le plus les di\u00e9t\u00e9ticiens et les cliniciens. Elle estime ton m\u00e9tabolisme de base (BMR)\u00a0: les calories br\u00fbl\u00e9es au repos. Le calcul se fait \u00e0 partir de ton poids, ta taille, ton \u00e2ge et ton sexe.",
       "how_p2": "On multiplie le BMR par un facteur d'activit\u00e9 (1,2\u20131,9) pour estimer ta d\u00e9pense \u00e9nerg\u00e9tique totale (TDEE). Ensuite on retire 500 kcal pour la perte, on garde le m\u00eame chiffre pour la maintenance, ou on ajoute 300 kcal pour une prise propre.",
       "how_p3": "Il y a un plancher de s\u00e9curit\u00e9 : 1 200 kcal/jour pour les femmes et 1 500 kcal/jour pour les hommes. Si ton d\u00e9ficit pousse l'objectif sous ce seuil, on le bloque. Manger moins que \u00e7a sur la dur\u00e9e se retourne souvent contre toi : le m\u00e9tabolisme s'adapte, l'\u00e9nergie chute, la plupart abandonnent.",
       "h2_plan": "D'un chiffre \u00e0 un plan de d\u00e9ficit calorique",
-      "plan_p1": "Savoir qu'il te faut 1 650 kcal ne te dit pas quoi manger. C'est l\u00e0 que la plupart des calculateurs s'arr\u00eatent et que la plupart des r\u00e9gimes craquent.",
+      "plan_p1": "Savoir qu'il te faut 1 650 kcal ne te dit pas quoi manger. C'est l\u00e0 que la plupart des calculateurs s'arr\u00eatent et que la plupart des <food>journaux alimentaires</food> craquent.",
       "plan_p2": "Clique sur \u00ab Obtenir mon plan du jour \u00bb et on construit une vraie journ\u00e9e autour de ton objectif : 3\u20134 repas, total \u00e0 10 % pr\u00e8s, portions ajust\u00e9es pour ne pas avoir \u00e0 compter de t\u00eate.",
-      "plan_p3": "C'est un plan, c'est cadeau. Si tu veux un nouveau plan chaque jour \u2014 et un suivi automatique des calories qui apprend tes habitudes \u2014 c'est ce que fait Nuvvoo."
+      "plan_p3": "Ce plan est offert. Si tu veux un nouveau plan chaque jour, avec un <chat>suivi automatique</chat> des calories qui apprend tes habitudes, c'est exactement ce que fait Nuvvoo."
     },
     "faq": {
       "q1": "Un d\u00e9ficit de 500 kcal/jour, c'est s\u00fbr ?",
@@ -263,11 +264,18 @@
       "q2": "\u00c0 quelle vitesse je vais perdre du poids ?",
       "a2": "La r\u00e8gle 7 700 kcal \u2248 1 kg est une moyenne ; les r\u00e9sultats varient. La premi\u00e8re semaine montre souvent une baisse plus marqu\u00e9e \u00e0 cause de l'eau et du glycog\u00e8ne, ensuite la perte hebdomadaire s'aligne sur la pr\u00e9vision. Fie-toi \u00e0 la tendance sur deux \u00e0 quatre semaines, pas \u00e0 un seul passage sur la balance.",
       "q3": "Et si je ne perds pas avec cet objectif ?",
-      "a3": "Deux causes fr\u00e9quentes : le TDEE estim\u00e9 est au-dessus de ta d\u00e9pense r\u00e9elle (les facteurs d'activit\u00e9 sont approximatifs), ou l'apport r\u00e9el d\u00e9passe l'apport d\u00e9clar\u00e9 (boissons, grignotages, sauces, huile). Suis tes apports pr\u00e9cis\u00e9ment pendant une semaine \u2014 si la tendance reste plate, baisse de 100\u2013150 kcal et observe deux semaines de plus.",
+      "a3": "Deux causes fr\u00e9quentes : le TDEE estim\u00e9 est au-dessus de ta d\u00e9pense r\u00e9elle (les facteurs d'activit\u00e9 sont approximatifs), ou l'apport r\u00e9el d\u00e9passe l'apport d\u00e9clar\u00e9 (boissons, grignotages, sauces, huile). Suis tes apports pr\u00e9cis\u00e9ment pendant une semaine. Si la tendance reste plate, baisse de 100\u2013150 kcal et observe deux semaines de plus.",
       "q4": "Faut-il compter les calories \u00e0 vie ?",
       "a4": "Non. Compter est un outil pour apprendre \u00e0 quoi ressemblent tes portions et tes repas \u00e0 l'objectif fix\u00e9. La plupart des gens le font 4\u201312 semaines, int\u00e8grent les sch\u00e9mas, puis basculent sur une vigilance plus l\u00e9g\u00e8re. Le but, c'est l'intuition, pas de compter chaque bouch\u00e9e \u00e0 vie.",
       "q5": "Quelle diff\u00e9rence avec MyFitnessPal et compagnie ?",
-      "a5": "Les apps classiques te donnent un chiffre et une base de donn\u00e9es pour saisir \u2014 tout le boulot est pour toi. Ce calculateur te donne le chiffre et un plan dans la foul\u00e9e, pour que tu ne te retrouves pas \u00e0 9 h face \u00e0 un journal vide. Nuvvoo va plus loin : tu d\u00e9cris tes repas en langage naturel et l'app fait le suivi pour toi, en apprenant tes portions habituelles."
+      "a5": "Les apps classiques te donnent un chiffre et une base de donn\u00e9es pour saisir. Tout le boulot est pour toi. Ce calculateur te donne le chiffre et un plan dans la foul\u00e9e, pour que tu ne te retrouves pas \u00e0 9 h face \u00e0 un journal vide. Nuvvoo va plus loin : tu d\u00e9cris tes repas en langage naturel et l'app fait le suivi pour toi, en apprenant tes portions habituelles."
+    },
+    "related": {
+      "heading": "Guides li\u00e9s",
+      "descFoodDiary": "Transforme ton objectif en un journal par chat qui ne ressemble pas \u00e0 un devoir.",
+      "descMfpAlternative": "Ce qui change quand compter les calories devient une conversation.",
+      "descStayConsistent": "Tracker 80 % \u00e0 la louche bat 30 % parfait \u2014 comment vraiment tenir.",
+      "descStressFree": "Reste dans ton d\u00e9ficit sans tableurs, sans balance, sans culpabilit\u00e9."
     },
     "meals": {
       "oatmeal_berries_walnuts": "Flocons d'avoine, baies et noix",
