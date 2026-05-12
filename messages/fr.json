@@ -116,6 +116,7 @@
     "aiFoodJournal": "Journal alimentaire IA",
     "mfpAlternative": "Alternative à MyFitnessPal",
     "loseItAlternative": "Alternative à Lose It",
+    "calculator": "Calculateur de d\u00e9ficit calorique",
     "privacy": "Confidentialité",
     "terms": "Conditions",
     "aiDisclosure": "À propos de l'utilisation de l'IA",
@@ -141,6 +142,20 @@
     "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
     "es": "Espa\u00f1ol",
     "fr": "Fran\u00e7ais"
+  },
+  "relatedLinks": {
+    "heading": "Guides liés",
+    "descCalculator": "Obtiens ton objectif calorique du jour et un plan en une étape.",
+    "descFoodDiary": "Transforme ton objectif en un journal par chat qui ne ressemble pas à un devoir.",
+    "descMfpAlternative": "Ce qui change quand compter les calories devient une conversation.",
+    "descLoseItAlternative": "Une approche plus calme que le tableur pour compter les calories.",
+    "descStayConsistent": "Tracker 80 % à la louche bat 30 % parfait — comment vraiment tenir.",
+    "descStressFree": "Reste dans ton déficit sans tableurs, sans balance, sans culpabilité.",
+    "descChatTracker": "Enregistre tes repas par chat, sans chercher dans une base de données.",
+    "descAiFoodJournal": "Décris ta journée, l'IA s'occupe des chiffres.",
+    "descPhotoVsChat": "Pourquoi décrire ses repas en mots bat le suivi par photo.",
+    "descDinnerIdeas": "Idées de dîner rapides qui rentrent dans ton objectif calorique.",
+    "descEatingDisorderSafety": "Règles de suivi qui protègent ta santé mentale."
   },
   "deficitCalculator": {
     "metadata": {
@@ -270,14 +285,7 @@
       "q5": "Quelle diff\u00e9rence avec MyFitnessPal et compagnie ?",
       "a5": "Les apps classiques te donnent un chiffre et une base de donn\u00e9es pour saisir. Tout le boulot est pour toi. Ce calculateur te donne le chiffre et un plan dans la foul\u00e9e, pour que tu ne te retrouves pas \u00e0 9 h face \u00e0 un journal vide. Nuvvoo va plus loin : tu d\u00e9cris tes repas en langage naturel et l'app fait le suivi pour toi, en apprenant tes portions habituelles."
     },
-    "related": {
-      "heading": "Guides li\u00e9s",
-      "descFoodDiary": "Transforme ton objectif en un journal par chat qui ne ressemble pas \u00e0 un devoir.",
-      "descMfpAlternative": "Ce qui change quand compter les calories devient une conversation.",
-      "descStayConsistent": "Tracker 80 % \u00e0 la louche bat 30 % parfait \u2014 comment vraiment tenir.",
-      "descStressFree": "Reste dans ton d\u00e9ficit sans tableurs, sans balance, sans culpabilit\u00e9."
-    },
-    "meals": {
+"meals": {
       "oatmeal_berries_walnuts": "Flocons d'avoine, baies et noix",
       "greek_yogurt_honey_granola": "Yaourt grec, miel et granola",
       "scrambled_eggs_avocado_toast": "\u0152ufs brouill\u00e9s et toast \u00e0 l'avocat",

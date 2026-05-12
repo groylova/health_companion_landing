@@ -4,6 +4,7 @@ import { Nav } from '@/components/nav';
 import { Footer } from '@/components/footer';
 import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
+import { RelatedGuides } from '@/components/seo/related-guides';
 import { SeoCta } from '@/components/seo/seo-cta';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
@@ -178,6 +179,8 @@ export default async function ChatCalorieTracker({
             </div>
 
             <FaqSection faqs={faqs} />
+
+            <RelatedGuides slugs={['aiFoodJournal', 'foodDiary', 'mfpAlternative', 'stressFree']} />
           </div>
         </Container>
       </article>

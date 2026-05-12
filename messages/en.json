@@ -116,6 +116,7 @@
     "aiFoodJournal": "AI Food Journal",
     "mfpAlternative": "MyFitnessPal Alternative",
     "loseItAlternative": "Lose It Alternative",
+    "calculator": "Calorie Deficit Calculator",
     "privacy": "Privacy",
     "terms": "Terms",
     "aiDisclosure": "AI Disclosure",
@@ -141,6 +142,20 @@
     "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
     "es": "Espa\u00f1ol",
     "fr": "Fran\u00e7ais"
+  },
+  "relatedLinks": {
+    "heading": "Related guides",
+    "descCalculator": "Get your daily calorie target and a one-day plan in one go.",
+    "descFoodDiary": "Turn your target into a chat-based diary that doesn't feel like homework.",
+    "descMfpAlternative": "What changes when calorie tracking works like a conversation.",
+    "descLoseItAlternative": "A calmer take on calorie tracking than the spreadsheet approach.",
+    "descStayConsistent": "Tracking 80% imperfectly beats 30% perfectly — how to actually stick with it.",
+    "descStressFree": "Stay on track without spreadsheets, scales, or guilt.",
+    "descChatTracker": "Log meals by chatting, not searching a database.",
+    "descAiFoodJournal": "Describe your day, let AI do the counting.",
+    "descPhotoVsChat": "Why describing meals in plain text beats photo-based tracking.",
+    "descDinnerIdeas": "Quick dinner ideas that fit your calorie target.",
+    "descEatingDisorderSafety": "Tracking guidelines that protect your mental health."
   },
   "deficitCalculator": {
     "metadata": {
@@ -270,14 +285,7 @@
       "q5": "How is this different from MyFitnessPal or other calorie apps?",
       "a5": "Traditional apps give you a number and a database to log against. The work is on you. This calculator gives you the number and a plan in the same flow, so you don't stare at a blank diary at 9am. Nuvvoo (the app) goes further: you describe meals in plain text and it tracks for you, learning your usual portions and meals over time."
     },
-    "related": {
-      "heading": "Related guides",
-      "descFoodDiary": "Turn your target into a chat-based diary that doesn't feel like homework.",
-      "descMfpAlternative": "What changes when calorie tracking works like a conversation.",
-      "descStayConsistent": "Tracking 80% imperfectly beats 30% perfectly \u2014 how to actually stick with it.",
-      "descStressFree": "Stay in your deficit without spreadsheets, scales, or guilt."
-    },
-    "meals": {
+"meals": {
       "oatmeal_berries_walnuts": "Oatmeal with berries and walnuts",
       "greek_yogurt_honey_granola": "Greek yogurt with honey and granola",
       "scrambled_eggs_avocado_toast": "Scrambled eggs with avocado toast",

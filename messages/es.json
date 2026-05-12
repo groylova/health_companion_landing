@@ -116,6 +116,7 @@
     "aiFoodJournal": "Diario de alimentación con IA",
     "mfpAlternative": "Alternativa a MyFitnessPal",
     "loseItAlternative": "Alternativa a Lose It",
+    "calculator": "Calculadora de déficit calórico",
     "privacy": "Privacidad",
     "terms": "Condiciones",
     "aiDisclosure": "Acerca del uso de la IA",
@@ -141,6 +142,20 @@
     "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
     "es": "Espa\u00f1ol",
     "fr": "Fran\u00e7ais"
+  },
+  "relatedLinks": {
+    "heading": "Guías relacionadas",
+    "descCalculator": "Obtén tu objetivo diario y un plan en un solo paso.",
+    "descFoodDiary": "Convierte tu objetivo en un diario por chat que no parezca tarea.",
+    "descMfpAlternative": "Qué cambia cuando contar calorías funciona como una conversación.",
+    "descLoseItAlternative": "Una forma más tranquila de contar calorías, sin hojas de cálculo.",
+    "descStayConsistent": "Registrar el 80 % a ojo gana al 30 % perfecto — cómo no abandonar.",
+    "descStressFree": "Mantente en el déficit sin hojas de cálculo, sin báscula, sin culpa.",
+    "descChatTracker": "Registra comidas chateando, sin buscar en bases de datos.",
+    "descAiFoodJournal": "Describe tu día, la IA cuenta por ti.",
+    "descPhotoVsChat": "Por qué describir comidas en palabras supera al tracking por foto.",
+    "descDinnerIdeas": "Ideas rápidas de cena que encajan en tu objetivo calórico.",
+    "descEatingDisorderSafety": "Pautas de tracking que cuidan tu salud mental."
   },
   "deficitCalculator": {
     "metadata": {
@@ -270,14 +285,7 @@
       "q5": "\u00bfEn qu\u00e9 se diferencia esto de MyFitnessPal y similares?",
       "a5": "Las apps tradicionales te dan un n\u00famero y una base de datos donde registrar. El trabajo es tuyo. Esta calculadora te da el n\u00famero y un plan en el mismo paso, para que no te plantes a las 9 a. m. delante de un diario en blanco. Nuvvoo va m\u00e1s all\u00e1: describes la comida en lenguaje normal y la app la registra por ti, aprendiendo tus porciones habituales con el tiempo."
     },
-    "related": {
-      "heading": "Gu\u00edas relacionadas",
-      "descFoodDiary": "Convierte tu objetivo en un diario por chat que no parezca tarea.",
-      "descMfpAlternative": "Qu\u00e9 cambia cuando contar calor\u00edas funciona como una conversaci\u00f3n.",
-      "descStayConsistent": "Registrar el 80 % a ojo gana al 30 % perfecto \u2014 c\u00f3mo no abandonar.",
-      "descStressFree": "Mantente en el d\u00e9ficit sin hojas de c\u00e1lculo, sin b\u00e1scula, sin culpa."
-    },
-    "meals": {
+"meals": {
       "oatmeal_berries_walnuts": "Avena con frutos rojos y nueces",
       "greek_yogurt_honey_granola": "Yogur griego con miel y granola",
       "scrambled_eggs_avocado_toast": "Huevos revueltos con tostada de aguacate",

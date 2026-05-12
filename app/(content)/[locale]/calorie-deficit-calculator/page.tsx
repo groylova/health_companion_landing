@@ -6,6 +6,7 @@ import { Nav } from '@/components/nav';
 import { Footer } from '@/components/footer';
 import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
+import { RelatedGuides } from '@/components/seo/related-guides';
 import { AppStoreBadge } from '@/components/app-store-badge';
 import { routing } from '@/i18n/routing';
 import { CalculatorWidget } from './calculator-widget';
@@ -59,10 +60,6 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('deficitCalculator');
-  // Footer namespace owns the short titles for all SEO cross-link targets
-  // (foodDiary, mfpAlternative, stayConsistent, stressFree) — we reuse them
-  // here so card headings stay in sync if footer copy changes.
-  const tFooter = await getTranslations('footer');
 
   const faqs = [
     { question: t('faq.q1'), answer: t('faq.a1') },
@@ -173,64 +170,12 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
 
             <FaqSection faqs={faqs} />
 
-            {/* ─── RELATED GUIDES — internal cross-links ─── */}
-            <section className="mt-12">
-              <h2 className="text-xl font-semibold tracking-tight text-slate-900">
-                {t('related.heading')}
-              </h2>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <RelatedCard
-                  href="/food-diary-for-weight-loss"
-                  title={tFooter('foodDiary')}
-                  description={t('related.descFoodDiary')}
-                />
-                <RelatedCard
-                  href="/alternative-to-myfitnesspal"
-                  title={tFooter('mfpAlternative')}
-                  description={t('related.descMfpAlternative')}
-                />
-                <RelatedCard
-                  href="/how-to-stay-consistent-calorie-tracking"
-                  title={tFooter('stayConsistent')}
-                  description={t('related.descStayConsistent')}
-                />
-                <RelatedCard
-                  href="/calorie-tracking-without-stress"
-                  title={tFooter('stressFree')}
-                  description={t('related.descStressFree')}
-                />
-              </div>
-            </section>
+            <RelatedGuides slugs={['foodDiary', 'mfpAlternative', 'stayConsistent', 'stressFree']} />
           </div>
         </Container>
       </article>
 
       <Footer />
     </main>
-  );
-}
-
-function RelatedCard({
-  href,
-  title,
-  description,
-}: {
-  href: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <Link
-      href={href}
-      className="group block rounded-2xl border border-slate-200 bg-white/70 p-5 transition hover:border-nuvvooGreen-300 hover:shadow-soft"
-    >
-      <h3 className="text-base font-semibold tracking-tight text-slate-900">
-        {title}{' '}
-        <span aria-hidden className="inline-block text-nuvvooGreen-700 transition-transform group-hover:translate-x-0.5">
-          →
-        </span>
-      </h3>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
-    </Link>
   );
 }

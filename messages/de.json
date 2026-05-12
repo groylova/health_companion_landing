@@ -116,6 +116,7 @@
     "aiFoodJournal": "KI-Ernährungstagebuch",
     "mfpAlternative": "MyFitnessPal-Alternative",
     "loseItAlternative": "Lose-It-Alternative",
+    "calculator": "Kaloriendefizit-Rechner",
     "privacy": "Datenschutz",
     "terms": "AGB",
     "aiDisclosure": "Über den Einsatz von KI",
@@ -141,6 +142,20 @@
     "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
     "es": "Espa\u00f1ol",
     "fr": "Fran\u00e7ais"
+  },
+  "relatedLinks": {
+    "heading": "Verwandte Anleitungen",
+    "descCalculator": "Hol dir dein tägliches Kalorienziel und einen Tagesplan in einem Schritt.",
+    "descFoodDiary": "Mach aus deinem Ziel ein Chat-Tagebuch, das nicht nach Hausaufgabe klingt.",
+    "descMfpAlternative": "Was sich ändert, wenn Kalorientracking wie ein Gespräch funktioniert.",
+    "descLoseItAlternative": "Eine ruhigere Variante des Kalorien-Trackings als der Tabellen-Ansatz.",
+    "descStayConsistent": "80 % grob loggen schlägt 30 % perfekt — so bleibst du wirklich dran.",
+    "descStressFree": "Im Defizit bleiben — ohne Tabellen, Waagen oder schlechtes Gewissen.",
+    "descChatTracker": "Mahlzeiten per Chat loggen statt in einer Datenbank suchen.",
+    "descAiFoodJournal": "Erzähl von deinem Tag, die KI rechnet.",
+    "descPhotoVsChat": "Warum Mahlzeiten in Worten zu beschreiben Foto-Tracking schlägt.",
+    "descDinnerIdeas": "Schnelle Abendessen-Ideen, die in dein Kalorienziel passen.",
+    "descEatingDisorderSafety": "Tracking-Leitlinien, die deine mentale Gesundheit schützen."
   },
   "deficitCalculator": {
     "metadata": {
@@ -270,14 +285,7 @@
       "q5": "Wie unterscheidet sich das von MyFitnessPal & Co.?",
       "a5": "Klassische Apps geben dir eine Zahl und eine Datenbank zum Eintragen. Der Rest liegt bei dir. Dieser Rechner gibt dir die Zahl und einen Plan in einem Schritt, damit du morgens nicht vor einem leeren Tagebuch sitzt. Nuvvoo geht noch weiter: du beschreibst Mahlzeiten in normaler Sprache und die App trackt sie f\u00fcr dich, lernt deine \u00fcblichen Portionen und Gerichte mit der Zeit."
     },
-    "related": {
-      "heading": "Verwandte Anleitungen",
-      "descFoodDiary": "Mach aus deinem Ziel ein Chat-Tagebuch, das nicht nach Hausaufgabe klingt.",
-      "descMfpAlternative": "Was sich \u00e4ndert, wenn Kalorientracking wie ein Gespr\u00e4ch funktioniert.",
-      "descStayConsistent": "80 % grob loggen schl\u00e4gt 30 % perfekt \u2014 so bleibst du wirklich dran.",
-      "descStressFree": "Im Defizit bleiben \u2014 ohne Tabellen, Waagen oder schlechtes Gewissen."
-    },
-    "meals": {
+"meals": {
       "oatmeal_berries_walnuts": "Haferbrei mit Beeren und Waln\u00fcssen",
       "greek_yogurt_honey_granola": "Griechischer Joghurt mit Honig und Granola",
       "scrambled_eggs_avocado_toast": "R\u00fchrei mit Avocado-Toast",
