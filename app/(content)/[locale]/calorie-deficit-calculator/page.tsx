@@ -39,6 +39,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical,
       languages: alternates,
     },
+    // Calculator is fully localized to all 5 routing.locales via next-intl
+    // (form labels, SEO body, FAQ, related guides). Override the content
+    // layout's default noindex-for-non-default-locale so Google indexes
+    // every language version.
+    robots: { index: true, follow: true },
     openGraph: {
       title: t('ogTitle'),
       description: t('ogDescription'),
