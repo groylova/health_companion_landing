@@ -15,7 +15,7 @@ import { AppStoreBadge } from '@/components/app-store-badge';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
 export const metadata: Metadata = {
-  title: 'Photo vs Chat: Two Approaches to AI Calorie Tracking (And Why It Matters)',
+  title: 'Photo vs Chat Calorie Tracking: Accuracy Compared (2026)',
   description: 'Photo-based AI calorie trackers are fast, but research shows 30-40% error rates on complex meals. Here\'s how conversational tracking compares.',
   alternates: { canonical: `${siteUrl}/photo-vs-chat-calorie-tracking` },
   openGraph: {

@@ -15,7 +15,7 @@ import { AppStoreBadge } from '@/components/app-store-badge';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
 export const metadata: Metadata = {
-  title: 'No Idea What to Eat for Dinner? Meals That Actually Fit Your Calories',
+  title: 'No Dinner Ideas? 15 Meals That Fit Your Calories (2026)',
   description: 'Staring at the fridge with no dinner ideas and a calorie goal to hit? Here\'s how to think about it, plus 15 simple meals that actually work.',
   alternates: { canonical: `${siteUrl}/no-dinner-ideas-calories` },
   openGraph: {

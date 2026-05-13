@@ -15,7 +15,7 @@ import { AppStoreBadge } from '@/components/app-store-badge';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
 export const metadata: Metadata = {
-  title: 'How to Actually Stay Consistent With Calorie Tracking (Without Burning Out)',
+  title: 'How to Stay Consistent With Calorie Tracking (2026)',
   description: 'Most people quit calorie tracking within 3 weeks. Here\'s why it happens and a simpler approach that actually sticks long-term, backed by habit science.',
   alternates: { canonical: `${siteUrl}/how-to-stay-consistent-calorie-tracking` },
   openGraph: {
