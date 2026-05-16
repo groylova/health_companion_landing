@@ -5,6 +5,7 @@ import { RelatedCard } from './related-card';
 // description (relatedLinks.desc{Slug}) and the footer title (footer.{slug}).
 const SLUG_TO_HREF = {
   calculator: '/calorie-deficit-calculator',
+  bmiCalculator: '/bmi-calculator',
   foodDiary: '/food-diary-for-weight-loss',
   mfpAlternative: '/alternative-to-myfitnesspal',
   loseItAlternative: '/alternative-to-lose-it',
