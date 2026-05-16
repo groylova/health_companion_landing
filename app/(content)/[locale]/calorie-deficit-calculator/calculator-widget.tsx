@@ -1167,6 +1167,21 @@ function PlanView({
         </p>
       )}
 
+      {/* Rating sits ABOVE the App Store CTA — acts as a micro-commitment
+         ("I rated this 5★ so I clearly like it") that strengthens intent
+         to click through. Putting it below the CTA would be a step back
+         in the funnel — distracting users right when they're ready to
+         convert. Hidden entirely when the backend didn't return a
+         plan_id (cached pre-feature plans + rare DB-write failures). */}
+      {typeof plan.plan_id === 'number' && (
+        <RatingControl
+          planId={plan.plan_id}
+          sessionTokenRef={sessionTokenRef}
+          language={(['en', 'de', 'ru', 'es', 'fr'] as const).includes(locale as ApiLanguage) ? (locale as ApiLanguage) : 'en'}
+          diet={form.diet}
+        />
+      )}
+
       <div className="flex flex-col items-center gap-3">
         <a
           href={url}
@@ -1187,19 +1202,6 @@ function PlanView({
           <span>🔒 {tHero('trustPrivacy')}</span>
         </div>
       </div>
-
-      {/* Rating UI sits BELOW the App Store CTA per the spec — it's a
-         feedback channel, not a conversion path, so the CTA stays the
-         primary focus. Hidden entirely when the backend didn't return a
-         plan_id (cached pre-feature plans + rare DB-write failures). */}
-      {typeof plan.plan_id === 'number' && (
-        <RatingControl
-          planId={plan.plan_id}
-          sessionTokenRef={sessionTokenRef}
-          language={(['en', 'de', 'ru', 'es', 'fr'] as const).includes(locale as ApiLanguage) ? (locale as ApiLanguage) : 'en'}
-          diet={form.diet}
-        />
-      )}
     </div>
   );
 }
