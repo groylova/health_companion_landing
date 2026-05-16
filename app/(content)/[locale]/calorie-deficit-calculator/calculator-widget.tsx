@@ -1281,11 +1281,6 @@ function RatingControl({
     setPhase('thanked');
   }
 
-  function handleSkip(): void {
-    track('plan_rate_skipped', { language, diet });
-    setPhase('hidden');
-  }
-
   // Placeholder swaps based on whether the user picked a low (1-3) or
   // high (4-5) rating. While hovering, mirror the hover star value so the
   // placeholder previews the intent before commit.
@@ -1345,14 +1340,6 @@ function RatingControl({
           className="inline-flex h-10 items-center justify-center rounded-xl bg-[#52A574] px-4 text-sm font-semibold text-white transition hover:bg-[#459860] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {t('send')}
-        </button>
-        <button
-          type="button"
-          onClick={handleSkip}
-          disabled={isSubmitting}
-          className="inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-medium text-slate-500 hover:text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {t('skip')}
         </button>
       </div>
     </div>
