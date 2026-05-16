@@ -180,7 +180,7 @@ mapToCalcInput(form, activity, category)
     ↓ CalcInput
 calculate(input)                       // imported from lib/deficit/calc
     ↓ CalcResult { target, weightKg, proteinG, carbsG, fatG, clamped }
-ensureSessionToken()                   // imported from lib/deficit/meal-plan-api
+ensureSessionToken()                   // widget-local closure; calls fetchSession from lib/deficit/meal-plan-api on first miss
     ↓ session_token
 generatePlan({                          // POST /public/meal-plan
   calories_target: result.target,
