@@ -625,6 +625,12 @@ After the `"deficitCalculator": { ... }` block (or anywhere at top level — JSO
     "ageUnit": "years",
     "heightLabel": "Height",
     "weightLabel": "Weight",
+    "activityLabel": "Activity level",
+    "activitySedentary": "Sedentary (little or no exercise)",
+    "activityLight": "Lightly active (1–3 days/week)",
+    "activityModerate": "Moderately active (3–5 days/week)",
+    "activityVery": "Very active (6–7 days/week)",
+    "activityExtra": "Extra active (twice daily / physical job)",
     "submit": "Calculate BMI",
     "errorRequired": "Please fill this in.",
     "errorRange": "That value looks off — please double-check."
@@ -650,12 +656,6 @@ After the `"deficitCalculator": { ... }` block (or anywhere at top level — JSO
     "explanationObese": "Your BMI of {bmi} is in the obese range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minKg}–{maxKg} kg.",
     "explanationNormal": "Your BMI of {bmi} is in the healthy range. Here's a maintenance plan to stay on track.",
     "explanationUnderweight": "Your BMI of {bmi} suggests you may be underweight. A healthy weight for your height starts at {target} kg.",
-    "activityLabel": "Activity level",
-    "activitySedentary": "Sedentary (little or no exercise)",
-    "activityLight": "Lightly active (1–3 days/week)",
-    "activityModerate": "Moderately active (3–5 days/week)",
-    "activityVery": "Very active (6–7 days/week)",
-    "activityExtra": "Extra active (twice daily / physical job)",
     "activityPrompt": "How active are you?",
     "ctaButton": "Get my plan",
     "ctaUsedNote": "You've already generated your free plans. Install Nuvvoo for a fresh plan every day."
@@ -1358,18 +1358,18 @@ function BmiResultView({
       {!alreadyUsed && (
         <div className="space-y-4 border-t border-slate-200 pt-5">
           <div>
-            <label className="block text-sm font-medium text-slate-700">{t('result.activityLabel')}</label>
+            <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
             <select
               value={activity}
               onChange={(e) => onActivity(e.target.value as Activity)}
               className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
             >
               <option value="" disabled>—</option>
-              <option value="sedentary">{t('result.activitySedentary')}</option>
-              <option value="light">{t('result.activityLight')}</option>
-              <option value="moderate">{t('result.activityModerate')}</option>
-              <option value="very">{t('result.activityVery')}</option>
-              <option value="extra">{t('result.activityExtra')}</option>
+              <option value="sedentary">{t('form.activitySedentary')}</option>
+              <option value="light">{t('form.activityLight')}</option>
+              <option value="moderate">{t('form.activityModerate')}</option>
+              <option value="very">{t('form.activityVery')}</option>
+              <option value="extra">{t('form.activityExtra')}</option>
             </select>
           </div>
           <button
