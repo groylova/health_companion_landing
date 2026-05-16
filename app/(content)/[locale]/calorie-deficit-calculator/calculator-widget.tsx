@@ -1219,7 +1219,7 @@ function RatingControl({
   language: ApiLanguage;
   diet: ApiDiet;
 }) {
-  const t = useTranslations('deficitCalculator.planRating');
+  const t = useTranslations('planRating');
   const [phase, setPhase] = useState<RatingPhase>('idle');
   const [rating, setRating] = useState<number>(0); // 0 = not picked
   const [hover, setHover] = useState<number>(0);
