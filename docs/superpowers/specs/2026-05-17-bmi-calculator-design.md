@@ -41,6 +41,13 @@ Uses the existing `[locale]` segment and `routing.locales`. `generateStaticParam
 - `components/{nav,footer,container,app-store-badge}`, `components/seo/{content-section,faq-section,related-guides}`.
 - `i18n/routing.ts`, `i18n/navigation.ts`.
 
+`ensureSessionToken` is not exported by `meal-plan-api.ts` — it's a widget-local closure in deficit calc's `calculator-widget.tsx` (lines 261–271) that caches the token in a `useRef`. The BMI widget defines its own local copy of the same shape (read ref → fall back to `fetchSession()` → cache and return). We do not extract a shared helper in this PR.
+
+### Updates to existing files
+
+- `components/seo/related-guides.tsx` — add `bmiCalculator: '/bmi-calculator'` to `SLUG_TO_HREF` so other SEO pages can link to the new calculator. This is the only edit to an existing component file.
+- `messages/{en,de,ru,es,fr}.json` — add `relatedLinks.descBmiCalculator` and `footer.bmiCalculator` entries (the keys `RelatedGuides` reads via `descKey(slug)` and `tFooter(slug)`).
+
 We deliberately do not rename `lib/deficit/` to a neutral name (e.g. `lib/calc/`) in this PR. The semantic mismatch is small and renaming touches files outside this feature's scope.
 
 ### `lib/bmi/bmi.ts` API
@@ -113,6 +120,8 @@ bmi ≥ 30              → 'obese'
 - `overweight` / `obese` → `21.7 × heightM²` (midpoint of Normal, comfortable buffer)
 - `underweight` → `18.5 × heightM²` (lower edge, "just reach healthy")
 - `normal` → `null`
+
+UI displays `targetWeightKg` as a single center value plus the `healthyRangeKg` range string — e.g. "Target weight ~67 kg (57–77)". No second field in the result type; the range is already on `healthyRangeKg`.
 
 `mapToCalcInput` converts BMI-form + selected activity to `CalcInput`:
 
@@ -292,7 +301,7 @@ Within `<article>` with `Container` and `max-w-3xl`:
 5. `ContentSection` — "What to do with your BMI result", 1 paragraph with `t.rich` linking out to `/calorie-deficit-calculator` and `/food-diary-for-weight-loss`.
 6. Conversion block — same shadow-soft white card as deficit, with title, subtitle, `AppStoreBadge buttonLocation="bmi_calculator_conversion"`.
 7. `FaqSection faqs={[…4 items…]}` — emits FAQPage JSON-LD via the existing component.
-8. `RelatedGuides slugs={['deficitCalculator', 'foodDiary', 'mfpAlternative', 'chatTracker']}`.
+8. `RelatedGuides slugs={['calculator', 'foodDiary', 'mfpAlternative', 'chatTracker']}` — `'calculator'` is the canonical slug for `/calorie-deficit-calculator` (see `SLUG_TO_HREF` in `components/seo/related-guides.tsx`).
 
 **FAQ questions (4):**
 
