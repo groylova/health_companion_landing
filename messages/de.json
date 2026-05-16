@@ -143,6 +143,14 @@
     "es": "Espa\u00f1ol",
     "fr": "Fran\u00e7ais"
   },
+  "planRating": {
+    "prompt": "Wie findest du diesen Plan?",
+    "placeholderLow": "Was stört? (optional)",
+    "placeholderHigh": "Was würdest du ergänzen? (optional)",
+    "send": "Senden",
+    "skip": "Überspringen",
+    "thanks": "Danke fürs Feedback!"
+  },
   "relatedLinks": {
     "heading": "Verwandte Anleitungen",
     "descCalculator": "Hol dir dein tägliches Kalorienziel und einen Tagesplan in einem Schritt.",

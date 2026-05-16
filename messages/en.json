@@ -143,6 +143,14 @@
     "es": "Espa\u00f1ol",
     "fr": "Fran\u00e7ais"
   },
+  "planRating": {
+    "prompt": "How does this plan look?",
+    "placeholderLow": "What's off? (optional)",
+    "placeholderHigh": "Anything you'd add? (optional)",
+    "send": "Send",
+    "skip": "Skip",
+    "thanks": "Thanks for the feedback!"
+  },
   "relatedLinks": {
     "heading": "Related guides",
     "descCalculator": "Get your daily calorie target and a one-day plan in one go.",

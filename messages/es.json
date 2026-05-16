@@ -143,6 +143,14 @@
     "es": "Espa\u00f1ol",
     "fr": "Fran\u00e7ais"
   },
+  "planRating": {
+    "prompt": "¿Qué te parece este plan?",
+    "placeholderLow": "¿Qué no encaja? (opcional)",
+    "placeholderHigh": "¿Qué añadirías? (opcional)",
+    "send": "Enviar",
+    "skip": "Omitir",
+    "thanks": "¡Gracias por tu opinión!"
+  },
   "relatedLinks": {
     "heading": "Guías relacionadas",
     "descCalculator": "Obtén tu objetivo diario y un plan en un solo paso.",

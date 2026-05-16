@@ -143,6 +143,14 @@
     "es": "Espa\u00f1ol",
     "fr": "Fran\u00e7ais"
   },
+  "planRating": {
+    "prompt": "Comment trouves-tu ce plan ?",
+    "placeholderLow": "Qu'est-ce qui ne va pas ? (optionnel)",
+    "placeholderHigh": "Qu'ajouterais-tu ? (optionnel)",
+    "send": "Envoyer",
+    "skip": "Passer",
+    "thanks": "Merci pour ton retour !"
+  },
   "relatedLinks": {
     "heading": "Guides liés",
     "descCalculator": "Obtiens ton objectif calorique du jour et un plan en une étape.",

@@ -47,6 +47,10 @@ export type ApiPlan = {
   meals: ApiMeal[];
   totals: ApiTotals;
   rationale: string;
+  // Server-side ID for this generation. Required to submit a rating; null
+  // when the backend's DB write failed (rare). Older plans cached from
+  // before the rating feature was deployed also won't have this field.
+  plan_id?: number | null;
 };
 
 export type GeneratePlanInput = {
@@ -154,6 +158,75 @@ export async function generatePlan(input: GeneratePlanInput): Promise<GeneratePl
   }
   if (response.status === 503) {
     return { ok: false, error: { kind: 'service_unavailable' } };
+  }
+  return { ok: false, error: { kind: 'network' } };
+}
+
+export type RatePlanInput = {
+  plan_id: number;
+  rating: number; // 1..5
+  comment?: string; // optional, max 500 chars per spec
+  session_token: string;
+};
+
+export type RatePlanError =
+  | { kind: 'session_expired' } // 401 — token expired or mismatch
+  | { kind: 'plan_not_found' } // 404 — wrong plan_id or session mismatch
+  | { kind: 'origin_blocked' } // 403
+  | { kind: 'invalid_input' } // 422
+  | { kind: 'network' };
+
+export type RatePlanResult =
+  | { ok: true }
+  | { ok: false; error: RatePlanError };
+
+// POST /public/meal-plan/{plan_id}/rate. Per spec, the UI should silently
+// hide the rating control on any 4xx error rather than surfacing a
+// technical message — so this helper just returns the typed result and
+// lets the caller decide.
+export async function ratePlan(input: RatePlanInput): Promise<RatePlanResult> {
+  const url = `${mealPlanApiBaseUrl()}/public/meal-plan/${input.plan_id}/rate`;
+  const tokenPreview = input.session_token.slice(0, 12) + '…';
+  console.log('[meal-plan] POST', url, {
+    rating: input.rating,
+    has_comment: input.comment !== undefined && input.comment.length > 0,
+    session_token: tokenPreview,
+  });
+
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'omit',
+      body: JSON.stringify({
+        rating: input.rating,
+        comment: input.comment,
+        session_token: input.session_token,
+      }),
+    });
+  } catch (err) {
+    console.error('[meal-plan] rate fetch failed:', err);
+    return { ok: false, error: { kind: 'network' } };
+  }
+
+  console.log('[meal-plan] rate status:', response.status);
+
+  if (response.ok) {
+    return { ok: true };
+  }
+
+  if (response.status === 401) {
+    return { ok: false, error: { kind: 'session_expired' } };
+  }
+  if (response.status === 403) {
+    return { ok: false, error: { kind: 'origin_blocked' } };
+  }
+  if (response.status === 404) {
+    return { ok: false, error: { kind: 'plan_not_found' } };
+  }
+  if (response.status === 422) {
+    return { ok: false, error: { kind: 'invalid_input' } };
   }
   return { ok: false, error: { kind: 'network' } };
 }
