@@ -367,7 +367,18 @@
       "activityExtra": "Extrem aktiv (2 Trainings täglich / körperliche Arbeit)",
       "submit": "BMI berechnen",
       "errorRequired": "Bitte fülle dieses Feld aus.",
-      "errorRange": "Der Wert wirkt ungewöhnlich — bitte prüfe ihn noch einmal."
+      "errorRange": "Der Wert wirkt ungewöhnlich — bitte prüfe ihn noch einmal.",
+      "dietLabel": "Ernährung",
+      "diet_none": "Keine",
+      "diet_vegetarian": "Vegetarisch",
+      "diet_pescatarian": "Pescetarisch",
+      "diet_vegan": "Vegan",
+      "allergiesLabel": "Allergien & Unverträglichkeiten",
+      "allergiesPlaceholder": "z. B. Erdnüsse, Meeresfrüchte",
+      "allergiesAdd": "Hinzufügen",
+      "allergiesRemove": "Entfernen",
+      "allergiesHint": "{count}/{max} · Enter zum Hinzufügen",
+      "allergiesAtCap": "Limit erreicht"
     },
     "result": {
       "bmiLabel": "Dein BMI",
@@ -395,7 +406,18 @@
       "ctaUsedNote": "Du hast deine kostenlosen Pläne schon genutzt. Installiere Nuvvoo für einen frischen Plan an jedem Tag.",
       "explanationOverweightLb": "Dein BMI von {bmi} liegt im Übergewichtsbereich. Ein gesunder BMI für deine Größe ist 18,5–24,9, das entspricht einem Zielgewicht von {minLb}–{maxLb} lb.",
       "explanationObeseLb": "Dein BMI von {bmi} liegt im Adipositasbereich. Ein gesunder BMI für deine Größe ist 18,5–24,9, das entspricht einem Zielgewicht von {minLb}–{maxLb} lb.",
-      "explanationUnderweightLb": "Dein BMI von {bmi} deutet auf Untergewicht hin. Ein gesundes Gewicht für deine Größe beginnt bei {target} lb."
+      "explanationUnderweightLb": "Dein BMI von {bmi} deutet auf Untergewicht hin. Ein gesundes Gewicht für deine Größe beginnt bei {target} lb.",
+      "kcalUnit": "kcal/Tag",
+      "bmrLabel": "Grundumsatz (BMR)",
+      "tdeeLabel": "Gesamtumsatz (TDEE)",
+      "macrosLabel": "Empfohlene Makros",
+      "macroProtein": "Eiweiß",
+      "macroCarbs": "Kohlenhydrate",
+      "macroFat": "Fett",
+      "clampedNote": "Wir haben dein Ziel auf das sichere Minimum begrenzt, damit der Plan realistisch und nachhaltig bleibt.",
+      "maintainTitle": "Deine Erhaltungskalorien",
+      "loseTitle": "Dein tägliches Kalorienziel",
+      "gainTitle": "Dein tägliches Kalorienziel"
     },
     "plan": {
       "heading": "Dein Tagesplan",

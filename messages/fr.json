@@ -367,7 +367,18 @@
       "activityExtra": "Extrêmement actif (2 séances par jour / travail physique)",
       "submit": "Calculer l'IMC",
       "errorRequired": "Merci de remplir ce champ.",
-      "errorRange": "Cette valeur paraît inhabituelle — vérifie-la, s'il te plaît."
+      "errorRange": "Cette valeur paraît inhabituelle — vérifie-la, s'il te plaît.",
+      "dietLabel": "Régime alimentaire",
+      "diet_none": "Aucun",
+      "diet_vegetarian": "Végétarien",
+      "diet_pescatarian": "Pescetarien",
+      "diet_vegan": "Végan",
+      "allergiesLabel": "Allergies et intolérances",
+      "allergiesPlaceholder": "ex. arachides, fruits de mer",
+      "allergiesAdd": "Ajouter",
+      "allergiesRemove": "Supprimer",
+      "allergiesHint": "{count}/{max} · Entrée pour ajouter",
+      "allergiesAtCap": "Limite atteinte"
     },
     "result": {
       "bmiLabel": "Ton IMC",
@@ -395,7 +406,18 @@
       "ctaUsedNote": "Tu as déjà utilisé tes plans gratuits. Installe Nuvvoo pour un nouveau plan chaque jour.",
       "explanationOverweightLb": "Ton IMC de {bmi} est dans la zone de surpoids. Un IMC sain pour ta taille est de 18,5–24,9, soit un poids cible de {minLb}–{maxLb} lb.",
       "explanationObeseLb": "Ton IMC de {bmi} est dans la zone d’obésité. Un IMC sain pour ta taille est de 18,5–24,9, soit un poids cible de {minLb}–{maxLb} lb.",
-      "explanationUnderweightLb": "Ton IMC de {bmi} suggère que tu pourrais être en insuffisance pondérale. Un poids sain pour ta taille commence à {target} lb."
+      "explanationUnderweightLb": "Ton IMC de {bmi} suggère que tu pourrais être en insuffisance pondérale. Un poids sain pour ta taille commence à {target} lb.",
+      "kcalUnit": "kcal/jour",
+      "bmrLabel": "Métabolisme de base (BMR)",
+      "tdeeLabel": "Maintenance (TDEE)",
+      "macrosLabel": "Macros suggérés",
+      "macroProtein": "Protéines",
+      "macroCarbs": "Glucides",
+      "macroFat": "Lipides",
+      "clampedNote": "On a plafonné ton objectif au minimum de sécurité pour que le plan reste réaliste et tenable.",
+      "maintainTitle": "Tes calories de maintenance",
+      "loseTitle": "Ton objectif calorique du jour",
+      "gainTitle": "Ton objectif calorique du jour"
     },
     "plan": {
       "heading": "Ton plan du jour",

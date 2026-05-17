@@ -367,7 +367,18 @@
       "activityExtra": "Очень высокая (2 тренировки в день / физический труд)",
       "submit": "Рассчитать BMI",
       "errorRequired": "Пожалуйста, заполни поле.",
-      "errorRange": "Значение выглядит странно — проверь ещё раз."
+      "errorRange": "Значение выглядит странно — проверь ещё раз.",
+      "dietLabel": "Тип питания",
+      "diet_none": "Без ограничений",
+      "diet_vegetarian": "Вегетарианство",
+      "diet_pescatarian": "Пескетарианство",
+      "diet_vegan": "Веганство",
+      "allergiesLabel": "Аллергии и непереносимости",
+      "allergiesPlaceholder": "напр. арахис, морепродукты",
+      "allergiesAdd": "Добавить",
+      "allergiesRemove": "Удалить",
+      "allergiesHint": "{count}/{max} — нажми Enter",
+      "allergiesAtCap": "Достигнут лимит"
     },
     "result": {
       "bmiLabel": "Твой BMI",
@@ -395,7 +406,18 @@
       "ctaUsedNote": "Ты уже использовал бесплатные планы. Установи Nuvvoo — и получай свежий план каждый день.",
       "explanationOverweightLb": "Твой BMI {bmi} попадает в зону избыточного веса. Здоровый BMI для твоего роста — 18,5–24,9, это целевой вес {minLb}–{maxLb} lb.",
       "explanationObeseLb": "Твой BMI {bmi} попадает в зону ожирения. Здоровый BMI для твоего роста — 18,5–24,9, это целевой вес {minLb}–{maxLb} lb.",
-      "explanationUnderweightLb": "Твой BMI {bmi} говорит о возможном недостатке веса. Здоровый вес для твоего роста начинается от {target} lb."
+      "explanationUnderweightLb": "Твой BMI {bmi} говорит о возможном недостатке веса. Здоровый вес для твоего роста начинается от {target} lb.",
+      "kcalUnit": "ккал/день",
+      "bmrLabel": "Базовый обмен (BMR)",
+      "tdeeLabel": "Поддержание (TDEE)",
+      "macrosLabel": "Рекомендуемые БЖУ",
+      "macroProtein": "Белки",
+      "macroCarbs": "Углеводы",
+      "macroFat": "Жиры",
+      "clampedNote": "Мы ограничили цель безопасным минимумом, чтобы план оставался реалистичным.",
+      "maintainTitle": "Калории для поддержания",
+      "loseTitle": "Твоя дневная норма калорий",
+      "gainTitle": "Твоя дневная норма калорий"
     },
     "plan": {
       "heading": "Твой план на день",

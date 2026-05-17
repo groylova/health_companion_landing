@@ -367,7 +367,18 @@
       "activityExtra": "Extremadamente activo (2 sesiones diarias / trabajo físico)",
       "submit": "Calcular IMC",
       "errorRequired": "Completa este campo, por favor.",
-      "errorRange": "Ese valor parece raro — revísalo, por favor."
+      "errorRange": "Ese valor parece raro — revísalo, por favor.",
+      "dietLabel": "Dieta",
+      "diet_none": "Ninguna",
+      "diet_vegetarian": "Vegetariana",
+      "diet_pescatarian": "Pescetariana",
+      "diet_vegan": "Vegana",
+      "allergiesLabel": "Alergias y restricciones",
+      "allergiesPlaceholder": "p. ej. cacahuetes, marisco",
+      "allergiesAdd": "Añadir",
+      "allergiesRemove": "Eliminar",
+      "allergiesHint": "{count}/{max} · pulsa Intro para añadir",
+      "allergiesAtCap": "Límite alcanzado"
     },
     "result": {
       "bmiLabel": "Tu IMC",
@@ -395,7 +406,18 @@
       "ctaUsedNote": "Ya has usado tus planes gratuitos. Instala Nuvvoo para un plan nuevo cada día.",
       "explanationOverweightLb": "Tu IMC de {bmi} está en el rango de sobrepeso. Un IMC saludable para tu estatura es 18,5–24,9, lo que significa un peso objetivo de {minLb}–{maxLb} lb.",
       "explanationObeseLb": "Tu IMC de {bmi} está en el rango de obesidad. Un IMC saludable para tu estatura es 18,5–24,9, lo que significa un peso objetivo de {minLb}–{maxLb} lb.",
-      "explanationUnderweightLb": "Tu IMC de {bmi} sugiere que podrías estar bajo de peso. Un peso saludable para tu estatura empieza en {target} lb."
+      "explanationUnderweightLb": "Tu IMC de {bmi} sugiere que podrías estar bajo de peso. Un peso saludable para tu estatura empieza en {target} lb.",
+      "kcalUnit": "kcal/día",
+      "bmrLabel": "Metabolismo basal (BMR)",
+      "tdeeLabel": "Mantenimiento (TDEE)",
+      "macrosLabel": "Macros sugeridos",
+      "macroProtein": "Proteínas",
+      "macroCarbs": "Carbohidratos",
+      "macroFat": "Grasas",
+      "clampedNote": "Limitamos tu objetivo al mínimo seguro para que el plan sea realista y sostenible.",
+      "maintainTitle": "Tus calorías de mantenimiento",
+      "loseTitle": "Tu objetivo diario de calorías",
+      "gainTitle": "Tu objetivo diario de calorías"
     },
     "plan": {
       "heading": "Tu plan del día",

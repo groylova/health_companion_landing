@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   computeBmiResult,
@@ -22,6 +22,7 @@ import {
 import {
   fetchSession,
   generatePlan,
+  type ApiDiet,
   type ApiLanguage,
   type ApiPlan,
   type ApiSlot,
@@ -94,9 +95,15 @@ const PILL_CLASS: Record<BmiResult['category'], string> = {
 
 const STORAGE_KEY_COUNT = 'nuvvoo_bmi_plan_count';
 const STORAGE_KEY_DATA = 'nuvvoo_bmi_plan_data';
-const STORAGE_VERSION = 1;
+// Bump when StoredData shape changes — stale entries are dropped on hydrate.
+// v=2 adds diet + allergies to the persisted snapshot.
+const STORAGE_VERSION = 2;
 const PLAN_LIMIT_PER_BROWSER = 2;
 const PLAN_LIMIT_ENABLED = true;
+
+const DIET_OPTIONS: ApiDiet[] = ['none', 'vegetarian', 'pescatarian', 'vegan'];
+const MAX_ALLERGIES = 8;
+const MAX_ALLERGY_LEN = 32;
 
 const API_LANGUAGES: ApiLanguage[] = ['en', 'de', 'ru', 'es', 'fr'];
 function toApiLanguage(locale: string): ApiLanguage {
@@ -108,6 +115,8 @@ type StoredData = {
   form: BmiFormState;
   bmi: BmiResult;
   activity: Activity;
+  diet: ApiDiet;
+  allergies: string[];
   calcResult: CalcResult;
   plan: ApiPlan;
 };
@@ -130,12 +139,32 @@ export function CalculatorWidget() {
   const [error, setError] = useState<BmiValidationError | null>(null);
   const [bmi, setBmi] = useState<BmiResult | null>(null);
   const [activity, setActivity] = useState<Activity | ''>('');
+  const [diet, setDiet] = useState<ApiDiet>('none');
+  const [allergies, setAllergies] = useState<string[]>([]);
   const [plan, setPlan] = useState<ApiPlan | null>(null);
-  const [calcResult, setCalcResult] = useState<CalcResult | null>(null);
+  // Hydrated calcResult — populated only from localStorage on cached-plan
+  // restore. Live calcResult is computed reactively via the useMemo below.
+  const [hydratedCalcResult, setHydratedCalcResult] = useState<CalcResult | null>(null);
   const [planLoading, setPlanLoading] = useState(false);
   const [planError, setPlanError] = useState<string | null>(null);
   const [planCount, setPlanCount] = useState(0);
   const alreadyUsed = PLAN_LIMIT_ENABLED && planCount >= PLAN_LIMIT_PER_BROWSER;
+
+  // Compute the live calorie target + macros as soon as bmi + activity are
+  // both known. This drives the per-user "Your daily calories" panel that
+  // sits between the BMI result and the plan CTA — same data we'll send to
+  // the meal-plan API on Get-my-plan. Pure math; cheap to recompute.
+  const liveCalcResult: CalcResult | null = useMemo(() => {
+    if (bmi === null || activity === '') {
+      return null;
+    }
+    return calculate(mapToCalcInput(form, activity, bmi.category));
+  }, [bmi, activity, form]);
+
+  // PlanView reads calcResult to render the kcal total + macros. Prefer the
+  // hydrated value (so cached plans round-trip exactly) then fall back to
+  // the live recomputation.
+  const calcResult: CalcResult | null = hydratedCalcResult ?? liveCalcResult;
 
   // Session token is fetched once on mount; refs keep the latest value
   // without forcing a re-render when we rotate it after a 401.
@@ -170,7 +199,9 @@ export function CalculatorWidget() {
           setForm(data.form);
           setBmi(data.bmi);
           setActivity(data.activity);
-          setCalcResult(data.calcResult);
+          setDiet(data.diet);
+          setAllergies(data.allergies);
+          setHydratedCalcResult(data.calcResult);
           setPlan(data.plan);
           setPhase('plan');
         }
@@ -214,7 +245,6 @@ export function CalculatorWidget() {
 
     const input = mapToCalcInput(form, activity, bmi.category);
     const result = calculate(input);
-    setCalcResult(result);
 
     const payload = {
       calories_target: result.target,
@@ -225,6 +255,9 @@ export function CalculatorWidget() {
       protein_g: result.proteinG,
       carbs_g: result.carbsG,
       fat_g: result.fatG,
+      diet,
+      // Backend caps at 8 chips × 32 chars; FormState already enforces that.
+      allergies: allergies.length > 0 ? allergies : undefined,
     };
 
     let response = await generatePlan(payload);
@@ -253,6 +286,7 @@ export function CalculatorWidget() {
 
     const apiPlan = response.plan;
     setPlan(apiPlan);
+    setHydratedCalcResult(result);
     setPhase('plan');
 
     const newCount = planCount + 1;
@@ -267,6 +301,8 @@ export function CalculatorWidget() {
         form,
         bmi,
         activity,
+        diet,
+        allergies,
         calcResult: result,
         plan: apiPlan,
       };
@@ -329,6 +365,11 @@ export function CalculatorWidget() {
           form={form}
           activity={activity}
           onActivity={(a) => setActivity(a)}
+          calcResult={liveCalcResult}
+          diet={diet}
+          onDiet={setDiet}
+          allergies={allergies}
+          onAllergies={setAllergies}
           onGetPlan={handleGetPlan}
           onEdit={() => setPhase('form')}
           planLoading={planLoading}
@@ -397,6 +438,11 @@ function BmiResultView({
   form,
   activity,
   onActivity,
+  calcResult,
+  diet,
+  onDiet,
+  allergies,
+  onAllergies,
   onGetPlan,
   onEdit,
   planLoading,
@@ -408,6 +454,11 @@ function BmiResultView({
   form: BmiFormState;
   activity: Activity | '';
   onActivity: (a: Activity) => void;
+  calcResult: CalcResult | null;
+  diet: ApiDiet;
+  onDiet: (d: ApiDiet) => void;
+  allergies: string[];
+  onAllergies: (next: string[]) => void;
   onGetPlan: () => void;
   onEdit: () => void;
   planLoading: boolean;
@@ -415,6 +466,15 @@ function BmiResultView({
   alreadyUsed: boolean;
   t: Translator;
 }) {
+  // Headline key over the calorie target depends on which goal the user's
+  // BMI implies. Lift the same key pattern from deficit calc so copy reads
+  // the same across the two pages.
+  const targetTitleKey: 'result.loseTitle' | 'result.maintainTitle' | 'result.gainTitle' =
+    bmi.category === 'underweight'
+      ? 'result.gainTitle'
+      : bmi.category === 'normal'
+      ? 'result.maintainTitle'
+      : 'result.loseTitle';
   // When alreadyUsed flips on the CTA section morphs into the App-Store
   // conversion stack — same pattern as the deficit calc's ResultView.
   const tHero = useTranslations('hero');
@@ -561,7 +621,7 @@ function BmiResultView({
       </p>
 
       {!alreadyUsed && (
-        <div className="space-y-4 border-t border-slate-200 pt-5">
+        <div className="space-y-5 border-t border-slate-200 pt-5">
           <div>
             <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
             <select
@@ -579,6 +639,75 @@ function BmiResultView({
               <option value="extra">{t('form.activityExtra')}</option>
             </select>
           </div>
+
+          {/* Calories + BMR/TDEE + macros + diet + allergies — appears once
+             activity is picked so calcResult is non-null. Same blocks as
+             deficit calc's ResultView; lets the user see the personalized
+             targets before clicking "Get my first day plan". */}
+          {calcResult !== null && (
+            <div className="space-y-5">
+              <div>
+                <p className="text-sm font-medium text-slate-500">{t(targetTitleKey)}</p>
+                <p className="text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+                  {calcResult.target.toLocaleString()}
+                </p>
+                <p className="mt-1 text-sm text-slate-500">{t('result.kcalUnit')}</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
+                <div>
+                  <p className="text-slate-500">{t('result.bmrLabel')}</p>
+                  <p className="font-semibold text-slate-900">{calcResult.bmr.toLocaleString()} kcal</p>
+                </div>
+                <div>
+                  <p className="text-slate-500">{t('result.tdeeLabel')}</p>
+                  <p className="font-semibold text-slate-900">{calcResult.tdee.toLocaleString()} kcal</p>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm font-medium text-slate-700">{t('result.macrosLabel')}</p>
+                <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
+                  <div>
+                    <p className="text-slate-500">{t('result.macroProtein')}</p>
+                    <p className="font-semibold text-slate-900">{calcResult.proteinG.toLocaleString()} g</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500">{t('result.macroCarbs')}</p>
+                    <p className="font-semibold text-slate-900">{calcResult.carbsG.toLocaleString()} g</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500">{t('result.macroFat')}</p>
+                    <p className="font-semibold text-slate-900">{calcResult.fatG.toLocaleString()} g</p>
+                  </div>
+                </div>
+              </div>
+
+              {calcResult.clamped && (
+                <p className="text-xs text-amber-700">{t('result.clampedNote')}</p>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
+                {/* 2×2 grid — same reason as deficit: keeps longer locale
+                   labels (Pescatarian / Pescetarisch / Вегетарианство) from
+                   clipping inside the half-width hero column. */}
+                <div className="mt-1 grid grid-cols-2 gap-2">
+                  {DIET_OPTIONS.map((d) => (
+                    <SegmentButton
+                      key={d}
+                      selected={diet === d}
+                      onClick={() => onDiet(d)}
+                      label={t(`form.diet_${d}` as 'form.diet_none')}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <AllergiesInput value={allergies} onChange={onAllergies} t={t} />
+            </div>
+          )}
+
           <button
             onClick={onGetPlan}
             disabled={planLoading || activity === ''}
@@ -947,5 +1076,96 @@ function SegmentButton({
     <button type="button" onClick={onClick} className={className}>
       {label}
     </button>
+  );
+}
+
+// Chip-style allergy input. Lifted from deficit calc's widget — same
+// behavior (Enter or comma commits, max 8 chips × 32 chars, dedupe on add).
+function AllergiesInput({
+  value,
+  onChange,
+  t,
+}: {
+  value: string[];
+  onChange: (next: string[]) => void;
+  t: Translator;
+}) {
+  const [draft, setDraft] = useState('');
+
+  function commit(): void {
+    const cleaned = draft.trim().slice(0, MAX_ALLERGY_LEN);
+    if (cleaned.length === 0) {
+      return;
+    }
+    if (value.includes(cleaned)) {
+      setDraft('');
+      return;
+    }
+    if (value.length >= MAX_ALLERGIES) {
+      return;
+    }
+    onChange([...value, cleaned]);
+    setDraft('');
+  }
+
+  function remove(idx: number): void {
+    onChange(value.filter((_, i) => i !== idx));
+  }
+
+  const atCap = value.length >= MAX_ALLERGIES;
+
+  return (
+    <div>
+      <label className="block text-sm font-medium text-slate-700">{t('form.allergiesLabel')}</label>
+      <div className="mt-1 flex flex-wrap gap-2">
+        {value.map((chip, idx) => (
+          <span
+            key={`${chip}-${idx}`}
+            className="inline-flex items-center gap-1 rounded-full bg-nuvvooGreen-50 px-3 py-1 text-sm text-nuvvooGreen-800"
+          >
+            {chip}
+            <button
+              type="button"
+              onClick={() => remove(idx)}
+              aria-label={t('form.allergiesRemove')}
+              className="text-nuvvooGreen-700 hover:text-nuvvooGreen-900"
+            >
+              ×
+            </button>
+          </span>
+        ))}
+      </div>
+      <div className="mt-2 flex gap-2">
+        <input
+          type="text"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => {
+            // Enter or comma commits the chip; swallow the key so the form
+            // doesn't submit on Enter and so the comma never makes it into
+            // the chip text.
+            if (e.key === 'Enter' || e.key === ',') {
+              e.preventDefault();
+              commit();
+            }
+          }}
+          maxLength={MAX_ALLERGY_LEN}
+          disabled={atCap}
+          placeholder={atCap ? t('form.allergiesAtCap') : t('form.allergiesPlaceholder')}
+          className="h-11 flex-1 rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100 disabled:bg-slate-100 disabled:text-slate-400"
+        />
+        <button
+          type="button"
+          onClick={commit}
+          disabled={atCap || draft.trim().length === 0}
+          className="h-11 rounded-xl border border-slate-300 bg-white px-4 text-sm font-medium text-slate-700 hover:border-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {t('form.allergiesAdd')}
+        </button>
+      </div>
+      <p className="mt-1 text-xs text-slate-500">
+        {t('form.allergiesHint', { count: value.length, max: MAX_ALLERGIES })}
+      </p>
+    </div>
   );
 }
