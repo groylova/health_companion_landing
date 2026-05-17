@@ -12,6 +12,7 @@ import {
 } from '@/lib/bmi/bmi';
 import {
   calculate,
+  kgToLb,
   type Activity,
   type CalcResult,
   type Gender,
@@ -432,19 +433,32 @@ function BmiResultView({
 
   const categoryLabel = t(CATEGORY_LABEL_KEY[bmi.category]);
 
-  // Range string uses kg always (the form is canonicalized; we don't render
-  // lb here for v1).
-  const rangeText = t('result.healthyRangeKg', {
-    minKg: bmi.healthyRangeKg.minKg.toString(),
-    maxKg: bmi.healthyRangeKg.maxKg.toString(),
-  });
-  const targetText =
-    bmi.targetWeightKg !== null
-      ? t('result.targetWeightKg', {
-          target: bmi.targetWeightKg.toString(),
+  // Healthy-range and target rows follow the unit the user typed in. The
+  // explanation copy below still uses kg — full lb support there would need
+  // parallel explanation strings (follow-up).
+  const rangeText =
+    form.weightUnit === 'lb'
+      ? t('result.healthyRangeLb', {
+          minLb: Math.round(kgToLb(bmi.healthyRangeKg.minKg)).toString(),
+          maxLb: Math.round(kgToLb(bmi.healthyRangeKg.maxKg)).toString(),
+        })
+      : t('result.healthyRangeKg', {
           minKg: bmi.healthyRangeKg.minKg.toString(),
           maxKg: bmi.healthyRangeKg.maxKg.toString(),
-        })
+        });
+  const targetText =
+    bmi.targetWeightKg !== null
+      ? form.weightUnit === 'lb'
+        ? t('result.targetWeightLb', {
+            target: Math.round(kgToLb(bmi.targetWeightKg)).toString(),
+            minLb: Math.round(kgToLb(bmi.healthyRangeKg.minKg)).toString(),
+            maxLb: Math.round(kgToLb(bmi.healthyRangeKg.maxKg)).toString(),
+          })
+        : t('result.targetWeightKg', {
+            target: bmi.targetWeightKg.toString(),
+            minKg: bmi.healthyRangeKg.minKg.toString(),
+            maxKg: bmi.healthyRangeKg.maxKg.toString(),
+          })
       : null;
 
   // ICU explanation params vary by category. Build the right object once,
@@ -459,10 +473,6 @@ function BmiResultView({
           minKg: bmi.healthyRangeKg.minKg.toString(),
           maxKg: bmi.healthyRangeKg.maxKg.toString(),
         };
-
-  // Form is unused in v1 — we keep the prop so Task 9 can derive lb display
-  // strings from form.weightUnit without restructuring the call site.
-  void form;
 
   return (
     <div className="space-y-6">
@@ -521,7 +531,6 @@ function BmiResultView({
         {t(EXPLANATION_KEY[bmi.category], explanationParams)}
       </p>
 
-      {/* Activity + CTA — task 9 wires the plan call. */}
       {!alreadyUsed && (
         <div className="space-y-4 border-t border-slate-200 pt-5">
           <div>
