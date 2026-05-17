@@ -153,6 +153,17 @@ export type CalcResult = {
   fatG: number;
 };
 
+export type BmrInput = Pick<
+  CalcInput,
+  'weight' | 'weightUnit' | 'height' | 'heightUnit' | 'age' | 'gender'
+>;
+
+export function computeBmr(input: BmrInput): number {
+  const kg = input.weightUnit === 'kg' ? input.weight : lbToKg(input.weight);
+  const cm = input.heightUnit === 'cm' ? input.height : inToCm(input.height);
+  return Math.round(mifflin(kg, cm, input.age, input.gender));
+}
+
 function mifflin(kg: number, cm: number, age: number, gender: Gender): number {
   const base = 10 * kg + 6.25 * cm - 5 * age;
   if (gender === 'male') {
@@ -260,7 +271,13 @@ export type ValidationError = {
   reason: 'required' | 'range';
 };
 
-export function validate(input: Partial<CalcInput>): ValidationError | null {
+export type ValidateMode = 'bmr' | 'tdee' | 'deficit';
+
+export function validate(
+  input: Partial<CalcInput>,
+  mode: ValidateMode = 'deficit',
+): ValidationError | null {
+  // weight/height/age/gender — required in all modes
   if (input.weight === undefined || Number.isNaN(input.weight)) {
     return { field: 'weight', reason: 'required' };
   }
@@ -294,9 +311,17 @@ export function validate(input: Partial<CalcInput>): ValidationError | null {
     return { field: 'gender', reason: 'required' };
   }
 
+  if (mode === 'bmr') {
+    return null;
+  }
+
   const validActivities: Activity[] = ['sedentary', 'light', 'moderate', 'very', 'extra'];
   if (input.activity === undefined || !validActivities.includes(input.activity)) {
     return { field: 'activity', reason: 'required' };
+  }
+
+  if (mode === 'tdee') {
+    return null;
   }
 
   const validGoals: Goal[] = ['lose', 'maintain', 'gain'];
