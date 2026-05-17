@@ -402,8 +402,8 @@
       "explanationNormal": "Ton IMC de {bmi} est dans l'intervalle sain.",
       "explanationUnderweight": "Ton IMC de {bmi} suggère une possible insuffisance pondérale. Un poids sain pour ta taille commence à {target} kg.",
       "activityPrompt": "Quel est ton niveau d'activité ?",
-      "ctaButton": "Obtenir mon plan du jour",
-      "ctaUsedNote": "Tu as déjà utilisé tes plans gratuits. Installe Nuvvoo pour un nouveau plan chaque jour.",
+      "ctaButton": "Obtenir mon plan repas du jour",
+      "ctaUsedNote": "Tu as utilisé tes générations gratuites. Installe Nuvvoo pour un nouveau plan repas chaque jour.",
       "explanationOverweightLb": "Ton IMC de {bmi} est dans la zone de surpoids. Un IMC sain pour ta taille est de 18,5–24,9, soit un poids cible de {minLb}–{maxLb} lb.",
       "explanationObeseLb": "Ton IMC de {bmi} est dans la zone d’obésité. Un IMC sain pour ta taille est de 18,5–24,9, soit un poids cible de {minLb}–{maxLb} lb.",
       "explanationUnderweightLb": "Ton IMC de {bmi} suggère que tu pourrais être en insuffisance pondérale. Un poids sain pour ta taille commence à {target} lb.",
@@ -421,8 +421,8 @@
       "activityIntro": "Une étape avant ton objectif calorique + plan repas"
     },
     "plan": {
-      "heading": "Ton plan du jour",
-      "loading": "Génération de ton plan…",
+      "heading": "Ton plan repas",
+      "loading": "Création de ton plan repas…",
       "slotBreakfast": "Petit-déjeuner",
       "slotLunch": "Déjeuner",
       "slotDinner": "Dîner",
@@ -430,9 +430,9 @@
       "kcalUnit": "kcal",
       "totalLabel": "Total",
       "macros": "P {p}g · G {c}g · L {f}g",
-      "errorTitle": "Impossible de générer le plan pour l'instant. Réessaie dans une minute.",
-      "rateLimitedHourly": "Tu as atteint la limite gratuite de cette heure. Réessaie dans une heure.",
-      "rateLimitedDaily": "Tu as atteint la limite gratuite d'aujourd'hui. Réessaie demain."
+      "errorTitle": "Impossible de créer le plan repas. Réessaie dans une minute.",
+      "rateLimitedHourly": "Limite horaire de générations gratuites atteinte. Réessaie dans une heure.",
+      "rateLimitedDaily": "Limite quotidienne de générations gratuites atteinte. Réessaie demain."
     },
     "seo": {
       "h2_what": "Qu'est-ce que l'IMC ?",
@@ -454,9 +454,9 @@
       "action_p1": "Si ton IMC est au-dessus de 24,9, commencer par un déficit calorique modéré est la bonne entrée — passe par notre <deficit>calculateur de déficit calorique</deficit> pour un objectif quotidien. Si tu es dans l'intervalle sain, vise la régularité plutôt que les chiffres — un simple <food>journal alimentaire</food> bat les plans restrictifs pour tenir dans la durée."
     },
     "conversion": {
-      "title": "C'est une journée. Nuvvoo te donne un nouveau plan chaque jour.",
-      "subtitle": "Enregistre tes repas par chat, sans formulaire. L'IA construit ton plan et s'adapte à tes habitudes.",
-      "cta": "Un plan comme ça chaque jour →"
+      "title": "Ça, c'est un jour. Nuvvoo te donne un nouveau plan repas chaque jour.",
+      "subtitle": "Suis tes repas en discutant, pas en saisissant. L'IA crée ton plan repas et s'adapte à tes habitudes.",
+      "cta": "Un plan repas comme ça chaque jour →"
     },
     "faq": {
       "q1": "Quel est un IMC sain ?",

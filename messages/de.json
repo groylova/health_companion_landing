@@ -402,8 +402,8 @@
       "explanationNormal": "Dein BMI von {bmi} liegt im gesunden Bereich.",
       "explanationUnderweight": "Dein BMI von {bmi} deutet auf Untergewicht hin. Ein gesundes Gewicht für deine Größe beginnt bei {target} kg.",
       "activityPrompt": "Wie aktiv bist du?",
-      "ctaButton": "Meinen ersten Tagesplan holen",
-      "ctaUsedNote": "Du hast deine kostenlosen Pläne schon genutzt. Installiere Nuvvoo für einen frischen Plan an jedem Tag.",
+      "ctaButton": "Meinen ersten Essensplan holen",
+      "ctaUsedNote": "Du hast deine kostenlosen Generierungen aufgebraucht. Hol dir Nuvvoo für jeden Tag einen neuen Essensplan.",
       "explanationOverweightLb": "Dein BMI von {bmi} liegt im Übergewichtsbereich. Ein gesunder BMI für deine Größe ist 18,5–24,9, das entspricht einem Zielgewicht von {minLb}–{maxLb} lb.",
       "explanationObeseLb": "Dein BMI von {bmi} liegt im Adipositasbereich. Ein gesunder BMI für deine Größe ist 18,5–24,9, das entspricht einem Zielgewicht von {minLb}–{maxLb} lb.",
       "explanationUnderweightLb": "Dein BMI von {bmi} deutet auf Untergewicht hin. Ein gesundes Gewicht für deine Größe beginnt bei {target} lb.",
@@ -421,8 +421,8 @@
       "activityIntro": "Nur ein Schritt zu deinem Kalorienziel + Essensplan"
     },
     "plan": {
-      "heading": "Dein Tagesplan",
-      "loading": "Plan wird erstellt…",
+      "heading": "Dein Essensplan",
+      "loading": "Dein Essensplan wird erstellt…",
       "slotBreakfast": "Frühstück",
       "slotLunch": "Mittagessen",
       "slotDinner": "Abendessen",
@@ -430,9 +430,9 @@
       "kcalUnit": "kcal",
       "totalLabel": "Gesamt",
       "macros": "P {p}g · K {c}g · F {f}g",
-      "errorTitle": "Plan konnte gerade nicht erstellt werden. Bitte versuch es in einer Minute noch einmal.",
-      "rateLimitedHourly": "Du hast das Stündlich-Limit für kostenlose Pläne erreicht. Versuch es in einer Stunde noch einmal.",
-      "rateLimitedDaily": "Du hast das Tageslimit für kostenlose Pläne erreicht. Versuch es morgen noch einmal."
+      "errorTitle": "Der Essensplan konnte gerade nicht erstellt werden. Bitte in einer Minute erneut versuchen.",
+      "rateLimitedHourly": "Stündliches Limit an Gratis-Generierungen erreicht. Bitte in einer Stunde erneut versuchen.",
+      "rateLimitedDaily": "Tägliches Limit an Gratis-Generierungen erreicht. Bitte morgen erneut versuchen."
     },
     "seo": {
       "h2_what": "Was ist der BMI?",
@@ -454,9 +454,9 @@
       "action_p1": "Liegt dein BMI über 24,9, ist ein moderates Kaloriendefizit der richtige Startpunkt — schau in unseren <deficit>Kaloriendefizit-Rechner</deficit> für ein tägliches Ziel. Liegst du im gesunden Bereich, geht es um Konstanz statt um Zahlen — ein einfaches <food>Ernährungstagebuch</food> schlägt strenge Pläne, wenn du dranbleiben willst."
     },
     "conversion": {
-      "title": "Das ist ein Tag. Nuvvoo gibt dir jeden Tag einen frischen Plan.",
-      "subtitle": "Tracke Mahlzeiten per Chat statt sie zu loggen. Die KI baut deinen Plan und passt ihn an deine Gewohnheiten an.",
-      "cta": "Jeden Tag so einen Plan →"
+      "title": "Das ist ein Tag. Nuvvoo gibt dir jeden Tag einen neuen Essensplan.",
+      "subtitle": "Erfasse Mahlzeiten im Chat statt sie zu loggen. KI baut deinen Essensplan und passt sich deinen Gewohnheiten an.",
+      "cta": "So einen Essensplan jeden Tag →"
     },
     "faq": {
       "q1": "Was ist ein gesunder BMI?",

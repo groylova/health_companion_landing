@@ -405,8 +405,8 @@
       "explanationObeseLb": "Your BMI of {bmi} is in the obese range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minLb}–{maxLb} lb.",
       "explanationUnderweightLb": "Your BMI of {bmi} suggests you may be underweight. A healthy weight for your height starts at {target} lb.",
       "activityPrompt": "How active are you?",
-      "ctaButton": "Get my first day plan",
-      "ctaUsedNote": "You've already generated your free plans. Install Nuvvoo for a fresh plan every day.",
+      "ctaButton": "Get my first day meal plan",
+      "ctaUsedNote": "You've already used your free generations. Install Nuvvoo for a fresh meal plan every day.",
       "kcalUnit": "kcal/day",
       "bmrLabel": "BMR",
       "tdeeLabel": "Maintenance (TDEE)",
@@ -421,8 +421,8 @@
       "activityIntro": "One step to your calorie target + meal plan"
     },
     "plan": {
-      "heading": "Your day plan",
-      "loading": "Building your plan…",
+      "heading": "Your meal plan",
+      "loading": "Building your meal plan…",
       "slotBreakfast": "Breakfast",
       "slotLunch": "Lunch",
       "slotDinner": "Dinner",
@@ -430,9 +430,9 @@
       "kcalUnit": "kcal",
       "totalLabel": "Total",
       "macros": "P {p}g · C {c}g · F {f}g",
-      "errorTitle": "Couldn't build the plan right now. Please try again in a minute.",
-      "rateLimitedHourly": "We've hit the hourly free-plan limit. Please try again in an hour.",
-      "rateLimitedDaily": "We've hit today's free-plan limit. Please try again tomorrow."
+      "errorTitle": "Couldn't build the meal plan right now. Please try again in a minute.",
+      "rateLimitedHourly": "We've hit the hourly free-generation limit. Please try again in an hour.",
+      "rateLimitedDaily": "We've hit today's free-generation limit. Please try again tomorrow."
     },
     "seo": {
       "h2_what": "What is BMI?",
@@ -454,9 +454,9 @@
       "action_p1": "If your BMI is above 24.9, a moderate calorie deficit is the place to start — see our <deficit>calorie deficit calculator</deficit> for a daily target. If it's in the healthy range, focus on consistency over numbers — a simple <food>food diary</food> beats restrictive plans for staying on track."
     },
     "conversion": {
-      "title": "This is one day. Nuvvoo gives you a fresh plan every day.",
-      "subtitle": "Track meals by chatting, not logging. AI builds your plan and adapts to your habits.",
-      "cta": "Get a plan like this every day →"
+      "title": "This is one day. Nuvvoo gives you a fresh meal plan every day.",
+      "subtitle": "Track meals by chatting, not logging. AI builds your meal plan and adapts to your habits.",
+      "cta": "Get a meal plan like this every day →"
     },
     "faq": {
       "q1": "What is a healthy BMI?",

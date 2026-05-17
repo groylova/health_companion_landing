@@ -402,8 +402,8 @@
       "explanationNormal": "Tu IMC de {bmi} está en el rango saludable.",
       "explanationUnderweight": "Tu IMC de {bmi} sugiere que podrías estar en bajo peso. Un peso saludable para tu altura empieza en {target} kg.",
       "activityPrompt": "¿Qué tan activo eres?",
-      "ctaButton": "Generar mi plan del día",
-      "ctaUsedNote": "Ya has usado tus planes gratuitos. Instala Nuvvoo para un plan nuevo cada día.",
+      "ctaButton": "Generar mi plan de comidas del día",
+      "ctaUsedNote": "Ya has usado tus generaciones gratis. Instala Nuvvoo para un nuevo plan de comidas cada día.",
       "explanationOverweightLb": "Tu IMC de {bmi} está en el rango de sobrepeso. Un IMC saludable para tu estatura es 18,5–24,9, lo que significa un peso objetivo de {minLb}–{maxLb} lb.",
       "explanationObeseLb": "Tu IMC de {bmi} está en el rango de obesidad. Un IMC saludable para tu estatura es 18,5–24,9, lo que significa un peso objetivo de {minLb}–{maxLb} lb.",
       "explanationUnderweightLb": "Tu IMC de {bmi} sugiere que podrías estar bajo de peso. Un peso saludable para tu estatura empieza en {target} lb.",
@@ -421,8 +421,8 @@
       "activityIntro": "Un paso para tu objetivo de calorías + plan de comidas"
     },
     "plan": {
-      "heading": "Tu plan del día",
-      "loading": "Generando tu plan…",
+      "heading": "Tu plan de comidas",
+      "loading": "Preparando tu plan de comidas…",
       "slotBreakfast": "Desayuno",
       "slotLunch": "Comida",
       "slotDinner": "Cena",
@@ -430,9 +430,9 @@
       "kcalUnit": "kcal",
       "totalLabel": "Total",
       "macros": "P {p}g · C {c}g · G {f}g",
-      "errorTitle": "No se pudo generar el plan ahora mismo. Inténtalo de nuevo en un minuto.",
-      "rateLimitedHourly": "Has alcanzado el límite gratuito de esta hora. Inténtalo en una hora.",
-      "rateLimitedDaily": "Has alcanzado el límite gratuito de hoy. Inténtalo mañana."
+      "errorTitle": "No se pudo crear el plan de comidas. Inténtalo en un minuto.",
+      "rateLimitedHourly": "Has alcanzado el límite de generaciones gratis de esta hora. Inténtalo en una hora.",
+      "rateLimitedDaily": "Has alcanzado el límite de generaciones gratis de hoy. Inténtalo mañana."
     },
     "seo": {
       "h2_what": "¿Qué es el IMC?",
@@ -454,9 +454,9 @@
       "action_p1": "Si tu IMC está por encima de 24,9, empezar por un déficit calórico moderado es lo lógico — entra en nuestra <deficit>calculadora de déficit calórico</deficit> para un objetivo diario. Si estás en el rango saludable, prioriza la constancia sobre los números — un simple <food>diario de comidas</food> gana a los planes restrictivos para no abandonar."
     },
     "conversion": {
-      "title": "Esto es un día. Nuvvoo te da un plan nuevo cada día.",
-      "subtitle": "Registra comidas chateando, sin formularios. La IA arma tu plan y se adapta a tus hábitos.",
-      "cta": "Un plan así cada día →"
+      "title": "Esto es un día. Nuvvoo te da un nuevo plan de comidas cada día.",
+      "subtitle": "Registra tus comidas charlando, no anotando. La IA arma tu plan de comidas y se adapta a tus hábitos.",
+      "cta": "Un plan de comidas así cada día →"
     },
     "faq": {
       "q1": "¿Qué IMC es saludable?",
