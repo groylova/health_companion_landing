@@ -739,7 +739,7 @@ git commit -m "Add bmiCalculator namespace + cross-link keys to EN messages"
 - DE: `BMI Rechner — Kostenlos + KI-Ernährungsplan`
 - RU: `Калькулятор BMI — бесплатно + AI план питания`
 - ES: `Calculadora de IMC — Gratis + Plan IA`
-- FR: `Calculateur IMC — Gratuit + Plan Repas IA`
+- FR: `Calculateur d'IMC — Gratuit + Plan Repas IA`
 
 H1 per locale: `BMI Rechner` / `Калькулятор BMI` / `Calculadora de IMC` / `Calculateur d'IMC`.
 
