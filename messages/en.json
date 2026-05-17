@@ -417,7 +417,8 @@
       "clampedNote": "We capped your target at the safe minimum so the plan stays realistic and sustainable.",
       "maintainTitle": "Your maintenance calories",
       "loseTitle": "Your daily calorie target",
-      "gainTitle": "Your daily calorie target"
+      "gainTitle": "Your daily calorie target",
+      "activityIntro": "Now let's see your daily calorie target."
     },
     "plan": {
       "heading": "Your day plan",

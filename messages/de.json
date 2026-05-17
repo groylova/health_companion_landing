@@ -417,7 +417,8 @@
       "clampedNote": "Wir haben dein Ziel auf das sichere Minimum begrenzt, damit der Plan realistisch und nachhaltig bleibt.",
       "maintainTitle": "Deine Erhaltungskalorien",
       "loseTitle": "Dein tägliches Kalorienziel",
-      "gainTitle": "Dein tägliches Kalorienziel"
+      "gainTitle": "Dein tägliches Kalorienziel",
+      "activityIntro": "Schauen wir uns jetzt dein tägliches Kalorienziel an."
     },
     "plan": {
       "heading": "Dein Tagesplan",

@@ -417,7 +417,8 @@
       "clampedNote": "On a plafonné ton objectif au minimum de sécurité pour que le plan reste réaliste et tenable.",
       "maintainTitle": "Tes calories de maintenance",
       "loseTitle": "Ton objectif calorique du jour",
-      "gainTitle": "Ton objectif calorique du jour"
+      "gainTitle": "Ton objectif calorique du jour",
+      "activityIntro": "Maintenant, voyons quel est ton objectif calorique quotidien."
     },
     "plan": {
       "heading": "Ton plan du jour",

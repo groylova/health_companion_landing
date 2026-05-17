@@ -623,11 +623,17 @@ function BmiResultView({
       {!alreadyUsed && (
         <div className="space-y-5 border-t border-slate-200 pt-5">
           <div>
-            <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
+            {/* Friendly bridge from the BMI number into the calorie funnel.
+               Without this the activity dropdown sits there with no context —
+               the user just sees "Activity level" and doesn't know why.
+               The intro answers "what's this for?" before the question. */}
+            <p className="text-sm font-semibold text-slate-900">{t('result.activityIntro')}</p>
+            <label className="mt-1 block text-xs text-slate-500">{t('result.activityPrompt')}</label>
             <select
               value={activity}
               onChange={(e) => onActivity(e.target.value as Activity)}
-              className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
+              aria-label={t('form.activityLabel')}
+              className="mt-2 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
             >
               <option value="" disabled>
                 —

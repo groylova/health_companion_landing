@@ -417,7 +417,8 @@
       "clampedNote": "Limitamos tu objetivo al mínimo seguro para que el plan sea realista y sostenible.",
       "maintainTitle": "Tus calorías de mantenimiento",
       "loseTitle": "Tu objetivo diario de calorías",
-      "gainTitle": "Tu objetivo diario de calorías"
+      "gainTitle": "Tu objetivo diario de calorías",
+      "activityIntro": "Ahora veamos cuál es tu objetivo diario de calorías."
     },
     "plan": {
       "heading": "Tu plan del día",
