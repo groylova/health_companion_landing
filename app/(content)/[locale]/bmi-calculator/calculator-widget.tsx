@@ -620,143 +620,150 @@ function BmiResultView({
         {t(explanationKey, explanationParams)}
       </p>
 
-      {!alreadyUsed && (
-        <div className="space-y-5 border-t border-slate-200 pt-5">
-          <div>
-            {/* Friendly bridge from the BMI number into the calorie funnel.
-               Without this the activity dropdown sits there with no context —
-               the user just sees "Activity level" and doesn't know why.
-               The intro answers "what's this for?" before the question. */}
-            <p className="text-sm font-semibold text-slate-900">{t('result.activityIntro')}</p>
-            <label className="mt-1 block text-xs text-slate-500">{t('result.activityPrompt')}</label>
-            <select
-              value={activity}
-              onChange={(e) => onActivity(e.target.value as Activity)}
-              aria-label={t('form.activityLabel')}
-              className="mt-2 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
-            >
-              <option value="" disabled>
-                —
-              </option>
-              <option value="sedentary">{t('form.activitySedentary')}</option>
-              <option value="light">{t('form.activityLight')}</option>
-              <option value="moderate">{t('form.activityModerate')}</option>
-              <option value="very">{t('form.activityVery')}</option>
-              <option value="extra">{t('form.activityExtra')}</option>
-            </select>
-          </div>
-
-          {/* Calories + BMR/TDEE + macros + diet + allergies — appears once
-             activity is picked so calcResult is non-null. Same blocks as
-             deficit calc's ResultView; lets the user see the personalized
-             targets before clicking "Get my first day plan". */}
-          {calcResult !== null && (
-            <div className="space-y-5">
-              <div>
-                <p className="text-sm font-medium text-slate-500">{t(targetTitleKey)}</p>
-                <p className="text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-                  {calcResult.target.toLocaleString()}
-                </p>
-                <p className="mt-1 text-sm text-slate-500">{t('result.kcalUnit')}</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
-                <div>
-                  <p className="text-slate-500">{t('result.bmrLabel')}</p>
-                  <p className="font-semibold text-slate-900">{calcResult.bmr.toLocaleString()} kcal</p>
-                </div>
-                <div>
-                  <p className="text-slate-500">{t('result.tdeeLabel')}</p>
-                  <p className="font-semibold text-slate-900">{calcResult.tdee.toLocaleString()} kcal</p>
-                </div>
-              </div>
-
-              <div>
-                <p className="text-sm font-medium text-slate-700">{t('result.macrosLabel')}</p>
-                <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
-                  <div>
-                    <p className="text-slate-500">{t('result.macroProtein')}</p>
-                    <p className="font-semibold text-slate-900">{calcResult.proteinG.toLocaleString()} g</p>
-                  </div>
-                  <div>
-                    <p className="text-slate-500">{t('result.macroCarbs')}</p>
-                    <p className="font-semibold text-slate-900">{calcResult.carbsG.toLocaleString()} g</p>
-                  </div>
-                  <div>
-                    <p className="text-slate-500">{t('result.macroFat')}</p>
-                    <p className="font-semibold text-slate-900">{calcResult.fatG.toLocaleString()} g</p>
-                  </div>
-                </div>
-              </div>
-
-              {calcResult.clamped && (
-                <p className="text-xs text-amber-700">{t('result.clampedNote')}</p>
-              )}
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
-                {/* 2×2 grid — same reason as deficit: keeps longer locale
-                   labels (Pescatarian / Pescetarisch / Вегетарианство) from
-                   clipping inside the half-width hero column. */}
-                <div className="mt-1 grid grid-cols-2 gap-2">
-                  {DIET_OPTIONS.map((d) => (
-                    <SegmentButton
-                      key={d}
-                      selected={diet === d}
-                      onClick={() => onDiet(d)}
-                      label={t(`form.diet_${d}` as 'form.diet_none')}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <AllergiesInput value={allergies} onChange={onAllergies} t={t} />
-            </div>
-          )}
-
-          <button
-            onClick={onGetPlan}
-            disabled={planLoading || activity === ''}
-            className="group inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
+      <div className="space-y-5 border-t border-slate-200 pt-5">
+        {/* Activity + calorie panel are FREE math — always shown. Only the
+           AI meal plan generation (and its diet/allergies inputs) is gated
+           behind alreadyUsed, so a user who's spent their plans still gets
+           the calorie/BMR/TDEE/macros payoff they came here for. */}
+        <div>
+          {/* Friendly bridge from the BMI number into the calorie funnel.
+             Without this the activity dropdown sits there with no context —
+             the user just sees "Activity level" and doesn't know why. */}
+          <p className="text-sm font-semibold text-slate-900">{t('result.activityIntro')}</p>
+          <label className="mt-1 block text-xs text-slate-500">{t('result.activityPrompt')}</label>
+          <select
+            value={activity}
+            onChange={(e) => onActivity(e.target.value as Activity)}
+            aria-label={t('form.activityLabel')}
+            className="mt-2 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
           >
-            <span>{planLoading ? t('plan.loading') : t('result.ctaButton')}</span>
-            {!planLoading && (
-              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-                →
-              </span>
-            )}
-          </button>
-          {planError !== null && <p className="mt-2 text-xs text-red-600">{planError}</p>}
+            <option value="" disabled>
+              —
+            </option>
+            <option value="sedentary">{t('form.activitySedentary')}</option>
+            <option value="light">{t('form.activityLight')}</option>
+            <option value="moderate">{t('form.activityModerate')}</option>
+            <option value="very">{t('form.activityVery')}</option>
+            <option value="extra">{t('form.activityExtra')}</option>
+          </select>
         </div>
-      )}
 
-      {alreadyUsed && (
-        // Both free plans already spent — replace the generation CTA with
-        // the App Store conversion stack so the result page doesn't dead-end.
-        <div className="border-t border-slate-200 pt-5">
-          <p className="text-sm text-slate-600">{t('result.ctaUsedNote')}</p>
-          <div className="mt-4 flex flex-col items-center gap-3">
-            <a
-              href={appUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleResultUsedCtaClick}
-              className="inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)]"
+        {calcResult !== null && (
+          <div className="space-y-5">
+            <div>
+              <p className="text-sm font-medium text-slate-500">{t(targetTitleKey)}</p>
+              <p className="text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+                {calcResult.target.toLocaleString()}
+              </p>
+              <p className="mt-1 text-sm text-slate-500">{t('result.kcalUnit')}</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
+              <div>
+                <p className="text-slate-500">{t('result.bmrLabel')}</p>
+                <p className="font-semibold text-slate-900">{calcResult.bmr.toLocaleString()} kcal</p>
+              </div>
+              <div>
+                <p className="text-slate-500">{t('result.tdeeLabel')}</p>
+                <p className="font-semibold text-slate-900">{calcResult.tdee.toLocaleString()} kcal</p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm font-medium text-slate-700">{t('result.macrosLabel')}</p>
+              <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
+                <div>
+                  <p className="text-slate-500">{t('result.macroProtein')}</p>
+                  <p className="font-semibold text-slate-900">{calcResult.proteinG.toLocaleString()} g</p>
+                </div>
+                <div>
+                  <p className="text-slate-500">{t('result.macroCarbs')}</p>
+                  <p className="font-semibold text-slate-900">{calcResult.carbsG.toLocaleString()} g</p>
+                </div>
+                <div>
+                  <p className="text-slate-500">{t('result.macroFat')}</p>
+                  <p className="font-semibold text-slate-900">{calcResult.fatG.toLocaleString()} g</p>
+                </div>
+              </div>
+            </div>
+
+            {calcResult.clamped && (
+              <p className="text-xs text-amber-700">{t('result.clampedNote')}</p>
+            )}
+
+            {/* Plan-only inputs: only the AI plan reads these, so hide once
+               the user has spent both free plans — they'd be inert clutter. */}
+            {!alreadyUsed && (
+              <>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
+                  {/* 2×2 grid — keeps longer locale labels (Pescatarian /
+                     Pescetarisch / Вегетарианство) from clipping inside the
+                     half-width hero column. */}
+                  <div className="mt-1 grid grid-cols-2 gap-2">
+                    {DIET_OPTIONS.map((d) => (
+                      <SegmentButton
+                        key={d}
+                        selected={diet === d}
+                        onClick={() => onDiet(d)}
+                        label={t(`form.diet_${d}` as 'form.diet_none')}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <AllergiesInput value={allergies} onChange={onAllergies} t={t} />
+              </>
+            )}
+          </div>
+        )}
+
+        {!alreadyUsed && (
+          <div>
+            <button
+              onClick={onGetPlan}
+              disabled={planLoading || activity === ''}
+              className="group inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {t('conversion.cta')}
-            </a>
-            <AppStoreBadge
-              buttonLocation="bmi_calculator_result_used_badge"
-              size="sm"
-              onClick={() => fireAppClick('bmi_calculator_result_used_badge')}
-            />
-            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
-              <span>💚 {tHero('trustFree')}</span>
-              <span>🔒 {tHero('trustPrivacy')}</span>
+              <span>{planLoading ? t('plan.loading') : t('result.ctaButton')}</span>
+              {!planLoading && (
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              )}
+            </button>
+            {planError !== null && <p className="mt-2 text-xs text-red-600">{planError}</p>}
+          </div>
+        )}
+
+        {alreadyUsed && (
+          // Both free plans already spent — swap the generation CTA for
+          // the App Store stack. The calorie/macro panel above stays visible.
+          <div>
+            <p className="text-sm text-slate-600">{t('result.ctaUsedNote')}</p>
+            <div className="mt-4 flex flex-col items-center gap-3">
+              <a
+                href={appUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleResultUsedCtaClick}
+                className="inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)]"
+              >
+                {t('conversion.cta')}
+              </a>
+              <AppStoreBadge
+                buttonLocation="bmi_calculator_result_used_badge"
+                size="sm"
+                onClick={() => fireAppClick('bmi_calculator_result_used_badge')}
+              />
+              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
+                <span>💚 {tHero('trustFree')}</span>
+                <span>🔒 {tHero('trustPrivacy')}</span>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
