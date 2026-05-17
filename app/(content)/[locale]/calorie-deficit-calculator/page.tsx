@@ -9,7 +9,7 @@ import { FaqSection } from '@/components/seo/faq-section';
 import { RelatedGuides } from '@/components/seo/related-guides';
 import { AppStoreBadge } from '@/components/app-store-badge';
 import { routing } from '@/i18n/routing';
-import { CalculatorWidget } from './calculator-widget';
+import { CalorieCalculator } from '@/components/calculator/calorie-calculator';
 
 const SLUG = 'calorie-deficit-calculator';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
@@ -113,7 +113,7 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
                negative margin so the white card uses nearly the full
                viewport width. md+ reverts to standard grid placement. */}
             <div className="-mx-2 w-auto min-w-0 md:mx-0 md:w-full">
-              <CalculatorWidget />
+              <CalorieCalculator mode="deficit" messagesNamespace="deficitCalculator" />
             </div>
           </div>
         </Container>

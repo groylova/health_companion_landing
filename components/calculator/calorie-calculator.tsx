@@ -74,8 +74,6 @@ const DIET_OPTIONS: ApiDiet[] = ['none', 'vegetarian', 'pescatarian', 'vegan'];
 const MAX_ALLERGIES = 8;
 const MAX_ALLERGY_LEN = 32;
 
-const STORAGE_KEY_USED = 'nuvvoo_deficit_plan_used';
-const STORAGE_KEY_DATA = 'nuvvoo_deficit_plan_data';
 // Bumped to 6 when FormState gained diet + allergies — old payloads lack
 // those fields and would crash the chip input on rehydrate. The version
 // gate at load time drops stale entries instead of trying to migrate them.
@@ -200,9 +198,19 @@ function convertHeight(
   return { heightCm: cm.toString(), heightFt: current.heightFt, heightIn: current.heightIn };
 }
 
-export function CalculatorWidget() {
-  const t = useTranslations('deficitCalculator');
+type Mode = 'bmr' | 'tdee' | 'deficit';
+
+type Props = {
+  mode: Mode;
+  messagesNamespace: 'bmrCalculator' | 'tdeeCalculator' | 'deficitCalculator';
+};
+
+export function CalorieCalculator({ mode, messagesNamespace }: Props) {
+  const t = useTranslations(messagesNamespace);
   const locale = useLocale();
+
+  const storageKeyUsed = `nuvvoo_${mode}_plan_used`;
+  const storageKeyData = `nuvvoo_${mode}_plan_data`;
 
   const [phase, setPhase] = useState<Phase>('form');
   const [form, setForm] = useState<FormState>(DEFAULT_FORM);
@@ -227,7 +235,12 @@ export function CalculatorWidget() {
       return;
     }
     viewedRef.current = true;
-    track('calculator_viewed', { page: 'calorie_deficit_calculator', locale });
+    const pageNameFor: Record<Mode, string> = {
+      bmr: 'bmr_calculator',
+      tdee: 'tdee_calculator',
+      deficit: 'calorie_deficit_calculator',
+    };
+    track('calculator_viewed', { page: pageNameFor[mode], mode, locale });
 
     void fetchSession().then((session) => {
       if (session !== null) {
@@ -237,12 +250,12 @@ export function CalculatorWidget() {
 
     try {
       if (PLAN_LIMIT_ENABLED) {
-        const used = window.localStorage.getItem(STORAGE_KEY_USED);
+        const used = window.localStorage.getItem(storageKeyUsed);
         if (used === '1') {
           setAlreadyUsed(true);
         }
       }
-      const dataRaw = window.localStorage.getItem(STORAGE_KEY_DATA);
+      const dataRaw = window.localStorage.getItem(storageKeyData);
       if (dataRaw !== null) {
         const data = JSON.parse(dataRaw) as StoredData;
         if (data.v === STORAGE_VERSION && data.form && data.result && data.plan) {
@@ -381,9 +394,9 @@ export function CalculatorWidget() {
     const stored: StoredData = { v: STORAGE_VERSION, form, result, plan: apiPlan };
     try {
       if (PLAN_LIMIT_ENABLED) {
-        window.localStorage.setItem(STORAGE_KEY_USED, '1');
+        window.localStorage.setItem(storageKeyUsed, '1');
       }
-      window.localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(stored));
+      window.localStorage.setItem(storageKeyData, JSON.stringify(stored));
     } catch {
       // Storage full / disabled — feature still works for this session.
     }
@@ -439,7 +452,7 @@ export function CalculatorWidget() {
 
 /* ─── FORM ─── */
 
-type Translator = ReturnType<typeof useTranslations<'deficitCalculator'>>;
+type Translator = (key: string, values?: Record<string, string | number>) => string;
 
 function FormView({
   form,
