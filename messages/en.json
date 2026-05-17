@@ -239,16 +239,16 @@
       "macroFat": "Fat",
       "clampedNote": "We capped your target at the safe minimum so the plan stays realistic and sustainable.",
       "ctaText": "Turn this into a plan for today",
-      "ctaButton": "Get my first day plan",
-      "ctaUsedNote": "You've used your free plan. Open Nuvvoo for a fresh plan every day."
+      "ctaButton": "Get my first day meal plan",
+      "ctaUsedNote": "You've used your free generation. Open Nuvvoo for a fresh meal plan every day."
     },
     "plan": {
-      "loading": "Generating your plan…",
-      "errorTitle": "Couldn't generate a plan",
+      "loading": "Generating your meal plan…",
+      "errorTitle": "Couldn't generate the meal plan",
       "errorRetry": "Try again",
-      "rateLimitedHourly": "You've hit this hour's plan limit. Try again in an hour.",
-      "rateLimitedDaily": "You've hit today's plan limit. Try again tomorrow.",
-      "heading": "Goal",
+      "rateLimitedHourly": "You've hit this hour's generation limit. Try again in an hour.",
+      "rateLimitedDaily": "You've hit today's generation limit. Try again tomorrow.",
+      "heading": "Your meal plan",
       "totalLabel": "Total",
       "kcalUnit": "kcal",
       "portionFactor": "{factor}× normal portion",
@@ -265,9 +265,9 @@
       "macros": "P {p}g · C {c}g · F {f}g"
     },
     "conversion": {
-      "title": "Want a new plan every day and automatic tracking?",
+      "title": "Want a new meal plan every day and automatic tracking?",
       "subtitle": "Try Nuvvoo, the modern calorie tracker.",
-      "cta": "Get a plan like this every day →"
+      "cta": "Get a meal plan like this every day →"
     },
     "seo": {
       "h2_what": "What is a calorie deficit?",

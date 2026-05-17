@@ -239,16 +239,16 @@
       "macroFat": "Lipides",
       "clampedNote": "On a plafonné ton objectif au minimum de sécurité pour que le plan reste réaliste et tenable.",
       "ctaText": "Transforme ça en plan pour aujourd'hui",
-      "ctaButton": "Obtenir mon plan du jour",
-      "ctaUsedNote": "Tu as utilisé ton plan gratuit. Ouvre Nuvvoo pour un nouveau plan chaque jour."
+      "ctaButton": "Obtenir mon plan repas du jour",
+      "ctaUsedNote": "Tu as utilisé ta génération gratuite. Ouvre Nuvvoo pour un nouveau plan repas chaque jour."
     },
     "plan": {
-      "loading": "Génération de ton plan…",
-      "errorTitle": "Impossible de générer le plan",
+      "loading": "Génération de ton plan repas…",
+      "errorTitle": "Impossible de générer le plan repas",
       "errorRetry": "Réessayer",
-      "rateLimitedHourly": "Tu as atteint la limite de plans de cette heure. Réessaie dans une heure.",
-      "rateLimitedDaily": "Tu as atteint la limite de plans d'aujourd'hui. Réessaie demain.",
-      "heading": "Ton plan du jour",
+      "rateLimitedHourly": "Tu as atteint la limite de générations de cette heure. Réessaie dans une heure.",
+      "rateLimitedDaily": "Tu as atteint la limite de générations d'aujourd'hui. Réessaie demain.",
+      "heading": "Ton plan repas",
       "totalLabel": "Total",
       "kcalUnit": "kcal",
       "portionFactor": "{factor}× portion normale",
@@ -265,9 +265,9 @@
       "macros": "P {p}g · G {c}g · L {f}g"
     },
     "conversion": {
-      "title": "Tu veux un nouveau plan chaque jour et un suivi automatique ?",
+      "title": "Tu veux un nouveau plan repas chaque jour et un suivi automatique ?",
       "subtitle": "Essaie Nuvvoo, le tracker de calories moderne.",
-      "cta": "Un plan comme ça chaque jour →"
+      "cta": "Un plan repas comme ça chaque jour →"
     },
     "seo": {
       "h2_what": "Qu'est-ce qu'un déficit calorique ?",

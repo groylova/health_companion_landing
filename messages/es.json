@@ -239,16 +239,16 @@
       "macroFat": "Grasas",
       "clampedNote": "Limitamos tu objetivo al mínimo seguro para que el plan sea realista y sostenible.",
       "ctaText": "Conviértelo en un plan para hoy",
-      "ctaButton": "Generar mi plan del día",
-      "ctaUsedNote": "Ya has usado tu plan gratuito. Abre Nuvvoo para un plan nuevo cada día."
+      "ctaButton": "Generar mi plan de comidas del día",
+      "ctaUsedNote": "Ya has usado tu generación gratis. Abre Nuvvoo para un plan de comidas nuevo cada día."
     },
     "plan": {
-      "loading": "Generando tu plan…",
-      "errorTitle": "No se pudo generar el plan",
+      "loading": "Generando tu plan de comidas…",
+      "errorTitle": "No se pudo generar el plan de comidas",
       "errorRetry": "Reintentar",
-      "rateLimitedHourly": "Has alcanzado el límite de planes de esta hora. Inténtalo en una hora.",
-      "rateLimitedDaily": "Has alcanzado el límite de planes de hoy. Inténtalo mañana.",
-      "heading": "Tu plan del día",
+      "rateLimitedHourly": "Has alcanzado el límite de generaciones de esta hora. Inténtalo en una hora.",
+      "rateLimitedDaily": "Has alcanzado el límite de generaciones de hoy. Inténtalo mañana.",
+      "heading": "Tu plan de comidas",
       "totalLabel": "Total",
       "kcalUnit": "kcal",
       "portionFactor": "{factor}× porción normal",
@@ -265,9 +265,9 @@
       "macros": "P {p}g · C {c}g · G {f}g"
     },
     "conversion": {
-      "title": "¿Quieres un plan nuevo cada día y registro automático?",
+      "title": "¿Quieres un plan de comidas nuevo cada día y registro automático?",
       "subtitle": "Prueba Nuvvoo, el contador de calorías moderno.",
-      "cta": "Un plan así cada día →"
+      "cta": "Un plan de comidas así cada día →"
     },
     "seo": {
       "h2_what": "¿Qué es un déficit calórico?",

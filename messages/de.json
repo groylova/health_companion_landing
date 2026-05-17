@@ -239,16 +239,16 @@
       "macroFat": "Fett",
       "clampedNote": "Wir haben dein Ziel auf das sichere Minimum begrenzt, damit der Plan realistisch und nachhaltig bleibt.",
       "ctaText": "Mach daraus einen Plan für heute",
-      "ctaButton": "Meinen ersten Tagesplan holen",
-      "ctaUsedNote": "Du hast deinen kostenlosen Plan genutzt. Öffne Nuvvoo für jeden Tag einen frischen Plan."
+      "ctaButton": "Meinen ersten Essensplan holen",
+      "ctaUsedNote": "Du hast deine kostenlose Generierung genutzt. Öffne Nuvvoo für jeden Tag einen neuen Essensplan."
     },
     "plan": {
-      "loading": "Plan wird erstellt…",
-      "errorTitle": "Plan konnte nicht erstellt werden",
+      "loading": "Dein Essensplan wird erstellt…",
+      "errorTitle": "Essensplan konnte nicht erstellt werden",
       "errorRetry": "Erneut versuchen",
-      "rateLimitedHourly": "Du hast das Stündlich-Limit erreicht. Versuch es in einer Stunde noch einmal.",
-      "rateLimitedDaily": "Du hast das Tageslimit erreicht. Versuch es morgen noch einmal.",
-      "heading": "Dein Tagesplan",
+      "rateLimitedHourly": "Du hast das Stündlich-Limit an Generierungen erreicht. Versuch es in einer Stunde noch einmal.",
+      "rateLimitedDaily": "Du hast das Tageslimit an Generierungen erreicht. Versuch es morgen noch einmal.",
+      "heading": "Dein Essensplan",
       "totalLabel": "Gesamt",
       "kcalUnit": "kcal",
       "portionFactor": "{factor}× normale Portion",
@@ -265,9 +265,9 @@
       "macros": "P {p}g · K {c}g · F {f}g"
     },
     "conversion": {
-      "title": "Willst du jeden Tag einen neuen Plan und automatisches Tracking?",
+      "title": "Willst du jeden Tag einen neuen Essensplan und automatisches Tracking?",
       "subtitle": "Probier Nuvvoo, den modernen Kalorien-Tracker.",
-      "cta": "Jeden Tag so einen Plan →"
+      "cta": "So einen Essensplan jeden Tag →"
     },
     "seo": {
       "h2_what": "Was ist ein Kaloriendefizit?",
