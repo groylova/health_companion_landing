@@ -399,7 +399,7 @@
       "targetWeightLb": "~{target} lb ({minLb}–{maxLb})",
       "explanationOverweight": "Ton IMC de {bmi} est dans la zone de surpoids. Un IMC sain pour ta taille est 18,5–24,9, soit un poids cible de {minKg}–{maxKg} kg.",
       "explanationObese": "Ton IMC de {bmi} est dans la zone d'obésité. Un IMC sain pour ta taille est 18,5–24,9, soit un poids cible de {minKg}–{maxKg} kg.",
-      "explanationNormal": "Ton IMC de {bmi} est dans l'intervalle sain. Voici un plan de maintien pour y rester.",
+      "explanationNormal": "Ton IMC de {bmi} est dans l'intervalle sain.",
       "explanationUnderweight": "Ton IMC de {bmi} suggère une possible insuffisance pondérale. Un poids sain pour ta taille commence à {target} kg.",
       "activityPrompt": "Quel est ton niveau d'activité ?",
       "ctaButton": "Obtenir mon plan du jour",
@@ -415,7 +415,7 @@
       "macroCarbs": "Glucides",
       "macroFat": "Lipides",
       "clampedNote": "On a plafonné ton objectif au minimum de sécurité pour que le plan reste réaliste et tenable.",
-      "maintainTitle": "Tes calories de maintenance",
+      "maintainTitle": "Ton objectif calorique du jour",
       "loseTitle": "Ton objectif calorique du jour",
       "gainTitle": "Ton objectif calorique du jour",
       "activityIntro": "Maintenant, voyons quel est ton objectif calorique quotidien."

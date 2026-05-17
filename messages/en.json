@@ -399,7 +399,7 @@
       "targetWeightLb": "~{target} lb ({minLb}–{maxLb})",
       "explanationOverweight": "Your BMI of {bmi} is in the overweight range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minKg}–{maxKg} kg.",
       "explanationObese": "Your BMI of {bmi} is in the obese range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minKg}–{maxKg} kg.",
-      "explanationNormal": "Your BMI of {bmi} is in the healthy range. Here's a maintenance plan to stay on track.",
+      "explanationNormal": "Your BMI of {bmi} is in the healthy range.",
       "explanationUnderweight": "Your BMI of {bmi} suggests you may be underweight. A healthy weight for your height starts at {target} kg.",
       "explanationOverweightLb": "Your BMI of {bmi} is in the overweight range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minLb}–{maxLb} lb.",
       "explanationObeseLb": "Your BMI of {bmi} is in the obese range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minLb}–{maxLb} lb.",
@@ -415,7 +415,7 @@
       "macroCarbs": "Carbs",
       "macroFat": "Fat",
       "clampedNote": "We capped your target at the safe minimum so the plan stays realistic and sustainable.",
-      "maintainTitle": "Your maintenance calories",
+      "maintainTitle": "Your daily calorie target",
       "loseTitle": "Your daily calorie target",
       "gainTitle": "Your daily calorie target",
       "activityIntro": "Now let's see your daily calorie target."

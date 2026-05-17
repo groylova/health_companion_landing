@@ -399,7 +399,7 @@
       "targetWeightLb": "~{target} lb ({minLb}–{maxLb})",
       "explanationOverweight": "Dein BMI von {bmi} liegt im Bereich Übergewicht. Ein gesunder BMI für deine Größe ist 18,5–24,9 — das entspricht einem Zielgewicht von {minKg}–{maxKg} kg.",
       "explanationObese": "Dein BMI von {bmi} liegt im Bereich Adipositas. Ein gesunder BMI für deine Größe ist 18,5–24,9 — das entspricht einem Zielgewicht von {minKg}–{maxKg} kg.",
-      "explanationNormal": "Dein BMI von {bmi} liegt im gesunden Bereich. Hier ist ein Plan, mit dem du dort bleibst.",
+      "explanationNormal": "Dein BMI von {bmi} liegt im gesunden Bereich.",
       "explanationUnderweight": "Dein BMI von {bmi} deutet auf Untergewicht hin. Ein gesundes Gewicht für deine Größe beginnt bei {target} kg.",
       "activityPrompt": "Wie aktiv bist du?",
       "ctaButton": "Meinen ersten Tagesplan holen",
@@ -415,7 +415,7 @@
       "macroCarbs": "Kohlenhydrate",
       "macroFat": "Fett",
       "clampedNote": "Wir haben dein Ziel auf das sichere Minimum begrenzt, damit der Plan realistisch und nachhaltig bleibt.",
-      "maintainTitle": "Deine Erhaltungskalorien",
+      "maintainTitle": "Dein tägliches Kalorienziel",
       "loseTitle": "Dein tägliches Kalorienziel",
       "gainTitle": "Dein tägliches Kalorienziel",
       "activityIntro": "Schauen wir uns jetzt dein tägliches Kalorienziel an."

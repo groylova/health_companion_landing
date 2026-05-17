@@ -399,7 +399,7 @@
       "targetWeightLb": "~{target} lb ({minLb}–{maxLb})",
       "explanationOverweight": "Tu IMC de {bmi} está en el rango de sobrepeso. Un IMC saludable para tu altura es 18,5–24,9, lo que equivale a un peso objetivo de {minKg}–{maxKg} kg.",
       "explanationObese": "Tu IMC de {bmi} está en el rango de obesidad. Un IMC saludable para tu altura es 18,5–24,9, lo que equivale a un peso objetivo de {minKg}–{maxKg} kg.",
-      "explanationNormal": "Tu IMC de {bmi} está en el rango saludable. Aquí tienes un plan de mantenimiento para seguir así.",
+      "explanationNormal": "Tu IMC de {bmi} está en el rango saludable.",
       "explanationUnderweight": "Tu IMC de {bmi} sugiere que podrías estar en bajo peso. Un peso saludable para tu altura empieza en {target} kg.",
       "activityPrompt": "¿Qué tan activo eres?",
       "ctaButton": "Generar mi plan del día",
@@ -415,7 +415,7 @@
       "macroCarbs": "Carbohidratos",
       "macroFat": "Grasas",
       "clampedNote": "Limitamos tu objetivo al mínimo seguro para que el plan sea realista y sostenible.",
-      "maintainTitle": "Tus calorías de mantenimiento",
+      "maintainTitle": "Tu objetivo diario de calorías",
       "loseTitle": "Tu objetivo diario de calorías",
       "gainTitle": "Tu objetivo diario de calorías",
       "activityIntro": "Ahora veamos cuál es tu objetivo diario de calorías."
