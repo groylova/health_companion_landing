@@ -54,21 +54,23 @@ type FormState = {
   allergies: string[];
 };
 
-const DEFAULT_FORM: FormState = {
-  weight: '',
-  weightUnit: 'lb',
-  heightCm: '',
-  heightFt: '',
-  heightIn: '',
-  heightUnit: 'in',
-  age: '',
-  gender: '',
-  activity: '',
-  goal: 'lose',
-  pace: 'normal',
-  diet: 'none',
-  allergies: [],
-};
+function defaultForm(mode: Mode): FormState {
+  return {
+    weight: '',
+    weightUnit: 'lb',
+    heightCm: '',
+    heightFt: '',
+    heightIn: '',
+    heightUnit: 'in',
+    age: '',
+    gender: '',
+    activity: '',
+    goal: mode === 'deficit' ? 'lose' : 'maintain',
+    pace: 'normal',
+    diet: 'none',
+    allergies: [],
+  };
+}
 
 const DIET_OPTIONS: ApiDiet[] = ['none', 'vegetarian', 'pescatarian', 'vegan'];
 const MAX_ALLERGIES = 8;
@@ -213,7 +215,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
   const storageKeyData = `nuvvoo_${mode}_plan_data`;
 
   const [phase, setPhase] = useState<Phase>('form');
-  const [form, setForm] = useState<FormState>(DEFAULT_FORM);
+  const [form, setForm] = useState<FormState>(() => defaultForm(mode));
   const [error, setError] = useState<ValidationError | null>(null);
   const [result, setResult] = useState<CalcResult | null>(null);
   const [plan, setPlan] = useState<ApiPlan | null>(null);
@@ -294,7 +296,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
   function handleSubmit(e: React.FormEvent): void {
     e.preventDefault();
     const input = toCalcInput(form);
-    const validationError = validate(input);
+    const validationError = validate(input, mode);
     if (validationError !== null) {
       setError(validationError);
       return;
@@ -416,6 +418,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
     <div className="rounded-[2rem] border border-slate-200 bg-white/80 p-6 shadow-soft backdrop-blur md:p-7">
       {phase === 'form' && (
         <FormView
+          mode={mode}
           form={form}
           error={error}
           onField={handleField}
@@ -455,12 +458,14 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
 type Translator = (key: string, values?: Record<string, string | number>) => string;
 
 function FormView({
+  mode,
   form,
   error,
   onField,
   onSubmit,
   t,
 }: {
+  mode: Mode;
   form: FormState;
   error: ValidationError | null;
   onField: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
@@ -657,58 +662,69 @@ function FormView({
         {fieldError('gender') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('gender')}</p>}
       </div>
 
-      {/* Activity */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
-        <select
-          value={form.activity}
-          onChange={(e) => onField('activity', e.target.value as Activity | '')}
-          className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
-        >
-          <option value="" disabled>—</option>
-          <option value="sedentary">{t('form.activitySedentary')}</option>
-          <option value="light">{t('form.activityLight')}</option>
-          <option value="moderate">{t('form.activityModerate')}</option>
-          <option value="very">{t('form.activityVery')}</option>
-          <option value="extra">{t('form.activityExtra')}</option>
-        </select>
-        {fieldError('activity') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('activity')}</p>}
-      </div>
-
-      {/* Goal */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700">{t('form.goalLabel')}</label>
-        <div className="mt-1 grid grid-cols-3 gap-2">
-          <SegmentButton selected={form.goal === 'lose'} onClick={() => handleGoal('lose')} label={t('form.goalLose')} />
-          <SegmentButton selected={form.goal === 'maintain'} onClick={() => handleGoal('maintain')} label={t('form.goalMaintain')} />
-          <SegmentButton selected={form.goal === 'gain'} onClick={() => handleGoal('gain')} label={t('form.goalGain')} />
-        </div>
-      </div>
-
-      {/* Pace — only relevant when there is a deficit/surplus to size. */}
-      {form.goal !== 'maintain' && (
+      {/* Activity — hidden on BMR (BMR is activity-independent). */}
+      {mode !== 'bmr' && (
         <div>
-          <label className="block text-sm font-medium text-slate-700">{t('form.paceLabel')}</label>
+          <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
           <select
-            value={form.pace}
-            onChange={(e) => onField('pace', e.target.value as Pace)}
+            value={form.activity}
+            onChange={(e) => onField('activity', e.target.value as Activity | '')}
             className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
           >
-            {PACE_KEYS.map((p) => (
-              <option key={p} value={p}>
-                {paceLabel(p)}
-              </option>
-            ))}
+            <option value="" disabled>—</option>
+            <option value="sedentary">{t('form.activitySedentary')}</option>
+            <option value="light">{t('form.activityLight')}</option>
+            <option value="moderate">{t('form.activityModerate')}</option>
+            <option value="very">{t('form.activityVery')}</option>
+            <option value="extra">{t('form.activityExtra')}</option>
           </select>
-          {fieldError('pace') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('pace')}</p>}
+          {fieldError('activity') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('activity')}</p>}
         </div>
+      )}
+
+      {/* Goal + Pace — only relevant on the deficit page; BMR/TDEE just
+         report numbers without a goal-directed adjustment. */}
+      {mode === 'deficit' && (
+        <>
+          <div>
+            <label className="block text-sm font-medium text-slate-700">{t('form.goalLabel')}</label>
+            <div className="mt-1 grid grid-cols-3 gap-2">
+              <SegmentButton selected={form.goal === 'lose'} onClick={() => handleGoal('lose')} label={t('form.goalLose')} />
+              <SegmentButton selected={form.goal === 'maintain'} onClick={() => handleGoal('maintain')} label={t('form.goalMaintain')} />
+              <SegmentButton selected={form.goal === 'gain'} onClick={() => handleGoal('gain')} label={t('form.goalGain')} />
+            </div>
+          </div>
+
+          {/* Pace — only relevant when there is a deficit/surplus to size. */}
+          {form.goal !== 'maintain' && (
+            <div>
+              <label className="block text-sm font-medium text-slate-700">{t('form.paceLabel')}</label>
+              <select
+                value={form.pace}
+                onChange={(e) => onField('pace', e.target.value as Pace)}
+                className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
+              >
+                {PACE_KEYS.map((p) => (
+                  <option key={p} value={p}>
+                    {paceLabel(p)}
+                  </option>
+                ))}
+              </select>
+              {fieldError('pace') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('pace')}</p>}
+            </div>
+          )}
+        </>
       )}
 
       <button
         type="submit"
         className="mt-2 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860]"
       >
-        {t('form.submit')}
+        {mode === 'bmr'
+          ? t('form.submitBmr')
+          : mode === 'tdee'
+          ? t('form.submitTdee')
+          : t('form.submit')}
       </button>
     </form>
   );
