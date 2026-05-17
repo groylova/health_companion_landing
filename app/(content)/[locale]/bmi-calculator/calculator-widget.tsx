@@ -4,17 +4,29 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   computeBmiResult,
+  mapToCalcInput,
   validateBmiForm,
   type BmiFormState,
   type BmiResult,
   type BmiValidationError,
 } from '@/lib/bmi/bmi';
-import type {
-  Activity,
-  Gender,
-  HeightUnit,
-  WeightUnit,
+import {
+  calculate,
+  type Activity,
+  type CalcResult,
+  type Gender,
+  type HeightUnit,
+  type WeightUnit,
 } from '@/lib/deficit/calc';
+import {
+  fetchSession,
+  generatePlan,
+  type ApiLanguage,
+  type ApiPlan,
+  type ApiSlot,
+} from '@/lib/deficit/meal-plan-api';
+import { useAppStoreLink } from '@/lib/use-app-store-link';
+import { AppStoreBadge } from '@/components/app-store-badge';
 
 type Phase = 'form' | 'bmi-result' | 'plan';
 
@@ -66,6 +78,26 @@ const PILL_CLASS: Record<BmiResult['category'], string> = {
   obese: 'bg-red-100 text-red-800',
 };
 
+const STORAGE_KEY_COUNT = 'nuvvoo_bmi_plan_count';
+const STORAGE_KEY_DATA = 'nuvvoo_bmi_plan_data';
+const STORAGE_VERSION = 1;
+const PLAN_LIMIT_PER_BROWSER = 2;
+const PLAN_LIMIT_ENABLED = true;
+
+const API_LANGUAGES: ApiLanguage[] = ['en', 'de', 'ru', 'es', 'fr'];
+function toApiLanguage(locale: string): ApiLanguage {
+  return (API_LANGUAGES as string[]).includes(locale) ? (locale as ApiLanguage) : 'en';
+}
+
+type StoredData = {
+  v: number;
+  form: BmiFormState;
+  bmi: BmiResult;
+  activity: Activity;
+  calcResult: CalcResult;
+  plan: ApiPlan;
+};
+
 function track(name: string, params?: Record<string, unknown>): void {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
     return;
@@ -83,29 +115,163 @@ export function CalculatorWidget() {
   const [form, setForm] = useState<BmiFormState>(DEFAULT_FORM);
   const [error, setError] = useState<BmiValidationError | null>(null);
   const [bmi, setBmi] = useState<BmiResult | null>(null);
-  // Placeholders for Tasks 8 + 9 — declared here so the result/plan views
-  // wired up next don't need to reshape the top-level state surface. The
-  // `void` reference at the end keeps the linter quiet without disabling
-  // a rule that isn't even enabled in this repo's ESLint config.
   const [activity, setActivity] = useState<Activity | ''>('');
+  const [plan, setPlan] = useState<ApiPlan | null>(null);
+  const [calcResult, setCalcResult] = useState<CalcResult | null>(null);
   const [planLoading, setPlanLoading] = useState(false);
   const [planError, setPlanError] = useState<string | null>(null);
   const [planCount, setPlanCount] = useState(0);
-  const alreadyUsed = planCount >= 2;
-  // `setPlanLoading`/`setPlanError`/`setPlanCount` are still inert in this
-  // task — Task 9 wires them up when it adds the plan fetch logic.
-  void setPlanLoading;
-  void setPlanError;
-  void setPlanCount;
+  const alreadyUsed = PLAN_LIMIT_ENABLED && planCount >= PLAN_LIMIT_PER_BROWSER;
 
+  // Session token is fetched once on mount; refs keep the latest value
+  // without forcing a re-render when we rotate it after a 401.
+  const sessionTokenRef = useRef<string | null>(null);
   const viewedRef = useRef(false);
+
   useEffect(() => {
     if (viewedRef.current) {
       return;
     }
     viewedRef.current = true;
     track('bmi_calculator_viewed', { page: 'bmi_calculator', locale });
+
+    void fetchSession().then((session) => {
+      if (session !== null) {
+        sessionTokenRef.current = session.session_token;
+      }
+    });
+
+    try {
+      if (PLAN_LIMIT_ENABLED) {
+        const raw = window.localStorage.getItem(STORAGE_KEY_COUNT);
+        const n = raw === null ? 0 : parseInt(raw, 10);
+        if (!Number.isNaN(n)) {
+          setPlanCount(n);
+        }
+      }
+      const dataRaw = window.localStorage.getItem(STORAGE_KEY_DATA);
+      if (dataRaw !== null) {
+        const data = JSON.parse(dataRaw) as StoredData;
+        if (data.v === STORAGE_VERSION && data.form && data.bmi && data.plan) {
+          setForm(data.form);
+          setBmi(data.bmi);
+          setActivity(data.activity);
+          setCalcResult(data.calcResult);
+          setPlan(data.plan);
+          setPhase('plan');
+        }
+      }
+    } catch {
+      // ignore stale / corrupt storage
+    }
   }, [locale]);
+
+  async function ensureSessionToken(): Promise<string | null> {
+    if (sessionTokenRef.current !== null) {
+      return sessionTokenRef.current;
+    }
+    const session = await fetchSession();
+    if (session === null) {
+      return null;
+    }
+    sessionTokenRef.current = session.session_token;
+    return session.session_token;
+  }
+
+  async function handleGetPlan(): Promise<void> {
+    if (bmi === null || activity === '') {
+      return;
+    }
+    track('bmi_cta_clicked', { bmi_category: bmi.category, locale });
+
+    if (alreadyUsed) {
+      return; // CTA is rendered as App Store stack, this is just defensive.
+    }
+
+    setPlanLoading(true);
+    setPlanError(null);
+
+    const token = await ensureSessionToken();
+    if (token === null) {
+      setPlanError(t('plan.errorTitle'));
+      setPlanLoading(false);
+      return;
+    }
+
+    const input = mapToCalcInput(form, activity, bmi.category);
+    const result = calculate(input);
+    setCalcResult(result);
+
+    const payload = {
+      calories_target: result.target,
+      weight_kg: result.weightKg,
+      goal: input.goal,
+      language: toApiLanguage(locale),
+      session_token: token,
+      protein_g: result.proteinG,
+      carbs_g: result.carbsG,
+      fat_g: result.fatG,
+    };
+
+    let response = await generatePlan(payload);
+    if (!response.ok && response.error.kind === 'session_expired') {
+      sessionTokenRef.current = null;
+      const fresh = await ensureSessionToken();
+      if (fresh === null) {
+        setPlanError(t('plan.errorTitle'));
+        setPlanLoading(false);
+        return;
+      }
+      response = await generatePlan({ ...payload, session_token: fresh });
+    }
+
+    if (!response.ok) {
+      if (response.error.kind === 'rate_limited_hourly') {
+        setPlanError(t('plan.rateLimitedHourly'));
+      } else if (response.error.kind === 'rate_limited_daily') {
+        setPlanError(t('plan.rateLimitedDaily'));
+      } else {
+        setPlanError(t('plan.errorTitle'));
+      }
+      setPlanLoading(false);
+      return;
+    }
+
+    const apiPlan = response.plan;
+    setPlan(apiPlan);
+    setPhase('plan');
+
+    const newCount = planCount + 1;
+    setPlanCount(newCount);
+
+    try {
+      if (PLAN_LIMIT_ENABLED) {
+        window.localStorage.setItem(STORAGE_KEY_COUNT, newCount.toString());
+      }
+      const stored: StoredData = {
+        v: STORAGE_VERSION,
+        form,
+        bmi,
+        activity,
+        calcResult: result,
+        plan: apiPlan,
+      };
+      window.localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(stored));
+    } catch {
+      // storage full / disabled — non-fatal
+    }
+
+    track('bmi_plan_generated', {
+      bmi_value: bmi.bmi,
+      bmi_category: bmi.category,
+      target_kcal: result.target,
+      total_kcal: apiPlan.totals.calories,
+      meal_count: apiPlan.meals.length,
+      locale,
+    });
+
+    setPlanLoading(false);
+  }
 
   function handleField<K extends keyof BmiFormState>(key: K, value: BmiFormState[K]): void {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -149,15 +315,16 @@ export function CalculatorWidget() {
           form={form}
           activity={activity}
           onActivity={(a) => setActivity(a)}
-          onGetPlan={() => {
-            /* task 9 */
-          }}
+          onGetPlan={handleGetPlan}
           onEdit={() => setPhase('form')}
           planLoading={planLoading}
           planError={planError}
           alreadyUsed={alreadyUsed}
           t={t}
         />
+      )}
+      {phase === 'plan' && bmi !== null && plan !== null && calcResult !== null && (
+        <PlanView bmi={bmi} plan={plan} calcResult={calcResult} onEdit={() => setPhase('form')} t={t} />
       )}
     </div>
   );
@@ -234,6 +401,33 @@ function BmiResultView({
   alreadyUsed: boolean;
   t: Translator;
 }) {
+  // When alreadyUsed flips on the CTA section morphs into the App-Store
+  // conversion stack — same pattern as the deficit calc's ResultView.
+  const tHero = useTranslations('hero');
+  const locale = useLocale();
+  const { url: appUrl, handleClick: appHandleClick } = useAppStoreLink(
+    'bmi_calculator_result_used',
+  );
+
+  function fireAppClick(buttonLocation: string, extras: Record<string, unknown> = {}): void {
+    const trafficSource =
+      typeof window !== 'undefined' && typeof window.sessionStorage !== 'undefined'
+        ? window.sessionStorage.getItem('nuvvoo_source') || 'direct'
+        : 'direct';
+    track('bmi_app_click', {
+      button_location: buttonLocation,
+      traffic_source: trafficSource,
+      locale,
+      bmi_category: bmi.category,
+      ...extras,
+    });
+  }
+
+  function handleResultUsedCtaClick(): void {
+    fireAppClick('bmi_calculator_result_used');
+    appHandleClick();
+  }
+
   const markerPct = Math.min(100, Math.max(0, ((bmi.bmi - 15) / (40 - 15)) * 100));
 
   const categoryLabel = t(CATEGORY_LABEL_KEY[bmi.category]);
@@ -362,6 +556,148 @@ function BmiResultView({
           {planError !== null && <p className="mt-2 text-xs text-red-600">{planError}</p>}
         </div>
       )}
+
+      {alreadyUsed && (
+        // Both free plans already spent — replace the generation CTA with
+        // the App Store conversion stack so the result page doesn't dead-end.
+        <div className="border-t border-slate-200 pt-5">
+          <p className="text-sm text-slate-600">{t('result.ctaUsedNote')}</p>
+          <div className="mt-4 flex flex-col items-center gap-3">
+            <a
+              href={appUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleResultUsedCtaClick}
+              className="inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)]"
+            >
+              {t('conversion.cta')}
+            </a>
+            <AppStoreBadge
+              buttonLocation="bmi_calculator_result_used_badge"
+              size="sm"
+              onClick={() => fireAppClick('bmi_calculator_result_used_badge')}
+            />
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
+              <span>💚 {tHero('trustFree')}</span>
+              <span>🔒 {tHero('trustPrivacy')}</span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PlanView({
+  bmi,
+  plan,
+  calcResult,
+  onEdit,
+  t,
+}: {
+  bmi: BmiResult;
+  plan: ApiPlan;
+  calcResult: CalcResult;
+  onEdit: () => void;
+  t: Translator;
+}) {
+  const tHero = useTranslations('hero');
+  const locale = useLocale();
+  const { url, handleClick } = useAppStoreLink('bmi_calculator_plan');
+
+  function fireAppClick(buttonLocation: string, extras: Record<string, unknown> = {}): void {
+    const trafficSource =
+      typeof window !== 'undefined' && typeof window.sessionStorage !== 'undefined'
+        ? window.sessionStorage.getItem('nuvvoo_source') || 'direct'
+        : 'direct';
+    track('bmi_app_click', {
+      button_location: buttonLocation,
+      traffic_source: trafficSource,
+      locale,
+      bmi_category: bmi.category,
+      ...extras,
+    });
+  }
+
+  function slotLabel(slot: ApiSlot): string {
+    if (slot === 'breakfast') return t('plan.slotBreakfast');
+    if (slot === 'lunch') return t('plan.slotLunch');
+    if (slot === 'dinner') return t('plan.slotDinner');
+    return t('plan.slotSnack');
+  }
+
+  function handleCtaClick(): void {
+    fireAppClick('bmi_calculator_plan', { target_kcal: calcResult.target });
+    handleClick();
+  }
+
+  return (
+    <div className="space-y-5">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium text-slate-500">{t('plan.heading')}</p>
+          <p className="text-2xl font-bold text-slate-900">
+            {calcResult.target.toLocaleString()}{' '}
+            <span className="text-sm font-medium text-slate-500">{t('plan.kcalUnit')}</span>
+          </p>
+        </div>
+        <button onClick={onEdit} className="text-sm text-nuvvooGreen-700 hover:text-nuvvooGreen-900 underline-offset-2 hover:underline">
+          {t('result.edit')}
+        </button>
+      </div>
+
+      <ul className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
+        {plan.meals.map((meal) => (
+          <li key={meal.slot} className="p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-xs font-medium uppercase tracking-wide text-nuvvooGreen-700">{slotLabel(meal.slot)}</p>
+                <p className="mt-1 text-sm font-medium text-slate-900">{meal.name}</p>
+                {meal.description.length > 0 && (
+                  <p className="mt-1 text-xs leading-relaxed text-slate-500">{meal.description}</p>
+                )}
+              </div>
+              <div className="shrink-0 text-right">
+                <p className="text-base font-semibold text-slate-900">{meal.calories.toLocaleString()}</p>
+                <p className="text-xs text-slate-500">{t('plan.kcalUnit')}</p>
+              </div>
+            </div>
+            <p className="mt-3 border-t border-slate-100 pt-2 text-xs text-slate-500">
+              {t('plan.macros', { p: meal.protein_g, c: meal.carbs_g, f: meal.fat_g })}
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      <div className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
+        <span className="text-sm font-medium text-slate-700">{t('plan.totalLabel')}</span>
+        <span className="text-base font-bold text-slate-900">
+          {plan.totals.calories.toLocaleString()} {t('plan.kcalUnit')}
+        </span>
+      </div>
+
+      {plan.rationale.length > 0 && (
+        <p className="rounded-2xl border border-nuvvooGreen-200 bg-nuvvooGreen-50/40 p-4 text-sm leading-relaxed text-slate-700">
+          {plan.rationale}
+        </p>
+      )}
+
+      <div className="flex flex-col items-center gap-3">
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleCtaClick}
+          className="inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)]"
+        >
+          {t('conversion.cta')}
+        </a>
+        <AppStoreBadge buttonLocation="bmi_calculator_plan_badge" size="sm" onClick={() => fireAppClick('bmi_calculator_plan_badge')} />
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
+          <span>💚 {tHero('trustFree')}</span>
+          <span>🔒 {tHero('trustPrivacy')}</span>
+        </div>
+      </div>
     </div>
   );
 }
