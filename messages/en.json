@@ -390,8 +390,11 @@
       "explanationObese": "Your BMI of {bmi} is in the obese range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minKg}–{maxKg} kg.",
       "explanationNormal": "Your BMI of {bmi} is in the healthy range. Here's a maintenance plan to stay on track.",
       "explanationUnderweight": "Your BMI of {bmi} suggests you may be underweight. A healthy weight for your height starts at {target} kg.",
+      "explanationOverweightLb": "Your BMI of {bmi} is in the overweight range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minLb}–{maxLb} lb.",
+      "explanationObeseLb": "Your BMI of {bmi} is in the obese range. A healthy BMI for your height is 18.5–24.9, which means a target weight of {minLb}–{maxLb} lb.",
+      "explanationUnderweightLb": "Your BMI of {bmi} suggests you may be underweight. A healthy weight for your height starts at {target} lb.",
       "activityPrompt": "How active are you?",
-      "ctaButton": "Get my plan",
+      "ctaButton": "Get my first day plan",
       "ctaUsedNote": "You've already generated your free plans. Install Nuvvoo for a fresh plan every day."
     },
     "plan": {
@@ -430,7 +433,7 @@
     "conversion": {
       "title": "This is one day. Nuvvoo gives you a fresh plan every day.",
       "subtitle": "Track meals by chatting, not logging. AI builds your plan and adapts to your habits.",
-      "cta": "Get Nuvvoo Free"
+      "cta": "Get a plan like this every day →"
     },
     "faq": {
       "q1": "What is a healthy BMI?",

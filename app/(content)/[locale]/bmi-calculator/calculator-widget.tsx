@@ -72,6 +72,19 @@ const EXPLANATION_KEY: Record<
   obese: 'result.explanationObese',
 };
 
+const EXPLANATION_KEY_LB: Record<
+  BmiResult['category'],
+  | 'result.explanationUnderweightLb'
+  | 'result.explanationNormal'
+  | 'result.explanationOverweightLb'
+  | 'result.explanationObeseLb'
+> = {
+  underweight: 'result.explanationUnderweightLb',
+  normal: 'result.explanationNormal',
+  overweight: 'result.explanationOverweightLb',
+  obese: 'result.explanationObeseLb',
+};
+
 const PILL_CLASS: Record<BmiResult['category'], string> = {
   underweight: 'bg-blue-100 text-blue-800',
   normal: 'bg-nuvvooGreen-50 text-nuvvooGreen-800',
@@ -461,13 +474,29 @@ function BmiResultView({
           })
       : null;
 
-  // ICU explanation params vary by category. Build the right object once,
-  // then pass to t() through the EXPLANATION_KEY lookup.
+  // ICU explanation params vary by category AND by unit. Build the right
+  // object once, then pass to t() through the EXPLANATION_KEY lookup
+  // (kg keys use {minKg}/{maxKg}/{target}, lb keys use {minLb}/{maxLb}/{target}).
+  const explanationKey =
+    form.weightUnit === 'lb'
+      ? EXPLANATION_KEY_LB[bmi.category]
+      : EXPLANATION_KEY[bmi.category];
   const explanationParams: Record<string, string> =
-    bmi.category === 'underweight'
-      ? { bmi: bmi.bmi.toString(), target: (bmi.targetWeightKg ?? 0).toString() }
-      : bmi.category === 'normal'
+    bmi.category === 'normal'
       ? { bmi: bmi.bmi.toString() }
+      : form.weightUnit === 'lb'
+      ? bmi.category === 'underweight'
+        ? {
+            bmi: bmi.bmi.toString(),
+            target: Math.round(kgToLb(bmi.targetWeightKg ?? 0)).toString(),
+          }
+        : {
+            bmi: bmi.bmi.toString(),
+            minLb: Math.round(kgToLb(bmi.healthyRangeKg.minKg)).toString(),
+            maxLb: Math.round(kgToLb(bmi.healthyRangeKg.maxKg)).toString(),
+          }
+      : bmi.category === 'underweight'
+      ? { bmi: bmi.bmi.toString(), target: (bmi.targetWeightKg ?? 0).toString() }
       : {
           bmi: bmi.bmi.toString(),
           minKg: bmi.healthyRangeKg.minKg.toString(),
@@ -528,7 +557,7 @@ function BmiResultView({
       </div>
 
       <p className="text-sm leading-relaxed text-slate-600">
-        {t(EXPLANATION_KEY[bmi.category], explanationParams)}
+        {t(explanationKey, explanationParams)}
       </p>
 
       {!alreadyUsed && (
