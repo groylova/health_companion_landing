@@ -175,7 +175,7 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['foodDiary', 'mfpAlternative', 'stayConsistent', 'stressFree']} />
+            <RelatedGuides slugs={['bmiCalculator', 'foodDiary', 'mfpAlternative', 'stressFree']} />
           </div>
         </Container>
       </article>

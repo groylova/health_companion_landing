@@ -206,7 +206,7 @@ export default async function AlternativeToMyFitnessPal({ params }: Props) {
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['calculator', 'foodDiary', 'aiFoodJournal', 'stressFree']} />
+            <RelatedGuides slugs={['calculator', 'bmiCalculator', 'foodDiary', 'stressFree']} />
           </div>
         </Container>
       </article>

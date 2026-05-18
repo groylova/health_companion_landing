@@ -10,6 +10,7 @@ const TRANSLATED_SEO_SLUGS: Record<string, string[]> = {
   'alternative-to-lose-it': ['en', 'de', 'ru', 'es', 'fr'],
   'food-diary-for-weight-loss': ['en', 'fr', 'de', 'es', 'ru'],
   'calorie-deficit-calculator': ['en', 'de', 'ru', 'es', 'fr'],
+  'bmi-calculator': ['en', 'de', 'ru', 'es', 'fr'],
 };
 
 // Slugs of SEO articles that exist only in English. A single entry per slug.

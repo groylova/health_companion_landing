@@ -230,7 +230,7 @@ export default async function FoodDiaryForWeightLoss({ params }: Props) {
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['calculator', 'stressFree', 'stayConsistent', 'chatTracker']} />
+            <RelatedGuides slugs={['calculator', 'bmiCalculator', 'stressFree', 'chatTracker']} />
           </div>
         </Container>
       </article>

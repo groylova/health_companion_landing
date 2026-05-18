@@ -242,7 +242,7 @@ export default async function AlternativeToLoseIt({ params }: Props) {
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['calculator', 'foodDiary', 'stressFree', 'chatTracker']} />
+            <RelatedGuides slugs={['calculator', 'bmiCalculator', 'foodDiary', 'stressFree']} />
           </div>
         </Container>
       </article>
