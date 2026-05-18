@@ -464,12 +464,12 @@
       "h2_limitations": "Limitaciones del IMC",
       "lim_p1": "El IMC no distingue grasa de músculo. Personas atléticas con mucha masa muscular pueden tener un IMC alto sin tener sobrepeso. Embarazadas, personas mayores y personas con proporciones corporales muy distintas también necesitan otras medidas además del IMC.",
       "lim_p2": "Los umbrales del IMC se desarrollaron principalmente en poblaciones europeas. Algunas guías clínicas sugieren umbrales más bajos para personas de origen surasiático o asiático oriental. Toma tu IMC como un punto de partida, no como una conclusión definitiva.",
-      "h2_action": "Qué hacer con tu resultado de IMC",
+      "h2_action": "Por dónde seguir",
       "action_p1": "Si tu IMC está por encima de 24,9, empezar por un déficit calórico moderado es lo lógico — entra en nuestra <deficit>calculadora de déficit calórico</deficit> para un objetivo diario. Si estás en el rango saludable, prioriza la constancia sobre los números — un simple <food>diario de comidas</food> gana a los planes restrictivos para no abandonar."
     },
     "conversion": {
-      "title": "Esto es un día. Nuvvoo te da un nuevo plan de comidas cada día.",
-      "subtitle": "Registra tus comidas charlando, no anotando. La IA arma tu plan de comidas y se adapta a tus hábitos.",
+      "title": "Qué hacer con tu resultado de IMC",
+      "subtitle": "Prueba Nuvvoo. Registra tus comidas charlando, recibe un plan de comidas con IA y mantente en tu rango saludable — sin anotar nada.",
       "cta": "Un plan de comidas así cada día →"
     },
     "faq": {

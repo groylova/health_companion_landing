@@ -464,12 +464,12 @@
       "h2_limitations": "Grenzen des BMI",
       "lim_p1": "Der BMI unterscheidet nicht zwischen Fett und Muskeln. Sportler mit viel Muskelmasse können einen hohen BMI haben, ohne übergewichtig zu sein. Auch Schwangere, ältere Menschen und Menschen mit sehr abweichenden Körperproportionen brauchen zusätzliche Messwerte neben dem BMI.",
       "lim_p2": "Die BMI-Grenzwerte wurden vor allem an europäischen Populationen entwickelt. Manche klinische Leitlinien empfehlen niedrigere Schwellen für Menschen süd- oder ostasiatischer Herkunft. Sieh deinen BMI als Ausgangspunkt, nicht als endgültiges Urteil.",
-      "h2_action": "Was du mit deinem BMI-Ergebnis tun kannst",
+      "h2_action": "Wie es weitergeht",
       "action_p1": "Liegt dein BMI über 24,9, ist ein moderates Kaloriendefizit der richtige Startpunkt — schau in unseren <deficit>Kaloriendefizit-Rechner</deficit> für ein tägliches Ziel. Liegst du im gesunden Bereich, geht es um Konstanz statt um Zahlen — ein einfaches <food>Ernährungstagebuch</food> schlägt strenge Pläne, wenn du dranbleiben willst."
     },
     "conversion": {
-      "title": "Das ist ein Tag. Nuvvoo gibt dir jeden Tag einen neuen Essensplan.",
-      "subtitle": "Erfasse Mahlzeiten im Chat statt sie zu loggen. KI baut deinen Essensplan und passt sich deinen Gewohnheiten an.",
+      "title": "Was du mit deinem BMI-Ergebnis tun kannst",
+      "subtitle": "Probier Nuvvoo. Erfasse Mahlzeiten im Chat, hol dir einen KI-Essensplan und bleib in deinem gesunden Bereich — ganz ohne Logging.",
       "cta": "So einen Essensplan jeden Tag →"
     },
     "faq": {

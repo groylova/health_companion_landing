@@ -464,12 +464,12 @@
       "h2_limitations": "BMI limitations",
       "lim_p1": "BMI doesn't distinguish fat from muscle. Athletes with a lot of muscle mass can show a high BMI without being overweight. Pregnant women, the elderly, and people with very different body proportions also need other measures alongside BMI.",
       "lim_p2": "BMI thresholds were developed primarily on European populations. Some clinical guidelines suggest lower thresholds for people of South or East Asian descent. Treat your BMI as a starting point, not the final word.",
-      "h2_action": "What to do with your BMI result",
+      "h2_action": "Where to go from here",
       "action_p1": "If your BMI is above 24.9, a moderate calorie deficit is the place to start — see our <deficit>calorie deficit calculator</deficit> for a daily target. If it's in the healthy range, focus on consistency over numbers — a simple <food>food diary</food> beats restrictive plans for staying on track."
     },
     "conversion": {
-      "title": "This is one day. Nuvvoo gives you a fresh meal plan every day.",
-      "subtitle": "Track meals by chatting, not logging. AI builds your meal plan and adapts to your habits.",
+      "title": "What to do with your BMI result",
+      "subtitle": "Try Nuvvoo. Track meals by chatting, get an AI meal plan, and stay in your healthy range — without logging anything.",
       "cta": "Get a meal plan like this every day →"
     },
     "faq": {
