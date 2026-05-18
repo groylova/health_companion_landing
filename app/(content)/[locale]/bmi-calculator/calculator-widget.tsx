@@ -35,11 +35,11 @@ type Phase = 'form' | 'bmi-result' | 'plan';
 const DEFAULT_FORM: BmiFormState = {
   gender: '',
   age: '',
-  heightUnit: 'in',
+  heightUnit: 'cm',
   heightCm: '',
   heightFt: '',
   heightIn: '',
-  weightUnit: 'lb',
+  weightUnit: 'kg',
   weight: '',
 };
 

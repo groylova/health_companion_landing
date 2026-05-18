@@ -37,7 +37,9 @@ import { AppStoreBadge } from '@/components/app-store-badge';
 type Phase = 'form' | 'result' | 'plan';
 
 // Split height fields: when heightUnit is 'cm' we use heightCm; when 'in'
-// (imperial) we use heightFt + heightIn. US-focused defaults: lb + ft/in.
+// (imperial) we use heightFt + heightIn. Metric defaults (kg + cm); the
+// per-input UnitToggle lets the user flip to lb / ft+in without losing
+// the entered value.
 type FormState = {
   weight: string;
   weightUnit: WeightUnit;
@@ -56,11 +58,11 @@ type FormState = {
 
 const DEFAULT_FORM: FormState = {
   weight: '',
-  weightUnit: 'lb',
+  weightUnit: 'kg',
   heightCm: '',
   heightFt: '',
   heightIn: '',
-  heightUnit: 'in',
+  heightUnit: 'cm',
   age: '',
   gender: '',
   activity: '',
