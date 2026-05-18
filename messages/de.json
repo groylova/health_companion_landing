@@ -351,7 +351,7 @@
     "intro": "Bestimme deinen BMI in 30 Sekunden und mach aus dem Ergebnis einen Tagesplan, den du wirklich umsetzen kannst. Keine Konten, kein Einrichten.",
     "trustFree": "Kostenlos",
     "trustNoAccount": "Ohne Konto",
-    "trustPrivate": "Datenschutz zuerst",
+    "trustPrivate": "Datenschutz",
     "form": {
       "genderLabel": "Geschlecht",
       "genderMale": "Männlich",

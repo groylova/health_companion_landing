@@ -351,7 +351,7 @@
     "intro": "Trouve ton IMC en 30 secondes et transforme le résultat en un plan d'une journée que tu pourras vraiment suivre. Pas de compte, pas de configuration.",
     "trustFree": "Gratuit",
     "trustNoAccount": "Sans compte",
-    "trustPrivate": "Confidentialité par défaut",
+    "trustPrivate": "Confidentialité",
     "form": {
       "genderLabel": "Sexe",
       "genderMale": "Homme",
