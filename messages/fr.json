@@ -464,7 +464,7 @@
       "h2_limitations": "Limites de l'IMC",
       "lim_p1": "L'IMC ne distingue pas le gras du muscle. Les athlètes avec beaucoup de masse musculaire peuvent afficher un IMC élevé sans être en surpoids. Les femmes enceintes, les personnes âgées et les personnes aux proportions très différentes ont aussi besoin d'autres mesures à côté de l'IMC.",
       "lim_p2": "Les seuils d'IMC ont été développés principalement sur des populations européennes. Certaines recommandations cliniques proposent des seuils plus bas pour les personnes d'origine sud- ou est-asiatique. Considère ton IMC comme un point de départ, pas comme un verdict définitif.",
-      "h2_action": "Par où commencer",
+      "h2_action": "Et après ?",
       "action_p1": "Si ton IMC est au-dessus de 24,9, commencer par un déficit calorique modéré est la bonne entrée — passe par notre <deficit>calculateur de déficit calorique</deficit> pour un objectif quotidien. Si tu es dans l'intervalle sain, vise la régularité plutôt que les chiffres — un simple <food>journal alimentaire</food> bat les plans restrictifs pour tenir dans la durée."
     },
     "conversion": {

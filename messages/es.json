@@ -413,7 +413,7 @@
       "explanationObese": "Tu IMC de {bmi} está en el rango de obesidad. Un IMC saludable para tu altura es 18,5–24,9, lo que equivale a un peso objetivo de {minKg}–{maxKg} kg.",
       "explanationNormal": "Tu IMC de {bmi} está en el rango saludable.",
       "explanationUnderweight": "Tu IMC de {bmi} sugiere que podrías estar en bajo peso. Un peso saludable para tu altura empieza en {target} kg.",
-      "activityPrompt": "¿Qué tan activo eres?",
+      "activityPrompt": "¿Cuál es tu nivel de actividad?",
       "ctaButton": "Generar mi plan de comidas del día",
       "ctaUsedNote": "Ya has usado tus generaciones gratis. Instala Nuvvoo para un nuevo plan de comidas cada día.",
       "explanationOverweightLb": "Tu IMC de {bmi} está en el rango de sobrepeso. Un IMC saludable para tu estatura es 18,5–24,9, lo que significa un peso objetivo de {minLb}–{maxLb} lb.",
