@@ -219,7 +219,12 @@
       "allergiesAdd": "Добавить",
       "allergiesRemove": "Удалить",
       "allergiesAtCap": "Достигнут лимит",
-      "allergiesHint": "{count}/{max} — нажми Enter"
+      "allergiesHint": "{count}/{max} — нажми Enter",
+      "unitCm": "см",
+      "unitFt": "фт",
+      "unitKg": "кг",
+      "unitLb": "фнт",
+      "unitIn": "дюйм"
     },
     "result": {
       "edit": "Изменить ответы",
@@ -348,7 +353,7 @@
       "ogDescription": "Бесплатный калькулятор BMI. За 30 секунд узнаешь категорию, здоровый диапазон и план питания на день."
     },
     "h1": "Калькулятор BMI",
-    "intro": "Узнай свой BMI за 30 секунд и преврати результат в план на день, которому реально следовать. Без аккаунтов и настроек.",
+    "intro": "Узнай свой BMI за 30 секунд и преврати результат в план питания, которому реально следовать. Без аккаунтов и настроек.",
     "trustFree": "Бесплатно",
     "trustNoAccount": "Без аккаунта",
     "trustPrivate": "Приватность",
@@ -380,7 +385,12 @@
       "allergiesAdd": "Добавить",
       "allergiesRemove": "Удалить",
       "allergiesHint": "{count}/{max} — нажми Enter",
-      "allergiesAtCap": "Достигнут лимит"
+      "allergiesAtCap": "Достигнут лимит",
+      "unitCm": "см",
+      "unitFt": "фт",
+      "unitKg": "кг",
+      "unitLb": "фнт",
+      "unitIn": "дюйм"
     },
     "result": {
       "bmiLabel": "Твой BMI",

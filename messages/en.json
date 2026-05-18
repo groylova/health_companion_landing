@@ -219,7 +219,12 @@
       "allergiesAdd": "Add",
       "allergiesRemove": "Remove",
       "allergiesAtCap": "Limit reached",
-      "allergiesHint": "{count}/{max} · press Enter to add"
+      "allergiesHint": "{count}/{max} · press Enter to add",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitIn": "in"
     },
     "result": {
       "edit": "Edit answers",
@@ -380,7 +385,12 @@
       "allergiesAdd": "Add",
       "allergiesRemove": "Remove",
       "allergiesHint": "{count}/{max} · press Enter to add",
-      "allergiesAtCap": "Limit reached"
+      "allergiesAtCap": "Limit reached",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitIn": "in"
     },
     "result": {
       "bmiLabel": "Your BMI",

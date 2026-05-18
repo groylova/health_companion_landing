@@ -219,7 +219,12 @@
       "allergiesAdd": "Ajouter",
       "allergiesRemove": "Supprimer",
       "allergiesAtCap": "Limite atteinte",
-      "allergiesHint": "{count}/{max} · Entrée pour ajouter"
+      "allergiesHint": "{count}/{max} · Entrée pour ajouter",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitIn": "in"
     },
     "result": {
       "edit": "Modifier les réponses",
@@ -348,7 +353,7 @@
       "ogDescription": "Calculateur d'IMC gratuit. Vois ta catégorie, ton intervalle sain et un plan d'une journée en 30 secondes."
     },
     "h1": "Calculateur d'IMC",
-    "intro": "Trouve ton IMC en 30 secondes et transforme le résultat en un plan d'une journée que tu pourras vraiment suivre. Pas de compte, pas de configuration.",
+    "intro": "Trouve ton IMC en 30 secondes et transforme le résultat en un plan repas que tu pourras vraiment suivre. Pas de compte, pas de configuration.",
     "trustFree": "Gratuit",
     "trustNoAccount": "Sans compte",
     "trustPrivate": "Confidentialité",
@@ -380,7 +385,12 @@
       "allergiesAdd": "Ajouter",
       "allergiesRemove": "Supprimer",
       "allergiesHint": "{count}/{max} · Entrée pour ajouter",
-      "allergiesAtCap": "Limite atteinte"
+      "allergiesAtCap": "Limite atteinte",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitIn": "in"
     },
     "result": {
       "bmiLabel": "Ton IMC",

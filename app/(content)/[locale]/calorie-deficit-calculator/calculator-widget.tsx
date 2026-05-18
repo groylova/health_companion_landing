@@ -554,7 +554,7 @@ function FormView({
           />
           <UnitToggle
             value={form.weightUnit}
-            options={[{ value: 'kg', label: 'kg' }, { value: 'lb', label: 'lb' }]}
+            options={[{ value: 'kg', label: t('form.unitKg') }, { value: 'lb', label: t('form.unitLb') }]}
             onChange={(v) => handleWeightUnit(v as WeightUnit)}
           />
         </div>
@@ -590,7 +590,7 @@ function FormView({
                   placeholder="5"
                   className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3 pr-9 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
                 />
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">ft</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">{t('form.unitFt')}</span>
               </div>
               <div className="relative flex-1">
                 <input
@@ -604,13 +604,13 @@ function FormView({
                   placeholder="9"
                   className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3 pr-9 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
                 />
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">in</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">{t('form.unitIn')}</span>
               </div>
             </div>
           )}
           <UnitToggle
             value={form.heightUnit}
-            options={[{ value: 'cm', label: 'cm' }, { value: 'in', label: 'ft' }]}
+            options={[{ value: 'cm', label: t('form.unitCm') }, { value: 'in', label: t('form.unitFt') }]}
             onChange={(v) => handleHeightUnit(v as HeightUnit)}
           />
         </div>

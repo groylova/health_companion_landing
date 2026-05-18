@@ -219,7 +219,12 @@
       "allergiesAdd": "Hinzufügen",
       "allergiesRemove": "Entfernen",
       "allergiesAtCap": "Limit erreicht",
-      "allergiesHint": "{count}/{max} · Enter zum Hinzufügen"
+      "allergiesHint": "{count}/{max} · Enter zum Hinzufügen",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitIn": "in"
     },
     "result": {
       "edit": "Antworten ändern",
@@ -348,7 +353,7 @@
       "ogDescription": "Kostenloser BMI-Rechner. Sieh deine Kategorie, deinen gesunden Bereich und einen Tagesplan in 30 Sekunden."
     },
     "h1": "BMI Rechner",
-    "intro": "Bestimme deinen BMI in 30 Sekunden und mach aus dem Ergebnis einen Tagesplan, den du wirklich umsetzen kannst. Keine Konten, kein Einrichten.",
+    "intro": "Bestimme deinen BMI in 30 Sekunden und mach aus dem Ergebnis einen Essensplan, dem du wirklich folgen kannst. Keine Konten, kein Einrichten.",
     "trustFree": "Kostenlos",
     "trustNoAccount": "Ohne Konto",
     "trustPrivate": "Datenschutz",
@@ -380,7 +385,12 @@
       "allergiesAdd": "Hinzufügen",
       "allergiesRemove": "Entfernen",
       "allergiesHint": "{count}/{max} · Enter zum Hinzufügen",
-      "allergiesAtCap": "Limit erreicht"
+      "allergiesAtCap": "Limit erreicht",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitIn": "in"
     },
     "result": {
       "bmiLabel": "Dein BMI",
