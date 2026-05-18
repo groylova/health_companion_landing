@@ -374,7 +374,6 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
     if (result === null) {
       return;
     }
-    track('plan_cta_clicked', { target_kcal: result.target, goal: form.goal, locale });
 
     if (alreadyUsed) {
       // Already used → still show the cached plan if we have it; otherwise
@@ -385,12 +384,35 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
     // Plan generation needs the full deficit field set. On BMR/TDEE pages we
     // hide some of those at the form step; the upgrade panel collects them
     // before this call. Re-validate here under 'deficit' rules so missing
-    // fields surface as inline errors instead of API failures.
+    // fields surface as inline errors instead of API failures. Validation runs
+    // BEFORE the BMR-mode recompute so a missing activity (or other gap)
+    // fails fast instead of tripping calculate()'s preconditions.
     const fullValidation = validate(toCalcInput(form), 'deficit');
     if (fullValidation !== null) {
       setError(fullValidation);
       return;
     }
+
+    // For BMR mode the result we stored at form-submit time has zeros for
+    // tdee/target/macros (activity was missing back then). Now that the
+    // upgrade panel has the activity, recompute the full CalcResult here so
+    // the analytics event AND the downstream payload all see the real target
+    // (otherwise plan_cta_clicked.target_kcal would be 0). For TDEE/deficit
+    // modes the form-submit result is already complete.
+    const effectiveResult: CalcResult =
+      mode === 'bmr' ? calculate(toCalcInput(form) as CalcInput) : result;
+
+    if (mode === 'bmr') {
+      // Catch the result state up so setPhase('plan') below renders against
+      // the populated CalcResult instead of the zeroed BMR-form one.
+      setResult(effectiveResult);
+    }
+
+    track('plan_cta_clicked', {
+      target_kcal: effectiveResult.target,
+      goal: form.goal,
+      locale,
+    });
 
     setPlanLoading(true);
     setPlanError(null);
@@ -402,41 +424,18 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
       return;
     }
 
-    // For BMR mode the result we stored at form-submit time has zeros for
-    // tdee/target/macros (activity was missing back then). Now that the
-    // upgrade panel has the activity, recompute the full CalcResult and
-    // shadow the stale `result` fields with local vars — setState is async
-    // and the payload assembly below runs synchronously.
-    let effectiveResult: CalcResult = result;
-    let target = result.target;
-    let weightKg = result.weightKg;
-    let proteinG = result.proteinG;
-    let carbsG = result.carbsG;
-    let fatG = result.fatG;
-
-    if (mode === 'bmr') {
-      const fullResult = calculate(toCalcInput(form) as CalcInput);
-      setResult(fullResult);
-      effectiveResult = fullResult;
-      target = fullResult.target;
-      weightKg = fullResult.weightKg;
-      proteinG = fullResult.proteinG;
-      carbsG = fullResult.carbsG;
-      fatG = fullResult.fatG;
-    }
-
     const payload = {
-      calories_target: target,
-      weight_kg: weightKg,
+      calories_target: effectiveResult.target,
+      weight_kg: effectiveResult.weightKg,
       goal: form.goal,
       language: toApiLanguage(locale),
       session_token: token,
       // Send the same macro split we show on the result screen so the AI
       // plan honors it (otherwise it'd compute its own and the displayed
       // targets would drift from what arrives back).
-      protein_g: proteinG,
-      carbs_g: carbsG,
-      fat_g: fatG,
+      protein_g: effectiveResult.proteinG,
+      carbs_g: effectiveResult.carbsG,
+      fat_g: effectiveResult.fatG,
       diet: form.diet,
       // Backend caps at 8 chips × 32 chars; FormState already enforces that.
       allergies: form.allergies.length > 0 ? form.allergies : undefined,
@@ -488,7 +487,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
     }
 
     track('plan_generated', {
-      target_kcal: target,
+      target_kcal: effectiveResult.target,
       total_kcal: apiPlan.totals.calories,
       meal_count: apiPlan.meals.length,
       goal: form.goal,
@@ -1085,8 +1084,14 @@ function ResultView({
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-medium text-slate-500">{t(titleKey)}</p>
+      {/* BMR mode hides the goal-derived title ("Your maintain calories") since
+         its hero is a BMR number, not a goal target — the bmrSubtitle below
+         the hero already explains what's shown. Keep the Edit link in its
+         right corner via justify-end when the title is hidden. */}
+      <div className={`flex items-center ${mode === 'bmr' ? 'justify-end' : 'justify-between'}`}>
+        {mode !== 'bmr' && (
+          <p className="text-sm font-medium text-slate-500">{t(titleKey)}</p>
+        )}
         <button onClick={onEdit} className="text-sm text-nuvvooGreen-700 hover:text-nuvvooGreen-900 underline-offset-2 hover:underline">
           {t('result.edit')}
         </button>
@@ -1271,6 +1276,7 @@ function ResultView({
             type="button"
             onClick={onUpgrade}
             aria-expanded={upgrading}
+            aria-controls="calc-upgrade-panel"
             className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860]"
           >
             {t('upgrade.cta')}
@@ -1285,6 +1291,7 @@ function ResultView({
       {mode !== 'deficit' && !alreadyUsed && upgrading && (
         <div
           ref={upgradePanelRef}
+          id="calc-upgrade-panel"
           role="region"
           aria-label={t('upgrade.title')}
           className="space-y-4 border-t border-slate-200 pt-5"
