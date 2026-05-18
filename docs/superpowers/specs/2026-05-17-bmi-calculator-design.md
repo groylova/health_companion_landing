@@ -315,7 +315,7 @@ Within `<article>` with `Container` and `max-w-3xl`:
 - `title`: bare title without `| Nuvvoo` suffix — the parent `layout.tsx` template `'%s | Nuvvoo'` appends it. The recent commit `6f2e825` fixed exactly this dup; we copy the pattern.
   - EN: `BMI Calculator — Free + AI Meal Plan`
   - ES: `Calculadora de IMC — Gratis + Plan IA`
-  - FR: `Calculateur IMC — Gratuit + Plan Repas IA`
+  - FR: `Calculateur d'IMC — Gratuit + Plan Repas IA`
   - DE: `BMI Rechner — Kostenlos + KI-Ernährungsplan`
   - RU: `Калькулятор BMI — бесплатно + AI план питания`
 - `description`: from the brief (each locale).

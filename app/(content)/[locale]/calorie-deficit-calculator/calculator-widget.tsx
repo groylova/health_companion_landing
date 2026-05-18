@@ -36,7 +36,9 @@ import { AppStoreBadge } from '@/components/app-store-badge';
 type Phase = 'form' | 'result' | 'plan';
 
 // Split height fields: when heightUnit is 'cm' we use heightCm; when 'in'
-// (imperial) we use heightFt + heightIn. US-focused defaults: lb + ft/in.
+// (imperial) we use heightFt + heightIn. Metric defaults (kg + cm); the
+// per-input UnitToggle lets the user flip to lb / ft+in without losing
+// the entered value.
 type FormState = {
   weight: string;
   weightUnit: WeightUnit;
@@ -55,11 +57,11 @@ type FormState = {
 
 const DEFAULT_FORM: FormState = {
   weight: '',
-  weightUnit: 'lb',
+  weightUnit: 'kg',
   heightCm: '',
   heightFt: '',
   heightIn: '',
-  heightUnit: 'in',
+  heightUnit: 'cm',
   age: '',
   gender: '',
   activity: '',
@@ -550,7 +552,7 @@ function FormView({
           />
           <UnitToggle
             value={form.weightUnit}
-            options={[{ value: 'kg', label: 'kg' }, { value: 'lb', label: 'lb' }]}
+            options={[{ value: 'kg', label: t('form.unitKg') }, { value: 'lb', label: t('form.unitLb') }]}
             onChange={(v) => handleWeightUnit(v as WeightUnit)}
           />
         </div>
@@ -586,7 +588,7 @@ function FormView({
                   placeholder="5"
                   className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3 pr-9 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
                 />
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">ft</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">{t('form.unitFt')}</span>
               </div>
               <div className="relative flex-1">
                 <input
@@ -600,13 +602,13 @@ function FormView({
                   placeholder="9"
                   className="h-11 w-full rounded-xl border border-slate-300 bg-white px-3 pr-9 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
                 />
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">in</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">{t('form.unitIn')}</span>
               </div>
             </div>
           )}
           <UnitToggle
             value={form.heightUnit}
-            options={[{ value: 'cm', label: 'cm' }, { value: 'in', label: 'ft' }]}
+            options={[{ value: 'cm', label: t('form.unitCm') }, { value: 'in', label: t('form.unitFt') }]}
             onChange={(v) => handleHeightUnit(v as HeightUnit)}
           />
         </div>
@@ -939,11 +941,11 @@ function ResultView({
       <div className="grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
         <div>
           <p className="text-slate-500">{t('result.bmrLabel')}</p>
-          <p className="font-semibold text-slate-900">{result.bmr.toLocaleString()} kcal</p>
+          <p className="font-semibold text-slate-900">{result.bmr.toLocaleString()} {t('result.kcalShortUnit')}</p>
         </div>
         <div>
           <p className="text-slate-500">{t('result.tdeeLabel')}</p>
-          <p className="font-semibold text-slate-900">{result.tdee.toLocaleString()} kcal</p>
+          <p className="font-semibold text-slate-900">{result.tdee.toLocaleString()} {t('result.kcalShortUnit')}</p>
         </div>
       </div>
 
@@ -954,15 +956,15 @@ function ResultView({
         <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
           <div>
             <p className="text-slate-500">{t('result.macroProtein')}</p>
-            <p className="font-semibold text-slate-900">{result.proteinG.toLocaleString()} g</p>
+            <p className="font-semibold text-slate-900">{result.proteinG.toLocaleString()} {t('result.gramsUnit')}</p>
           </div>
           <div>
             <p className="text-slate-500">{t('result.macroCarbs')}</p>
-            <p className="font-semibold text-slate-900">{result.carbsG.toLocaleString()} g</p>
+            <p className="font-semibold text-slate-900">{result.carbsG.toLocaleString()} {t('result.gramsUnit')}</p>
           </div>
           <div>
             <p className="text-slate-500">{t('result.macroFat')}</p>
-            <p className="font-semibold text-slate-900">{result.fatG.toLocaleString()} g</p>
+            <p className="font-semibold text-slate-900">{result.fatG.toLocaleString()} {t('result.gramsUnit')}</p>
           </div>
         </div>
       </div>

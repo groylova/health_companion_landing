@@ -47,10 +47,10 @@
 
 Run:
 ```bash
-pnpm add -D vitest
+npm install --save-dev vitest
 ```
 
-Expected: `package.json` now lists `vitest` under `devDependencies`. `pnpm-lock.yaml` updated.
+Expected: `package.json` now lists `vitest` under `devDependencies`. `package-lock.json` updated.
 
 - [ ] **Step 2: Add test scripts to `package.json`**
 
@@ -92,13 +92,13 @@ This mirrors the `@/` alias from `tsconfig.json` so test files can import siblin
 
 - [ ] **Step 4: Smoke-test Vitest by running it on an empty pattern**
 
-Run: `pnpm test:run`
+Run: `npm run test:run`
 Expected: prints `No test files found, exiting with code 0` (or similar). Exit 0.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add package.json pnpm-lock.yaml vitest.config.ts
+git add package.json package-lock.json vitest.config.ts
 git commit -m "Add Vitest for unit tests on pure-math modules"
 ```
 
@@ -329,7 +329,7 @@ describe('mapToCalcInput', () => {
 
 - [ ] **Step 2: Run tests to confirm they fail (RED)**
 
-Run: `pnpm test:run`
+Run: `npm run test:run`
 Expected: every test fails with `Cannot find module './bmi'` (no implementation yet).
 
 - [ ] **Step 3: Implement `lib/bmi/bmi.ts` (GREEN)**
@@ -531,7 +531,7 @@ export function mapToCalcInput(
 
 - [ ] **Step 4: Run tests to confirm they pass (GREEN)**
 
-Run: `pnpm test:run`
+Run: `npm run test:run`
 Expected: all tests pass, exit 0.
 
 - [ ] **Step 5: Commit**
@@ -564,7 +564,7 @@ const SLUG_TO_HREF = {
 
 - [ ] **Step 2: Type-check**
 
-Run: `pnpm build`
+Run: `npm run build`
 Expected: build succeeds (or fails on the next missing piece — but `RelatedSlug` should include `'bmiCalculator'` now).
 
 - [ ] **Step 3: Commit**
@@ -739,7 +739,7 @@ git commit -m "Add bmiCalculator namespace + cross-link keys to EN messages"
 - DE: `BMI Rechner — Kostenlos + KI-Ernährungsplan`
 - RU: `Калькулятор BMI — бесплатно + AI план питания`
 - ES: `Calculadora de IMC — Gratis + Plan IA`
-- FR: `Calculateur IMC — Gratuit + Plan Repas IA`
+- FR: `Calculateur d'IMC — Gratuit + Plan Repas IA`
 
 H1 per locale: `BMI Rechner` / `Калькулятор BMI` / `Calculadora de IMC` / `Calculateur d'IMC`.
 
@@ -974,7 +974,7 @@ export default async function BmiCalculatorPage({ params }: Props) {
 
 - [ ] **Step 2: Type-check + skip-the-widget compile**
 
-Run: `pnpm build`
+Run: `npm run build`
 Expected: build fails because `./calculator-widget` doesn't exist yet — that's fine, we'll create it in the next task. The page file itself should have no type errors.
 
 - [ ] **Step 3: Commit**
@@ -1199,12 +1199,12 @@ function SegmentButton({
 
 - [ ] **Step 2: Verify build compiles**
 
-Run: `pnpm build`
+Run: `npm run build`
 Expected: build succeeds.
 
 - [ ] **Step 3: Smoke-test in dev**
 
-Run: `pnpm dev`
+Run: `npm run dev`
 Open `http://localhost:3000/bmi-calculator`. Fill in valid values and submit. Verify:
 - BMI number renders in the placeholder result view.
 - Category label renders.
@@ -1420,7 +1420,7 @@ const alreadyUsed = planCount >= 2;
 
 - [ ] **Step 3: Verify build + smoke-test all four categories**
 
-Run: `pnpm build` then `pnpm dev`. Test these inputs and verify the marker lands in the right zone, pill colour matches, explanation reads naturally:
+Run: `npm run build` then `npm run dev`. Test these inputs and verify the marker lands in the right zone, pill colour matches, explanation reads naturally:
 
 | Input                                | Expected category | Marker zone |
 | ------------------------------------ | ----------------- | ----------- |
@@ -1798,7 +1798,7 @@ The implementer should pull the JSX shape verbatim from deficit calc's "alreadyU
 
 - [ ] **Step 6: Verify build + smoke-test end-to-end**
 
-Run: `pnpm build` then `pnpm dev`. Manually:
+Run: `npm run build` then `npm run dev`. Manually:
 1. Submit valid form → BMI result → pick activity → click "Get my plan" → verify plan renders.
 2. Check `localStorage`: `nuvvoo_bmi_plan_count === '1'`, `nuvvoo_bmi_plan_data` JSON present and valid.
 3. Reload page → should rehydrate into `plan` phase directly.
@@ -1819,26 +1819,26 @@ git commit -m "BMI widget: plan generation, plan view, 2-generation gate, error 
 
 **Files:** none — verification only.
 
-**Why:** Spec §Acceptance requires `pnpm build && pnpm lint` pass, every locale URL is indexable, plan gate triggers at count >= 2, and the five events fire correctly. Don't claim done until this checklist is green.
+**Why:** Spec §Acceptance requires `npm run build && npm run lint` pass, every locale URL is indexable, plan gate triggers at count >= 2, and the five events fire correctly. Don't claim done until this checklist is green.
 
 - [ ] **Step 1: Run unit tests**
 
-Run: `pnpm test:run`
+Run: `npm run test:run`
 Expected: all `lib/bmi/bmi.test.ts` tests pass.
 
 - [ ] **Step 2: Run build**
 
-Run: `pnpm build`
+Run: `npm run build`
 Expected: success, no type errors, no warnings about unused imports.
 
 - [ ] **Step 3: Run lint**
 
-Run: `pnpm lint`
+Run: `npm run lint`
 Expected: clean — no new warnings or errors.
 
 - [ ] **Step 4: Locale + indexability smoke**
 
-Run `pnpm start` (after the build) and `curl` each locale URL, asserting `<meta name="robots" content="index, follow">` is present:
+Run `npm start` (after the build) and `curl` each locale URL, asserting `<meta name="robots" content="index, follow">` is present:
 
 ```bash
 for path in /bmi-calculator /de/bmi-calculator /ru/bmi-calculator /es/bmi-calculator /fr/bmi-calculator; do
@@ -1850,7 +1850,7 @@ Expected: each line shows `<meta name="robots" content="index, follow"/>`.
 
 - [ ] **Step 5: Manual end-to-end on each locale**
 
-In `pnpm dev` mode, hit each locale URL, verify H1, intro, BMI category labels, FAQ all render in the locale's language. Verify the gradient scale, marker, pill colours, and explanation copy all render correctly for at least one BMI category per locale.
+In `npm run dev` mode, hit each locale URL, verify H1, intro, BMI category labels, FAQ all render in the locale's language. Verify the gradient scale, marker, pill colours, and explanation copy all render correctly for at least one BMI category per locale.
 
 - [ ] **Step 6: 2-generation gate verification**
 
