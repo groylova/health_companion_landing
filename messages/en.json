@@ -240,7 +240,9 @@
       "clampedNote": "We capped your target at the safe minimum so the plan stays realistic and sustainable.",
       "ctaText": "Turn this into a plan for today",
       "ctaButton": "Get my first day meal plan",
-      "ctaUsedNote": "You've used your free generation. Open Nuvvoo for a fresh meal plan every day."
+      "ctaUsedNote": "You've used your free generation. Open Nuvvoo for a fresh meal plan every day.",
+      "kcalShortUnit": "kcal",
+      "gramsUnit": "g"
     },
     "plan": {
       "loading": "Generating your meal plan…",
@@ -418,7 +420,9 @@
       "maintainTitle": "Your daily calorie target",
       "loseTitle": "Your daily calorie target",
       "gainTitle": "Your daily calorie target",
-      "activityIntro": "One step to your calorie target + meal plan"
+      "activityIntro": "One step to your calorie target + meal plan",
+      "kcalShortUnit": "kcal",
+      "gramsUnit": "g"
     },
     "plan": {
       "heading": "Your meal plan",

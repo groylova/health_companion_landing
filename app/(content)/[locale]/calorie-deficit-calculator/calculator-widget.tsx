@@ -943,11 +943,11 @@ function ResultView({
       <div className="grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
         <div>
           <p className="text-slate-500">{t('result.bmrLabel')}</p>
-          <p className="font-semibold text-slate-900">{result.bmr.toLocaleString()} kcal</p>
+          <p className="font-semibold text-slate-900">{result.bmr.toLocaleString()} {t('result.kcalShortUnit')}</p>
         </div>
         <div>
           <p className="text-slate-500">{t('result.tdeeLabel')}</p>
-          <p className="font-semibold text-slate-900">{result.tdee.toLocaleString()} kcal</p>
+          <p className="font-semibold text-slate-900">{result.tdee.toLocaleString()} {t('result.kcalShortUnit')}</p>
         </div>
       </div>
 
@@ -958,15 +958,15 @@ function ResultView({
         <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
           <div>
             <p className="text-slate-500">{t('result.macroProtein')}</p>
-            <p className="font-semibold text-slate-900">{result.proteinG.toLocaleString()} g</p>
+            <p className="font-semibold text-slate-900">{result.proteinG.toLocaleString()} {t('result.gramsUnit')}</p>
           </div>
           <div>
             <p className="text-slate-500">{t('result.macroCarbs')}</p>
-            <p className="font-semibold text-slate-900">{result.carbsG.toLocaleString()} g</p>
+            <p className="font-semibold text-slate-900">{result.carbsG.toLocaleString()} {t('result.gramsUnit')}</p>
           </div>
           <div>
             <p className="text-slate-500">{t('result.macroFat')}</p>
-            <p className="font-semibold text-slate-900">{result.fatG.toLocaleString()} g</p>
+            <p className="font-semibold text-slate-900">{result.fatG.toLocaleString()} {t('result.gramsUnit')}</p>
           </div>
         </div>
       </div>

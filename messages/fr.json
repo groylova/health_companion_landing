@@ -240,7 +240,9 @@
       "clampedNote": "On a plafonné ton objectif au minimum de sécurité pour que le plan reste réaliste et tenable.",
       "ctaText": "Transforme ça en plan pour aujourd'hui",
       "ctaButton": "Obtenir mon plan repas du jour",
-      "ctaUsedNote": "Tu as utilisé ta génération gratuite. Ouvre Nuvvoo pour un nouveau plan repas chaque jour."
+      "ctaUsedNote": "Tu as utilisé ta génération gratuite. Ouvre Nuvvoo pour un nouveau plan repas chaque jour.",
+      "kcalShortUnit": "kcal",
+      "gramsUnit": "g"
     },
     "plan": {
       "loading": "Génération de ton plan repas…",
@@ -418,7 +420,9 @@
       "maintainTitle": "Ton objectif calorique du jour",
       "loseTitle": "Ton objectif calorique du jour",
       "gainTitle": "Ton objectif calorique du jour",
-      "activityIntro": "Une étape avant ton objectif calorique + plan repas"
+      "activityIntro": "Une étape avant ton objectif calorique + plan repas",
+      "kcalShortUnit": "kcal",
+      "gramsUnit": "g"
     },
     "plan": {
       "heading": "Ton plan repas",

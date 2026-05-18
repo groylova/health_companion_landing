@@ -240,7 +240,9 @@
       "clampedNote": "Wir haben dein Ziel auf das sichere Minimum begrenzt, damit der Plan realistisch und nachhaltig bleibt.",
       "ctaText": "Mach daraus einen Plan für heute",
       "ctaButton": "Meinen ersten Essensplan holen",
-      "ctaUsedNote": "Du hast deine kostenlose Generierung genutzt. Öffne Nuvvoo für jeden Tag einen neuen Essensplan."
+      "ctaUsedNote": "Du hast deine kostenlose Generierung genutzt. Öffne Nuvvoo für jeden Tag einen neuen Essensplan.",
+      "kcalShortUnit": "kcal",
+      "gramsUnit": "g"
     },
     "plan": {
       "loading": "Dein Essensplan wird erstellt…",
@@ -418,7 +420,9 @@
       "maintainTitle": "Dein tägliches Kalorienziel",
       "loseTitle": "Dein tägliches Kalorienziel",
       "gainTitle": "Dein tägliches Kalorienziel",
-      "activityIntro": "Nur ein Schritt zu deinem Kalorienziel + Essensplan"
+      "activityIntro": "Nur ein Schritt zu deinem Kalorienziel + Essensplan",
+      "kcalShortUnit": "kcal",
+      "gramsUnit": "g"
     },
     "plan": {
       "heading": "Dein Essensplan",

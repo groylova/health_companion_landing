@@ -661,11 +661,11 @@ function BmiResultView({
             <div className="grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
               <div>
                 <p className="text-slate-500">{t('result.bmrLabel')}</p>
-                <p className="font-semibold text-slate-900">{calcResult.bmr.toLocaleString()} kcal</p>
+                <p className="font-semibold text-slate-900">{calcResult.bmr.toLocaleString()} {t('result.kcalShortUnit')}</p>
               </div>
               <div>
                 <p className="text-slate-500">{t('result.tdeeLabel')}</p>
-                <p className="font-semibold text-slate-900">{calcResult.tdee.toLocaleString()} kcal</p>
+                <p className="font-semibold text-slate-900">{calcResult.tdee.toLocaleString()} {t('result.kcalShortUnit')}</p>
               </div>
             </div>
 
@@ -674,15 +674,15 @@ function BmiResultView({
               <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
                 <div>
                   <p className="text-slate-500">{t('result.macroProtein')}</p>
-                  <p className="font-semibold text-slate-900">{calcResult.proteinG.toLocaleString()} g</p>
+                  <p className="font-semibold text-slate-900">{calcResult.proteinG.toLocaleString()} {t('result.gramsUnit')}</p>
                 </div>
                 <div>
                   <p className="text-slate-500">{t('result.macroCarbs')}</p>
-                  <p className="font-semibold text-slate-900">{calcResult.carbsG.toLocaleString()} g</p>
+                  <p className="font-semibold text-slate-900">{calcResult.carbsG.toLocaleString()} {t('result.gramsUnit')}</p>
                 </div>
                 <div>
                   <p className="text-slate-500">{t('result.macroFat')}</p>
-                  <p className="font-semibold text-slate-900">{calcResult.fatG.toLocaleString()} g</p>
+                  <p className="font-semibold text-slate-900">{calcResult.fatG.toLocaleString()} {t('result.gramsUnit')}</p>
                 </div>
               </div>
             </div>

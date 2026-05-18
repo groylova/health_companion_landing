@@ -240,7 +240,9 @@
       "clampedNote": "Limitamos tu objetivo al mínimo seguro para que el plan sea realista y sostenible.",
       "ctaText": "Conviértelo en un plan para hoy",
       "ctaButton": "Generar mi plan de comidas del día",
-      "ctaUsedNote": "Ya has usado tu generación gratis. Abre Nuvvoo para un plan de comidas nuevo cada día."
+      "ctaUsedNote": "Ya has usado tu generación gratis. Abre Nuvvoo para un plan de comidas nuevo cada día.",
+      "kcalShortUnit": "kcal",
+      "gramsUnit": "g"
     },
     "plan": {
       "loading": "Generando tu plan de comidas…",
@@ -418,7 +420,9 @@
       "maintainTitle": "Tu objetivo diario de calorías",
       "loseTitle": "Tu objetivo diario de calorías",
       "gainTitle": "Tu objetivo diario de calorías",
-      "activityIntro": "Un paso para tu objetivo de calorías + plan de comidas"
+      "activityIntro": "Un paso para tu objetivo de calorías + plan de comidas",
+      "kcalShortUnit": "kcal",
+      "gramsUnit": "g"
     },
     "plan": {
       "heading": "Tu plan de comidas",
