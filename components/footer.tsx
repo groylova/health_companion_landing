@@ -8,21 +8,27 @@ export async function Footer() {
   return (
     <footer className="mt-20 border-t border-slate-200/70 py-10">
       <Container>
-        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-          <div className="text-sm text-slate-600">
-            <div className="font-medium text-slate-900">Nuvvoo</div>
-            <div className="mt-1">{t('tagline')}</div>
-          </div>
-
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-end">
           <div className="flex flex-col gap-6 md:flex-row md:gap-12">
+            {/* Calculators — interactive tools live here so they don't get
+               buried inside the long "Resources" article list. */}
+            <div className="flex flex-col gap-2">
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                {t('calculators')}
+              </div>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-deficit-calculator">
+                {t('calculator')}
+              </NextLink>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/bmi-calculator">
+                {t('bmiCalculator')}
+              </NextLink>
+            </div>
+
             {/* Resources — Column 1 */}
             <div className="flex flex-col gap-2">
               <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 {t('resources')}
               </div>
-              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-deficit-calculator">
-                {t('calculator')}
-              </NextLink>
               <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-tracker-eating-disorders">
                 {t('eatingDisorderSafety')}
               </NextLink>
