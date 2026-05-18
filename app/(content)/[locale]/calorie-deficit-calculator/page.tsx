@@ -7,7 +7,7 @@ import { Footer } from '@/components/footer';
 import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
 import { RelatedGuides } from '@/components/seo/related-guides';
-import { AppStoreBadge } from '@/components/app-store-badge';
+import { ConversionAppStoreBadge } from '@/components/conversion-app-store-badge';
 import { routing } from '@/i18n/routing';
 import { CalculatorWidget } from './calculator-widget';
 
@@ -168,7 +168,10 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
                 </h3>
                 <p className="mt-3 text-slate-600">{t('conversion.subtitle')}</p>
                 <div className="mt-6">
-                  <AppStoreBadge buttonLocation="deficit_calculator_conversion" />
+                  <ConversionAppStoreBadge
+                    buttonLocation="deficit_calculator_conversion"
+                    eventName="app_click"
+                  />
                 </div>
               </div>
             </div>
