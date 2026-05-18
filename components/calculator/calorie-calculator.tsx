@@ -36,6 +36,8 @@ import { AppStoreBadge } from '@/components/app-store-badge';
 // gtag is declared globally in lib/use-app-store-link.ts as
 // `(...args: any[]) => void`; we don't redeclare it here.
 
+type Mode = 'bmr' | 'tdee' | 'deficit';
+
 type Phase = 'form' | 'result' | 'plan';
 
 // Split height fields: when heightUnit is 'cm' we use heightCm; when 'in'
@@ -112,6 +114,18 @@ function track(name: string, params?: Record<string, unknown>): void {
     return;
   }
   window.gtag('event', name, params || {});
+}
+
+// Resolves the analytics page prefix for a given calculator mode. Used to
+// mode-prefix `button_location` strings on App Store CTAs so funnel dashboards
+// can split BMR vs TDEE vs deficit. Deliberately returns `deficit_calculator`
+// (not `deficit_calculator_calculator`) so legacy dashboard filters for the
+// deficit funnel keep working byte-for-byte.
+function calcPagePrefix(mode: Mode): string {
+  if (mode === 'deficit') {
+    return 'deficit_calculator';
+  }
+  return `${mode}_calculator`;
 }
 
 function toCalcInput(form: FormState): Partial<CalcInput> {
@@ -202,8 +216,6 @@ function convertHeight(
   return { heightCm: cm.toString(), heightFt: current.heightFt, heightIn: current.heightIn };
 }
 
-type Mode = 'bmr' | 'tdee' | 'deficit';
-
 type Props = {
   mode: Mode;
   messagesNamespace: 'bmrCalculator' | 'tdeeCalculator' | 'deficitCalculator';
@@ -246,6 +258,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
   }, [upgrading]);
 
   function handleUpgradeClick(): void {
+    track('upgrade_clicked', { mode, locale });
     setUpgrading(true);
   }
 
@@ -356,6 +369,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
     setError(null);
     setPhase('result');
     track('calculator_completed', {
+      mode,
       target_kcal: calcResult.target,
       goal: form.goal,
       activity: form.activity,
@@ -409,6 +423,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
     }
 
     track('plan_cta_clicked', {
+      mode,
       target_kcal: effectiveResult.target,
       goal: form.goal,
       locale,
@@ -487,6 +502,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
     }
 
     track('plan_generated', {
+      mode,
       target_kcal: effectiveResult.target,
       total_kcal: apiPlan.totals.calories,
       meal_count: apiPlan.meals.length,
@@ -529,6 +545,7 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
       )}
       {phase === 'plan' && result !== null && plan !== null && (
         <PlanView
+          mode={mode}
           form={form}
           result={result}
           plan={plan}
@@ -998,7 +1015,7 @@ function ResultView({
   const tHero = useTranslations('hero');
   const locale = useLocale();
   const { url: appUrl, handleClick: appHandleClick } = useAppStoreLink(
-    'deficit_calculator_result_used',
+    `${calcPagePrefix(mode)}_result_used`,
   );
 
   // Mirror of FormView.fieldError so the upgrade panel can surface validation
@@ -1024,6 +1041,7 @@ function ResultView({
         ? window.sessionStorage.getItem('nuvvoo_source') || 'direct'
         : 'direct';
     track('app_click', {
+      mode,
       button_location: buttonLocation,
       traffic_source: trafficSource,
       locale,
@@ -1033,7 +1051,7 @@ function ResultView({
   }
 
   function handleResultUsedCtaClick(): void {
-    fireAppClick('deficit_calculator_result_used');
+    fireAppClick(`${calcPagePrefix(mode)}_result_used`);
     appHandleClick();
   }
 
@@ -1210,9 +1228,9 @@ function ResultView({
               {t('conversion.cta')}
             </a>
             <AppStoreBadge
-              buttonLocation="deficit_calculator_result_used_badge"
+              buttonLocation={`${calcPagePrefix(mode)}_result_used_badge`}
               size="sm"
-              onClick={() => fireAppClick('deficit_calculator_result_used_badge')}
+              onClick={() => fireAppClick(`${calcPagePrefix(mode)}_result_used_badge`)}
             />
             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
               <span>💚 {tHero('trustFree')}</span>
@@ -1254,9 +1272,9 @@ function ResultView({
               {t('conversion.cta')}
             </a>
             <AppStoreBadge
-              buttonLocation="deficit_calculator_result_used_badge"
+              buttonLocation={`${calcPagePrefix(mode)}_result_used_badge`}
               size="sm"
-              onClick={() => fireAppClick('deficit_calculator_result_used_badge')}
+              onClick={() => fireAppClick(`${calcPagePrefix(mode)}_result_used_badge`)}
             />
             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
               <span>💚 {tHero('trustFree')}</span>
@@ -1384,6 +1402,7 @@ function ResultView({
 /* ─── PLAN ─── */
 
 function PlanView({
+  mode,
   form,
   result,
   plan,
@@ -1391,6 +1410,7 @@ function PlanView({
   onEdit,
   t,
 }: {
+  mode: Mode;
   form: FormState;
   result: CalcResult;
   plan: ApiPlan;
@@ -1405,7 +1425,7 @@ function PlanView({
   // duplicating the keys under deficitCalculator.
   const tHero = useTranslations('hero');
   const locale = useLocale();
-  const { url, handleClick } = useAppStoreLink('deficit_calculator_plan');
+  const { url, handleClick } = useAppStoreLink(`${calcPagePrefix(mode)}_plan`);
 
   // Fires the calculator-funnel-specific `app_click` event with the same
   // shape used everywhere on this page: button_location distinguishes CTA
@@ -1419,6 +1439,7 @@ function PlanView({
         ? window.sessionStorage.getItem('nuvvoo_source') || 'direct'
         : 'direct';
     track('app_click', {
+      mode,
       button_location: buttonLocation,
       traffic_source: trafficSource,
       locale,
@@ -1440,7 +1461,7 @@ function PlanView({
   }
 
   function trackAppClick(): void {
-    fireAppClick('deficit_calculator_plan', {
+    fireAppClick(`${calcPagePrefix(mode)}_plan`, {
       target_kcal: result.target,
       goal: form.goal,
     });
@@ -1527,9 +1548,9 @@ function PlanView({
           {t('conversion.cta')}
         </a>
         <AppStoreBadge
-          buttonLocation="deficit_calculator_plan_badge"
+          buttonLocation={`${calcPagePrefix(mode)}_plan_badge`}
           size="sm"
-          onClick={() => fireAppClick('deficit_calculator_plan_badge')}
+          onClick={() => fireAppClick(`${calcPagePrefix(mode)}_plan_badge`)}
         />
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
           <span>💚 {tHero('trustFree')}</span>
