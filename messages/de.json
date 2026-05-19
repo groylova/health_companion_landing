@@ -183,7 +183,7 @@
     "intro": "Finde dein tägliches Kalorienziel heraus und verwandle es in einen Tagesplan, den du auch wirklich einhalten kannst. Keine Registrierung, kein Einrichten. Beantworte sechs kurze Fragen und wir zeigen dir, was du heute essen solltest.",
     "trustFree": "Kostenlos",
     "trustNoAccount": "Ohne Konto",
-    "trustPrivate": "Datenschutz zuerst",
+    "trustPrivate": "Datenschutz",
     "form": {
       "weightLabel": "Gewicht",
       "heightLabel": "Größe",
@@ -507,7 +507,7 @@
     "intro": "Finde heraus, wie viele Kalorien dein Körper in vollständiger Ruhe verbrennt. Dein BMR ist die Grundlage jedes Kalorienziels — wenn du ihn kennst, kannst du einen Plan bauen, der wirklich zu dir passt.",
     "trustFree": "Kostenlos",
     "trustNoAccount": "Ohne Konto",
-    "trustPrivate": "Datenschutz zuerst",
+    "trustPrivate": "Datenschutz",
     "form": {
       "weightLabel": "Gewicht",
       "heightLabel": "Größe",
@@ -652,7 +652,7 @@
     "intro": "Berechne, wie viele Kalorien dein Körper täglich verbrennt — inklusive deiner gesamten Aktivität. Iss diese Menge, um dein Gewicht zu halten — oder nimm sie als Basis für ein Defizit oder einen Überschuss.",
     "trustFree": "Kostenlos",
     "trustNoAccount": "Ohne Konto",
-    "trustPrivate": "Datenschutz zuerst",
+    "trustPrivate": "Datenschutz",
     "form": {
       "weightLabel": "Gewicht",
       "heightLabel": "Größe",

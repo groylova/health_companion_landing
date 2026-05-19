@@ -183,7 +183,7 @@
     "intro": "Find your daily calorie target and turn it into a one-day plan you can actually follow. No accounts, no setup. Answer six quick questions and we'll show you what to eat today.",
     "trustFree": "Free",
     "trustNoAccount": "No account",
-    "trustPrivate": "Private by default",
+    "trustPrivate": "Privacy",
     "form": {
       "weightLabel": "Weight",
       "heightLabel": "Height",
@@ -507,7 +507,7 @@
     "intro": "Find out how many calories your body burns at complete rest. Your BMR is the foundation of any calorie target — once you know it, you can build a plan that actually fits you.",
     "trustFree": "Free",
     "trustNoAccount": "No account",
-    "trustPrivate": "Private by default",
+    "trustPrivate": "Privacy",
     "form": {
       "weightLabel": "Weight",
       "heightLabel": "Height",
@@ -652,7 +652,7 @@
     "intro": "Calculate how many calories your body burns each day, including all your activity. Eat this number to maintain your weight — or use it as the baseline for a deficit or surplus.",
     "trustFree": "Free",
     "trustNoAccount": "No account",
-    "trustPrivate": "Private by default",
+    "trustPrivate": "Privacy",
     "form": {
       "weightLabel": "Weight",
       "heightLabel": "Height",

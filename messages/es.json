@@ -183,7 +183,7 @@
     "intro": "Descubre tu objetivo calórico diario y conviértelo en un plan de un día que realmente puedas seguir. Sin necesidad de crear una cuenta ni de configurar nada. Responde seis preguntas rápidas y te diremos qué comer hoy.",
     "trustFree": "Gratis",
     "trustNoAccount": "Sin cuenta",
-    "trustPrivate": "Privacidad por defecto",
+    "trustPrivate": "Privacidad",
     "form": {
       "weightLabel": "Peso",
       "heightLabel": "Altura",
@@ -507,7 +507,7 @@
     "intro": "Descubre cuántas calorías quema tu cuerpo en reposo absoluto. Tu BMR es la base de cualquier objetivo calórico: una vez que lo conoces, puedes armar un plan que realmente te encaje.",
     "trustFree": "Gratis",
     "trustNoAccount": "Sin cuenta",
-    "trustPrivate": "Privacidad por defecto",
+    "trustPrivate": "Privacidad",
     "form": {
       "weightLabel": "Peso",
       "heightLabel": "Altura",
@@ -652,7 +652,7 @@
     "intro": "Calcula cuántas calorías quema tu cuerpo cada día incluyendo toda tu actividad. Come esta cifra para mantener el peso — o úsala como base para un déficit o superávit.",
     "trustFree": "Gratis",
     "trustNoAccount": "Sin cuenta",
-    "trustPrivate": "Privacidad por defecto",
+    "trustPrivate": "Privacidad",
     "form": {
       "weightLabel": "Peso",
       "heightLabel": "Altura",

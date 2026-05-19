@@ -183,7 +183,7 @@
     "intro": "Détermine ton apport calorique quotidien et transforme-le en un programme d'une journée que tu pourras vraiment suivre. Pas besoin de compte ni de configuration. Réponds à six questions rapides et on te dira quoi manger aujourd'hui.",
     "trustFree": "Gratuit",
     "trustNoAccount": "Sans compte",
-    "trustPrivate": "Confidentialité par défaut",
+    "trustPrivate": "Confidentialité",
     "form": {
       "weightLabel": "Poids",
       "heightLabel": "Taille",
@@ -507,7 +507,7 @@
     "intro": "Découvre combien de calories ton corps brûle au repos complet. Ton BMR est la base de tout objectif calorique — une fois que tu le connais, tu peux construire un plan qui te correspond vraiment.",
     "trustFree": "Gratuit",
     "trustNoAccount": "Sans compte",
-    "trustPrivate": "Confidentialité par défaut",
+    "trustPrivate": "Confidentialité",
     "form": {
       "weightLabel": "Poids",
       "heightLabel": "Taille",
@@ -652,7 +652,7 @@
     "intro": "Calcule combien de calories ton corps brûle chaque jour, activité comprise. Mange cette quantité pour stabiliser ton poids — ou utilise-la comme base pour un déficit ou un surplus.",
     "trustFree": "Gratuit",
     "trustNoAccount": "Sans compte",
-    "trustPrivate": "Confidentialité par défaut",
+    "trustPrivate": "Confidentialité",
     "form": {
       "weightLabel": "Poids",
       "heightLabel": "Taille",
