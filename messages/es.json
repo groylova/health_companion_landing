@@ -283,7 +283,8 @@
       "h2_plan": "De un n\u00famero a un plan de d\u00e9ficit cal\u00f3rico",
       "plan_p1": "Saber que necesitas 1.650 kcal no te dice qu\u00e9 comer. Ah\u00ed es donde la mayor\u00eda de calculadoras paran y donde la mayor\u00eda de <food>diarios de comidas</food> se rompen.",
       "plan_p2": "Pulsa \u00abGenerar mi plan del d\u00eda\u00bb y armamos un d\u00eda real alrededor de tu objetivo: 3\u20134 comidas, total dentro del 10 % del n\u00famero, con porciones ajustadas para que no tengas que hacer cuentas mentales.",
-      "plan_p3": "Este plan corre por nuestra cuenta. Si quieres uno nuevo cada d\u00eda, con <chat>registro autom\u00e1tico</chat> que aprende tus h\u00e1bitos y deja de parecer una tarea, eso ya es Nuvvoo."
+      "plan_p3": "Este plan corre por nuestra cuenta. Si quieres uno nuevo cada d\u00eda, con <chat>registro autom\u00e1tico</chat> que aprende tus h\u00e1bitos y deja de parecer una tarea, eso ya es Nuvvoo.",
+      "plan_p4": "Si solo quieres los n\u00fameros, mira la <bmr>calculadora de BMR</bmr> o la <tdee>calculadora de TDEE</tdee>."
     },
     "faq": {
       "q1": "\u00bfEs seguro un d\u00e9ficit de 500 kcal/d\u00eda?",

@@ -283,7 +283,8 @@
       "h2_plan": "D'un chiffre \u00e0 un plan de d\u00e9ficit calorique",
       "plan_p1": "Savoir qu'il te faut 1 650 kcal ne te dit pas quoi manger. C'est l\u00e0 que la plupart des calculateurs s'arr\u00eatent et que la plupart des <food>journaux alimentaires</food> craquent.",
       "plan_p2": "Clique sur \u00ab Obtenir mon plan du jour \u00bb et on construit une vraie journ\u00e9e autour de ton objectif : 3\u20134 repas, total \u00e0 10 % pr\u00e8s, portions ajust\u00e9es pour ne pas avoir \u00e0 compter de t\u00eate.",
-      "plan_p3": "Ce plan est offert. Si tu veux un nouveau plan chaque jour, avec un <chat>suivi automatique</chat> des calories qui apprend tes habitudes, c'est exactement ce que fait Nuvvoo."
+      "plan_p3": "Ce plan est offert. Si tu veux un nouveau plan chaque jour, avec un <chat>suivi automatique</chat> des calories qui apprend tes habitudes, c'est exactement ce que fait Nuvvoo.",
+      "plan_p4": "Si tu veux juste les chiffres bruts, vois le <bmr>calculateur de BMR</bmr> ou le <tdee>calculateur de TDEE</tdee>."
     },
     "faq": {
       "q1": "Un d\u00e9ficit de 500 kcal/jour, c'est s\u00fbr ?",

@@ -158,6 +158,20 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
                   ),
                 })}
               </p>
+              <p>
+                {t.rich('seo.plan_p4', {
+                  bmr: (chunks) => (
+                    <Link href="/bmr-calculator" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
+                      {chunks}
+                    </Link>
+                  ),
+                  tdee: (chunks) => (
+                    <Link href="/tdee-calculator" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
+                      {chunks}
+                    </Link>
+                  ),
+                })}
+              </p>
             </ContentSection>
 
             {/* ─── CONVERSION BLOCK ─── */}

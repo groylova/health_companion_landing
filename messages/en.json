@@ -283,7 +283,8 @@
       "h2_plan": "From a number to a calorie deficit plan",
       "plan_p1": "Knowing you need 1,650 kcal doesn't tell you what to eat. That's where most calculators stop and most <food>food diaries</food> fall apart. The math is right, but the day is unstructured, so by 8pm you're improvising.",
       "plan_p2": "Hit \"Get my first day plan\" and we assemble a real day around your target: 3\u20134 meals, total within 10% of your number, with portion sizes scaled so you don't have to do mental math. The plan is built to feel like food, not a spreadsheet.",
-      "plan_p3": "It's one plan, on us. If you want a fresh plan every day, plus automatic <chat>calorie tracking</chat> that learns your habits and stops feeling like homework. That's what Nuvvoo does."
+      "plan_p3": "It's one plan, on us. If you want a fresh plan every day, plus automatic <chat>calorie tracking</chat> that learns your habits and stops feeling like homework. That's what Nuvvoo does.",
+      "plan_p4": "If you want just the raw numbers, see the <bmr>BMR calculator</bmr> or the <tdee>TDEE calculator</tdee>."
     },
     "faq": {
       "q1": "Is a 500 kcal/day deficit safe?",

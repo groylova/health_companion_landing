@@ -283,7 +283,8 @@
       "h2_plan": "Vom Ziel zum Defizit-Plan",
       "plan_p1": "Zu wissen, dass du 1.650 kcal brauchst, sagt dir nicht, was du essen sollst. Genau hier h\u00f6ren die meisten Rechner auf, und genau dort scheitern die meisten <food>Ern\u00e4hrungstageb\u00fccher</food> die meisten Di\u00e4ten.",
       "plan_p2": "Klick auf \u201eMeinen ersten Tagesplan holen\u201c, und wir bauen einen echten Tag um dein Ziel: 3\u20134 Mahlzeiten, Gesamtsumme innerhalb von 10 % deiner Zahl, mit angepassten Portionsgr\u00f6\u00dfen, damit du nicht im Kopf rechnen musst.",
-      "plan_p3": "Dieser eine Plan geht auf uns. Wenn du jeden Tag einen frischen Plan willst, plus automatisches <chat>Kalorientracking</chat>, das deine Gewohnheiten lernt \u2014 das macht Nuvvoo."
+      "plan_p3": "Dieser eine Plan geht auf uns. Wenn du jeden Tag einen frischen Plan willst, plus automatisches <chat>Kalorientracking</chat>, das deine Gewohnheiten lernt \u2014 das macht Nuvvoo.",
+      "plan_p4": "Wenn du nur die nackten Zahlen willst, schau in den <bmr>BMR-Rechner</bmr> oder den <tdee>TDEE-Rechner</tdee>."
     },
     "faq": {
       "q1": "Ist ein Defizit von 500 kcal/Tag sicher?",
