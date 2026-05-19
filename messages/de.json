@@ -431,9 +431,16 @@
       "maintainTitle": "Dein tägliches Kalorienziel",
       "loseTitle": "Dein tägliches Kalorienziel",
       "gainTitle": "Dein tägliches Kalorienziel",
-      "activityIntro": "Nur ein Schritt zu deinem Kalorienziel + Essensplan",
       "kcalShortUnit": "kcal",
-      "gramsUnit": "g"
+      "gramsUnit": "g",
+      "actionPromptLose": "Möchtest du abnehmen?",
+      "actionPromptGain": "Möchtest du zunehmen?",
+      "actionPromptMaintain": "Möchtest du einen täglichen Essensplan?",
+      "panelIntro": "Das sind deine Werte bei deinem aktuellen Gewicht und sitzender Aktivität. Passe unten an, falls du aktiver bist.",
+      "weeklyOutcomeLoseKg": "Bleib in diesem Tempo und du nimmst etwa {amount} kg in rund {weeks} Wochen ab. Willst du einen Essensplan dafür?",
+      "weeklyOutcomeLoseLb": "Bleib in diesem Tempo und du nimmst etwa {amount} lb in rund {weeks} Wochen ab. Willst du einen Essensplan dafür?",
+      "weeklyOutcomeGainKg": "Bleib in diesem Tempo und du nimmst etwa {amount} kg in rund {weeks} Wochen zu. Willst du einen Essensplan dafür?",
+      "weeklyOutcomeGainLb": "Bleib in diesem Tempo und du nimmst etwa {amount} lb in rund {weeks} Wochen zu. Willst du einen Essensplan dafür?"
     },
     "plan": {
       "heading": "Dein Essensplan",

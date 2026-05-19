@@ -3,9 +3,11 @@
 
 import {
   inToCm,
+  kgToLb,
   lbToKg,
   type Activity,
   type CalcInput,
+  type CalcResult,
   type Gender,
   type HeightUnit,
   type WeightUnit,
@@ -163,6 +165,44 @@ export function computeBmiResult(form: BmiFormState): BmiResult {
   };
 }
 
+// Flat ±500 kcal/day deficit/surplus — MyFitnessPal-style, the industry
+// default users expect to see on a BMI / TDEE calculator. Anchored to
+// TDEE (not bodyweight), so a 60-kg and a 120-kg overweight user both
+// see "TDEE − 500" rather than the wildly different deltas the
+// bodyweight-based pace formula produces. 1200 kcal floor protects
+// petite users from sub-minimum-safe targets.
+const FLAT_DEFICIT_KCAL = 500;
+const MIN_KCAL = 1200;
+
+// Post-process the deficit-calc result so target + weeklyDelta reflect a
+// flat ±500 deficit/surplus rather than the pace-based bodyweight delta
+// the underlying calculate() picked. BMR/TDEE/macros are kept as-is —
+// macros are calibrated by bodyweight + goal in macroSplit() and only
+// the carbs back-fill changes slightly when target moves by ~50 kcal;
+// recomputing the full macro split would require re-exporting an
+// internal of calc.ts, which the BMI spec deliberately avoids.
+export function applyFlatDeficit(result: CalcResult, goal: CalcInput['goal']): CalcResult {
+  if (goal === 'maintain') {
+    return result;
+  }
+  const signedDelta = goal === 'lose' ? -FLAT_DEFICIT_KCAL : FLAT_DEFICIT_KCAL;
+  const rawTarget = result.tdee + signedDelta;
+  const clamped = rawTarget < MIN_KCAL;
+  const target = clamped ? MIN_KCAL : rawTarget;
+  const roundedTarget = Math.round(target / 10) * 10;
+  // Effective daily delta after clamp — for very petite users the floor
+  // shrinks the delta, so weekly weight change is slower than 500/7700.
+  const effectiveDailyDelta = roundedTarget - result.tdee;
+  const weeklyKg = (effectiveDailyDelta * 7) / 7700;
+  return {
+    ...result,
+    target: roundedTarget,
+    clamped,
+    weeklyDeltaKg: Math.round(weeklyKg * 10) / 10,
+    weeklyDeltaLb: Math.round(kgToLb(weeklyKg) * 10) / 10,
+  };
+}
+
 export function mapToCalcInput(
   form: BmiFormState,
   activity: Activity,
@@ -176,6 +216,13 @@ export function mapToCalcInput(
   const age = parseInt(form.age, 10);
   const goal: CalcInput['goal'] =
     category === 'underweight' ? 'gain' : category === 'normal' ? 'maintain' : 'lose';
+  // BMI page uses slow pace by default — 0.5% bodyweight/week for lose,
+  // 0.3% for gain. That lands around a 500 kcal/day deficit for a typical
+  // overweight user (the deficit calc's pace=normal yields 700-900 which
+  // exceeds the conservative "lose 0.5-1 kg/week" public-health rule).
+  // Deficit calc has the pace selector for users who want to tune; BMI
+  // page is for visitors looking for the BMI number, so a sustainable
+  // default beats giving them an aggressive sub-1500 kcal target.
   return {
     weight: weightKg,
     weightUnit: 'kg',
@@ -185,6 +232,6 @@ export function mapToCalcInput(
     gender: form.gender,
     activity,
     goal,
-    pace: 'normal',
+    pace: 'slow',
   };
 }

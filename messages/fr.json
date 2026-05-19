@@ -431,9 +431,16 @@
       "maintainTitle": "Ton objectif calorique du jour",
       "loseTitle": "Ton objectif calorique du jour",
       "gainTitle": "Ton objectif calorique du jour",
-      "activityIntro": "Une étape avant ton objectif calorique + plan repas",
       "kcalShortUnit": "kcal",
-      "gramsUnit": "g"
+      "gramsUnit": "g",
+      "actionPromptLose": "Tu veux perdre du poids ?",
+      "actionPromptGain": "Tu veux prendre du poids ?",
+      "actionPromptMaintain": "Tu veux un plan repas quotidien ?",
+      "panelIntro": "Voici tes chiffres avec ton poids actuel et une activité sédentaire. Ajuste ci-dessous si tu bouges plus.",
+      "weeklyOutcomeLoseKg": "À ce rythme tu perdras ~{amount} kg en environ {weeks} semaines. Tu veux un plan repas pour y arriver ?",
+      "weeklyOutcomeLoseLb": "À ce rythme tu perdras ~{amount} lb en environ {weeks} semaines. Tu veux un plan repas pour y arriver ?",
+      "weeklyOutcomeGainKg": "À ce rythme tu prendras ~{amount} kg en environ {weeks} semaines. Tu veux un plan repas pour y arriver ?",
+      "weeklyOutcomeGainLb": "À ce rythme tu prendras ~{amount} lb en environ {weeks} semaines. Tu veux un plan repas pour y arriver ?"
     },
     "plan": {
       "heading": "Ton plan repas",

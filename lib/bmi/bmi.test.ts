@@ -170,23 +170,23 @@ describe('mapToCalcInput', () => {
     weight: '85',
   };
 
-  it('maps overweight → lose/normal', () => {
+  it('maps overweight → lose/slow', () => {
     const input = mapToCalcInput(form, 'moderate', 'overweight');
     expect(input.goal).toBe('lose');
-    expect(input.pace).toBe('normal');
+    expect(input.pace).toBe('slow');
     expect(input.activity).toBe('moderate');
     expect(input.gender).toBe('female');
   });
 
-  it('maps obese → lose/normal', () => {
+  it('maps obese → lose/slow', () => {
     expect(mapToCalcInput(form, 'sedentary', 'obese').goal).toBe('lose');
   });
 
-  it('maps normal → maintain/normal', () => {
+  it('maps normal → maintain/slow', () => {
     expect(mapToCalcInput(form, 'light', 'normal').goal).toBe('maintain');
   });
 
-  it('maps underweight → gain/normal', () => {
+  it('maps underweight → gain/slow', () => {
     expect(mapToCalcInput(form, 'very', 'underweight').goal).toBe('gain');
   });
 });

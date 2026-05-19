@@ -431,9 +431,16 @@
       "maintainTitle": "Your daily calorie target",
       "loseTitle": "Your daily calorie target",
       "gainTitle": "Your daily calorie target",
-      "activityIntro": "One step to your calorie target + meal plan",
       "kcalShortUnit": "kcal",
-      "gramsUnit": "g"
+      "gramsUnit": "g",
+      "actionPromptLose": "Want to lose weight?",
+      "actionPromptGain": "Want to gain weight?",
+      "actionPromptMaintain": "Want a daily meal plan?",
+      "panelIntro": "Here are your numbers at your current weight with sedentary activity. Adjust below if you're more active.",
+      "weeklyOutcomeLoseKg": "Stay on this pace and you'll lose ~{amount} kg in about {weeks} weeks. Want a meal plan to make it happen?",
+      "weeklyOutcomeLoseLb": "Stay on this pace and you'll lose ~{amount} lb in about {weeks} weeks. Want a meal plan to make it happen?",
+      "weeklyOutcomeGainKg": "Stay on this pace and you'll gain ~{amount} kg in about {weeks} weeks. Want a meal plan to get there?",
+      "weeklyOutcomeGainLb": "Stay on this pace and you'll gain ~{amount} lb in about {weeks} weeks. Want a meal plan to get there?"
     },
     "plan": {
       "heading": "Your meal plan",

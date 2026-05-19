@@ -431,9 +431,16 @@
       "maintainTitle": "Tu objetivo diario de calorías",
       "loseTitle": "Tu objetivo diario de calorías",
       "gainTitle": "Tu objetivo diario de calorías",
-      "activityIntro": "Un paso para tu objetivo de calorías + plan de comidas",
       "kcalShortUnit": "kcal",
-      "gramsUnit": "g"
+      "gramsUnit": "g",
+      "actionPromptLose": "¿Quieres perder peso?",
+      "actionPromptGain": "¿Quieres ganar peso?",
+      "actionPromptMaintain": "¿Quieres un plan de comidas diario?",
+      "panelIntro": "Estos son tus números con tu peso actual y actividad sedentaria. Ajusta abajo si eres más activo.",
+      "weeklyOutcomeLoseKg": "A este ritmo perderás ~{amount} kg en unas {weeks} semanas. ¿Quieres un plan de comidas para lograrlo?",
+      "weeklyOutcomeLoseLb": "A este ritmo perderás ~{amount} lb en unas {weeks} semanas. ¿Quieres un plan de comidas para lograrlo?",
+      "weeklyOutcomeGainKg": "A este ritmo ganarás ~{amount} kg en unas {weeks} semanas. ¿Quieres un plan de comidas para lograrlo?",
+      "weeklyOutcomeGainLb": "A este ritmo ganarás ~{amount} lb en unas {weeks} semanas. ¿Quieres un plan de comidas para lograrlo?"
     },
     "plan": {
       "heading": "Tu plan de comidas",

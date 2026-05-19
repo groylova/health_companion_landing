@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import {
+  applyFlatDeficit,
   computeBmiResult,
   mapToCalcInput,
   validateBmiForm,
@@ -93,6 +94,34 @@ const PILL_CLASS: Record<BmiResult['category'], string> = {
   obese: 'bg-red-100 text-red-800',
 };
 
+// Action prompt — the green plaque after the BMI explanation that
+// "hooks" the user into the calorie panel below ("Want to lose
+// weight?" / "Want to gain weight?" / "Want a daily meal plan?").
+// Same scaffold pattern as PILL_CLASS / EXPLANATION_KEY so a new
+// category becomes a compile-time error rather than silent miss.
+const ACTION_PROMPT_KEY: Record<
+  BmiResult['category'],
+  | 'result.actionPromptLose'
+  | 'result.actionPromptGain'
+  | 'result.actionPromptMaintain'
+> = {
+  underweight: 'result.actionPromptGain',
+  normal: 'result.actionPromptMaintain',
+  overweight: 'result.actionPromptLose',
+  obese: 'result.actionPromptLose',
+};
+
+// Weekly-outcome copy — the closing green plaque BELOW the panel that
+// names the future state and ends in a CTA-style question. Two axes:
+// direction (lose for over/obese, gain for under) × unit (kg/lb).
+// Normal-BMI users don't see this — they get the maintenance action
+// prompt above instead; no delta to chase.
+type WeeklyOutcomeKey =
+  | 'result.weeklyOutcomeLoseKg'
+  | 'result.weeklyOutcomeLoseLb'
+  | 'result.weeklyOutcomeGainKg'
+  | 'result.weeklyOutcomeGainLb';
+
 const STORAGE_KEY_COUNT = 'nuvvoo_bmi_plan_count';
 const STORAGE_KEY_DATA = 'nuvvoo_bmi_plan_data';
 // Bump when StoredData shape changes — stale entries are dropped on hydrate.
@@ -138,7 +167,12 @@ export function CalculatorWidget() {
   const [form, setForm] = useState<BmiFormState>(DEFAULT_FORM);
   const [error, setError] = useState<BmiValidationError | null>(null);
   const [bmi, setBmi] = useState<BmiResult | null>(null);
-  const [activity, setActivity] = useState<Activity | ''>('');
+  // Default to 'sedentary' so the calorie/BMR/TDEE/macros panel renders
+  // immediately on the BMI-result screen — the user sees their personalized
+  // numbers right under the BMI category, instead of staring at an empty
+  // dropdown labeled "—". Activity stays interactive: tweaking it re-runs
+  // calculate() and the panel numbers update live.
+  const [activity, setActivity] = useState<Activity | ''>('sedentary');
   const [diet, setDiet] = useState<ApiDiet>('none');
   const [allergies, setAllergies] = useState<string[]>([]);
   const [plan, setPlan] = useState<ApiPlan | null>(null);
@@ -158,7 +192,11 @@ export function CalculatorWidget() {
     if (bmi === null || activity === '') {
       return null;
     }
-    return calculate(mapToCalcInput(form, activity, bmi.category));
+    const input = mapToCalcInput(form, activity, bmi.category);
+    // applyFlatDeficit overrides the pace-based delta calculate() picked
+    // with a flat ±500 kcal/day. Industry standard (MyFitnessPal etc.),
+    // and what users expect when they read "deficit" on a BMI page.
+    return applyFlatDeficit(calculate(input), input.goal);
   }, [bmi, activity, form]);
 
   // PlanView reads calcResult to render the kcal total + macros. Prefer the
@@ -244,7 +282,10 @@ export function CalculatorWidget() {
     }
 
     const input = mapToCalcInput(form, activity, bmi.category);
-    const result = calculate(input);
+    // Same flat-deficit override the panel above used — send the API the
+    // calorie target the user actually saw, not the pace-based one
+    // calculate() would have used by itself.
+    const result = applyFlatDeficit(calculate(input), input.goal);
 
     const payload = {
       calories_target: result.target,
@@ -534,6 +575,42 @@ function BmiResultView({
           })
       : null;
 
+  // Weekly-outcome copy — the closing green plaque below the calorie
+  // panel that ends in a "Want a meal plan to make it happen?" question.
+  // Same math as the weekly-progress line it replaces: distance from
+  // current weight to the BMI midpoint, divided by the safe weekly delta
+  // calculate() picked. Skipped for normal-BMI users (no delta) and when
+  // weekly delta is too small to produce a sensible week count.
+  let weeklyOutcomeKey: WeeklyOutcomeKey | null = null;
+  let weeklyOutcomeParams: Record<string, string> | null = null;
+  if (
+    calcResult !== null &&
+    bmi.targetWeightKg !== null &&
+    bmi.category !== 'normal'
+  ) {
+    const kgDelta = Math.abs(bmi.weightKg - bmi.targetWeightKg);
+    const weeklyKg = Math.abs(calcResult.weeklyDeltaKg);
+    if (weeklyKg >= 0.05) {
+      const weeks = Math.max(1, Math.round(kgDelta / weeklyKg));
+      const direction: 'Lose' | 'Gain' = bmi.category === 'underweight' ? 'Gain' : 'Lose';
+      if (form.weightUnit === 'lb') {
+        const lbAmount = Math.max(1, Math.round(kgToLb(kgDelta)));
+        weeklyOutcomeKey = (direction === 'Gain'
+          ? 'result.weeklyOutcomeGainLb'
+          : 'result.weeklyOutcomeLoseLb') as WeeklyOutcomeKey;
+        weeklyOutcomeParams = { amount: lbAmount.toString(), weeks: weeks.toString() };
+      } else {
+        const kgAmount = Math.max(1, Math.round(kgDelta));
+        weeklyOutcomeKey = (direction === 'Gain'
+          ? 'result.weeklyOutcomeGainKg'
+          : 'result.weeklyOutcomeLoseKg') as WeeklyOutcomeKey;
+        weeklyOutcomeParams = { amount: kgAmount.toString(), weeks: weeks.toString() };
+      }
+    }
+  }
+
+  const actionPromptKey = ACTION_PROMPT_KEY[bmi.category];
+
   // ICU explanation params vary by category AND by unit. Build the right
   // object once, then pass to t() through the EXPLANATION_KEY lookup
   // (kg keys use {minKg}/{maxKg}/{target}, lb keys use {minLb}/{maxLb}/{target}).
@@ -621,33 +698,24 @@ function BmiResultView({
       </p>
 
       <div className="space-y-5 border-t border-slate-200 pt-5">
-        {/* Activity + calorie panel are FREE math — always shown. Only the
-           AI meal plan generation (and its diet/allergies inputs) is gated
-           behind alreadyUsed, so a user who's spent their plans still gets
-           the calorie/BMR/TDEE/macros payoff they came here for. */}
-        <div>
-          {/* Friendly bridge from the BMI number into the calorie funnel.
-             Without this the activity dropdown sits there with no context —
-             the user just sees "Activity level" and doesn't know why. */}
-          <p className="text-sm font-semibold text-slate-900">{t('result.activityIntro')}</p>
-          <label className="mt-1 block text-xs text-slate-500">{t('result.activityPrompt')}</label>
-          <select
-            value={activity}
-            onChange={(e) => onActivity(e.target.value as Activity)}
-            aria-label={t('form.activityLabel')}
-            className="mt-2 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
-          >
-            <option value="" disabled>
-              —
-            </option>
-            <option value="sedentary">{t('form.activitySedentary')}</option>
-            <option value="light">{t('form.activityLight')}</option>
-            <option value="moderate">{t('form.activityModerate')}</option>
-            <option value="very">{t('form.activityVery')}</option>
-            <option value="extra">{t('form.activityExtra')}</option>
-          </select>
+        {/* Action prompt — visual scroll hook between the BMI explanation
+           and the calorie panel. Big green plaque, NOT a button — just a
+           confident question per category ("Want to lose/gain weight?" /
+           "Want a daily meal plan?"). Without this, the BMI block bleeds
+           straight into the calorie block and nothing tells the user why
+           they should scroll further. */}
+        <div className="rounded-2xl bg-nuvvooGreen-50 border border-nuvvooGreen-200 px-5 py-4 text-center">
+          <p className="text-lg font-semibold text-nuvvooGreen-900">
+            {t(actionPromptKey)}
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-nuvvooGreen-800/80">
+            {t('result.panelIntro')}
+          </p>
         </div>
 
+        {/* Calorie panel — appears IMMEDIATELY with activity defaulting to
+           'sedentary'. Tweaking the activity selector below recomputes
+           live via the parent's liveCalcResult useMemo. */}
         {calcResult !== null && (
           <div className="space-y-5">
             <div>
@@ -690,31 +758,60 @@ function BmiResultView({
             {calcResult.clamped && (
               <p className="text-xs text-amber-700">{t('result.clampedNote')}</p>
             )}
+          </div>
+        )}
 
-            {/* Plan-only inputs: only the AI plan reads these, so hide once
-               the user has spent both free plans — they'd be inert clutter. */}
-            {!alreadyUsed && (
-              <>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
-                  {/* 2×2 grid — keeps longer locale labels (Pescatarian /
-                     Pescetarisch / Вегетарианство) from clipping inside the
-                     half-width hero column. */}
-                  <div className="mt-1 grid grid-cols-2 gap-2">
-                    {DIET_OPTIONS.map((d) => (
-                      <SegmentButton
-                        key={d}
-                        selected={diet === d}
-                        onClick={() => onDiet(d)}
-                        label={t(`form.diet_${d}` as 'form.diet_none')}
-                      />
-                    ))}
-                  </div>
-                </div>
+        {/* Closing outcome plaque — narrates the future state ("Stay on
+           this pace and you'll lose ~27 kg in about 39 weeks. Want a meal
+           plan to make it happen?"). Only for non-normal categories;
+           normal-BMI users already saw the matching action prompt above. */}
+        {weeklyOutcomeKey !== null && weeklyOutcomeParams !== null && (
+          <div className="rounded-2xl bg-nuvvooGreen-50 border border-nuvvooGreen-200 px-5 py-4 text-center">
+            <p className="text-sm font-medium leading-relaxed text-nuvvooGreen-900">
+              {t(weeklyOutcomeKey, weeklyOutcomeParams)}
+            </p>
+          </div>
+        )}
 
-                <AllergiesInput value={allergies} onChange={onAllergies} t={t} />
-              </>
-            )}
+        {/* Personalization block — activity tweaks the live numbers above
+           (kcal/BMR/TDEE/macros all recompute), diet + allergies feed the
+           AI meal plan. The action-prompt plaque above already framed
+           this section, so no headline here. */}
+        {!alreadyUsed && (
+          <div className="space-y-4 border-t border-slate-200 pt-5">
+            <div>
+              <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
+              <select
+                value={activity}
+                onChange={(e) => onActivity(e.target.value as Activity)}
+                className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
+              >
+                <option value="sedentary">{t('form.activitySedentary')}</option>
+                <option value="light">{t('form.activityLight')}</option>
+                <option value="moderate">{t('form.activityModerate')}</option>
+                <option value="very">{t('form.activityVery')}</option>
+                <option value="extra">{t('form.activityExtra')}</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
+              {/* 2×2 grid — keeps longer locale labels (Pescatarian /
+                 Pescetarisch / Вегетарианство) from clipping inside the
+                 half-width hero column. */}
+              <div className="mt-1 grid grid-cols-2 gap-2">
+                {DIET_OPTIONS.map((d) => (
+                  <SegmentButton
+                    key={d}
+                    selected={diet === d}
+                    onClick={() => onDiet(d)}
+                    label={t(`form.diet_${d}` as 'form.diet_none')}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <AllergiesInput value={allergies} onChange={onAllergies} t={t} />
           </div>
         )}
 
@@ -722,7 +819,7 @@ function BmiResultView({
           <div>
             <button
               onClick={onGetPlan}
-              disabled={planLoading || activity === ''}
+              disabled={planLoading}
               className="group inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
             >
               <span>{planLoading ? t('plan.loading') : t('result.ctaButton')}</span>
