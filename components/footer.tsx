@@ -15,14 +15,28 @@ export async function Footer() {
           </div>
 
           <div className="flex flex-col gap-6 md:flex-row md:gap-12">
+            {/* Calculators — interactive tools live here so they don't get
+               buried inside the long "Resources" article list. */}
+            <div className="flex flex-col gap-2">
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                {t('calculators')}
+              </div>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-deficit-calculator">
+                {t('calculator')}
+              </NextLink>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/bmr-calculator">
+                {t('bmrCalculator')}
+              </NextLink>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/tdee-calculator">
+                {t('tdeeCalculator')}
+              </NextLink>
+            </div>
+
             {/* Resources — Column 1 */}
             <div className="flex flex-col gap-2">
               <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 {t('resources')}
               </div>
-              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-deficit-calculator">
-                {t('calculator')}
-              </NextLink>
               <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/calorie-tracker-eating-disorders">
                 {t('eatingDisorderSafety')}
               </NextLink>
