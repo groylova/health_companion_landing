@@ -117,6 +117,8 @@
     "mfpAlternative": "Alternative à MyFitnessPal",
     "loseItAlternative": "Alternative à Lose It",
     "calculator": "Calculateur de d\u00e9ficit calorique",
+    "bmrCalculator": "Calculateur BMR",
+    "tdeeCalculator": "Calculateur TDEE",
     "privacy": "Confidentialité",
     "terms": "Conditions",
     "aiDisclosure": "À propos de l'utilisation de l'IA",
@@ -163,7 +165,9 @@
     "descAiFoodJournal": "Décris ta journée, l'IA s'occupe des chiffres.",
     "descPhotoVsChat": "Pourquoi décrire ses repas en mots bat le suivi par photo.",
     "descDinnerIdeas": "Idées de dîner rapides qui rentrent dans ton objectif calorique.",
-    "descEatingDisorderSafety": "Règles de suivi qui protègent ta santé mentale."
+    "descEatingDisorderSafety": "Règles de suivi qui protègent ta santé mentale.",
+    "descBmrCalculator": "Calcule ton métabolisme de base (Mifflin\u2013St Jeor).",
+    "descTdeeCalculator": "Calcule ta dépense énergétique totale quotidienne."
   },
   "deficitCalculator": {
     "metadata": {

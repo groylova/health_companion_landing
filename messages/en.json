@@ -117,6 +117,8 @@
     "mfpAlternative": "MyFitnessPal Alternative",
     "loseItAlternative": "Lose It Alternative",
     "calculator": "Calorie Deficit Calculator",
+    "bmrCalculator": "BMR Calculator",
+    "tdeeCalculator": "TDEE Calculator",
     "privacy": "Privacy",
     "terms": "Terms",
     "aiDisclosure": "AI Disclosure",
@@ -163,7 +165,9 @@
     "descAiFoodJournal": "Describe your day, let AI do the counting.",
     "descPhotoVsChat": "Why describing meals in plain text beats photo-based tracking.",
     "descDinnerIdeas": "Quick dinner ideas that fit your calorie target.",
-    "descEatingDisorderSafety": "Tracking guidelines that protect your mental health."
+    "descEatingDisorderSafety": "Tracking guidelines that protect your mental health.",
+    "descBmrCalculator": "Find your resting metabolic rate (Mifflin\u2013St Jeor).",
+    "descTdeeCalculator": "Calculate your total daily energy expenditure."
   },
   "deficitCalculator": {
     "metadata": {

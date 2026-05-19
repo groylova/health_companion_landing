@@ -117,6 +117,8 @@
     "mfpAlternative": "Альтернатива MyFitnessPal",
     "loseItAlternative": "Альтернатива Lose It",
     "calculator": "Калькулятор дефицита калорий",
+    "bmrCalculator": "Калькулятор BMR",
+    "tdeeCalculator": "Калькулятор TDEE",
     "privacy": "Конфиденциальность",
     "terms": "Условия",
     "aiDisclosure": "Про использование AI",
@@ -163,7 +165,9 @@
     "descAiFoodJournal": "Опиши свой день — AI всё посчитает.",
     "descPhotoVsChat": "Почему описать еду текстом удобнее, чем фоткать.",
     "descDinnerIdeas": "Быстрые идеи на ужин, которые впишутся в дневную норму.",
-    "descEatingDisorderSafety": "Правила трекинга, которые берегут психику."
+    "descEatingDisorderSafety": "Правила трекинга, которые берегут психику.",
+    "descBmrCalculator": "Посчитай свой базовый обмен (формула Миффлина — Сан-Жеора).",
+    "descTdeeCalculator": "Посчитай общий расход энергии за сутки."
   },
   "deficitCalculator": {
     "metadata": {
