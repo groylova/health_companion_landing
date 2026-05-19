@@ -44,6 +44,6 @@ export const config = {
   matcher: [
     '/',
     '/(de|ru|es|fr)/:path*',
-    '/(chat-calorie-tracker|ai-food-journal|calorie-tracking-without-stress|alternative-to-myfitnesspal|alternative-to-lose-it|calorie-tracker-eating-disorders|no-dinner-ideas-calories|how-to-stay-consistent-calorie-tracking|photo-vs-chat-calorie-tracking|food-diary-for-weight-loss|calorie-deficit-calculator)',
+    '/(chat-calorie-tracker|ai-food-journal|calorie-tracking-without-stress|alternative-to-myfitnesspal|alternative-to-lose-it|calorie-tracker-eating-disorders|no-dinner-ideas-calories|how-to-stay-consistent-calorie-tracking|photo-vs-chat-calorie-tracking|food-diary-for-weight-loss|calorie-deficit-calculator|bmr-calculator|tdee-calculator)',
   ],
 };
