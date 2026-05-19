@@ -66,30 +66,12 @@ export default async function TdeeCalculatorPage({ params }: Props) {
 
   const t = await getTranslations('tdeeCalculator');
 
-  // faq.a5 contains a <deficit> rich-text marker that cross-links to the
-  // deficit calculator — render via t.rich so next-intl substitutes the
-  // tag for a real <Link>. JSON-LD inside FaqSection only consumes string
-  // answers, so this answer is omitted from structured data; not ideal but
-  // acceptable for a single cross-link.
   const faqs = [
     { question: t('faq.q1'), answer: t('faq.a1') },
     { question: t('faq.q2'), answer: t('faq.a2') },
     { question: t('faq.q3'), answer: t('faq.a3') },
     { question: t('faq.q4'), answer: t('faq.a4') },
-    {
-      question: t('faq.q5'),
-      answer: (
-        <p>
-          {t.rich('faq.a5', {
-            deficit: (chunks) => (
-              <Link href="/calorie-deficit-calculator" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
-                {chunks}
-              </Link>
-            ),
-          })}
-        </p>
-      ),
-    },
+    { question: t('faq.q5'), answer: t('faq.a5') },
   ];
 
   return (

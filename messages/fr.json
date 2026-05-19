@@ -614,7 +614,7 @@
       "q4": "Et si mon activit\u00e9 varie d'un jour \u00e0 l'autre\u00a0?",
       "a4": "Choisis le coefficient qui correspond \u00e0 ta semaine moyenne, pas \u00e0 ton jour le plus charg\u00e9 ou le plus calme. Si la semaine fluctue beaucoup, moyenne sur 7 jours. Beaucoup utilisent \u00ab\u00a0mod\u00e9r\u00e9\u00a0\u00bb (1,55) comme valeur par d\u00e9faut raisonnable.",
       "q5": "Puis-je manger au niveau du TDEE et quand m\u00eame perdre\u00a0?",
-      "a5": "Non \u2014 par d\u00e9finition, manger au TDEE, c'est l'\u00e9quilibre calorique. Pour perdre, il faut un d\u00e9ficit (manger sous le TDEE) ou plus d'activit\u00e9. Le <deficit>calculateur de d\u00e9ficit</deficit> s'occupe des calculs."
+      "a5": "Non \u2014 par d\u00e9finition, manger au TDEE, c'est l'\u00e9quilibre calorique. Pour perdre, il faut un d\u00e9ficit (manger sous le TDEE) ou plus d'activit\u00e9. Le calculateur de d\u00e9ficit s'occupe des calculs."
     }
   }
 }
