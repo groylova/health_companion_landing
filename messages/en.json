@@ -25,18 +25,18 @@
     "eyebrow": "Founder story",
     "name": "Irina Groylova",
     "role": "Founder of Nuvvoo",
-    "title": "Why I\u2019m building Nuvvoo",
+    "title": "Why I’m building Nuvvoo",
     "intro": "<strong>A couple of years ago</strong> I started taking migraine medication. The pain went away, but the side effects hit hard: my mood crashed, my weight went up, and it felt like everything was slipping out of control.",
-    "readMore": "Read more \u2193",
-    "p1": "I started looking for a way to lose weight and tried a ton of calorie-tracking apps. And kept quitting every time. Not because the apps were bad, but because I didn\u2019t have the energy to do it <strong>consistently</strong>. It was really hard to search for foods, enter grams\u2026 especially while depressed.",
-    "p2": "But one day I simply wrote in a chat with AI, told it what I\u2019d eaten that day, and asked what I could have for dinner to stay within my calories. It felt so natural. The chat didn\u2019t just give recommendations, it added supportive words too. A quick dopamine hit I\u2019d been missing.",
+    "readMore": "Read more ↓",
+    "p1": "I started looking for a way to lose weight and tried a ton of calorie-tracking apps. And kept quitting every time. Not because the apps were bad, but because I didn’t have the energy to do it <strong>consistently</strong>. It was really hard to search for foods, enter grams… especially while depressed.",
+    "p2": "But one day I simply wrote in a chat with AI, told it what I’d eaten that day, and asked what I could have for dinner to stay within my calories. It felt so natural. The chat didn’t just give recommendations, it added supportive words too. A quick dopamine hit I’d been missing.",
     "p3": "The next day I wrote again. And the next. Within a month it stopped feeling like stress. Talking with the chat about my food became a calm <strong>daily ritual</strong>.",
-    "p4": "That\u2019s when I came up with the idea for Nuvvoo: a companion that listens first, counts second, and helps everyone who struggles with procrastination like I do stay in <strong>balance</strong>. I hope you\u2019ll find your own way to stay balanced, without pressure, with joy."
+    "p4": "That’s when I came up with the idea for Nuvvoo: a companion that listens first, counts second, and helps everyone who struggles with procrastination like I do stay in <strong>balance</strong>. I hope you’ll find your own way to stay balanced, without pressure, with joy."
   },
   "product": {
     "eyebrow": "Product",
     "title": "One chat instead of ten apps.",
-    "subtitle": "Tell Nuvvoo about your food, sleep, workout, and it\u2019ll count and remember.",
+    "subtitle": "Tell Nuvvoo about your food, sleep, workout, and it’ll count and remember.",
     "journalAlt": "Journal screen",
     "todayAlt": "Today screen with ring",
     "statsAlt": "Statistics screen"
@@ -59,7 +59,7 @@
     "nuvvooNoRestart": "No need to restart.",
     "nuvvooJustWrite": "Type \"chicken with rice\". Done.",
     "nuvvooOpen": "Start typing right away.",
-    "nuvvooPizza": "\"Pizza at a cafe.\" That\u2019s enough.",
+    "nuvvooPizza": "\"Pizza at a cafe.\" That’s enough.",
     "nuvvooOneChat": "Food, water, sleep, workouts in one chat.",
     "nuvvooLearns": "In a week, Nuvvoo knows your habits."
   },
@@ -82,11 +82,11 @@
   },
   "socialProof": {
     "heading": "Loved by people who hate calorie tracking",
-    "quote1": "I\u2019ve been tracking for 10 days, no urge to quit.",
+    "quote1": "I’ve been tracking for 10 days, no urge to quit.",
     "name1": "Mary, photographer",
-    "quote2": "I hate logging food, but I want to watch what I eat. With Nuvvoo it doesn\u2019t feel like constant logging. It\u2019s just a conversation.",
+    "quote2": "I hate logging food, but I want to watch what I eat. With Nuvvoo it doesn’t feel like constant logging. It’s just a conversation.",
     "name2": "Stacy, stylist",
-    "quote3": "I just want something that won\u2019t annoy me. Nuvvoo is a sweet, supportive companion.",
+    "quote3": "I just want something that won’t annoy me. Nuvvoo is a sweet, supportive companion.",
     "name3": "Sarah, mom of two"
   },
   "waitlistCta": {
@@ -96,8 +96,8 @@
   "waitlist": {
     "placeholder": "you@example.com",
     "join": "Join",
-    "joining": "Joining\u2026",
-    "success": "You\u2019re on the list. See you soon \u2728",
+    "joining": "Joining…",
+    "success": "You’re on the list. See you soon ✨",
     "networkError": "Network error. Please try again.",
     "genericError": "Something went wrong."
   },
@@ -123,7 +123,7 @@
     "terms": "Terms",
     "aiDisclosure": "AI Disclosure",
     "contact": "Contact",
-    "copyright": "\u00a9 2026 Pryvus Inc."
+    "copyright": "© 2026 Pryvus Inc."
   },
   "seoCta": {
     "title": "Ready to track without stress?",
@@ -141,9 +141,9 @@
     "label": "Language",
     "en": "English",
     "de": "Deutsch",
-    "ru": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
-    "es": "Espa\u00f1ol",
-    "fr": "Fran\u00e7ais"
+    "ru": "Русский",
+    "es": "Español",
+    "fr": "Français"
   },
   "planRating": {
     "prompt": "How does this plan look?",
@@ -166,7 +166,7 @@
     "descPhotoVsChat": "Why describing meals in plain text beats photo-based tracking.",
     "descDinnerIdeas": "Quick dinner ideas that fit your calorie target.",
     "descEatingDisorderSafety": "Tracking guidelines that protect your mental health.",
-    "descBmrCalculator": "Find your resting metabolic rate (Mifflin\u2013St Jeor).",
+    "descBmrCalculator": "Find your resting metabolic rate (Mifflin–St Jeor).",
     "descTdeeCalculator": "Calculate your total daily energy expenditure."
   },
   "deficitCalculator": {
@@ -191,9 +191,9 @@
       "genderFemale": "Female",
       "activityLabel": "Activity level",
       "activitySedentary": "Sedentary (little or no exercise)",
-      "activityLight": "Lightly active (1\u20133 days/week)",
-      "activityModerate": "Moderately active (3\u20135 days/week)",
-      "activityVery": "Very active (6\u20137 days/week)",
+      "activityLight": "Lightly active (1–3 days/week)",
+      "activityModerate": "Moderately active (3–5 days/week)",
+      "activityVery": "Very active (6–7 days/week)",
       "activityExtra": "Extra active (twice daily / physical job)",
       "goalLabel": "Goal",
       "goalLose": "Lose weight",
@@ -221,7 +221,12 @@
       "allergiesAdd": "Add",
       "allergiesRemove": "Remove",
       "allergiesAtCap": "Limit reached",
-      "allergiesHint": "{count}/{max} · press Enter to add"
+      "allergiesHint": "{count}/{max} · press Enter to add",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitIn": "in"
     },
     "result": {
       "edit": "Edit answers",
@@ -229,10 +234,10 @@
       "maintainTitle": "Your maintenance calories",
       "gainTitle": "Your daily calorie target",
       "kcalUnit": "kcal/day",
-      "weeklyLossKg": "\u2248 {amount} kg/week loss",
-      "weeklyLossLb": "\u2248 {amount} lb/week loss",
-      "weeklyGainKg": "\u2248 {amount} kg/week gain",
-      "weeklyGainLb": "\u2248 {amount} lb/week gain",
+      "weeklyLossKg": "≈ {amount} kg/week loss",
+      "weeklyLossLb": "≈ {amount} lb/week loss",
+      "weeklyGainKg": "≈ {amount} kg/week gain",
+      "weeklyGainLb": "≈ {amount} lb/week gain",
       "bmrLabel": "BMR",
       "tdeeLabel": "Maintenance (TDEE)",
       "macrosLabel": "Suggested macros",
@@ -242,10 +247,12 @@
       "clampedNote": "We capped your target at the safe minimum so the plan stays realistic and sustainable.",
       "ctaText": "Turn this into a plan for today",
       "ctaButton": "Get my first day plan",
-      "ctaUsedNote": "You've used your free plan. Open Nuvvoo for a fresh plan every day."
+      "ctaUsedNote": "You've used your free plan. Open Nuvvoo for a fresh plan every day.",
+      "kcalShortUnit": "kcal",
+      "gramsShort": "g"
     },
     "plan": {
-      "loading": "Generating your plan\u2026",
+      "loading": "Generating your plan…",
       "errorTitle": "Couldn't generate a plan",
       "errorRetry": "Try again",
       "rateLimitedHourly": "You've hit this hour's plan limit. Try again in an hour.",
@@ -253,7 +260,7 @@
       "heading": "Goal",
       "totalLabel": "Total",
       "kcalUnit": "kcal",
-      "portionFactor": "{factor}\u00d7 normal portion",
+      "portionFactor": "{factor}× normal portion",
       "fitsLoseKg": "At {weight} kg with a goal to lose weight, this plan keeps you in a {deficit} kcal deficit, about {weekly} kg per week.",
       "fitsLoseLb": "At {weight} lb with a goal to lose weight, this plan keeps you in a {deficit} kcal deficit, about {weekly} lb per week.",
       "fitsMaintainKg": "At {weight} kg, these meals match your maintenance calories so your weight stays steady.",
@@ -264,12 +271,12 @@
       "slotLunch": "Lunch",
       "slotDinner": "Dinner",
       "slotSnack": "Snack",
-      "macros": "P {p}g \u00b7 C {c}g \u00b7 F {f}g"
+      "macros": "P {p}g · C {c}g · F {f}g"
     },
     "conversion": {
       "title": "Want a new plan every day and automatic tracking?",
       "subtitle": "Try Nuvvoo, the modern calorie tracker.",
-      "cta": "Get a plan like this every day \u2192"
+      "cta": "Get a plan like this every day →"
     },
     "seo": {
       "h2_what": "What is a calorie deficit?",
@@ -277,12 +284,12 @@
       "what_p2": "Most adults can sustainably lose roughly 0.5 kg (about 1 pound) per week with a daily deficit of around 500 kcal. That's the default our calorie deficit calculator uses, and it's the level the World Health Organization and most clinical guidelines describe as safe for healthy adults.",
       "what_p3": "The math is simple, but actually staying in a deficit is the hard part. That's why this page does two things: it gives you the number, then it turns the number into a plan you can eat today.",
       "h2_how": "How the calorie deficit calculator works",
-      "how_p1": "We use the Mifflin\u2013St Jeor equation, the formula clinicians and registered dietitians rely on most. It estimates your basal metabolic rate (BMR), the calories you'd burn lying still, from your weight, height, age, and sex.",
-      "how_p2": "We multiply BMR by an activity factor (1.2\u20131.9) to estimate your total daily energy expenditure (TDEE). Then we subtract 500 kcal for fat loss, hold steady for maintenance, or add 300 kcal for a lean gain.",
+      "how_p1": "We use the Mifflin–St Jeor equation, the formula clinicians and registered dietitians rely on most. It estimates your basal metabolic rate (BMR), the calories you'd burn lying still, from your weight, height, age, and sex.",
+      "how_p2": "We multiply BMR by an activity factor (1.2–1.9) to estimate your total daily energy expenditure (TDEE). Then we subtract 500 kcal for fat loss, hold steady for maintenance, or add 300 kcal for a lean gain.",
       "how_p3": "There's a safety floor: 1,200 kcal/day for women and 1,500 kcal/day for men. If your deficit pushes the target below that floor, we clamp it. Eating less than that long-term tends to backfire. Metabolism adapts, energy drops, and most people quit.",
       "h2_plan": "From a number to a calorie deficit plan",
       "plan_p1": "Knowing you need 1,650 kcal doesn't tell you what to eat. That's where most calculators stop and most <food>food diaries</food> fall apart. The math is right, but the day is unstructured, so by 8pm you're improvising.",
-      "plan_p2": "Hit \"Get my first day plan\" and we assemble a real day around your target: 3\u20134 meals, total within 10% of your number, with portion sizes scaled so you don't have to do mental math. The plan is built to feel like food, not a spreadsheet.",
+      "plan_p2": "Hit \"Get my first day plan\" and we assemble a real day around your target: 3–4 meals, total within 10% of your number, with portion sizes scaled so you don't have to do mental math. The plan is built to feel like food, not a spreadsheet.",
       "plan_p3": "It's one plan, on us. If you want a fresh plan every day, plus automatic <chat>calorie tracking</chat> that learns your habits and stops feeling like homework. That's what Nuvvoo does.",
       "plan_p4": "If you want just the raw numbers, see the <bmr>BMR calculator</bmr> or the <tdee>TDEE calculator</tdee>."
     },
@@ -290,15 +297,15 @@
       "q1": "Is a 500 kcal/day deficit safe?",
       "a1": "For most healthy adults, yes. A 500 kcal daily deficit produces roughly 0.5 kg (about 1 pound) of weight loss per week and is the level most clinical guidelines describe as sustainable. People with medical conditions, pregnant or breastfeeding women, athletes in heavy training, or anyone with a history of disordered eating should talk to a doctor or registered dietitian before starting any deficit.",
       "q2": "How fast will I actually lose weight?",
-      "a2": "The 7,700 kcal \u2248 1 kg rule is an average; real results vary. The first week often shows a bigger drop because of water and glycogen losses, then weekly weight loss settles closer to the predicted rate. Sleep, stress, sodium, menstrual cycles, and exercise all move the scale day-to-day. Trust the trend over two to four weeks, not one weigh-in.",
+      "a2": "The 7,700 kcal ≈ 1 kg rule is an average; real results vary. The first week often shows a bigger drop because of water and glycogen losses, then weekly weight loss settles closer to the predicted rate. Sleep, stress, sodium, menstrual cycles, and exercise all move the scale day-to-day. Trust the trend over two to four weeks, not one weigh-in.",
       "q3": "What if I'm not losing weight at this calorie target?",
-      "a3": "Two common causes: the TDEE estimate overshot your real burn (activity multipliers are rough), or actual intake is higher than reported intake (untracked drinks, bites, sauces, oil). Try logging tightly for a week. If the trend is still flat, drop the target by 100\u2013150 kcal and reassess in two weeks. Don't slash deeper than that all at once.",
+      "a3": "Two common causes: the TDEE estimate overshot your real burn (activity multipliers are rough), or actual intake is higher than reported intake (untracked drinks, bites, sauces, oil). Try logging tightly for a week. If the trend is still flat, drop the target by 100–150 kcal and reassess in two weeks. Don't slash deeper than that all at once.",
       "q4": "Do I need to count calories forever?",
-      "a4": "No. Counting is a tool for learning what portions and meals look like at your target. Most people use it for 4\u201312 weeks, internalize the patterns, and shift to lighter awareness afterwards. The goal is to build intuition, not to count every bite for life.",
+      "a4": "No. Counting is a tool for learning what portions and meals look like at your target. Most people use it for 4–12 weeks, internalize the patterns, and shift to lighter awareness afterwards. The goal is to build intuition, not to count every bite for life.",
       "q5": "How is this different from MyFitnessPal or other calorie apps?",
       "a5": "Traditional apps give you a number and a database to log against. The work is on you. This calculator gives you the number and a plan in the same flow, so you don't stare at a blank diary at 9am. Nuvvoo (the app) goes further: you describe meals in plain text and it tracks for you, learning your usual portions and meals over time."
     },
-"meals": {
+    "meals": {
       "oatmeal_berries_walnuts": "Oatmeal with berries and walnuts",
       "greek_yogurt_honey_granola": "Greek yogurt with honey and granola",
       "scrambled_eggs_avocado_toast": "Scrambled eggs with avocado toast",
@@ -349,7 +356,7 @@
       "ogDescription": "Calculate your basal metabolic rate and turn it into a real meal plan."
     },
     "h1": "BMR Calculator",
-    "intro": "Find out how many calories your body burns at complete rest. Your BMR is the foundation of any calorie target \u2014 once you know it, you can build a plan that actually fits you.",
+    "intro": "Find out how many calories your body burns at complete rest. Your BMR is the foundation of any calorie target — once you know it, you can build a plan that actually fits you.",
     "trustFree": "Free",
     "trustNoAccount": "No account",
     "trustPrivate": "Private by default",
@@ -364,9 +371,9 @@
       "genderFemale": "Female",
       "activityLabel": "Activity level",
       "activitySedentary": "Sedentary (little or no exercise)",
-      "activityLight": "Lightly active (1\u20133 days/week)",
-      "activityModerate": "Moderately active (3\u20135 days/week)",
-      "activityVery": "Very active (6\u20137 days/week)",
+      "activityLight": "Lightly active (1–3 days/week)",
+      "activityModerate": "Moderately active (3–5 days/week)",
+      "activityVery": "Very active (6–7 days/week)",
       "activityExtra": "Extra active (twice daily / physical job)",
       "goalLabel": "Goal",
       "goalLose": "Lose weight",
@@ -393,14 +400,19 @@
       "allergiesAdd": "Add",
       "allergiesRemove": "Remove",
       "allergiesAtCap": "Limit reached",
-      "allergiesHint": "{count}/{max} \u00b7 press Enter to add"
+      "allergiesHint": "{count}/{max} · press Enter to add",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitIn": "in"
     },
     "result": {
       "edit": "Edit answers",
       "kcalUnit": "kcal/day",
-      "bmrSubtitle": "Your resting metabolism \u2014 calories your body burns at rest",
+      "bmrSubtitle": "Your resting metabolism — calories your body burns at rest",
       "bmrExplain": "This is BMR. Your body needs this many calories even at full rest. Add an activity level to get your total daily burn.",
-      "tdeeSubtitle": "Your daily calorie burn \u2014 eat this to maintain weight",
+      "tdeeSubtitle": "Your daily calorie burn — eat this to maintain weight",
       "tdeeRestingLine": "Resting (BMR): {bmr} kcal",
       "bmrLabel": "BMR",
       "tdeeLabel": "Maintenance (TDEE)",
@@ -411,22 +423,24 @@
       "loseTitle": "Your daily calorie target",
       "maintainTitle": "Your maintenance calories",
       "gainTitle": "Your daily calorie target",
-      "weeklyLossKg": "\u2248 {amount} kg/week loss",
-      "weeklyLossLb": "\u2248 {amount} lb/week loss",
-      "weeklyGainKg": "\u2248 {amount} kg/week gain",
-      "weeklyGainLb": "\u2248 {amount} lb/week gain",
+      "weeklyLossKg": "≈ {amount} kg/week loss",
+      "weeklyLossLb": "≈ {amount} lb/week loss",
+      "weeklyGainKg": "≈ {amount} kg/week gain",
+      "weeklyGainLb": "≈ {amount} lb/week gain",
       "clampedNote": "We capped your target at the safe minimum so the plan stays realistic and sustainable.",
       "ctaText": "Turn this into a plan for today",
       "ctaButton": "Get my first day plan",
-      "ctaUsedNote": "You've used your free plan. Open Nuvvoo for a fresh plan every day."
+      "ctaUsedNote": "You've used your free plan. Open Nuvvoo for a fresh plan every day.",
+      "kcalShortUnit": "kcal",
+      "gramsShort": "g"
     },
     "upgrade": {
       "title": "Want a personalized meal plan?",
-      "subtitle": "Tell us your activity, goal, and any food preferences \u2014 we'll calculate your daily target and build a sample day.",
+      "subtitle": "Tell us your activity, goal, and any food preferences — we'll calculate your daily target and build a sample day.",
       "cta": "Get my plan"
     },
     "plan": {
-      "loading": "Generating your plan\u2026",
+      "loading": "Generating your plan…",
       "errorTitle": "Couldn't generate a plan",
       "errorRetry": "Try again",
       "rateLimitedHourly": "You've hit this hour's plan limit. Try again in an hour.",
@@ -434,7 +448,7 @@
       "heading": "Goal",
       "totalLabel": "Total",
       "kcalUnit": "kcal",
-      "portionFactor": "{factor}\u00d7 normal portion",
+      "portionFactor": "{factor}× normal portion",
       "fitsLoseKg": "At {weight} kg with a goal to lose weight, this plan keeps you in a {deficit} kcal deficit, about {weekly} kg per week.",
       "fitsLoseLb": "At {weight} lb with a goal to lose weight, this plan keeps you in a {deficit} kcal deficit, about {weekly} lb per week.",
       "fitsMaintainKg": "At {weight} kg, these meals match your maintenance calories so your weight stays steady.",
@@ -445,38 +459,38 @@
       "slotLunch": "Lunch",
       "slotDinner": "Dinner",
       "slotSnack": "Snack",
-      "macros": "P {p}g \u00b7 C {c}g \u00b7 F {f}g"
+      "macros": "P {p}g · C {c}g · F {f}g"
     },
     "conversion": {
       "title": "Want a new plan every day and automatic tracking?",
       "subtitle": "Try Nuvvoo, the modern calorie tracker.",
-      "cta": "Get a plan like this every day \u2192"
+      "cta": "Get a plan like this every day →"
     },
     "seo": {
       "h2_what": "What is BMR?",
-      "what_p1": "Basal Metabolic Rate (BMR) is the number of calories your body burns at complete rest \u2014 just to keep your heart beating, your lungs moving, your brain thinking, and your cells repairing. It's the irreducible cost of being alive.",
-      "what_p2": "BMR makes up about 60\u201375% of total daily calorie burn for most adults. The remainder comes from physical activity and the small thermic effect of digesting food.",
+      "what_p1": "Basal Metabolic Rate (BMR) is the number of calories your body burns at complete rest — just to keep your heart beating, your lungs moving, your brain thinking, and your cells repairing. It's the irreducible cost of being alive.",
+      "what_p2": "BMR makes up about 60–75% of total daily calorie burn for most adults. The remainder comes from physical activity and the small thermic effect of digesting food.",
       "what_p3": "Knowing your BMR tells you the absolute floor of what your body needs. Eating below it for extended periods is unsustainable and counterproductive.",
       "h2_how": "How the BMR calculator works",
-      "how_p1": "We use the Mifflin\u2013St Jeor equation, the formula most clinicians and registered dietitians rely on. It estimates BMR from your weight, height, age, and sex.",
-      "how_p2": "For men: BMR = 10 \u00d7 weight(kg) + 6.25 \u00d7 height(cm) \u2212 5 \u00d7 age + 5. For women: same, minus 161 instead of plus 5. The formula has been validated against indirect calorimetry within \u00b110% for most non-athletic adults.",
+      "how_p1": "We use the Mifflin–St Jeor equation, the formula most clinicians and registered dietitians rely on. It estimates BMR from your weight, height, age, and sex.",
+      "how_p2": "For men: BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5. For women: same, minus 161 instead of plus 5. The formula has been validated against indirect calorimetry within ±10% for most non-athletic adults.",
       "how_p3": "If you want your total daily burn instead of just resting, see the <tdee>TDEE calculator</tdee>. If you want the calorie target for losing weight, see the <deficit>calorie deficit calculator</deficit>.",
       "h2_plan": "From BMR to a daily plan",
-      "plan_p1": "BMR is a starting point, not a meal plan. To eat for a goal, you need to add activity (TDEE) and choose a direction \u2014 lose, maintain, or gain.",
-      "plan_p2": "Click \"Want a personalized meal plan?\" above and we'll ask the two extra questions, calculate your daily target, and assemble a one-day plan \u2014 3\u20134 meals, total within 10% of target, with portion sizes already scaled.",
+      "plan_p1": "BMR is a starting point, not a meal plan. To eat for a goal, you need to add activity (TDEE) and choose a direction — lose, maintain, or gain.",
+      "plan_p2": "Click \"Want a personalized meal plan?\" above and we'll ask the two extra questions, calculate your daily target, and assemble a one-day plan — 3–4 meals, total within 10% of target, with portion sizes already scaled.",
       "plan_p3": "It's one plan, on us. If you want a fresh plan every day plus automatic tracking that learns your habits, that's what Nuvvoo does."
     },
     "faq": {
       "q1": "Is BMR the same as TDEE?",
-      "a1": "No. BMR is calories burned at rest. TDEE (Total Daily Energy Expenditure) adds the calories you burn through activity. TDEE = BMR \u00d7 an activity multiplier (1.2 for sedentary up to 1.9 for very active).",
+      "a1": "No. BMR is calories burned at rest. TDEE (Total Daily Energy Expenditure) adds the calories you burn through activity. TDEE = BMR × an activity multiplier (1.2 for sedentary up to 1.9 for very active).",
       "q2": "Can I eat just my BMR to lose weight?",
       "a2": "It will produce weight loss but is rarely a good idea long-term. Eating at or below BMR makes most people miserable, drops energy and mood, and stalls progress as metabolism adapts. A modest deficit below your TDEE works better.",
-      "q3": "How accurate is Mifflin\u2013St Jeor?",
-      "a3": "Within \u00b110% for most non-athletic adults. It's less accurate for very lean or very muscular people \u2014 the formula doesn't see body composition, only total weight. If you have a lot of muscle, your real BMR is higher than the equation says.",
+      "q3": "How accurate is Mifflin–St Jeor?",
+      "a3": "Within ±10% for most non-athletic adults. It's less accurate for very lean or very muscular people — the formula doesn't see body composition, only total weight. If you have a lot of muscle, your real BMR is higher than the equation says.",
       "q4": "Why does BMR drop as I age?",
-      "a4": "Two main reasons: loss of lean mass (muscle is metabolically active tissue) and small downshifts in cell-level metabolic rate. The age term in Mifflin\u2013St Jeor (\u22125 \u00d7 age) approximates the first; you can blunt it with resistance training.",
+      "a4": "Two main reasons: loss of lean mass (muscle is metabolically active tissue) and small downshifts in cell-level metabolic rate. The age term in Mifflin–St Jeor (−5 × age) approximates the first; you can blunt it with resistance training.",
       "q5": "Should I always eat above my BMR?",
-      "a5": "For most healthy adults trying to lose weight slowly, yes \u2014 stay above BMR and create the deficit from your TDEE, not your BMR. People in supervised medical programs sometimes eat below BMR temporarily, but that's not a self-managed strategy."
+      "a5": "For most healthy adults trying to lose weight slowly, yes — stay above BMR and create the deficit from your TDEE, not your BMR. People in supervised medical programs sometimes eat below BMR temporarily, but that's not a self-managed strategy."
     }
   },
   "tdeeCalculator": {
@@ -487,7 +501,7 @@
       "ogDescription": "Calculate your total daily energy expenditure and turn it into a real meal plan."
     },
     "h1": "TDEE Calculator",
-    "intro": "Calculate how many calories your body burns each day, including all your activity. Eat this number to maintain your weight \u2014 or use it as the baseline for a deficit or surplus.",
+    "intro": "Calculate how many calories your body burns each day, including all your activity. Eat this number to maintain your weight — or use it as the baseline for a deficit or surplus.",
     "trustFree": "Free",
     "trustNoAccount": "No account",
     "trustPrivate": "Private by default",
@@ -502,9 +516,9 @@
       "genderFemale": "Female",
       "activityLabel": "Activity level",
       "activitySedentary": "Sedentary (little or no exercise)",
-      "activityLight": "Lightly active (1\u20133 days/week)",
-      "activityModerate": "Moderately active (3\u20135 days/week)",
-      "activityVery": "Very active (6\u20137 days/week)",
+      "activityLight": "Lightly active (1–3 days/week)",
+      "activityModerate": "Moderately active (3–5 days/week)",
+      "activityVery": "Very active (6–7 days/week)",
       "activityExtra": "Extra active (twice daily / physical job)",
       "goalLabel": "Goal",
       "goalLose": "Lose weight",
@@ -531,14 +545,19 @@
       "allergiesAdd": "Add",
       "allergiesRemove": "Remove",
       "allergiesAtCap": "Limit reached",
-      "allergiesHint": "{count}/{max} \u00b7 press Enter to add"
+      "allergiesHint": "{count}/{max} · press Enter to add",
+      "unitKg": "kg",
+      "unitLb": "lb",
+      "unitCm": "cm",
+      "unitFt": "ft",
+      "unitIn": "in"
     },
     "result": {
       "edit": "Edit answers",
       "kcalUnit": "kcal/day",
-      "bmrSubtitle": "Your resting metabolism \u2014 calories your body burns at rest",
+      "bmrSubtitle": "Your resting metabolism — calories your body burns at rest",
       "bmrExplain": "This is BMR. Your body needs this many calories even at full rest. Add an activity level to get your total daily burn.",
-      "tdeeSubtitle": "Your daily calorie burn \u2014 eat this to maintain weight",
+      "tdeeSubtitle": "Your daily calorie burn — eat this to maintain weight",
       "tdeeRestingLine": "Resting (BMR): {bmr} kcal",
       "bmrLabel": "BMR",
       "tdeeLabel": "Maintenance (TDEE)",
@@ -549,14 +568,16 @@
       "loseTitle": "Your daily calorie target",
       "maintainTitle": "Your maintenance calories",
       "gainTitle": "Your daily calorie target",
-      "weeklyLossKg": "\u2248 {amount} kg/week loss",
-      "weeklyLossLb": "\u2248 {amount} lb/week loss",
-      "weeklyGainKg": "\u2248 {amount} kg/week gain",
-      "weeklyGainLb": "\u2248 {amount} lb/week gain",
+      "weeklyLossKg": "≈ {amount} kg/week loss",
+      "weeklyLossLb": "≈ {amount} lb/week loss",
+      "weeklyGainKg": "≈ {amount} kg/week gain",
+      "weeklyGainLb": "≈ {amount} lb/week gain",
       "clampedNote": "We capped your target at the safe minimum so the plan stays realistic and sustainable.",
       "ctaText": "Turn this into a plan for today",
       "ctaButton": "Get my first day plan",
-      "ctaUsedNote": "You've used your free plan. Open Nuvvoo for a fresh plan every day."
+      "ctaUsedNote": "You've used your free plan. Open Nuvvoo for a fresh plan every day.",
+      "kcalShortUnit": "kcal",
+      "gramsShort": "g"
     },
     "upgrade": {
       "title": "Want to lose or gain weight?",
@@ -564,7 +585,7 @@
       "cta": "Get my plan"
     },
     "plan": {
-      "loading": "Generating your plan\u2026",
+      "loading": "Generating your plan…",
       "errorTitle": "Couldn't generate a plan",
       "errorRetry": "Try again",
       "rateLimitedHourly": "You've hit this hour's plan limit. Try again in an hour.",
@@ -572,7 +593,7 @@
       "heading": "Goal",
       "totalLabel": "Total",
       "kcalUnit": "kcal",
-      "portionFactor": "{factor}\u00d7 normal portion",
+      "portionFactor": "{factor}× normal portion",
       "fitsLoseKg": "At {weight} kg with a goal to lose weight, this plan keeps you in a {deficit} kcal deficit, about {weekly} kg per week.",
       "fitsLoseLb": "At {weight} lb with a goal to lose weight, this plan keeps you in a {deficit} kcal deficit, about {weekly} lb per week.",
       "fitsMaintainKg": "At {weight} kg, these meals match your maintenance calories so your weight stays steady.",
@@ -583,21 +604,21 @@
       "slotLunch": "Lunch",
       "slotDinner": "Dinner",
       "slotSnack": "Snack",
-      "macros": "P {p}g \u00b7 C {c}g \u00b7 F {f}g"
+      "macros": "P {p}g · C {c}g · F {f}g"
     },
     "conversion": {
       "title": "Want a new plan every day and automatic tracking?",
       "subtitle": "Try Nuvvoo, the modern calorie tracker.",
-      "cta": "Get a plan like this every day \u2192"
+      "cta": "Get a plan like this every day →"
     },
     "seo": {
       "h2_what": "What is TDEE?",
-      "what_p1": "Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns in a day \u2014 BMR (resting metabolism) plus everything you do on top: walking, working, exercise, fidgeting.",
+      "what_p1": "Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns in a day — BMR (resting metabolism) plus everything you do on top: walking, working, exercise, fidgeting.",
       "what_p2": "TDEE is what you eat to stay the same weight. Eat below it to lose, eat above it to gain. It's the most useful single number in calorie planning.",
       "what_p3": "Most adult TDEEs fall between 1,800 and 3,200 kcal/day, depending on size and activity.",
       "h2_how": "How the TDEE calculator works",
-      "how_p1": "We compute BMR with the Mifflin\u2013St Jeor equation, then multiply by an activity factor: 1.2 for sedentary, 1.375 for lightly active, 1.55 for moderately active, 1.725 for very active, 1.9 for extra active.",
-      "how_p2": "Activity multipliers are rough \u2014 they encode a population average across walking, standing, and exercise. Your real TDEE varies a few hundred kcal day to day. We round to the nearest 10.",
+      "how_p1": "We compute BMR with the Mifflin–St Jeor equation, then multiply by an activity factor: 1.2 for sedentary, 1.375 for lightly active, 1.55 for moderately active, 1.725 for very active, 1.9 for extra active.",
+      "how_p2": "Activity multipliers are rough — they encode a population average across walking, standing, and exercise. Your real TDEE varies a few hundred kcal day to day. We round to the nearest 10.",
       "how_p3": "If you want just your resting metabolism, see the <bmr>BMR calculator</bmr>. For a calorie target tuned to weight loss, see the <deficit>calorie deficit calculator</deficit>.",
       "h2_plan": "Using TDEE to plan meals",
       "plan_p1": "Knowing your TDEE is half the battle. The other half is eating consistently within it (for maintenance) or below it (for loss).",
@@ -605,16 +626,16 @@
       "plan_p3": "Want a fresh plan daily plus tracking that learns your habits? That's what Nuvvoo does."
     },
     "faq": {
-      "q1": "TDEE vs BMR \u2014 what's the difference?",
-      "a1": "BMR is your resting burn. TDEE is BMR plus your activity. TDEE is always higher \u2014 typically 1.2\u00d7 to 1.9\u00d7 BMR.",
+      "q1": "TDEE vs BMR — what's the difference?",
+      "a1": "BMR is your resting burn. TDEE is BMR plus your activity. TDEE is always higher — typically 1.2× to 1.9× BMR.",
       "q2": "How accurate are activity multipliers?",
-      "a2": "Within \u00b110\u201315% for most people. The multipliers are population averages \u2014 your individual factor depends on body composition, NEAT (fidgeting, standing), and exercise type. Recalibrate after a few weeks if scale weight drifts.",
+      "a2": "Within ±10–15% for most people. The multipliers are population averages — your individual factor depends on body composition, NEAT (fidgeting, standing), and exercise type. Recalibrate after a few weeks if scale weight drifts.",
       "q3": "Should I recalculate TDEE after losing weight?",
-      "a3": "Yes. A smaller body burns fewer calories. Recompute every 5\u201310 lb (or 3\u20135 kg) of change so the target stays accurate.",
+      "a3": "Yes. A smaller body burns fewer calories. Recompute every 5–10 lb (or 3–5 kg) of change so the target stays accurate.",
       "q4": "What if my activity varies day to day?",
       "a4": "Pick the multiplier that matches your average week, not your busiest or laziest day. If your week swings widely, average across 7 days. Many people use moderate (1.55) as a sensible default.",
       "q5": "Can I eat at TDEE and still lose weight?",
-      "a5": "No \u2014 by definition, eating at TDEE means calorie balance. To lose, you need a deficit (eat below TDEE) or to raise activity. The deficit calculator handles the math."
+      "a5": "No — by definition, eating at TDEE means calorie balance. To lose, you need a deficit (eat below TDEE) or to raise activity. The deficit calculator handles the math."
     }
   }
 }
