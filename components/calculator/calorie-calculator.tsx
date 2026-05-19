@@ -61,11 +61,11 @@ type FormState = {
 function defaultForm(mode: Mode): FormState {
   return {
     weight: '',
-    weightUnit: 'lb',
+    weightUnit: 'kg',
     heightCm: '',
     heightFt: '',
     heightIn: '',
-    heightUnit: 'in',
+    heightUnit: 'cm',
     age: '',
     gender: '',
     activity: '',
