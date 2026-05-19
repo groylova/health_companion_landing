@@ -22,6 +22,12 @@ export async function Footer() {
               <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/bmi-calculator">
                 {t('bmiCalculator')}
               </NextLink>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/bmr-calculator">
+                {t('bmrCalculator')}
+              </NextLink>
+              <NextLink className="text-sm text-slate-600 hover:text-slate-900" href="/tdee-calculator">
+                {t('tdeeCalculator')}
+              </NextLink>
             </div>
 
             {/* Resources — Column 1 */}

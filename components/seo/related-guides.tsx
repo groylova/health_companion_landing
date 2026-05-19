@@ -16,6 +16,8 @@ const SLUG_TO_HREF = {
   photoVsChat: '/photo-vs-chat-calorie-tracking',
   dinnerIdeas: '/no-dinner-ideas-calories',
   eatingDisorderSafety: '/calorie-tracker-eating-disorders',
+  bmrCalculator: '/bmr-calculator',
+  tdeeCalculator: '/tdee-calculator',
 } as const;
 
 export type RelatedSlug = keyof typeof SLUG_TO_HREF;

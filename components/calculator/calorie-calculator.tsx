@@ -5,11 +5,13 @@ import { useTranslations, useLocale } from 'next-intl';
 import {
   PACE_KEYS,
   calculate,
+  computeBmr,
   kgToLb,
   lbToKg,
   paceRates,
   validate,
   type Activity,
+  type BmrInput,
   type CalcInput,
   type CalcResult,
   type Gender,
@@ -22,6 +24,7 @@ import {
 import {
   fetchSession,
   generatePlan,
+  ratePlan,
   type ApiDiet,
   type ApiLanguage,
   type ApiPlan,
@@ -33,12 +36,12 @@ import { AppStoreBadge } from '@/components/app-store-badge';
 // gtag is declared globally in lib/use-app-store-link.ts as
 // `(...args: any[]) => void`; we don't redeclare it here.
 
+type Mode = 'bmr' | 'tdee' | 'deficit';
+
 type Phase = 'form' | 'result' | 'plan';
 
 // Split height fields: when heightUnit is 'cm' we use heightCm; when 'in'
-// (imperial) we use heightFt + heightIn. Metric defaults (kg + cm); the
-// per-input UnitToggle lets the user flip to lb / ft+in without losing
-// the entered value.
+// (imperial) we use heightFt + heightIn. US-focused defaults: lb + ft/in.
 type FormState = {
   weight: string;
   weightUnit: WeightUnit;
@@ -55,28 +58,28 @@ type FormState = {
   allergies: string[];
 };
 
-const DEFAULT_FORM: FormState = {
-  weight: '',
-  weightUnit: 'kg',
-  heightCm: '',
-  heightFt: '',
-  heightIn: '',
-  heightUnit: 'cm',
-  age: '',
-  gender: '',
-  activity: '',
-  goal: 'lose',
-  pace: 'normal',
-  diet: 'none',
-  allergies: [],
-};
+function defaultForm(mode: Mode): FormState {
+  return {
+    weight: '',
+    weightUnit: 'kg',
+    heightCm: '',
+    heightFt: '',
+    heightIn: '',
+    heightUnit: 'cm',
+    age: '',
+    gender: '',
+    activity: '',
+    goal: mode === 'deficit' ? 'lose' : 'maintain',
+    pace: 'normal',
+    diet: 'none',
+    allergies: [],
+  };
+}
 
 const DIET_OPTIONS: ApiDiet[] = ['none', 'vegetarian', 'pescatarian', 'vegan'];
 const MAX_ALLERGIES = 8;
 const MAX_ALLERGY_LEN = 32;
 
-const STORAGE_KEY_USED = 'nuvvoo_deficit_plan_used';
-const STORAGE_KEY_DATA = 'nuvvoo_deficit_plan_data';
 // Bumped to 6 when FormState gained diet + allergies — old payloads lack
 // those fields and would crash the chip input on rehydrate. The version
 // gate at load time drops stale entries instead of trying to migrate them.
@@ -111,6 +114,18 @@ function track(name: string, params?: Record<string, unknown>): void {
     return;
   }
   window.gtag('event', name, params || {});
+}
+
+// Resolves the analytics page prefix for a given calculator mode. Used to
+// mode-prefix `button_location` strings on App Store CTAs so funnel dashboards
+// can split BMR vs TDEE vs deficit. Deliberately returns `deficit_calculator`
+// (not `deficit_calculator_calculator`) so legacy dashboard filters for the
+// deficit funnel keep working byte-for-byte.
+function calcPagePrefix(mode: Mode): string {
+  if (mode === 'deficit') {
+    return 'deficit_calculator';
+  }
+  return `${mode}_calculator`;
 }
 
 function toCalcInput(form: FormState): Partial<CalcInput> {
@@ -201,18 +216,51 @@ function convertHeight(
   return { heightCm: cm.toString(), heightFt: current.heightFt, heightIn: current.heightIn };
 }
 
-export function CalculatorWidget() {
-  const t = useTranslations('deficitCalculator');
+type Props = {
+  mode: Mode;
+  messagesNamespace: 'bmrCalculator' | 'tdeeCalculator' | 'deficitCalculator';
+};
+
+export function CalorieCalculator({ mode, messagesNamespace }: Props) {
+  const t = useTranslations(messagesNamespace);
   const locale = useLocale();
 
+  const storageKeyUsed = `nuvvoo_${mode}_plan_used`;
+  const storageKeyData = `nuvvoo_${mode}_plan_data`;
+
   const [phase, setPhase] = useState<Phase>('form');
-  const [form, setForm] = useState<FormState>(DEFAULT_FORM);
+  const [form, setForm] = useState<FormState>(() => defaultForm(mode));
   const [error, setError] = useState<ValidationError | null>(null);
   const [result, setResult] = useState<CalcResult | null>(null);
   const [plan, setPlan] = useState<ApiPlan | null>(null);
   const [planLoading, setPlanLoading] = useState(false);
   const [planError, setPlanError] = useState<string | null>(null);
   const [alreadyUsed, setAlreadyUsed] = useState(false);
+  const [upgrading, setUpgrading] = useState(false);
+
+  // Imperative focus management when the BMR/TDEE upgrade panel reveals. The
+  // ref is attached to the panel root inside ResultView; the effect runs in
+  // the parent so the focus call lands after the panel mounts.
+  const upgradePanelRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!upgrading) {
+      return;
+    }
+    const root = upgradePanelRef.current;
+    if (root === null) {
+      return;
+    }
+    const focusable = root.querySelector<HTMLElement>(
+      'select, button:not([type="button"][aria-label]), input',
+    );
+    focusable?.focus();
+  }, [upgrading]);
+
+  function handleUpgradeClick(): void {
+    track('upgrade_clicked', { mode, locale });
+    setUpgrading(true);
+  }
 
   // Session token is fetched once on mount per the API contract; we cache it
   // in a ref so the click handler can read the latest value (and replace it
@@ -228,7 +276,12 @@ export function CalculatorWidget() {
       return;
     }
     viewedRef.current = true;
-    track('calculator_viewed', { page: 'calorie_deficit_calculator', locale });
+    const pageNameFor: Record<Mode, string> = {
+      bmr: 'bmr_calculator',
+      tdee: 'tdee_calculator',
+      deficit: 'calorie_deficit_calculator',
+    };
+    track('calculator_viewed', { page: pageNameFor[mode], mode, locale });
 
     void fetchSession().then((session) => {
       if (session !== null) {
@@ -238,12 +291,12 @@ export function CalculatorWidget() {
 
     try {
       if (PLAN_LIMIT_ENABLED) {
-        const used = window.localStorage.getItem(STORAGE_KEY_USED);
+        const used = window.localStorage.getItem(storageKeyUsed);
         if (used === '1') {
           setAlreadyUsed(true);
         }
       }
-      const dataRaw = window.localStorage.getItem(STORAGE_KEY_DATA);
+      const dataRaw = window.localStorage.getItem(storageKeyData);
       if (dataRaw !== null) {
         const data = JSON.parse(dataRaw) as StoredData;
         if (data.v === STORAGE_VERSION && data.form && data.result && data.plan) {
@@ -282,16 +335,41 @@ export function CalculatorWidget() {
   function handleSubmit(e: React.FormEvent): void {
     e.preventDefault();
     const input = toCalcInput(form);
-    const validationError = validate(input);
+    const validationError = validate(input, mode);
     if (validationError !== null) {
       setError(validationError);
       return;
     }
-    const calcResult = calculate(input as CalcInput);
+
+    let calcResult: CalcResult;
+    if (mode === 'bmr') {
+      // Hero number is BMR only; no need to materialize TDEE/target/macros yet.
+      // Activity is missing on the BMR form so calculate() would throw — stub
+      // the rest with zeros and fill them in later if the user opts in to the
+      // upgrade panel.
+      const bmrInput = input as BmrInput;
+      const bmrValue = computeBmr(bmrInput);
+      calcResult = {
+        bmr: bmrValue,
+        tdee: 0,
+        target: 0,
+        weeklyDeltaKg: 0,
+        weeklyDeltaLb: 0,
+        clamped: false,
+        weightKg: input.weightUnit === 'kg' ? input.weight! : lbToKg(input.weight!),
+        proteinG: 0,
+        carbsG: 0,
+        fatG: 0,
+      };
+    } else {
+      calcResult = calculate(input as CalcInput);
+    }
+
     setResult(calcResult);
     setError(null);
     setPhase('result');
     track('calculator_completed', {
+      mode,
       target_kcal: calcResult.target,
       goal: form.goal,
       activity: form.activity,
@@ -303,19 +381,53 @@ export function CalculatorWidget() {
 
   function handleEdit(): void {
     setPhase('form');
+    setUpgrading(false);
   }
 
   async function handleGetPlan(): Promise<void> {
     if (result === null) {
       return;
     }
-    track('plan_cta_clicked', { target_kcal: result.target, goal: form.goal, locale });
 
     if (alreadyUsed) {
       // Already used → still show the cached plan if we have it; otherwise
       // surface the limit message inline.
       return;
     }
+
+    // Plan generation needs the full deficit field set. On BMR/TDEE pages we
+    // hide some of those at the form step; the upgrade panel collects them
+    // before this call. Re-validate here under 'deficit' rules so missing
+    // fields surface as inline errors instead of API failures. Validation runs
+    // BEFORE the BMR-mode recompute so a missing activity (or other gap)
+    // fails fast instead of tripping calculate()'s preconditions.
+    const fullValidation = validate(toCalcInput(form), 'deficit');
+    if (fullValidation !== null) {
+      setError(fullValidation);
+      return;
+    }
+
+    // For BMR mode the result we stored at form-submit time has zeros for
+    // tdee/target/macros (activity was missing back then). Now that the
+    // upgrade panel has the activity, recompute the full CalcResult here so
+    // the analytics event AND the downstream payload all see the real target
+    // (otherwise plan_cta_clicked.target_kcal would be 0). For TDEE/deficit
+    // modes the form-submit result is already complete.
+    const effectiveResult: CalcResult =
+      mode === 'bmr' ? calculate(toCalcInput(form) as CalcInput) : result;
+
+    if (mode === 'bmr') {
+      // Catch the result state up so setPhase('plan') below renders against
+      // the populated CalcResult instead of the zeroed BMR-form one.
+      setResult(effectiveResult);
+    }
+
+    track('plan_cta_clicked', {
+      mode,
+      target_kcal: effectiveResult.target,
+      goal: form.goal,
+      locale,
+    });
 
     setPlanLoading(true);
     setPlanError(null);
@@ -328,17 +440,17 @@ export function CalculatorWidget() {
     }
 
     const payload = {
-      calories_target: result.target,
-      weight_kg: result.weightKg,
+      calories_target: effectiveResult.target,
+      weight_kg: effectiveResult.weightKg,
       goal: form.goal,
       language: toApiLanguage(locale),
       session_token: token,
       // Send the same macro split we show on the result screen so the AI
       // plan honors it (otherwise it'd compute its own and the displayed
       // targets would drift from what arrives back).
-      protein_g: result.proteinG,
-      carbs_g: result.carbsG,
-      fat_g: result.fatG,
+      protein_g: effectiveResult.proteinG,
+      carbs_g: effectiveResult.carbsG,
+      fat_g: effectiveResult.fatG,
       diet: form.diet,
       // Backend caps at 8 chips × 32 chars; FormState already enforces that.
       allergies: form.allergies.length > 0 ? form.allergies : undefined,
@@ -379,18 +491,19 @@ export function CalculatorWidget() {
       setAlreadyUsed(true);
     }
 
-    const stored: StoredData = { v: STORAGE_VERSION, form, result, plan: apiPlan };
+    const stored: StoredData = { v: STORAGE_VERSION, form, result: effectiveResult, plan: apiPlan };
     try {
       if (PLAN_LIMIT_ENABLED) {
-        window.localStorage.setItem(STORAGE_KEY_USED, '1');
+        window.localStorage.setItem(storageKeyUsed, '1');
       }
-      window.localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(stored));
+      window.localStorage.setItem(storageKeyData, JSON.stringify(stored));
     } catch {
       // Storage full / disabled — feature still works for this session.
     }
 
     track('plan_generated', {
-      target_kcal: result.target,
+      mode,
+      target_kcal: effectiveResult.target,
       total_kcal: apiPlan.totals.calories,
       meal_count: apiPlan.meals.length,
       goal: form.goal,
@@ -404,6 +517,7 @@ export function CalculatorWidget() {
     <div className="rounded-[2rem] border border-slate-200 bg-white/80 p-6 shadow-soft backdrop-blur md:p-7">
       {phase === 'form' && (
         <FormView
+          mode={mode}
           form={form}
           error={error}
           onField={handleField}
@@ -413,22 +527,29 @@ export function CalculatorWidget() {
       )}
       {phase === 'result' && result !== null && (
         <ResultView
+          mode={mode}
           form={form}
           result={result}
+          error={error}
           alreadyUsed={alreadyUsed}
+          upgrading={upgrading}
           planLoading={planLoading}
           planError={planError}
           onEdit={handleEdit}
           onGetPlan={handleGetPlan}
+          onUpgrade={handleUpgradeClick}
           onField={handleField}
+          upgradePanelRef={upgradePanelRef}
           t={t}
         />
       )}
       {phase === 'plan' && result !== null && plan !== null && (
         <PlanView
+          mode={mode}
           form={form}
           result={result}
           plan={plan}
+          sessionTokenRef={sessionTokenRef}
           onEdit={handleEdit}
           t={t}
         />
@@ -439,15 +560,17 @@ export function CalculatorWidget() {
 
 /* ─── FORM ─── */
 
-type Translator = ReturnType<typeof useTranslations<'deficitCalculator'>>;
+type Translator = (key: string, values?: Record<string, string | number>) => string;
 
 function FormView({
+  mode,
   form,
   error,
   onField,
   onSubmit,
   t,
 }: {
+  mode: Mode;
   form: FormState;
   error: ValidationError | null;
   onField: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
@@ -644,58 +767,69 @@ function FormView({
         {fieldError('gender') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('gender')}</p>}
       </div>
 
-      {/* Activity */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
-        <select
-          value={form.activity}
-          onChange={(e) => onField('activity', e.target.value as Activity | '')}
-          className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
-        >
-          <option value="" disabled>—</option>
-          <option value="sedentary">{t('form.activitySedentary')}</option>
-          <option value="light">{t('form.activityLight')}</option>
-          <option value="moderate">{t('form.activityModerate')}</option>
-          <option value="very">{t('form.activityVery')}</option>
-          <option value="extra">{t('form.activityExtra')}</option>
-        </select>
-        {fieldError('activity') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('activity')}</p>}
-      </div>
-
-      {/* Goal */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700">{t('form.goalLabel')}</label>
-        <div className="mt-1 grid grid-cols-3 gap-2">
-          <SegmentButton selected={form.goal === 'lose'} onClick={() => handleGoal('lose')} label={t('form.goalLose')} />
-          <SegmentButton selected={form.goal === 'maintain'} onClick={() => handleGoal('maintain')} label={t('form.goalMaintain')} />
-          <SegmentButton selected={form.goal === 'gain'} onClick={() => handleGoal('gain')} label={t('form.goalGain')} />
-        </div>
-      </div>
-
-      {/* Pace — only relevant when there is a deficit/surplus to size. */}
-      {form.goal !== 'maintain' && (
+      {/* Activity — hidden on BMR (BMR is activity-independent). */}
+      {mode !== 'bmr' && (
         <div>
-          <label className="block text-sm font-medium text-slate-700">{t('form.paceLabel')}</label>
+          <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
           <select
-            value={form.pace}
-            onChange={(e) => onField('pace', e.target.value as Pace)}
+            value={form.activity}
+            onChange={(e) => onField('activity', e.target.value as Activity | '')}
             className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
           >
-            {PACE_KEYS.map((p) => (
-              <option key={p} value={p}>
-                {paceLabel(p)}
-              </option>
-            ))}
+            <option value="" disabled>—</option>
+            <option value="sedentary">{t('form.activitySedentary')}</option>
+            <option value="light">{t('form.activityLight')}</option>
+            <option value="moderate">{t('form.activityModerate')}</option>
+            <option value="very">{t('form.activityVery')}</option>
+            <option value="extra">{t('form.activityExtra')}</option>
           </select>
-          {fieldError('pace') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('pace')}</p>}
+          {fieldError('activity') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('activity')}</p>}
         </div>
+      )}
+
+      {/* Goal + Pace — only relevant on the deficit page; BMR/TDEE just
+         report numbers without a goal-directed adjustment. */}
+      {mode === 'deficit' && (
+        <>
+          <div>
+            <label className="block text-sm font-medium text-slate-700">{t('form.goalLabel')}</label>
+            <div className="mt-1 grid grid-cols-3 gap-2">
+              <SegmentButton selected={form.goal === 'lose'} onClick={() => handleGoal('lose')} label={t('form.goalLose')} />
+              <SegmentButton selected={form.goal === 'maintain'} onClick={() => handleGoal('maintain')} label={t('form.goalMaintain')} />
+              <SegmentButton selected={form.goal === 'gain'} onClick={() => handleGoal('gain')} label={t('form.goalGain')} />
+            </div>
+          </div>
+
+          {/* Pace — only relevant when there is a deficit/surplus to size. */}
+          {form.goal !== 'maintain' && (
+            <div>
+              <label className="block text-sm font-medium text-slate-700">{t('form.paceLabel')}</label>
+              <select
+                value={form.pace}
+                onChange={(e) => onField('pace', e.target.value as Pace)}
+                className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
+              >
+                {PACE_KEYS.map((p) => (
+                  <option key={p} value={p}>
+                    {paceLabel(p)}
+                  </option>
+                ))}
+              </select>
+              {fieldError('pace') !== null && <p className="mt-1 text-xs text-red-600">{fieldError('pace')}</p>}
+            </div>
+          )}
+        </>
       )}
 
       <button
         type="submit"
         className="mt-2 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860]"
       >
-        {t('form.submit')}
+        {mode === 'bmr'
+          ? t('form.submitBmr')
+          : mode === 'tdee'
+          ? t('form.submitTdee')
+          : t('form.submit')}
       </button>
     </form>
   );
@@ -844,24 +978,34 @@ function SegmentButton({
 /* ─── RESULT ─── */
 
 function ResultView({
+  mode,
   form,
   result,
+  error,
   alreadyUsed,
+  upgrading,
   planLoading,
   planError,
   onEdit,
   onGetPlan,
+  onUpgrade,
   onField,
+  upgradePanelRef,
   t,
 }: {
+  mode: Mode;
   form: FormState;
   result: CalcResult;
+  error: ValidationError | null;
   alreadyUsed: boolean;
+  upgrading: boolean;
   planLoading: boolean;
   planError: string | null;
   onEdit: () => void;
   onGetPlan: () => void;
+  onUpgrade: () => void;
   onField: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
+  upgradePanelRef: React.MutableRefObject<HTMLDivElement | null>;
   t: Translator;
 }) {
   // When alreadyUsed=true the CTA section morphs from "Get my first day plan"
@@ -871,8 +1015,25 @@ function ResultView({
   const tHero = useTranslations('hero');
   const locale = useLocale();
   const { url: appUrl, handleClick: appHandleClick } = useAppStoreLink(
-    'deficit_calculator_result_used',
+    `${calcPagePrefix(mode)}_result_used`,
   );
+
+  // Mirror of FormView.fieldError so the upgrade panel can surface validation
+  // errors for the fields it owns. Kept local because FormView's helper isn't
+  // reachable here; pulling it out into a shared module for a 10-line ternary
+  // would add more indirection than it saves.
+  function fieldError(field: string): string | null {
+    if (error === null) {
+      return null;
+    }
+    if (error.field !== field) {
+      return null;
+    }
+    if (error.reason === 'required') {
+      return t('form.errorRequired');
+    }
+    return t('form.errorRange');
+  }
 
   function fireAppClick(buttonLocation: string): void {
     const trafficSource =
@@ -880,6 +1041,7 @@ function ResultView({
         ? window.sessionStorage.getItem('nuvvoo_source') || 'direct'
         : 'direct';
     track('app_click', {
+      mode,
       button_location: buttonLocation,
       traffic_source: trafficSource,
       locale,
@@ -889,7 +1051,7 @@ function ResultView({
   }
 
   function handleResultUsedCtaClick(): void {
-    fireAppClick('deficit_calculator_result_used');
+    fireAppClick(`${calcPagePrefix(mode)}_result_used`);
     appHandleClick();
   }
 
@@ -916,65 +1078,115 @@ function ResultView({
       ? t('plan.errorTitle')
       : null;
 
+  // Reusable macros plate. Used by both deficit and tdee branches; BMR mode
+  // doesn't render it (target/macros stay zero until the user upgrades).
+  const macrosPlate = (
+    <div>
+      <p className="text-sm font-medium text-slate-700">{t('result.macrosLabel')}</p>
+      <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
+        <div>
+          <p className="text-slate-500">{t('result.macroProtein')}</p>
+          <p className="font-semibold text-slate-900">{result.proteinG.toLocaleString()} {t('result.gramsUnit')}</p>
+        </div>
+        <div>
+          <p className="text-slate-500">{t('result.macroCarbs')}</p>
+          <p className="font-semibold text-slate-900">{result.carbsG.toLocaleString()} {t('result.gramsUnit')}</p>
+        </div>
+        <div>
+          <p className="text-slate-500">{t('result.macroFat')}</p>
+          <p className="font-semibold text-slate-900">{result.fatG.toLocaleString()} {t('result.gramsUnit')}</p>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-medium text-slate-500">{t(titleKey)}</p>
+      {/* BMR mode hides the goal-derived title ("Your maintain calories") since
+         its hero is a BMR number, not a goal target — the bmrSubtitle below
+         the hero already explains what's shown. Keep the Edit link in its
+         right corner via justify-end when the title is hidden. */}
+      <div className={`flex items-center ${mode === 'bmr' ? 'justify-end' : 'justify-between'}`}>
+        {mode !== 'bmr' && (
+          <p className="text-sm font-medium text-slate-500">{t(titleKey)}</p>
+        )}
         <button onClick={onEdit} className="text-sm text-nuvvooGreen-700 hover:text-nuvvooGreen-900 underline-offset-2 hover:underline">
           {t('result.edit')}
         </button>
       </div>
 
-      <div>
-        <p className="text-5xl font-extrabold tracking-tight text-slate-900 md:text-6xl">
-          {result.target.toLocaleString()}
-        </p>
-        <p className="mt-1 text-sm text-slate-500">{t('result.kcalUnit')}</p>
-      </div>
-
-      {showWeekly && (
-        <p className="text-base font-medium text-nuvvooGreen-700">
-          {t(weeklyKey, { amount: weeklyAbs.toFixed(1) })}
-        </p>
+      {/* Hero + supporting numbers vary by mode. BMR shows only the BMR
+         value; TDEE shows TDEE as the hero with BMR as a supporting line +
+         macros; deficit keeps the original full readout. */}
+      {mode === 'bmr' && (
+        <div>
+          <p className="text-5xl font-extrabold tracking-tight text-slate-900 md:text-6xl">
+            {result.bmr.toLocaleString()}
+          </p>
+          <p className="mt-1 text-sm text-slate-500">{t('result.kcalUnit')}</p>
+          <p className="mt-3 text-sm text-slate-700">{t('result.bmrSubtitle')}</p>
+          <p className="mt-2 text-xs text-slate-500">{t('result.bmrExplain')}</p>
+        </div>
       )}
 
-      <div className="grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
-        <div>
-          <p className="text-slate-500">{t('result.bmrLabel')}</p>
-          <p className="font-semibold text-slate-900">{result.bmr.toLocaleString()} {t('result.kcalShortUnit')}</p>
-        </div>
-        <div>
-          <p className="text-slate-500">{t('result.tdeeLabel')}</p>
-          <p className="font-semibold text-slate-900">{result.tdee.toLocaleString()} {t('result.kcalShortUnit')}</p>
-        </div>
-      </div>
-
-      {/* Macro split. Mirrors the backend formula so what we show here is
-         exactly what the AI plan will hit when generated. */}
-      <div>
-        <p className="text-sm font-medium text-slate-700">{t('result.macrosLabel')}</p>
-        <div className="mt-2 grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
+      {mode === 'tdee' && (
+        <>
           <div>
-            <p className="text-slate-500">{t('result.macroProtein')}</p>
-            <p className="font-semibold text-slate-900">{result.proteinG.toLocaleString()} {t('result.gramsUnit')}</p>
+            <p className="text-5xl font-extrabold tracking-tight text-slate-900 md:text-6xl">
+              {result.tdee.toLocaleString()}
+            </p>
+            <p className="mt-1 text-sm text-slate-500">{t('result.kcalUnit')}</p>
+            <p className="mt-3 text-sm text-slate-700">{t('result.tdeeSubtitle')}</p>
           </div>
-          <div>
-            <p className="text-slate-500">{t('result.macroCarbs')}</p>
-            <p className="font-semibold text-slate-900">{result.carbsG.toLocaleString()} {t('result.gramsUnit')}</p>
-          </div>
-          <div>
-            <p className="text-slate-500">{t('result.macroFat')}</p>
-            <p className="font-semibold text-slate-900">{result.fatG.toLocaleString()} {t('result.gramsUnit')}</p>
-          </div>
-        </div>
-      </div>
 
-      {result.clamped && <p className="text-xs text-amber-700">{t('result.clampedNote')}</p>}
+          <p className="text-xs text-slate-500">
+            {t('result.tdeeRestingLine', { bmr: result.bmr.toLocaleString() })}
+          </p>
 
-      {/* Plan-only inputs: don't affect the kcal/macros math, only the AI
-         meal plan. Hidden once alreadyUsed flips on — they'd be inert
-         clutter when there's no plan left to generate. */}
-      {!alreadyUsed && (
+          {macrosPlate}
+        </>
+      )}
+
+      {mode === 'deficit' && (
+        <>
+          <div>
+            <p className="text-5xl font-extrabold tracking-tight text-slate-900 md:text-6xl">
+              {result.target.toLocaleString()}
+            </p>
+            <p className="mt-1 text-sm text-slate-500">{t('result.kcalUnit')}</p>
+          </div>
+
+          {showWeekly && (
+            <p className="text-base font-medium text-nuvvooGreen-700">
+              {t(weeklyKey, { amount: weeklyAbs.toFixed(1) })}
+            </p>
+          )}
+
+          <div className="grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">
+            <div>
+              <p className="text-slate-500">{t('result.bmrLabel')}</p>
+              <p className="font-semibold text-slate-900">{result.bmr.toLocaleString()} {t('result.kcalShortUnit')}</p>
+            </div>
+            <div>
+              <p className="text-slate-500">{t('result.tdeeLabel')}</p>
+              <p className="font-semibold text-slate-900">{result.tdee.toLocaleString()} {t('result.kcalShortUnit')}</p>
+            </div>
+          </div>
+
+          {/* Macro split. Mirrors the backend formula so what we show here is
+             exactly what the AI plan will hit when generated. */}
+          {macrosPlate}
+
+          {result.clamped && <p className="text-xs text-amber-700">{t('result.clampedNote')}</p>}
+        </>
+      )}
+
+      {/* Deficit-only inline diet+allergies block. BMR/TDEE move these into
+         the upgrade panel; here they're plan-only inputs that don't affect
+         the kcal/macros math, only the AI meal plan. Hidden once alreadyUsed
+         flips on — they'd be inert clutter when there's no plan left to
+         generate. */}
+      {mode === 'deficit' && !alreadyUsed && (
         <div className="space-y-4 border-t border-slate-200 pt-5">
           <div>
             <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
@@ -1000,10 +1212,9 @@ function ResultView({
         </div>
       )}
 
-      {alreadyUsed ? (
-        // Free plan already spent — replace the generation CTA with the
-        // App Store conversion stack so the result page doesn't dead-end
-        // into a disabled button.
+      {/* Deficit CTA block stays exactly as before — alreadyUsed splits
+         between App Store conversion stack and "Get my first day plan". */}
+      {mode === 'deficit' && (alreadyUsed ? (
         <div className="border-t border-slate-200 pt-5">
           <p className="text-sm text-slate-600">{t('result.ctaUsedNote')}</p>
           <div className="mt-4 flex flex-col items-center gap-3">
@@ -1017,9 +1228,9 @@ function ResultView({
               {t('conversion.cta')}
             </a>
             <AppStoreBadge
-              buttonLocation="deficit_calculator_result_used_badge"
+              buttonLocation={`${calcPagePrefix(mode)}_result_used_badge`}
               size="sm"
-              onClick={() => fireAppClick('deficit_calculator_result_used_badge')}
+              onClick={() => fireAppClick(`${calcPagePrefix(mode)}_result_used_badge`)}
             />
             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
               <span>💚 {tHero('trustFree')}</span>
@@ -1042,6 +1253,147 @@ function ResultView({
           </button>
           {errorMessage !== null && <p className="mt-2 text-xs text-red-600">{errorMessage}</p>}
         </div>
+      ))}
+
+      {/* BMR/TDEE upgrade ask. When alreadyUsed we skip the upgrade flow
+         entirely — the user already burned their free plan — and show the
+         App Store conversion stack instead, mirroring the deficit branch. */}
+      {mode !== 'deficit' && alreadyUsed && (
+        <div className="border-t border-slate-200 pt-5">
+          <p className="text-sm text-slate-600">{t('result.ctaUsedNote')}</p>
+          <div className="mt-4 flex flex-col items-center gap-3">
+            <a
+              href={appUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleResultUsedCtaClick}
+              className="inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)]"
+            >
+              {t('conversion.cta')}
+            </a>
+            <AppStoreBadge
+              buttonLocation={`${calcPagePrefix(mode)}_result_used_badge`}
+              size="sm"
+              onClick={() => fireAppClick(`${calcPagePrefix(mode)}_result_used_badge`)}
+            />
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
+              <span>💚 {tHero('trustFree')}</span>
+              <span>🔒 {tHero('trustPrivacy')}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* BMR/TDEE upgrade CTA card — closed state. Clicking it expands the
+         upgrade panel below (gathered fields → /generate). */}
+      {mode !== 'deficit' && !alreadyUsed && !upgrading && (
+        <div className="border-t border-slate-200 pt-5">
+          <p className="text-sm font-medium text-slate-900">{t('upgrade.title')}</p>
+          <p className="mt-1 text-sm text-slate-600">{t('upgrade.subtitle')}</p>
+          <button
+            type="button"
+            onClick={onUpgrade}
+            aria-expanded={upgrading}
+            aria-controls="calc-upgrade-panel"
+            className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860]"
+          >
+            {t('upgrade.cta')}
+          </button>
+        </div>
+      )}
+
+      {/* BMR/TDEE upgrade panel — expanded state. Collects the fields we
+         hid on the form step (BMR adds activity; both modes need goal/pace/
+         diet/allergies) and routes through the same handleGetPlan as the
+         deficit flow. */}
+      {mode !== 'deficit' && !alreadyUsed && upgrading && (
+        <div
+          ref={upgradePanelRef}
+          id="calc-upgrade-panel"
+          role="region"
+          aria-label={t('upgrade.title')}
+          className="space-y-4 border-t border-slate-200 pt-5"
+        >
+          {mode === 'bmr' && (
+            <div>
+              <label className="block text-sm font-medium text-slate-700">{t('form.activityLabel')}</label>
+              <select
+                value={form.activity}
+                onChange={(e) => onField('activity', e.target.value as Activity | '')}
+                className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
+              >
+                <option value="" disabled>—</option>
+                <option value="sedentary">{t('form.activitySedentary')}</option>
+                <option value="light">{t('form.activityLight')}</option>
+                <option value="moderate">{t('form.activityModerate')}</option>
+                <option value="very">{t('form.activityVery')}</option>
+                <option value="extra">{t('form.activityExtra')}</option>
+              </select>
+              {fieldError('activity') !== null && (
+                <p className="mt-1 text-xs text-red-600">{fieldError('activity')}</p>
+              )}
+            </div>
+          )}
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700">{t('form.goalLabel')}</label>
+            <div className="mt-1 grid grid-cols-3 gap-2">
+              <SegmentButton selected={form.goal === 'lose'} onClick={() => onField('goal', 'lose')} label={t('form.goalLose')} />
+              <SegmentButton selected={form.goal === 'maintain'} onClick={() => onField('goal', 'maintain')} label={t('form.goalMaintain')} />
+              <SegmentButton selected={form.goal === 'gain'} onClick={() => onField('goal', 'gain')} label={t('form.goalGain')} />
+            </div>
+          </div>
+
+          {form.goal !== 'maintain' && (
+            <div>
+              <label className="block text-sm font-medium text-slate-700">{t('form.paceLabel')}</label>
+              <select
+                value={form.pace}
+                onChange={(e) => onField('pace', e.target.value as Pace)}
+                className="mt-1 h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100"
+              >
+                {PACE_KEYS.map((p) => (
+                  <option key={p} value={p}>
+                    {t(`form.pace_${p}`)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700">{t('form.dietLabel')}</label>
+            <div className="mt-1 grid grid-cols-2 gap-2">
+              {DIET_OPTIONS.map((d) => (
+                <SegmentButton
+                  key={d}
+                  selected={form.diet === d}
+                  onClick={() => onField('diet', d)}
+                  label={t(`form.diet_${d}`)}
+                />
+              ))}
+            </div>
+          </div>
+
+          <AllergiesInput
+            value={form.allergies}
+            onChange={(next) => onField('allergies', next)}
+            t={t}
+          />
+
+          {errorMessage !== null && <p className="text-xs text-red-600">{errorMessage}</p>}
+
+          <button
+            onClick={onGetPlan}
+            disabled={planLoading}
+            className="group inline-flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#52A574] px-6 text-base font-semibold text-white shadow-[0_8px_20px_rgba(82,165,116,0.35)] transition hover:bg-[#459860] hover:shadow-[0_10px_24px_rgba(82,165,116,0.45)] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span>{planLoading ? t('plan.loading') : t('upgrade.cta')}</span>
+            {!planLoading && (
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+            )}
+          </button>
+        </div>
       )}
     </div>
   );
@@ -1050,15 +1402,21 @@ function ResultView({
 /* ─── PLAN ─── */
 
 function PlanView({
+  mode,
   form,
   result,
   plan,
+  sessionTokenRef,
   onEdit,
   t,
 }: {
+  mode: Mode;
   form: FormState;
   result: CalcResult;
   plan: ApiPlan;
+  // Token is needed to submit a rating. Refs keep the latest value without
+  // forcing PlanView to re-render when the token rotates after a 401.
+  sessionTokenRef: { current: string | null };
   onEdit: () => void;
   t: Translator;
 }) {
@@ -1067,7 +1425,7 @@ function PlanView({
   // duplicating the keys under deficitCalculator.
   const tHero = useTranslations('hero');
   const locale = useLocale();
-  const { url, handleClick } = useAppStoreLink('deficit_calculator_plan');
+  const { url, handleClick } = useAppStoreLink(`${calcPagePrefix(mode)}_plan`);
 
   // Fires the calculator-funnel-specific `app_click` event with the same
   // shape used everywhere on this page: button_location distinguishes CTA
@@ -1081,6 +1439,7 @@ function PlanView({
         ? window.sessionStorage.getItem('nuvvoo_source') || 'direct'
         : 'direct';
     track('app_click', {
+      mode,
       button_location: buttonLocation,
       traffic_source: trafficSource,
       locale,
@@ -1102,7 +1461,7 @@ function PlanView({
   }
 
   function trackAppClick(): void {
-    fireAppClick('deficit_calculator_plan', {
+    fireAppClick(`${calcPagePrefix(mode)}_plan`, {
       target_kcal: result.target,
       goal: form.goal,
     });
@@ -1163,6 +1522,21 @@ function PlanView({
         </p>
       )}
 
+      {/* Rating sits ABOVE the App Store CTA — acts as a micro-commitment
+         ("I rated this 5★ so I clearly like it") that strengthens intent
+         to click through. Putting it below the CTA would be a step back
+         in the funnel — distracting users right when they're ready to
+         convert. Hidden entirely when the backend didn't return a
+         plan_id (cached pre-feature plans + rare DB-write failures). */}
+      {typeof plan.plan_id === 'number' && (
+        <RatingControl
+          planId={plan.plan_id}
+          sessionTokenRef={sessionTokenRef}
+          language={(['en', 'de', 'ru', 'es', 'fr'] as const).includes(locale as ApiLanguage) ? (locale as ApiLanguage) : 'en'}
+          diet={form.diet}
+        />
+      )}
+
       <div className="flex flex-col items-center gap-3">
         <a
           href={url}
@@ -1174,14 +1548,156 @@ function PlanView({
           {t('conversion.cta')}
         </a>
         <AppStoreBadge
-          buttonLocation="deficit_calculator_plan_badge"
+          buttonLocation={`${calcPagePrefix(mode)}_plan_badge`}
           size="sm"
-          onClick={() => fireAppClick('deficit_calculator_plan_badge')}
+          onClick={() => fireAppClick(`${calcPagePrefix(mode)}_plan_badge`)}
         />
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-slate-500">
           <span>💚 {tHero('trustFree')}</span>
           <span>🔒 {tHero('trustPrivacy')}</span>
         </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── RATING ─── */
+
+type RatingPhase = 'idle' | 'submitting' | 'thanked' | 'hidden';
+
+function RatingControl({
+  planId,
+  sessionTokenRef,
+  language,
+  diet,
+}: {
+  planId: number;
+  sessionTokenRef: { current: string | null };
+  language: ApiLanguage;
+  diet: ApiDiet;
+}) {
+  const t = useTranslations('planRating');
+  const [phase, setPhase] = useState<RatingPhase>('idle');
+  const [rating, setRating] = useState<number>(0); // 0 = not picked
+  const [hover, setHover] = useState<number>(0);
+  const [comment, setComment] = useState<string>('');
+
+  // Don't re-fire submit if the user double-clicks Send.
+  const submittingRef = useRef(false);
+
+  if (phase === 'hidden') {
+    return null;
+  }
+
+  if (phase === 'thanked') {
+    return (
+      <div className="mt-6 rounded-2xl border border-nuvvooGreen-200 bg-nuvvooGreen-50/40 p-4 text-center text-sm text-slate-700">
+        {t('thanks')}
+      </div>
+    );
+  }
+
+  async function handleSubmit(): Promise<void> {
+    if (submittingRef.current || rating < 1) {
+      return;
+    }
+    const token = sessionTokenRef.current;
+    if (token === null) {
+      // No session token — we can't submit a rating. Per spec on 401 we'd
+      // hide silently, so do the equivalent here: hide before the call.
+      setPhase('hidden');
+      return;
+    }
+    submittingRef.current = true;
+    setPhase('submitting');
+
+    const trimmedComment = comment.trim();
+    const result = await ratePlan({
+      plan_id: planId,
+      rating,
+      comment: trimmedComment.length > 0 ? trimmedComment : undefined,
+      session_token: token,
+    });
+
+    submittingRef.current = false;
+
+    if (!result.ok) {
+      // Per spec: hide silently on any 4xx — don't surface technical
+      // details. Same on network errors (unlikely to recover on retry
+      // without UI clutter).
+      setPhase('hidden');
+      return;
+    }
+
+    track('plan_rated', {
+      rating,
+      has_comment: trimmedComment.length > 0,
+      language,
+      diet,
+    });
+    setPhase('thanked');
+  }
+
+  // Placeholder swaps based on whether the user picked a low (1-3) or
+  // high (4-5) rating. While hovering, mirror the hover star value so the
+  // placeholder previews the intent before commit.
+  const effectiveRating = hover > 0 ? hover : rating;
+  const placeholder =
+    effectiveRating >= 1 && effectiveRating <= 3
+      ? t('placeholderLow')
+      : t('placeholderHigh');
+
+  const isSubmitting = phase === 'submitting';
+  const canSubmit = rating >= 1 && !isSubmitting;
+
+  return (
+    <div className="mt-6 space-y-3 rounded-2xl border border-slate-200 bg-white/70 p-4">
+      <p className="text-sm font-medium text-slate-700">{t('prompt')}</p>
+      <div className="flex items-center gap-1" onMouseLeave={() => setHover(0)}>
+        {[1, 2, 3, 4, 5].map((n) => {
+          const filled = (hover > 0 ? hover : rating) >= n;
+          return (
+            <button
+              key={n}
+              type="button"
+              aria-label={`${n} ${n === 1 ? 'star' : 'stars'}`}
+              onMouseEnter={() => setHover(n)}
+              onFocus={() => setHover(n)}
+              onBlur={() => setHover(0)}
+              onClick={() => setRating(n)}
+              disabled={isSubmitting}
+              className={
+                filled
+                  ? 'text-2xl text-amber-400 transition-transform hover:scale-110 focus:outline-none'
+                  : 'text-2xl text-slate-300 transition-transform hover:scale-110 focus:outline-none'
+              }
+            >
+              ★
+            </button>
+          );
+        })}
+      </div>
+      {rating >= 1 && (
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value.slice(0, 500))}
+          placeholder={placeholder}
+          rows={2}
+          maxLength={500}
+          disabled={isSubmitting}
+          autoFocus
+          className="w-full resize-none rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100 disabled:bg-slate-100"
+        />
+      )}
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={!canSubmit}
+          className="inline-flex h-10 items-center justify-center rounded-xl bg-[#52A574] px-4 text-sm font-semibold text-white transition hover:bg-[#459860] disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {t('send')}
+        </button>
       </div>
     </div>
   );

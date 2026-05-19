@@ -7,11 +7,11 @@ import { Footer } from '@/components/footer';
 import { ContentSection } from '@/components/seo/content-section';
 import { FaqSection } from '@/components/seo/faq-section';
 import { RelatedGuides } from '@/components/seo/related-guides';
-import { ConversionAppStoreBadge } from '@/components/conversion-app-store-badge';
+import { AppStoreBadge } from '@/components/app-store-badge';
 import { routing } from '@/i18n/routing';
 import { CalorieCalculator } from '@/components/calculator/calorie-calculator';
 
-const SLUG = 'calorie-deficit-calculator';
+const SLUG = 'tdee-calculator';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nuvvoo.app';
 
 type Props = {
@@ -24,7 +24,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'deficitCalculator.metadata' });
+  const t = await getTranslations({ locale, namespace: 'tdeeCalculator.metadata' });
 
   const canonical = locale === 'en' ? `${siteUrl}/${SLUG}` : `${siteUrl}/${locale}/${SLUG}`;
   const alternates: Record<string, string> = { 'x-default': `${siteUrl}/${SLUG}` };
@@ -60,11 +60,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CalorieDeficitCalculatorPage({ params }: Props) {
+export default async function TdeeCalculatorPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('deficitCalculator');
+  const t = await getTranslations('tdeeCalculator');
 
   const faqs = [
     { question: t('faq.q1'), answer: t('faq.a1') },
@@ -81,11 +81,6 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
       {/* ─── HERO with calculator on the right ─── */}
       <section className="pt-12 md:pt-16">
         <Container>
-          {/* min-w-0 on both grid cells overrides the default min-width:auto
-             on grid items, otherwise long content inside the widget (long
-             <select> options, wide flex rows) prevents the column from
-             shrinking and the widget overflows past the viewport at the
-             md/lg in-between viewport widths. */}
           {/* min-w-0 on both grid cells overrides the default min-width:auto
              on grid items, otherwise long content inside the widget (long
              <select> options, wide flex rows) prevents the column from
@@ -113,7 +108,7 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
                negative margin so the white card uses nearly the full
                viewport width. md+ reverts to standard grid placement. */}
             <div className="-mx-2 w-auto min-w-0 md:mx-0 md:w-full">
-              <CalorieCalculator mode="deficit" messagesNamespace="deficitCalculator" />
+              <CalorieCalculator mode="tdee" messagesNamespace="tdeeCalculator" />
             </div>
           </div>
         </Container>
@@ -132,46 +127,29 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
             <ContentSection title={t('seo.h2_how')}>
               <p>{t('seo.how_p1')}</p>
               <p>{t('seo.how_p2')}</p>
-              <p>{t('seo.how_p3')}</p>
-            </ContentSection>
-
-            <ContentSection title={t('seo.h2_plan')}>
-              {/* Rich-text via t.rich — the <food> / <chat> markers in the
-                 translation strings get replaced with <Link> components for
-                 contextual SEO cross-links to related guides. */}
+              {/* Rich-text via t.rich — the <bmr> / <deficit> markers in the
+                 translation string get replaced with <Link> components for
+                 contextual SEO cross-links to the sibling calculators. */}
               <p>
-                {t.rich('seo.plan_p1', {
-                  food: (chunks) => (
-                    <Link href="/food-diary-for-weight-loss" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
-                      {chunks}
-                    </Link>
-                  ),
-                })}
-              </p>
-              <p>{t('seo.plan_p2')}</p>
-              <p>
-                {t.rich('seo.plan_p3', {
-                  chat: (chunks) => (
-                    <Link href="/chat-calorie-tracker" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
-                      {chunks}
-                    </Link>
-                  ),
-                })}
-              </p>
-              <p>
-                {t.rich('seo.plan_p4', {
+                {t.rich('seo.how_p3', {
                   bmr: (chunks) => (
                     <Link href="/bmr-calculator" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
                       {chunks}
                     </Link>
                   ),
-                  tdee: (chunks) => (
-                    <Link href="/tdee-calculator" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
+                  deficit: (chunks) => (
+                    <Link href="/calorie-deficit-calculator" className="text-nuvvooGreen-700 underline underline-offset-2 hover:text-nuvvooGreen-900">
                       {chunks}
                     </Link>
                   ),
                 })}
               </p>
+            </ContentSection>
+
+            <ContentSection title={t('seo.h2_plan')}>
+              <p>{t('seo.plan_p1')}</p>
+              <p>{t('seo.plan_p2')}</p>
+              <p>{t('seo.plan_p3')}</p>
             </ContentSection>
 
             {/* ─── CONVERSION BLOCK ─── */}
@@ -182,17 +160,14 @@ export default async function CalorieDeficitCalculatorPage({ params }: Props) {
                 </h3>
                 <p className="mt-3 text-slate-600">{t('conversion.subtitle')}</p>
                 <div className="mt-6">
-                  <ConversionAppStoreBadge
-                    buttonLocation="deficit_calculator_conversion"
-                    eventName="app_click"
-                  />
+                  <AppStoreBadge buttonLocation="tdee_calculator_conversion" />
                 </div>
               </div>
             </div>
 
             <FaqSection faqs={faqs} />
 
-            <RelatedGuides slugs={['bmiCalculator', 'foodDiary', 'mfpAlternative', 'stressFree']} />
+            <RelatedGuides slugs={['bmrCalculator', 'calculator', 'foodDiary', 'mfpAlternative']} />
           </div>
         </Container>
       </article>
