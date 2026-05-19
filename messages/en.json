@@ -504,7 +504,7 @@
       "ogDescription": "Calculate your basal metabolic rate and turn it into a real meal plan."
     },
     "h1": "BMR Calculator",
-    "intro": "Find out how many calories your body burns at complete rest. Your BMR is the foundation of any calorie target — once you know it, you can build a plan that actually fits you.",
+    "intro": "Find your basal metabolic rate and turn it into a one-day meal plan you can actually follow. No accounts, no setup. Answer four quick questions and we'll show your BMR, then build the plan.",
     "trustFree": "Free",
     "trustNoAccount": "No account",
     "trustPrivate": "Privacy",
@@ -649,7 +649,7 @@
       "ogDescription": "Calculate your total daily energy expenditure and turn it into a real meal plan."
     },
     "h1": "TDEE Calculator",
-    "intro": "Calculate how many calories your body burns each day, including all your activity. Eat this number to maintain your weight — or use it as the baseline for a deficit or surplus.",
+    "intro": "Find your total daily calorie burn and turn it into a one-day meal plan you can actually follow. No accounts, no setup. Answer five quick questions and we'll show your TDEE, then build the plan.",
     "trustFree": "Free",
     "trustNoAccount": "No account",
     "trustPrivate": "Privacy",

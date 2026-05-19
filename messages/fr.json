@@ -504,7 +504,7 @@
       "ogDescription": "Calcule ton métabolisme de base et transforme-le en vrai plan repas."
     },
     "h1": "Calculateur BMR",
-    "intro": "Découvre combien de calories ton corps brûle au repos complet. Ton BMR est la base de tout objectif calorique — une fois que tu le connais, tu peux construire un plan qui te correspond vraiment.",
+    "intro": "Trouve ton métabolisme de base et transforme-le en un plan repas pour la journée que tu peux vraiment suivre. Pas de compte, pas de configuration. Réponds à quatre questions rapides, on te montrera ton BMR, puis on construit le plan.",
     "trustFree": "Gratuit",
     "trustNoAccount": "Sans compte",
     "trustPrivate": "Confidentialité",
@@ -649,7 +649,7 @@
       "ogDescription": "Calcule ta dépense énergétique totale quotidienne et transforme-la en vrai plan repas."
     },
     "h1": "Calculateur TDEE",
-    "intro": "Calcule combien de calories ton corps brûle chaque jour, activité comprise. Mange cette quantité pour stabiliser ton poids — ou utilise-la comme base pour un déficit ou un surplus.",
+    "intro": "Trouve ta dépense calorique quotidienne et transforme-la en un plan repas pour la journée que tu peux vraiment suivre. Pas de compte, pas de configuration. Réponds à cinq questions rapides, on te montrera ton TDEE, puis on construit le plan.",
     "trustFree": "Gratuit",
     "trustNoAccount": "Sans compte",
     "trustPrivate": "Confidentialité",
