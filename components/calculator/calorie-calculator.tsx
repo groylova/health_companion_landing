@@ -24,7 +24,6 @@ import {
 import {
   fetchSession,
   generatePlan,
-  ratePlan,
   type ApiDiet,
   type ApiLanguage,
   type ApiPlan,
@@ -549,7 +548,6 @@ export function CalorieCalculator({ mode, messagesNamespace }: Props) {
           form={form}
           result={result}
           plan={plan}
-          sessionTokenRef={sessionTokenRef}
           onEdit={handleEdit}
           t={t}
         />
@@ -1406,7 +1404,6 @@ function PlanView({
   form,
   result,
   plan,
-  sessionTokenRef,
   onEdit,
   t,
 }: {
@@ -1414,9 +1411,6 @@ function PlanView({
   form: FormState;
   result: CalcResult;
   plan: ApiPlan;
-  // Token is needed to submit a rating. Refs keep the latest value without
-  // forcing PlanView to re-render when the token rotates after a 401.
-  sessionTokenRef: { current: string | null };
   onEdit: () => void;
   t: Translator;
 }) {
@@ -1522,21 +1516,6 @@ function PlanView({
         </p>
       )}
 
-      {/* Rating sits ABOVE the App Store CTA — acts as a micro-commitment
-         ("I rated this 5★ so I clearly like it") that strengthens intent
-         to click through. Putting it below the CTA would be a step back
-         in the funnel — distracting users right when they're ready to
-         convert. Hidden entirely when the backend didn't return a
-         plan_id (cached pre-feature plans + rare DB-write failures). */}
-      {typeof plan.plan_id === 'number' && (
-        <RatingControl
-          planId={plan.plan_id}
-          sessionTokenRef={sessionTokenRef}
-          language={(['en', 'de', 'ru', 'es', 'fr'] as const).includes(locale as ApiLanguage) ? (locale as ApiLanguage) : 'en'}
-          diet={form.diet}
-        />
-      )}
-
       <div className="flex flex-col items-center gap-3">
         <a
           href={url}
@@ -1556,148 +1535,6 @@ function PlanView({
           <span>💚 {tHero('trustFree')}</span>
           <span>🔒 {tHero('trustPrivacy')}</span>
         </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── RATING ─── */
-
-type RatingPhase = 'idle' | 'submitting' | 'thanked' | 'hidden';
-
-function RatingControl({
-  planId,
-  sessionTokenRef,
-  language,
-  diet,
-}: {
-  planId: number;
-  sessionTokenRef: { current: string | null };
-  language: ApiLanguage;
-  diet: ApiDiet;
-}) {
-  const t = useTranslations('planRating');
-  const [phase, setPhase] = useState<RatingPhase>('idle');
-  const [rating, setRating] = useState<number>(0); // 0 = not picked
-  const [hover, setHover] = useState<number>(0);
-  const [comment, setComment] = useState<string>('');
-
-  // Don't re-fire submit if the user double-clicks Send.
-  const submittingRef = useRef(false);
-
-  if (phase === 'hidden') {
-    return null;
-  }
-
-  if (phase === 'thanked') {
-    return (
-      <div className="mt-6 rounded-2xl border border-nuvvooGreen-200 bg-nuvvooGreen-50/40 p-4 text-center text-sm text-slate-700">
-        {t('thanks')}
-      </div>
-    );
-  }
-
-  async function handleSubmit(): Promise<void> {
-    if (submittingRef.current || rating < 1) {
-      return;
-    }
-    const token = sessionTokenRef.current;
-    if (token === null) {
-      // No session token — we can't submit a rating. Per spec on 401 we'd
-      // hide silently, so do the equivalent here: hide before the call.
-      setPhase('hidden');
-      return;
-    }
-    submittingRef.current = true;
-    setPhase('submitting');
-
-    const trimmedComment = comment.trim();
-    const result = await ratePlan({
-      plan_id: planId,
-      rating,
-      comment: trimmedComment.length > 0 ? trimmedComment : undefined,
-      session_token: token,
-    });
-
-    submittingRef.current = false;
-
-    if (!result.ok) {
-      // Per spec: hide silently on any 4xx — don't surface technical
-      // details. Same on network errors (unlikely to recover on retry
-      // without UI clutter).
-      setPhase('hidden');
-      return;
-    }
-
-    track('plan_rated', {
-      rating,
-      has_comment: trimmedComment.length > 0,
-      language,
-      diet,
-    });
-    setPhase('thanked');
-  }
-
-  // Placeholder swaps based on whether the user picked a low (1-3) or
-  // high (4-5) rating. While hovering, mirror the hover star value so the
-  // placeholder previews the intent before commit.
-  const effectiveRating = hover > 0 ? hover : rating;
-  const placeholder =
-    effectiveRating >= 1 && effectiveRating <= 3
-      ? t('placeholderLow')
-      : t('placeholderHigh');
-
-  const isSubmitting = phase === 'submitting';
-  const canSubmit = rating >= 1 && !isSubmitting;
-
-  return (
-    <div className="mt-6 space-y-3 rounded-2xl border border-slate-200 bg-white/70 p-4">
-      <p className="text-sm font-medium text-slate-700">{t('prompt')}</p>
-      <div className="flex items-center gap-1" onMouseLeave={() => setHover(0)}>
-        {[1, 2, 3, 4, 5].map((n) => {
-          const filled = (hover > 0 ? hover : rating) >= n;
-          return (
-            <button
-              key={n}
-              type="button"
-              aria-label={`${n} ${n === 1 ? 'star' : 'stars'}`}
-              onMouseEnter={() => setHover(n)}
-              onFocus={() => setHover(n)}
-              onBlur={() => setHover(0)}
-              onClick={() => setRating(n)}
-              disabled={isSubmitting}
-              className={
-                filled
-                  ? 'text-2xl text-amber-400 transition-transform hover:scale-110 focus:outline-none'
-                  : 'text-2xl text-slate-300 transition-transform hover:scale-110 focus:outline-none'
-              }
-            >
-              ★
-            </button>
-          );
-        })}
-      </div>
-      {rating >= 1 && (
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value.slice(0, 500))}
-          placeholder={placeholder}
-          rows={2}
-          maxLength={500}
-          disabled={isSubmitting}
-          autoFocus
-          className="w-full resize-none rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-nuvvooGreen-400 focus:ring-2 focus:ring-nuvvooGreen-100 disabled:bg-slate-100"
-        />
-      )}
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={handleSubmit}
-          disabled={!canSubmit}
-          className="inline-flex h-10 items-center justify-center rounded-xl bg-[#52A574] px-4 text-sm font-semibold text-white transition hover:bg-[#459860] disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {t('send')}
-        </button>
       </div>
     </div>
   );
